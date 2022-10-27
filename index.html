@@ -1,14 +1,176 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./img/favicon.webp" type="image/x-icon">
+    <link rel="shortcut icon" href="./img/icons/favicon.webp" type="image/x-icon">
     <link rel="stylesheet" href="./style/index.css">
     <title>Metasender</title>
 </head>
+
 <body>
-    
+
+    <nav id="navbar">
+        <div class="logo-navbar-container">
+            <img src="./img/metalogo/20.png" alt="metalogo" height="80">
+            <div class="logo-titlte">
+                <p>THE</p>
+                <p>METALORIAN</p>
+                <p>DAO</p>
+            </div>
+        </div>
+
+        <div class="contenedor-botones-navbar">
+            <a class="btn btn-home close-sidenavbar" href="#Home" data-content="navbar"
+                data-type="navbar-home">INICIO</a>
+            <div class="symbol" style="color: #a6903c; user-select: none">|</div>
+            <a class="btn close-sidenavbar" href="#marketplace" data-content="navbar"
+                data-type="navbar-marketplace">TIENDA</a>
+            <div class="symbol" style="color: #a6903c; user-select: none">|</div>
+            <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-aboutus" href="#aboutus">SOBRE
+                NOSOTROS
+            </a>
+            <div class="symbol" style="color: #a6903c; user-select: none">|</div>
+            <div class="about-navbar-options options">
+                <a class="btn3 btn-faq close-sidenavbar" data-content="navbar-aboutus-options" data-type="faq">FAQs</a>
+                <a class="btn3 close-sidenavbar" href="#stages" data-content="navbar-aboutus-options"
+                    data-type="options-stages">Etapas</a>
+                <a class="btn3 close-sidenavbar" href="#team" data-content="navbar-aboutus-options"
+                    data-type="options-team">Equipo</a>
+            </div>
+            <a class="community-navbar-btn btn" href="#nftSales" data-content="navbar"
+                data-type="navbar-community">COMUNIDAD
+            </a>
+            <div class="community-navbar-options options">
+                <div class="community-options">
+                    <a class="btn3 close-sidenavbar" href="#nftSales" data-content="navbar-community-options"
+                        data-type="options-investors">Comunidad Inversora</a>
+                    <a class="btn3 close-sidenavbar" href="https://discord.gg/T9GQekdFXp" target="_blank"
+                        data-content="navbar-community-options" data-type="join-discord">Únete a nuestro Discord</a>
+                </div>
+                <div class="community-redes">
+                    <h4 data-content="navbar-community-options" data-type="options-followus">
+                        Síguenos
+                    </h4>
+                    <div class="follow-us">
+                        <a href="https://twitter.com/Metalorian_Dao" target="_blank">
+                            <img src="./img/socialmedia/twitter-black.png" alt="twitter" />
+                        </a>
+                        <a href="https://www.instagram.com/themetaloriandao/" target="_blank">
+                            <img src="./img/socialmedia/instagram-black.png" alt="instagram" />
+                        </a>
+                        <a href="https://www.facebook.com/profile.php?id=100084863566366" target="_blank">
+                            <img src="./img/socialmedia/facebook-black.png" />
+                        </a>
+                        <a href="https://www.linkedin.com/company/the-metalorian-dao/" target="_blank">
+                            <img src="./img/socialmedia/linkedin-black.png" />
+                        </a>
+                        <a href="https://www.youtube.com/channel/UC9-Z4BdQs0QbdH3hx8rv0Iw" target="_blank">
+                            <img src="./img/socialmedia/youtube-black.png" />
+                        </a>
+                        <a href="https://www.tiktok.com/@themetaloriandao_" target="_blank">
+                            <img src="./img/socialmedia/tiktok-black.png" />
+                        </a>
+                        <a href="https://open.spotify.com/user/31c4o5jlrpohu3rmevgrx3adg5su" target="_blank">
+                            <img src="./img/socialmedia/spotify-black.png" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="language-container-navbar btn3">
+                <a class="boton-language">
+                    <img src="./img/icons/globe.png" alt="icono mundo" style="height: 25px" />
+                </a>
+                <div class="language-boton-container language">
+                    <a class="btn3" data-function="en">ENGLISH</a>
+                    <a class="btn3" data-function="es">ESPAÑOL</a>
+                    <a class="btn3" target="_blank" href="https://life-out.gitbook.io/the-metalorian-dao/">DOCS
+                        <img src="./img/icons/log-out.png" alt="log-out" style="height: 14px" /></a>
+                </div>
+            </div>
+        </div>
+        <div class="hamburguer">
+            <div class="bar1"></div>
+            <div class="bar2"></div>
+            <div class="bar3"></div>
+        </div>
+        <div class="sidenavbar-background"></div>
+    </nav>
+
+    <main></main>
+
+    <footer id="footer">
+        <div class="footer-info-container">
+            <div class="footer-logo-links-container">
+                <div class="logo-footer-container">
+                    <img src="./img/metalogo/20.png" alt="metalogo" />
+                    <div class="logo-titlte">
+                        <p>THE</p>
+                        <p>METALORIAN</p>
+                        <p>DAO</p>
+                    </div>
+                </div>
+                <div class="footer-links-container">
+                    <div class="links-column">
+                        <a href="#Home" data-content="navbar" data-type="navbar-home">Inicio</a>
+                        <a href="#marketplace" data-content="navbar" data-type="navbar-marketplace">Tienda</a>
+                        <a data-content="navbar" data-type="navbar-aboutus" href="#aboutus">Sobre Nosotros
+                        </a>
+                    </div>
+                    <div class="links-column">
+                        <a class="btn-faq" data-content="navbar-aboutus-options" data-type="faq">FAQs</a>
+                        <a href="#stages" data-content="navbar-aboutus-options" data-type="options-stages">Etapas</a>
+                        <a href="#team" data-content="navbar-aboutus-options" data-type="options-team">Equipo</a>
+
+                    </div>
+                    <div class="links-column">
+                        <a href="#nftSales" data-content="navbar-community-options"
+                            data-type="options-investors">Comunidad
+                            Inversora</a>
+                        <a href="https://discord.gg/T9GQekdFXp" target="_blank" data-content="navbar-community-options"
+                            data-type="join-discord">Únete a nuestro Discord</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-redes-container">
+
+                <h4 data-content="footer" data-type="footer-followus">Síguenos</h4>
+
+                <div class="footer-followus">
+                    <a href="https://twitter.com/Metalorian_Dao" target="_blank">
+                        <img src="./img/socialmedia/twitter-black.png" alt="twitter" />
+                    </a>
+                    <a href="https://www.instagram.com/themetaloriandao/" target="_blank">
+                        <img src="./img/socialmedia/instagram-black.png" alt="instagram" />
+                    </a>
+                    <a href="https://www.facebook.com/profile.php?id=100084863566366" target="_blank">
+                        <img src="./img/socialmedia/facebook-black.png" />
+                    </a>
+                    <a href="https://www.linkedin.com/company/the-metalorian-dao/" target="_blank">
+                        <img src="./img/socialmedia/linkedin-black.png" />
+                    </a>
+                    <a href="https://www.youtube.com/channel/UC9-Z4BdQs0QbdH3hx8rv0Iw" target="_blank">
+                        <img src="./img/socialmedia/youtube-black.png" />
+                    </a>
+                    <a href="https://www.tiktok.com/@themetaloriandao_" target="_blank">
+                        <img src="./img/socialmedia/tiktok-black.png" />
+                    </a>
+                    <a href="https://open.spotify.com/user/31c4o5jlrpohu3rmevgrx3adg5su" target="_blank">
+                        <img src="./img/socialmedia/spotify-black.png" />
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <div class="final-text">
+            The Metalorian DAO 2022
+        </div>
+
+    </footer>
+
+    <script src="./scripts/navBar.js"></script>
 </body>
+
 </html>
