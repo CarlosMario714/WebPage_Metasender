@@ -1,16 +1,21 @@
 import metasender from "./contracts/metasender.js";
-const btnSend = document.getElementById("send");
-const addressExample = [
-	"0xf45025599c54930BF6C16C208f0507E80FEA5d84",
-	"0x43875B7D7cE9Aaea95375929405fE05c84192C1E",
-];
-const valuesEj = [
-	ethers.utils.parseEther("0.01"),
-	ethers.utils.parseEther("0.01"),
-];
 
 function getTotalValue(valuesArray) {
 	return valuesArray.reduce((prev, curr) => prev.add(curr));
+}
+
+function getContract() {
+	
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+	const signer = provider.getSigner();
+
+	return new ethers.Contract(
+		metasender.address,
+		metasender.abi,
+		signer
+	);
+	
 }
 
 async function listenContract() {
@@ -38,40 +43,59 @@ async function listenContract() {
 	console.log(decode);
 }
 
-async function sendEthDifferentValue() {
-	const provider = new ethers.providers.Web3Provider(window.ethereum);
+async function sendEthDifferentValue( addresses, amounts ) {
 
-	const signer = provider.getSigner();
-
-	const contract = new ethers.Contract(
-		metasender.address,
-		metasender.abi,
-		signer
-	);
+	const contract = getContract()
 
 	const txFee = await contract.txFee();
 
-    const ifece = new ethers.utils.Interface(metasender.abi);
-
-	await contract
-		.sendEthDifferentValue(addressExample, valuesEj, {
-			value: getTotalValue(valuesEj).add(txFee),
-		})
-		.then((tx) => {
-
-            console.log(tx.hash)
-
-			const decode = ifece.parseTransaction({
-				data: tx.data,
-				value: tx.value,
-			});
-
-			console.log(decode);
-
-		})
+	return await contract
+		.sendEthDifferentValue(addresses, amounts, 
+			{ value: getTotalValue(addresses).add(txFee) })
 		.catch((error) => console.log(error.error.message));
+	
+	
 }
 
-listenContract()
+async function sendIERC20DifferentValue( addresses, amounts ) {
 
-btnSend.onclick = sendEthDifferentValue;
+	const contract = getContract()
+
+	const txFee = await contract.txFee();
+
+	return await contract
+		.sendIERC20DifferentValue(addresses, amounts, 
+			{ value: getTotalValue(addresses).add(txFee) })
+		.catch((error) => console.log(error.error.message));
+	
+}
+
+async function sendIERC721( addresses, tokenIds) {
+
+	const contract = getContract()
+
+	const txFee = await contract.txFee();
+
+	return await contract
+		.sendIERC721(addresses, tokenIds, 
+			{ value: getTotalValue(addresses).add(txFee) })
+		.catch((error) => console.log(error.error.message));
+
+}
+
+export async function sendTransaction(addresses, amounts, tokenType) {
+
+	switch(tokenType){
+
+		case 'ETH':
+			return await sendEthDifferentValue( addresses, amounts );
+
+		case 'ERC20':
+			return await sendIERC20DifferentValue( addresses, amounts );
+
+		case 'ERC721':
+			return await sendIERC721(addresses, amounts);
+
+	}
+
+}

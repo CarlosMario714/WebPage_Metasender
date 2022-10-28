@@ -4,8 +4,8 @@ const addWalletButton = document.querySelector(".add-wallet-button");
 
 const walletInput = document.querySelector(".wallet-input");
 const amountInput = document.querySelector(".amount-input");
-let walletsManualArr = [];
-let amountManualArr = [];
+export let walletsManualArr = [];
+export let amountManualArr = [];
 let numberOfWallets = 0;
 
 console.log(amountManualArr);
