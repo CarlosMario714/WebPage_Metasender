@@ -99,7 +99,16 @@
         <div class="sidenavbar-background"></div>
     </nav>
 
-    <main></main>
+    <main>
+        <div class="transactions-container">
+            <select name="eth-network" id="eth-network-select">
+                <option value="1">Mainnet</option>
+                <option value="5">Goerli</option>
+            </select>
+            <button id="btn-connect">Connect Wallet</button>
+            <button id="send">enviar</button>
+        </div>
+    </main>
 
     <footer id="footer">
         <div class="footer-info-container">
@@ -170,7 +179,10 @@
 
     </footer>
 
+    <script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"></script>
     <script src="./scripts/navBar.js"></script>
+    <script src="./scripts/connectWallet.js" type="module"></script>
+    <script src="./scripts/transactions.js" type="module"></script>
 </body>
 
 </html>
