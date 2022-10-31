@@ -1,7 +1,15 @@
 import metasender from "./contracts/metasender.js";
 
 function getTotalValue(valuesArray) {
+
 	return valuesArray.reduce((prev, curr) => prev.add(curr));
+
+}
+
+function isSameValue( values ) {
+
+	return values.every(( prev, curr) => prev == curr)
+
 }
 
 function getContract() {
@@ -18,29 +26,18 @@ function getContract() {
 	
 }
 
-async function listenContract() {
-	const provider = ethers.getDefaultProvider(5);
+async function sendEthSameValue( addresses, amounts ) {
 
-	const contract = new ethers.Contract(
-		metasender.address,
-		metasender.abi,
-		provider
-	);
+	const contract = getContract()
 
-	const ifece = new ethers.utils.Interface(metasender.abi);
+	const txFee = await contract.txFee();
 
-	const tx = await provider.getTransaction(
-		"0xd39ac1fed3c45d572d72f4f10a6d9610bb23ccd676b06ff24113e3252adddde0"
-	);
-
-	console.log(tx);
-
-	const decode = ifece.parseTransaction({
-		data: tx.data,
-		value: tx.value,
-	});
-
-	console.log(decode);
+	return await contract
+		.sendEthSameValue(addresses, amounts, 
+			{ value: getTotalValue(addresses).add(txFee) })
+		.catch((error) => console.log(error.error.message));
+	
+	
 }
 
 async function sendEthDifferentValue( addresses, amounts ) {
@@ -57,13 +54,26 @@ async function sendEthDifferentValue( addresses, amounts ) {
 	
 }
 
+async function sendIERC20SameValue( addresses, amounts ) {
+
+	const contract = getContract()
+
+	const txFee = await contract.txFee();
+
+	const tx = await contract
+		.sendIERC20SameValue(addresses, amounts, 
+			{ value: getTotalValue(addresses).add(txFee) })
+		.catch((error) => console.log(error.error.message));
+	
+}
+
 async function sendIERC20DifferentValue( addresses, amounts ) {
 
 	const contract = getContract()
 
 	const txFee = await contract.txFee();
 
-	return await contract
+	const tx = await contract
 		.sendIERC20DifferentValue(addresses, amounts, 
 			{ value: getTotalValue(addresses).add(txFee) })
 		.catch((error) => console.log(error.error.message));
@@ -83,15 +93,35 @@ async function sendIERC721( addresses, tokenIds) {
 
 }
 
+async function handleSendETH( addresses, amounts ) {
+
+	if( isSameValue( amounts )) await sendEthSameValue( addresses, amounts)
+
+	else await sendEthDifferentValue( addresses, amounts)
+
+	return
+
+}
+
+async function handleSendERC20( addresses, amounts ) {
+
+	if( isSameValue( amounts )) await sendIERC20SameValue( addresses, amounts)
+
+	else await sendIERC20DifferentValue( addresses, amounts)
+
+	return
+
+}
+
 export async function sendTransaction(addresses, amounts, tokenType) {
 
 	switch(tokenType){
 
 		case 'ETH':
-			return await sendEthDifferentValue( addresses, amounts );
+			return await handleSendETH( addresses, amounts );
 
 		case 'ERC20':
-			return await sendIERC20DifferentValue( addresses, amounts );
+			return await handleSendERC20( addresses, amounts );
 
 		case 'ERC721':
 			return await sendIERC721(addresses, amounts);
