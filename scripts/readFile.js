@@ -3,6 +3,9 @@ const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
 const input = dropArea.querySelector("#input-file");
 const body = document.querySelector("body");
+let tokenToSendFile = "ETH";
+let walletsFileArr = [];
+let amountFileArr = [];
 let files;
 
 button.addEventListener("click", () => {
@@ -39,7 +42,6 @@ dropArea.addEventListener("dragleave", (e) => {
 dropArea.addEventListener("drop", (e) => {
   e.preventDefault();
   files = e.dataTransfer.files[0];
-  console.log(files);
 
   processFile(files);
 
@@ -53,7 +55,6 @@ async function processFile(file) {
   const workbook = XLSX.readFile(data);
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
   const excelData = XLSX.utils.sheet_to_json(worksheet);
-  console.log(excelData);
 
   const filePreview = `
       <div id="1" class="file-container">
@@ -66,8 +67,12 @@ async function processFile(file) {
         </div>
       </div>`;
   let csv = XLSX.utils.sheet_to_csv(worksheet);
-  //body.append(csv);
-  console.log(typeof csv);
   const html = document.querySelector("#preview").innerHTML;
   document.querySelector("#preview").innerHTML = filePreview;
+  for (const adress of excelData) {
+    walletsFileArr.push(adress.address);
+    amountFileArr.push(adress.amount);
+  }
 }
+
+export { walletsFileArr, amountFileArr, tokenToSendFile };
