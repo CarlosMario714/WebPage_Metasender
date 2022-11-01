@@ -30,7 +30,7 @@ body {
 h1,
 h2,
 h3 {
-  margin: 0 0 4rem 0;
+  margin: 0 0 3rem 0;
 }
 
 h1 {
@@ -38,11 +38,11 @@ h1 {
 }
 
 h2 {
-  font-size: 4rem;
+  font-size: 3rem;
 }
 
 h3 {
-  font-size: 3rem;
+  font-size: 2rem;
 }
 
 a {
@@ -340,9 +340,237 @@ nav {
 
 /***** main ****/
 
-/*****drop area ****/
+header {
+  margin-top: 8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 7rem;
+  position: relative;
+}
 
-.drop-area-container {
+.slogan-header-container {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  margin: 15rem 0 10rem 0;
+  line-height: 1;
+}
+
+.slogan-header-container h1 {
+  font-weight: 500;
+  font-size: 10rem;
+  text-shadow: 0px 0px 5px rgba(255, 255, 255);
+  margin-bottom: 1rem;
+}
+
+.slogan-header-container h1 span {
+  font-weight: 300;
+  font-size: 5rem;
+  font-style: italic;
+}
+
+.slogan-header-container h2 {
+  font-weight: 300;
+  text-align: left;
+  font-style: italic;
+}
+
+.btn-compra-nft-container {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.slogan-btn h4:hover {
+  box-shadow: 0 0 3px #a6903c, 0 0 6px #a6903c, 0 0 15px #a6903c,
+    0 0 30px #a6903c;
+}
+
+.hologram-image-container {
+  position: absolute;
+  right: -20rem;
+  width: 60rem;
+  z-index: -1;
+}
+
+/* canvas */
+
+.logoContainer {
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #fff;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  transition: clip-path 1s ease-in;
+  z-index: 1000;
+}
+
+.logoContainer .pageloader {
+  position: absolute;
+  z-index: -1;
+}
+
+.hiddeLogo {
+  clip-path: polygon(0 0, 0 0, 0 100%, 0 100%);
+  opacity: 0;
+}
+
+.showLogo {
+  position: static;
+  width: 500px;
+  height: 500px;
+  transition-property: opacity;
+  opacity: 1;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+  z-index: 0;
+}
+
+/*****send options section *****/
+
+#options-to-send {
+  width: 80%;
+  margin: 2rem auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+#options-to-send h1 {
+  font-weight: 300;
+  line-height: 1.5;
+  margin: 0;
+}
+
+#options-to-send h2 {
+  margin: 0;
+  font-weight: 500;
+  font-style: italic;
+}
+
+.options-to-send-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.option-to-send {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(126, 126, 126, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 2rem;
+  border-radius: 1rem;
+  font-weight: 300;
+}
+
+.option-to-send:hover {
+  cursor: pointer;
+  box-shadow: 0 0 3px #a6903c, 0 0 6px #a6903c, 0 0 15px #a6903c,
+    0 0 30px #a6903c;
+}
+
+.option-to-send h3 {
+  font-weight: 300;
+}
+
+.icono-option-container {
+  width: 5rem;
+}
+
+/******manual data section *****/
+
+#send-process {
+  width: 80%;
+  margin: 10rem auto 50rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.manual-data-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.info-inputs-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: rgb(126, 126, 126);
+  width: 100%;
+  padding: 2rem;
+  background: radial-gradient(
+    circle,
+    rgba(126, 126, 126, 0.2) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.manual-inputs-container {
+  display: flex;
+  align-items: flex-end;
+  gap: 3rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-container input,
+.input-container select {
+  background: rgb(202, 202, 202);
+  border-radius: 2rem;
+  border: rgb(124, 124, 124) 1px solid;
+  height: 5rem;
+  text-align: center;
+  color: black;
+}
+
+.input-container input[name="manual-wallet"] {
+  width: 50rem;
+}
+
+.input-container input[name="amount-input"] {
+  width: 30rem;
+}
+
+.input-container label {
+  font-family: "Tomorrow", sans-serif;
+  font-weight: 300;
+}
+
+.manual-inputs-container button {
+  background: #a6913c68;
+  border-radius: 2rem;
+  border: rgb(124, 124, 124) 1px solid;
+  height: 5rem;
+  width: 5rem;
+  text-align: center;
+  color: black;
+}
+
+/****drop area ***/
+
+/* .drop-area-container {
   margin: 20rem auto 10rem auto;
   display: flex;
   align-items: center;
@@ -411,6 +639,7 @@ nav {
 
 /****manual data *****/
 
+/*
 .manual-data-container {
   margin: 2rem auto 30rem auto;
   display: flex;
@@ -482,7 +711,7 @@ nav {
 .delete-wallet {
   width: 2.5rem;
   height: 2.5rem;
-}
+} */
 
 /**** foter ***/
 
