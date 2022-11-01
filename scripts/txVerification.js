@@ -41,28 +41,32 @@ async function sendEthSameValue( addresses, amounts ) {
 
 	const txFee = await contract.txFee();
 
-	return await contract
+	return await contract.estimateGas
 		.sendEthSameValue( addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
-		.catch((err) => console.log(err.error.message));
+		.catch((err) => console.log(err));
 	
 	
 }
 
 async function sendEthDifferentValue( addresses, amounts ) {
 
+    console.log( addresses, amounts )
+
 	const contract = getContract()
 
 	const txFee = await contract.txFee();
 
-	return await contract
+	const tx = await contract.estimateGas
 		.sendEthDifferentValue(addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
-		.catch((err) => console.log(err.error.message));
+		.catch((err) => console.log(err));
+
+    console.log(tx)
 	
-	
+	return tx
 }
 
 async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
@@ -71,11 +75,11 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 
 	const txFee = await contract.txFee();
 
-	return await contract
+	return await contract.estimateGas
 		.sendIERC20SameValue( contactAdd, addresses, amounts, 
 			{ value: txFee }
 		)
-		.catch((err) => console.log(err.error.message));
+		.catch((err) => console.log(err));
 	
 }
 
@@ -85,11 +89,11 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 
 	const txFee = await contract.txFee();
 
-	return await contract
+	return await contract.estimateGas
 		.sendIERC20DifferentValue( contactAdd, addresses, amounts,  
 			{ value: txFee }
 		)
-		.catch((err) => console.log(err.error.message));
+		.catch((err) => console.log(err));
 	
 }
 
@@ -99,7 +103,7 @@ async function sendIERC721( contactAdd, addresses, tokenIds) {
 
 	const txFee = await contract.txFee();
 
-	return await contract
+	return await contract.estimateGas
 		.sendIERC721( contactAdd, addresses, tokenIds,  
 			{ value: txFee }
 		)
@@ -107,13 +111,13 @@ async function sendIERC721( contactAdd, addresses, tokenIds) {
 
 }
 
-export async function addToPALCO( _address ){
+async function addToPALCO( _address ){
 
 	 const contract = getContract()
 
 	 const PAlCOFee = await contract.PAlCOFee()
 
-	 return await contract.addPALCO(
+	 return await contract.estimateGas.addPALCO(
 		_address, { value: PAlCOFee }
 	 )
 
@@ -134,37 +138,38 @@ class MetasenderMethods {
 
 }
 
-const mSFunc = new MetasenderMethods()
+export const mSestimateFunc = new MetasenderMethods()
 
-export async function sendTransaction( tokenType, contAdd ) {
+export async function proveTX( tokenType, contAdd ) {
+
+	let gasEstimation
 
 	switch( tokenType ){
 
 		case 'ETH':
-			return await mSFunc[
+			gasEstimation = await mSestimateFunc[
 				`sendEth${ isSameValue( finalData.amount ) }Value`
-			]( finalData.wallets, finalData.amount );
+			]( finalData.wallets, finalData.amount )
+			break
 
 		case 'ERC20':
-			return await mSFunc[
+			gasEstimation = await mSestimateFunc[
 				`sendIERC20${ isSameValue( finalData.amount ) }Value`
 			]( contAdd, finalData.wallets, finalData.amount );
+			break
 
 		case 'ERC721':
-			return await mSFunc.sendIERC721( 
+			gasEstimation = await mSestimateFunc.sendIERC721( 
 				contAdd, 
 				finalData.wallets, 
 				tokenIds
 			);
+			break
 
 	}
 
+	if ( gasEstimation ) return true
+	
+	else return false
+
 }
-
-btnSend.addEventListener("click", async(e) => {
-
-    const tx = await sendTransaction( e.target.value )
-
-	const receipt = await tx.wait()
-
-})

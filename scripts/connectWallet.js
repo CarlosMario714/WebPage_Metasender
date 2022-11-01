@@ -1,6 +1,6 @@
 // const closeAlert = document.querySelectorAll(".closeAlert");
 // const alertText = document.querySelector(".alert-text");
-const btnConnect = document.getElementById("btn-connect");
+const btnConnect = document.querySelector(".btnConnect");
 const chainSelect = document.getElementById("eth-network-select");
 // const installAlert = document.querySelector(".installAlert");
 // const connectedToMainet = document.querySelector(".connectedToMainet");
