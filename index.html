@@ -8,6 +8,9 @@
   <link href="./style/normalize.css" rel="stylesheet" />
   <link rel="shortcut icon" href="./img/icons/favicon.webp" type="image/x-icon">
   <link rel="stylesheet" href="./style/index.css">
+  <!-- fuentes -->
+  <link href="https://fonts.googleapis.com/css2?family=Tomorrow:wght@100;300;500;700&display=swap" rel="stylesheet" />
+  <link rel="shortcut icon" href="./img/icons/icono-titulo.jpg" type="image/x-icon" />
   <title>Metasender</title>
 </head>
 
@@ -26,11 +29,9 @@
     <div class="contenedor-botones-navbar">
       <a class="btn btn-home close-sidenavbar" href="#Home" data-content="navbar" data-type="navbar-home">INICIO</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <a class="btn close-sidenavbar" href="#marketplace" data-content="navbar"
-        data-type="navbar-marketplace">TIENDA</a>
+      <a class="btn close-sidenavbar" href="#marketplace" data-content="navbar" data-type="navbar-marketplace">VIP</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-aboutus" href="#aboutus">SOBRE
-        NOSOTROS
+      <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-aboutus" href="#aboutus">TUTORIAL
       </a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <div class="about-navbar-options options">
@@ -99,7 +100,79 @@
   </nav>
 
   <main>
-    <div class="drop-area-container">
+    <header id="Home">
+      <div class="logoContainer">
+        <img src="./img/metalogo/metalorianLogo.gif" alt="metalogo" />
+        <div class="pageloader">
+          <div class="lds-ring">
+            <div></div>
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slogan-header-container">
+        <h1 data-content="header" data-type="header-slogan">
+          <span>The<br></span>
+          MetaSender<br>
+        </h1>
+        <h2>A Metalorian's app</h2>
+        <div class="hologram-image-container">
+          <img src="./img/imagenes/metalogo.png" alt="imagen fondo header" />
+        </div>
+      </div>
+    </header>
+
+    <section id="options-to-send">
+      <h1>Envia tokens a multiples cuentas a la vez
+      </h1>
+      <h2>Selecciona una forma de hacerlo</h2>
+      <div class="options-to-send-container">
+        <div class="option-to-send">
+          <p>Envia tokens agregando cuentas de forma manual</p>
+          <div class="icono-option-container">
+            <img src="./img/icons/contract.png" alt="icono escribir">
+          </div>
+
+        </div>
+        <div class="option-to-send">
+          <p>Envia tokens agregando cuentas desde un archivo Excel</p>
+          <div class="icono-option-container">
+            <img src="./img/icons/upload-icon.png" alt="icono escribir">
+          </div </div>
+        </div>
+    </section>
+
+    <section id="send-process">
+      <div class="manual-data-container">
+        <div class="info-inputs-container">
+          <h1>Agrega cuentas</h1>
+          <div class="manual-inputs-container">
+            <div class="input-container">
+              <label>Tipo de Token</label>
+              <select name="token" id="token-input" required>
+                <option selected value="ETH">ETH</option>
+                <option value="ETH">ERC20</option>
+                <option value="ETH">ERC721</option>
+              </select>
+            </div>
+            <div class="input-container">
+              <label>Cuenta o Adress</label>
+              <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet" required />
+            </div>
+            <div class="input-container">
+              <label>Monto a Enviar</label>
+              <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto" required />
+            </div>
+            <button class="add-wallet-button">+</button>
+          </div>
+        </div>
+    </section>
+
+
+    <!-- <div class="drop-area-container">
       <div class="drop-area">
         <h2>Arrastra y suelta el archivo aca</h2>
         <span>O</span>
@@ -108,9 +181,9 @@
       </div>
       <div id="preview"></div>
       <button class="process-btn-file">process data</button>
-    </div>
+    </div> -->
 
-    <div class="manual-data-container">
+    <!-- <div class="manual-data-container">
       <div class="manual-data">
         <h4>Añade manualmente los datos</h4>
         <div class="manual-wallets">
@@ -126,8 +199,7 @@
         </div>
       </div>
       <button class="process-btn-manual">process data</button>
-
-    </div>
+    </div> -->
 
   </main>
 
