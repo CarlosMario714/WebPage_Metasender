@@ -1,5 +1,7 @@
-// import { estimateTx } from "./estimate.js";
-// import { finalData } from "./finalData.js";
+import { estimateTx } from "./estimate.js";
+import { finalData } from "./finalData.js";
+import { getContract, getTotalValue } from "./transactions.js";
+const btnEstimate = document.querySelector(".btnEstimate")
 const ercABI = [
     'function balanceOf(address owner) view returns (uint balance)'
 ]
@@ -38,14 +40,54 @@ async function getUserTokenBalance( _address, tokenType ){
 
 async function getTxCostAprox() {
 
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    const contract = getContract()
+
     const { gasEstimation } = await estimateTx( 
         finalData.tokenToSend,
         finalData.tokenAddress
     )
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const txFee = await contract.txFee()
 
     const gasPrice = await provider.getGasPrice();
 
-    const totalGas = gasPrice * gasEstimation
+    const totalGas = gasPrice.mul(gasEstimation).add(txFee)
+
+    return roundNumber(
+        Number(ethers.utils.formatEther(totalGas))
+    )
+
 }
+
+function getTotalToSend() {
+
+    return Number(ethers.utils.formatEther(
+            getTotalValue( finalData.amount )
+        ))
+    
+
+}
+
+async function setResumeInfo() {
+    
+    finalData.numAddresses = finalData.wallets.length
+
+    finalData.tokenToSend == 'ERC721' ?
+        finalData.totalToSend = finalData.amount.length :
+        finalData.totalToSend = getTotalToSend()
+
+    finalData.userETHBalance = await getUserBalance()
+
+    finalData.tokenToSend == 'ETH' ? 
+        finalData.userTokenBalance = finalData.userETHBalance :
+        finalData.userTokenBalance = await getUserTokenBalance(
+            finalData.tokenAddress,
+            finalData.tokenToSend
+        )
+
+    finalData.txCost = await getTxCostAprox()
+}
+
+btnEstimate.onclick = setResumeInfo

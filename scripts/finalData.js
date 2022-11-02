@@ -9,6 +9,11 @@ const finalData = {
   tokenAddress: "",
   wallets: [],
   amount: [],
+  numAddresses: 0,
+  totalToSend: 0,
+  txCost: 0,
+  userETHBalance: 0,
+  userTokenBalance: 0,
 };
 const btnProcessManual = document.querySelector(".continue-btn-manual");
 const btnProcessFile = document.querySelector(".continue-btn-file");

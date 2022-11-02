@@ -5,7 +5,7 @@ const ERC20Address = "0x26Cc6709e75BFd6C659220dAD12537Db719fA345"
 const ERC721Address = "0x38105D76bca204cEa0A38B7A52D24620AAb6DA60"
 const tokenIds = [12, 17, 18]
 
-function getTotalValue(valuesArray) {
+export function getTotalValue(valuesArray) {
 
 	return valuesArray.reduce((prev, curr) => prev.add(curr));
 
@@ -21,7 +21,7 @@ function isSameValue( values ) {
 
 }
 
-function getContract() {
+export function getContract() {
 	
 	const provider = new ethers.providers.Web3Provider(window.ethereum);
 
