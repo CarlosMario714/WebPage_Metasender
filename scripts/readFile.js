@@ -3,6 +3,10 @@ const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
 const input = dropArea.querySelector("#input-file");
 const body = document.querySelector("body");
+const fileDataContainer = document.querySelector(".file-data-container");
+const manualDataContainer = document.querySelector(".manual-data-container");
+const optionFile = document.querySelector(".option-file");
+const optionManual = document.querySelector(".option-manual");
 let tokenToSendFile = "ETH";
 let walletsFileArr = [];
 let amountFileArr = [];
@@ -10,6 +14,11 @@ let files;
 
 button.addEventListener("click", () => {
   input.click();
+});
+
+optionFile.addEventListener("click", () => {
+  fileDataContainer.style.display = "flex";
+  manualDataContainer.style.display = "none";
 });
 
 //detecta cada vez que input cambia, osea cada vez que se sube un archivo
