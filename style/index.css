@@ -116,6 +116,11 @@ video {
   background-color: rgb(210, 210, 210);
 }
 
+button {
+  border: none;
+  cursor: pointer;
+}
+
 .btn3 {
   position: relative;
   display: flex;
@@ -143,6 +148,10 @@ nav {
   z-index: 15;
   justify-content: space-between;
   padding: 0 10rem;
+}
+
+nav button {
+  background: rgb(244, 244, 244);
 }
 
 /* metalorian dao logo */
@@ -496,7 +505,7 @@ header {
 
 #send-process {
   width: 80%;
-  margin: 0 auto 50rem auto;
+  margin: 0 auto 5rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -511,8 +520,6 @@ header {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
-  top: 0;
 }
 
 .info-inputs-container {
@@ -643,8 +650,6 @@ header {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
-  top: 0;
 }
 
 .drop-area-container {
@@ -886,6 +891,86 @@ footer {
 .containerInfoStages table p {
   font-weight: 300;
 } */
+
+/********** Alertas ***********/
+
+.installAlert,
+.connectedToMainet,
+.disConnectedToMainet,
+.errorsAlert {
+  position: fixed;
+  left: 0px;
+  bottom: 80px;
+  display: flex;
+  font-family: TomorrowBold;
+  clip-path: circle(0% at 0 50%);
+  transition: clip-path 1s ease;
+  align-items: center;
+  justify-content: center;
+  min-width: 700px;
+  height: 50px;
+  background: white;
+  /* z-index: 20; */
+  font-size: 2rem;
+}
+
+.errorsAlert p {
+  width: 450px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+.installAlert img,
+.connectedToMainet img,
+.disConnectedToMainet img,
+.errorsAlert img {
+  position: absolute;
+  left: 30px;
+  width: 30px;
+}
+
+.closeAlert {
+  position: absolute;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  right: 0px;
+  width: 50px;
+  height: 50px;
+  /* z-index: 5; */
+}
+
+.closeAlert .bar1 {
+  background: black;
+  width: 25px;
+  height: 4px;
+  transform: rotateZ(45deg);
+  position: absolute;
+}
+
+.closeAlert .bar2 {
+  background: black;
+  width: 25px;
+  height: 4px;
+  transform: rotateZ(-45deg);
+  position: absolute;
+}
+
+.showAlert {
+  clip-path: circle(150% at 0 50%);
+  z-index: 1000;
+}
+
+.hidde {
+  opacity: 0;
+  transition: opacity 1s;
+}
+
+.visible {
+  opacity: 1;
+}
 
 @media (max-width: 1200px) {
 

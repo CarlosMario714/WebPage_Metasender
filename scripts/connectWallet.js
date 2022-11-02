@@ -1,24 +1,43 @@
-// const closeAlert = document.querySelectorAll(".closeAlert");
-// const alertText = document.querySelector(".alert-text");
+import { addClass, removeClass } from "./tools.js"
+const closeAlert = document.querySelectorAll(".closeAlert");
+const alertText = document.querySelector(".alert-text");
 const btnConnect = document.querySelector(".btnConnect");
-const chainSelect = document.getElementById("eth-network-select");
-// const installAlert = document.querySelector(".installAlert");
-// const connectedToMainet = document.querySelector(".connectedToMainet");
-// const disConnectedToMainet = document.querySelector(".disConnectedToMainet");
-// const errorAlert = document.querySelector(".errorsAlert");
-// const inputWalletForm = document.querySelector(
-// 	'.contact-form input[name="wallet"] '
+const installAlert = document.querySelector(".installAlert");
+const connectedToMainet = document.querySelector(".connectedToMainet");
+const disConnectedToMainet = document.querySelector(".disConnectedToMainet");
+const errorAlert = document.querySelector(".errorsAlert");
 //change
-const chain = "0x1";
+const chain = "0x5";
 let isConnected = false;
-
-// Connect with a ethereum account ( only compatible with metamask )
 
 function setWalletAddress() {
 	let start = ethereum.selectedAddress.match(/^\w{5}/);
 	let end = ethereum.selectedAddress.match(/\w{4}$/);
 	return start + "..." + end;
 }
+
+function listenChain(){
+
+	ethereum.on("chainChanged", (chainId) => {
+	
+		if (chainId === chain) {
+		  disConnectedToMainet.classList.remove("showAlert");
+		  connectedToMainet.classList.add("showAlert");
+		  connectedToMainet.style.zIndex = 50;
+	
+		  setTimeout(() => {
+			connectedToMainet.classList.remove("showAlert");
+			connectedToMainet.style.zIndex = 0;
+		  }, 5000);
+		} else {
+		  disConnectedToMainet.classList.add("showAlert");
+		}
+	
+	});
+
+}
+
+// Connect with a ethereum account ( only compatible with metamask )
 
 async function connectWallet() {
 	await window.ethereum
@@ -28,6 +47,7 @@ async function connectWallet() {
 		})
 		.then(() => {
 			btnConnect.innerHTML = setWalletAddress();
+			listenChain()
 		})
 		.catch((x) => {
 			console.log(x.message);
@@ -74,17 +94,15 @@ btnConnect.addEventListener("click", () => {
 	}
 });
 
-chainSelect.onclick = setChain;
-
 //close alerts
 
-// closeAlert.forEach((alert) => {
-// 	alert.addEventListener("click", function () {
-// 		connectedToMainet.classList.remove("showAlert");
-// 		disConnectedToMainet.classList.remove("showAlert");
-// 		installAlert.classList.remove("showAlert");
-// 		errorAlert.classList.remove("showAlert");
-// 	});
-// });
+closeAlert.forEach((alert) => {
+	alert.addEventListener("click", function () {
+		removeClass(
+			[ connectedToMainet, disConnectedToMainet, installAlert, errorAlert ],
+			"showAlert"
+		)
+	});
+});
 
-// export { chain, installAlert, disConnectedToMainet };
+export { chain, installAlert, disConnectedToMainet };
