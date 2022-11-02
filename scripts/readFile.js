@@ -7,6 +7,8 @@ const fileDataContainer = document.querySelector(".file-data-container");
 const manualDataContainer = document.querySelector(".manual-data-container");
 const optionFile = document.querySelector(".option-file");
 const optionManual = document.querySelector(".option-manual");
+const sendProcessSection = document.getElementById("send-process");
+
 let tokenToSendFile = "ETH";
 let walletsFileArr = [];
 let amountFileArr = [];
@@ -65,9 +67,11 @@ async function processFile(file) {
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
   const excelData = XLSX.utils.sheet_to_json(worksheet);
 
+  const previewElement = document.createElement("div");
+
   const filePreview = `
       <div id="1" class="file-container">
-        <img src="../img/icons/unnamed.png" alt="${file.name}" width="50">
+        <img src="../img/icons/excel-icon.png" alt="${file.name}" width="50">
         <div class="status">
           <span>${file.name}</span>
           <span class="status-text">
@@ -75,9 +79,9 @@ async function processFile(file) {
           </span>
         </div>
       </div>`;
-  let csv = XLSX.utils.sheet_to_csv(worksheet);
-  const html = document.querySelector("#preview").innerHTML;
-  document.querySelector("#preview").innerHTML = filePreview;
+  const preview = document.querySelector("#preview");
+  preview.innerHTML = filePreview;
+  dropArea.innerHTML = preview;
   for (const adress of excelData) {
     walletsFileArr.push(adress.address);
     amountFileArr.push(adress.amount);

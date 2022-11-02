@@ -9,6 +9,7 @@ const optionFile = document.querySelector(".option-file");
 const manualDataContainer = document.querySelector(".manual-data-container");
 const fileDataContainer = document.querySelector(".file-data-container");
 const continueBtnManual = document.querySelector(".continue-btn-manual");
+const sendProcessSection = document.getElementById("send-process");
 let walletsManualArr = [];
 let amountManualArr = [];
 let tokenToSendManual = "ETH";

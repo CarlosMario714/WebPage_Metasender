@@ -496,7 +496,7 @@ header {
 
 #send-process {
   width: 80%;
-  margin: 0 auto 50rem auto;
+  margin: 0 auto 5rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -511,8 +511,6 @@ header {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
-  top: 0;
 }
 
 .info-inputs-container {
@@ -591,13 +589,13 @@ header {
   align-items: center;
   justify-content: center;
   gap: 3rem;
+  border-radius: 1rem;
   background: rgb(126, 126, 126);
   background: radial-gradient(
     circle,
     rgba(126, 126, 126, 0.2) 50%,
     rgba(255, 255, 255, 1) 100%
   );
-  border-radius: 1rem;
 }
 
 .continue-btn-manual {
@@ -643,8 +641,6 @@ header {
   flex-direction: column;
   align-items: center;
   width: 100%;
-  position: absolute;
-  top: 0;
 }
 
 .drop-area-container {
@@ -655,26 +651,49 @@ header {
   flex-direction: column;
 }
 
+.subir-archivo-titulo {
+  width: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  background: rgb(126, 126, 126);
+  background: radial-gradient(
+    circle,
+    rgba(126, 126, 126, 0.2) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
 .drop-area {
-  border: 5px dashed #ddd;
-  height: 30rem;
+  border: 2px dashed rgba(124, 124, 124, 0.5);
+  height: 20rem;
   width: 70rem;
-  border-radius: 5px;
+  border-radius: 1rem;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
+  background: rgb(126, 126, 126);
+  background: radial-gradient(
+    circle,
+    rgba(126, 126, 126, 0.2) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.drop-area > * {
+  margin: 0;
 }
 
 .drop-area.active {
-  background-color: #b8d4fe;
+  background-color: #a6913c68;
   color: black;
-  border: 2px dashed #618ac9;
+  border: 2px dashed black;
 }
 
 .drop-area h2 {
-  font-size: 3rem;
-  font-weight: 500;
+  font-weight: 300;
   color: #000;
 }
 
@@ -682,18 +701,6 @@ header {
   font-size: 2.5rem;
   font-weight: 500;
   color: #000;
-}
-
-.drop-area button {
-  padding: 1rem 2.5rem;
-  font-size: 2rem;
-  border: 0;
-  outline: none;
-  background-color: #5256ad;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
-  margin: 2rem;
 }
 
 .file-container {
@@ -714,6 +721,7 @@ header {
   padding: 0 1rem;
 }
 
+.drop-area button,
 .continue-btn-file {
   background: #a6913c68;
   border-radius: 2rem;
@@ -724,6 +732,13 @@ header {
   padding: 0 2rem;
   margin: 2rem;
   animation: opacity 0.5s ease;
+}
+
+.drop-area button:hover,
+.continue-btn-file:hover {
+  cursor: pointer;
+  box-shadow: 0 0 3px #a6903c, 0 0 6px #a6903c, 0 0 15px #a6903c,
+    0 0 30px #a6903c;
 }
 
 /**** foter ***/
