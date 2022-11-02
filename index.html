@@ -45,7 +45,8 @@
         <div class="language-boton-container language">
           <a class="btn3" data-function="en">ENGLISH</a>
           <a class="btn3" data-function="es">ESPAÑOL</a>
-          <a class="btn3" target="_blank" href="https://life-out.gitbook.io/the-metalorian-dao/">DOCS              <img src="./img/icons/logout.png" alt="log-out" style="height: 14px" /></a>
+          <a class="btn3" target="_blank" href="https://life-out.gitbook.io/the-metalorian-dao/">DOCS <img
+              src="./img/icons/logout.png" alt="log-out" style="height: 14px" /></a>
         </div>
       </div>
     </div>
@@ -76,7 +77,7 @@
           <span>The<br></span>
           MetaSender<br>
         </h1>
-        <h2>A Metalorian's app</h2>
+        <h2>A Metalorian's DApp</h2>
         <div class="hologram-image-container">
           <img src="./img/imagenes/metalogo.png" alt="imagen fondo header" />
         </div>
@@ -112,17 +113,20 @@
               <label>Tipo de Token</label>
               <select name="token" id="token-input" required>
                 <option selected value="ETH">ETH</option>
-                <option value="ETH">ERC20</option>
-                <option value="ETH">ERC721</option>
+                <option value="ERC20">ERC20</option>
+                <option value="ERC721">ERC721</option>
               </select>
             </div>
             <div class="input-container">
-              <label>Cuenta o Adress</label>
-              <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet" required />
+              <label class="label-adress">Cuenta o Wallet a enviar</label>
+              <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
+                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required />
+              <!-- <span class="contact-form-error none">wallet solo acepta</span> -->
             </div>
             <div class="input-container">
-              <label>Monto a Enviar</label>
-              <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto" required />
+              <label class="label-amount">Monto a Enviar</label>
+              <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto"
+                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required />
             </div>
             <button class="add-wallet-button">+</button>
           </div>
@@ -138,10 +142,8 @@
             <h2>Arrastra y suelta el archivo aqui</h2>
             <span>O</span>
             <button>Selecciona tus archivos</button>
-            <input type="file" name="" id="input-file" hidden multiple>
-            <div id="preview"></div>
+            <input type="file" name="" id="input-file" hidden>
           </div>
-          <div id="preview"></div>
           <button class="continue-btn-file">Continuar</button>
         </div>
       </div>
@@ -154,7 +156,9 @@
           Palco
         </h1>
         <p data-content="palco" data-type="palco-info">
-          <span>Metasender</span> te cobrara un pequeño impuesto por cada lote de transacciones que realices, puedes realizar lotes de transacciones gratuitas de por vida volviendote parte de nuestro <span>Palco</span> por 1 ETH.
+          <span>Metasender</span> te cobrara un pequeño impuesto por cada lote de transacciones que realices, puedes
+          realizar lotes de transacciones gratuitas de por vida volviendote parte de nuestro <span>Palco</span> por 1
+          ETH.
         </p>
         <button class="btn-palco" data-content="palco" data-type="btn-palco">
           Comprar
@@ -162,7 +166,7 @@
       </div>
     </section>
 
-    
+
     <div class="installAlert">
       <img src="./img/icons/alert.png" alt="alert" />
       <p data-content="alerts" data-type="install-metamask">

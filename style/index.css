@@ -715,11 +715,13 @@ header {
 .file-container {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 1rem;
   padding: 1rem;
   border: solid 1px #ddd;
-  width: 70rem;
+  width: 50rem;
   margin: 1rem auto;
+  background: #a6913c68;
 }
 
 #preview {
@@ -857,11 +859,11 @@ footer {
   color: rgb(126, 126, 126);
 }
 
-/* About us */
+/* palco */
 
 .palco-container {
   width: 65%;
-  margin: 20rem auto;
+  margin: 10rem auto;
   display: flex;
   flex-direction: column;
 }
@@ -992,7 +994,6 @@ footer {
 }
 
 @media (max-width: 1200px) {
-
   /* PALCO */
 
   .btn-palco {
@@ -1001,7 +1002,6 @@ footer {
     height: 5rem;
     margin-left: 0.5rem;
   }
-
 }
 
 @media (max-width: 980px) {
@@ -1106,7 +1106,6 @@ footer {
   .community-navbar-btn img {
     display: block;
   }
-  
 }
 
 @media (max-width: 700px) {

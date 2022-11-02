@@ -10,11 +10,37 @@ const manualDataContainer = document.querySelector(".manual-data-container");
 const fileDataContainer = document.querySelector(".file-data-container");
 const continueBtnManual = document.querySelector(".continue-btn-manual");
 const sendProcessSection = document.getElementById("send-process");
+const tokenInput = document.getElementById("token-input");
+const labelAdress = document.querySelector(".label-adress");
+const labelAmount = document.querySelector(".label-amount");
+
 let walletsManualArr = [];
 let amountManualArr = [];
-let tokenToSendManual = "ETH";
+let tokenToSendManual = tokenInput.value;
+
 let numberOfWallets = 0;
 let domElementWallet;
+
+tokenInput.addEventListener("click", (e) => {
+  switch (tokenInput.value) {
+    case "ETH":
+      labelAdress.innerHTML = "Cuenta o Wallet a enviar";
+      walletInput.placeholder = "Escribe la wallet";
+      labelAmount.innerHTML = "Monto a Enviar";
+      labelAmount.placeholder = "Escribe el monto";
+      break;
+    case "ERC20":
+      labelAdress.innerHTML = "Adress del contrato del token";
+      walletInput.placeholder = "Escribe el Adress del contrato";
+      labelAmount.innerHTML = "# de tokens a enviar";
+      labelAmount.placeholder = "Escribe el # de tokens";
+    case "ERC721":
+      labelAdress.innerHTML = "Adress del contrato del token";
+      walletInput.placeholder = "Escribe el Adress del contrato";
+      labelAmount.innerHTML = "# de tokens a enviar";
+      labelAmount.placeholder = "Escribe el # de tokens";
+  }
+});
 
 optionManual.addEventListener("click", () => {
   manualDataContainer.style.display = "flex";
