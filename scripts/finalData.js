@@ -10,8 +10,8 @@ const finalData = {
   wallets: [],
   amount: [],
 };
-const btnProcessManual = document.querySelector(".process-btn-manual");
-const btnProcessFile = document.querySelector(".process-btn-file");
+const btnProcessManual = document.querySelector(".continue-btn-manual");
+const btnProcessFile = document.querySelector(".continue-btn-file");
 
 btnProcessManual.addEventListener("click", () => {
   processFinalData();

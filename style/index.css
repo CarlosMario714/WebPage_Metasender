@@ -492,22 +492,27 @@ header {
   width: 5rem;
 }
 
-/******manual data section *****/
+/****** send process section *****/
 
 #send-process {
   width: 80%;
-  margin: 10rem auto 50rem auto;
+  margin: 0 auto 50rem auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
 
+/*manual data */
+
 .manual-data-container {
-  display: flex;
+  display: none;
   flex-direction: column;
   align-items: center;
   width: 100%;
+  position: absolute;
+  top: 0;
 }
 
 .info-inputs-container {
@@ -566,7 +571,7 @@ header {
 .manual-inputs-container button {
   background: #a6913c68;
   border-radius: 2rem;
-  border: rgb(124, 124, 124) 1px solid;
+  border: none;
   height: 5rem;
   width: 5rem;
   text-align: center;
@@ -595,10 +600,55 @@ header {
   border-radius: 1rem;
 }
 
+.continue-btn-manual {
+  display: none;
+  background: #a6913c68;
+  border-radius: 2rem;
+  border: none;
+  height: 5rem;
+  text-align: center;
+  color: black;
+  padding: 0 2rem;
+  margin: 2rem;
+  animation: opacity 0.5s ease;
+}
+
+.continue-btn-manual.opacity {
+  display: block;
+  animation: opacity 2s ease;
+}
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.add-wallet-button:hover,
+.continue-btn-manual:hover {
+  cursor: pointer;
+  box-shadow: 0 0 3px #a6903c, 0 0 6px #a6903c, 0 0 15px #a6903c,
+    0 0 30px #a6903c;
+}
+
+/* file data */
+
 /****drop area ***/
 
+.file-data-container {
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: absolute;
+  top: 0;
+}
+
 .drop-area-container {
-  margin: 20rem auto 10rem auto;
+  margin: 0 auto;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -664,81 +714,17 @@ header {
   padding: 0 1rem;
 }
 
-/****manual data *****/
-
-/*
-.manual-data-container {
-  margin: 2rem auto 30rem auto;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.manual-data {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-}
-
-.manual-wallets {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: #ddd;
-  border-radius: 1rem;
-  gap: 1rem;
-  padding: 1rem 4rem;
-}
-
-.input-container {
-  display: flex;
-  flex-direction: column;
-}
-
-.wallet-input {
-  width: 50rem;
-}
-
-.amount-input {
-  width: 10rem;
+.continue-btn-file {
+  background: #a6913c68;
+  border-radius: 2rem;
+  border: none;
+  height: 5rem;
   text-align: center;
-}
-
-.manual-wallets button {
-  padding: 1rem 2.5rem;
-  font-size: 2rem;
-  border: 0;
-  outline: none;
-  background-color: #5256ad;
-  color: white;
-  border-radius: 5px;
-  cursor: pointer;
+  color: black;
+  padding: 0 2rem;
   margin: 2rem;
+  animation: opacity 0.5s ease;
 }
-
-.number-wallet {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 5rem;
-}
-
-.wallet-input:read-only {
-  color: rgb(102, 102, 102);
-  background-color: rgb(192, 192, 192);
-  border: none;
-}
-
-.amount-input:read-only {
-  color: rgb(102, 102, 102);
-  background-color: rgb(192, 192, 192);
-  border: none;
-}
-
-.delete-wallet {
-  width: 2.5rem;
-  height: 2.5rem;
-} */
 
 /**** foter ***/
 

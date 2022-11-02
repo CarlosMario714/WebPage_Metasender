@@ -4,14 +4,25 @@ const manualWalletsContainer = document.querySelector(
 const addWalletButton = document.querySelector(".add-wallet-button");
 const walletInput = document.querySelector(".wallet-input");
 const amountInput = document.querySelector(".amount-input");
+const optionManual = document.querySelector(".option-manual");
+const optionFile = document.querySelector(".option-file");
+const manualDataContainer = document.querySelector(".manual-data-container");
+const fileDataContainer = document.querySelector(".file-data-container");
+const continueBtnManual = document.querySelector(".continue-btn-manual");
 let walletsManualArr = [];
 let amountManualArr = [];
 let tokenToSendManual = "ETH";
 let numberOfWallets = 0;
 let domElementWallet;
 
+optionManual.addEventListener("click", () => {
+  manualDataContainer.style.display = "flex";
+  fileDataContainer.style.display = "none";
+});
+
 addWalletButton.addEventListener("click", () => {
   addNewManualWallet();
+  continueBtnManual.classList.add("opacity");
 });
 
 manualWalletsContainer.addEventListener("click", (e) => {
