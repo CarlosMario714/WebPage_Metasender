@@ -5,7 +5,8 @@ import {
   tokenToSendManual,
 } from "./manualWallets.js";
 const finalData = {
-  tokenToSend: "",
+  tokenToSend: "ETH",
+  tokenAddress: "",
   wallets: [],
   amount: [],
 };

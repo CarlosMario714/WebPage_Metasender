@@ -140,7 +140,7 @@ class MetasenderMethods {
 
 export const mSestimateFunc = new MetasenderMethods()
 
-export async function proveTX( tokenType, contAdd ) {
+export async function estimateTx( tokenType, contAdd ) {
 
 	let gasEstimation
 
@@ -168,8 +168,8 @@ export async function proveTX( tokenType, contAdd ) {
 
 	}
 
-	if ( gasEstimation ) return true
+	if ( gasEstimation ) return { verify: true, gasEstimation }
 	
-	else return false
+	else return { verify: false }
 
 }
