@@ -52,21 +52,17 @@ async function sendEthSameValue( addresses, amounts ) {
 
 async function sendEthDifferentValue( addresses, amounts ) {
 
-    console.log( addresses, amounts )
-
 	const contract = getContract()
 
 	const txFee = await contract.txFee();
 
-	const tx = await contract.estimateGas
+	return await contract.estimateGas
 		.sendEthDifferentValue(addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
 		.catch((err) => console.log(err));
-
-    console.log(tx)
 	
-	return tx
+	
 }
 
 async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
