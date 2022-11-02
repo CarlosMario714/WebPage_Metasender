@@ -506,6 +506,7 @@ header {
 .manual-data-container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   width: 100%;
 }
 
@@ -514,14 +515,18 @@ header {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: rgb(126, 126, 126);
   width: 100%;
   padding: 2rem;
+  background: rgb(126, 126, 126);
   background: radial-gradient(
     circle,
     rgba(126, 126, 126, 0.2) 50%,
     rgba(255, 255, 255, 1) 100%
   );
+}
+
+.info-inputs-container h2 {
+  margin: 0;
 }
 
 .manual-inputs-container {
@@ -568,9 +573,31 @@ header {
   color: black;
 }
 
+.manual-wallets-container {
+  overflow: hidden;
+  overflow-y: scroll;
+  max-height: 50rem;
+}
+
+.manual-wallet {
+  margin: 2rem 0 0;
+  width: 80rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 3rem;
+  background: rgb(126, 126, 126);
+  background: radial-gradient(
+    circle,
+    rgba(126, 126, 126, 0.2) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+  border-radius: 1rem;
+}
+
 /****drop area ***/
 
-/* .drop-area-container {
+.drop-area-container {
   margin: 20rem auto 10rem auto;
   display: flex;
   align-items: center;
