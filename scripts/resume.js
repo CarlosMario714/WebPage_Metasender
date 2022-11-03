@@ -2,8 +2,9 @@ import { estimateTx } from "./estimate.js";
 import { finalData } from "./finalData.js";
 import { getContract, getTotalValue } from "./transactions.js";
 const btnEstimate = document.querySelector(".btnEstimate")
-const ercABI = [
-    'function balanceOf(address owner) view returns (uint balance)'
+export const ercABI = [
+    'function balanceOf(address owner) view returns (uint balance)',
+    'function symbol() public view returns (string)'
 ]
 
 function roundNumber( num ) {
@@ -89,5 +90,3 @@ async function setResumeInfo() {
 
     finalData.txCost = await getTxCostAprox()
 }
-
-btnEstimate.onclick = setResumeInfo
