@@ -8,8 +8,11 @@ const manualDataContainer = document.querySelector(".manual-data-container");
 const optionFile = document.querySelector(".option-file");
 const optionManual = document.querySelector(".option-manual");
 const sendProcessSection = document.getElementById("send-process");
+const child1DropArea = document.querySelector(".drop-area h2");
+const child2DropArea = document.querySelector(".drop-area span");
+const tokenInput = document.getElementById("token-input");
 
-let tokenToSendFile = "ETH";
+let tokenToSendFile = tokenInput.value;
 let walletsFileArr = [];
 let amountFileArr = [];
 let files;
@@ -68,20 +71,19 @@ async function processFile(file) {
   const excelData = XLSX.utils.sheet_to_json(worksheet);
 
   const previewElement = document.createElement("div");
+  previewElement.classList.add("file-container");
+  previewElement.innerHTML = `<img src="../img/icons/excel-icon.png" alt="${file.name}" width="50">
+  <div class="status">
+    <span>${file.name}</span>
+    <span class="status-text">
+      Loading...
+    </span>
+  </div>`;
+  dropArea.removeChild(child1DropArea);
+  dropArea.removeChild(child2DropArea);
+  dropArea.removeChild(button);
+  dropArea.append(previewElement);
 
-  const filePreview = `
-      <div id="1" class="file-container">
-        <img src="../img/icons/excel-icon.png" alt="${file.name}" width="50">
-        <div class="status">
-          <span>${file.name}</span>
-          <span class="status-text">
-            Loading...
-          </span>
-        </div>
-      </div>`;
-  const preview = document.querySelector("#preview");
-  preview.innerHTML = filePreview;
-  dropArea.innerHTML = preview;
   for (const adress of excelData) {
     walletsFileArr.push(adress.address);
     amountFileArr.push(adress.amount);
