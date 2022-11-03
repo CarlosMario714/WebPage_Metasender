@@ -162,12 +162,12 @@ export async function sendTransaction( tokenType, contAdd ) {
 
 }
 
-btnSend.addEventListener("click", async(e) => {
+// btnSend.addEventListener("click", async(e) => {
 
-    const tx = await sendTransaction( e.target.value )
+//     const tx = await sendTransaction( e.target.value )
 
-	const receipt = await tx.wait()
+// 	const receipt = await tx.wait()
 
-})
+// })
 
 btnPalco.onclick = mSFunc.addPALCO
