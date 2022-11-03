@@ -120,13 +120,14 @@
             <div class="input-container">
               <label class="label-adress">Cuenta o Wallet a enviar</label>
               <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
-                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required />
-              <!-- <span class="contact-form-error none">wallet solo acepta</span> -->
+                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" required />
+              <span class="input-error none span-wallet">wallet o Adress no valido</span>
             </div>
             <div class="input-container">
               <label class="label-amount">Monto a Enviar</label>
               <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto"
-                pattern="^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required />
+                pattern="^\d*\.\d+$|^\d*\d+$" required />
+              <span class="input-error none span-amount">Monto no valido</span>
             </div>
             <button class="add-wallet-button">+</button>
           </div>
