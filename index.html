@@ -31,13 +31,26 @@
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <a class="btn close-sidenavbar" href="#marketplace" data-content="navbar" data-type="navbar-marketplace">SEND</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-palco" href="#palco">VIP
+      <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-palco" href="#palco">PALCO
       </a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <a class="community-navbar-btn btn" href="#nftSales" data-content="navbar" data-type="navbar-community">TUTORIAL
       </a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <button class="btnConnect btn">CONNECT WALLET</button>
+      <button class="btnConnect btn">CONNECT WALLET <img src="./img/icons/Metamask-icon.png"
+          alt="icono metamask"></button>
+      <div class="symbol" style="color: #a6903c; user-select: none">|</div>
+      <div class="btn option-red">
+        <select name="red" style="width: 220px;" required>
+          <option selected value="1">ETHEREUM MAINNET</option>
+          <option value="5">GOERLI TESNET</option>
+          <option value="38">BINANCE SMART CHAIN MAINNET</option>
+          <option value="89">POLYGON MAINNET</option>
+          <option value="a86a">AVALANCHE C-CHAIN</option>
+          <option value="fa">FANTOM OPERA</option>
+          <option value="3d">ETHEREUM CLASSIC MAINNET</option>
+        </select>
+      </div>
       <div class="language-container-navbar btn3">
         <a class="boton-language">
           <img src="./img/icons/globe.png" alt="icono mundo" style="height: 25px" />
@@ -84,10 +97,16 @@
       </div>
     </header>
 
-    <section id="options-to-send">
-      <h1>Envia tokens de la red de Ethereum a multiples cuentas a la vez
+    <section id="options-to-send" class="options-to-send">
+      <h1>Envia tokens a multiples cuentas a la vez
       </h1>
-      <h2>Selecciona una forma de hacerlo</h2>
+      <p class="page-description">Con <span>The MetaSender </span> puedes enviar tokens a multiples cuentas a la vez en
+        redes como
+        Ethereum, Binance,
+        Polygon, entre otras. A un precio reducido.</p>
+      <h3>Conecta tu Wallet <img class="metamask-icon" src="./img/icons/Metamask-icon.png" alt="icono metamask">, escoje
+        una red y selecciona
+        una forma de hacerlo:</h3>
       <div class="options-to-send-container">
         <a class="option-to-send option-manual" href="#options-to-send">
           <p>Envia tokens agregando cuentas de forma manual</p>
@@ -102,6 +121,7 @@
             <img src="./img/icons/upload-icon.png" alt="icono escribir">
           </div>
         </a>
+      </div>
     </section>
 
     <section id="send-process">
@@ -111,8 +131,8 @@
           <div class="manual-inputs-container">
             <div class="input-container">
               <label>Tipo de Token</label>
-              <select name="token" id="token-input" required>
-                <option selected value="ETH">ETH</option>
+              <select name="token" class="token-input" id="token-input" required>
+                <option name="chain-currency" selected value="ETH">ETH</option>
                 <option value="ERC20">ERC20</option>
                 <option value="ERC721">ERC721</option>
               </select>
@@ -134,7 +154,7 @@
         </div>
         <div class="manual-wallets-container">
         </div>
-        <button class="continue-btn-manual">Continuar</button>
+        <button class="continue-btn-manual btn2">Continuar</button>
       </div>
       <div class="file-data-container">
         <h2 class="subir-archivo-titulo">Sube un archivo</h2>
@@ -142,10 +162,52 @@
           <div class="drop-area">
             <h2>Arrastra y suelta el archivo aqui</h2>
             <span>O</span>
-            <button>Selecciona tus archivos</button>
+            <button class="btn2">Selecciona tus archivos</button>
+            <div class="plantilla">
+              <p>*El archivo debe cumplir con la plantilla</p>
+              <a href="./download/metasender.xlsx" download="metasender.xlsx">Descargar Plantilla</a>
+            </div>
+
             <input type="file" name="" id="input-file" hidden>
           </div>
-          <button class="continue-btn-file">Continuar</button>
+          <div class="input-container input-container-file">
+            <label>Selecciona el Tipo de Token a Enviar</label>
+            <select name="token" class="token-input-file" id="token-input" required>
+              <option name="chain-currency-file" selected value="ETH">ETH</option>
+              <option value="ERC20">ERC20</option>
+              <option value="ERC721">ERC721</option>
+            </select>
+          </div>
+          <button class="continue-btn-file btn2">Continuar</button>
+        </div>
+      </div>
+      <div class="resumen-final-container">
+        <h2 class="titulo-resumen">Resumen de la operacion</h2>
+        <div class="resumen-container">
+          <div class="resumen">
+            <h3>Total de wallets o Adress</h3>
+            <h2 class="total-wallets">25</h2>
+          </div>
+          <div class="resumen">
+            <h3>Total de tokens a enviar</h3>
+            <h2 class="total-tokens">25</h2>
+          </div>
+          <div class="resumen">
+            <h3>Tu balance de tokens</h3>
+            <h2 class="balance-tokens">25</h2>
+          </div>
+          <div class="resumen">
+            <h3>Tu Balance de ETH</h3>
+            <h2 class="balance-eth">25</h2>
+          </div>
+          <div class="resumen">
+            <h3>Costo Aproximado de la Operacion</h3>
+            <h2 class="costo-operacion">25</h2>
+          </div>
+        </div>
+        <div class="container-buttons">
+          <button class="atras-btn btn2">Atras</button>
+          <button class="send-btn btn2">Enviar</button>
         </div>
       </div>
     </section>
@@ -157,7 +219,8 @@
           Palco
         </h1>
         <p data-content="palco" data-type="palco-info">
-          <span>Metasender</span> te cobrara un pequeño impuesto por cada lote de transacciones que realices, puedes
+          <span>Metasender</span> te cobrara un pequeño impuesto de 0.0075 ETH por cada lote de transacciones que
+          realices, puedes
           realizar lotes de transacciones gratuitas de por vida volviendote parte de nuestro <span>Palco</span> por 1
           ETH.
         </p>

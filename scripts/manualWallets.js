@@ -15,19 +15,33 @@ const labelAdress = document.querySelector(".label-adress");
 const labelAmount = document.querySelector(".label-amount");
 const spanWallet = document.querySelector(".span-wallet");
 const spanAmount = document.querySelector(".span-amount");
+const resumenFinalContainer = document.querySelector(
+  ".resumen-final-container"
+);
+const atrasbtn = document.querySelector(".atras-btn");
+//resumen operacion
+const totalWallets = document.querySelector(".total-wallets");
+const totalTokens = document.querySelector(".total-tokens");
+const balanceTokens = document.querySelector(".balance-tokens");
+const balanceEth = document.querySelector(".balance-eth");
+const costoOperacion = document.querySelector(".costo-operacion");
 
 let walletsManualArr = [];
 let amountManualArr = [];
 let tokenToSendManual = tokenInput.value;
 
-let numberOfWallets = 0;
-let domElementWallet;
+let numberOfNewWallet = 0;
 
-//expresion regular numeros positivos enteros ^\d*\d+$
-//expresion regular numeros positivos enteros y con decimales ^\d*\.\d+$|^\d*\d+$
+optionManual.addEventListener("click", () => {
+  manualDataContainer.style.display = "flex";
+  fileDataContainer.style.display = "none";
+  resumenFinalContainer.style.display = "none";
+});
+
+//select type of token
 tokenInput.addEventListener("click", (e) => {
   switch (tokenInput.value) {
-    case "ETH":
+    case "ETH" || "BNB" || "MATIC" || "AVAX" || "FTM" || "ETC":
       labelAdress.innerHTML = "Cuenta o Wallet a enviar";
       walletInput.placeholder = "Escribe la wallet";
       labelAmount.innerHTML = "Monto a Enviar";
@@ -51,11 +65,7 @@ tokenInput.addEventListener("click", (e) => {
   }
 });
 
-optionManual.addEventListener("click", () => {
-  manualDataContainer.style.display = "flex";
-  fileDataContainer.style.display = "none";
-});
-
+//verify data and add new wallet
 addWalletButton.addEventListener("click", (e) => {
   if (walletInput.value && amountInput.value !== "") {
     let walletRegex = new RegExp(walletInput.pattern);
@@ -78,48 +88,109 @@ addWalletButton.addEventListener("click", (e) => {
       AmountRegex.exec(amountInput.value)
     ) {
       addNewManualWallet();
+      walletInput.value = "";
+      amountInput.value = "";
       continueBtnManual.classList.add("opacity");
-      console.log(amountInput.pattern);
     }
   }
 });
 
+//delete wallet
 manualWalletsContainer.addEventListener("click", (e) => {
-  if (e.target.classList == "delete-wallet") {
-    deleteManualWallet(e.target.dataset.wallet);
+  if (e.target.classList[0] == "delete-wallet") {
+    manualWalletsContainer.removeChild(e.target.parentNode.parentNode);
+    renameNumberOfWallets();
+  }
+  if (e.target.classList[0] == "edit-wallet") {
+    let parentElement = e.target.parentNode.parentNode;
+    //console.log(parentElement.childNodes);
+    parentElement.childNodes.forEach((element) => {
+      if (element.classList == "wallet-adress") {
+        walletInput.value = element.innerHTML;
+      }
+      if (element.classList == "wallet-amount") {
+        amountInput.value = element.innerHTML;
+      }
+    });
+    walletInput.classList.add("edit");
+    amountInput.classList.add("edit");
+    setTimeout(() => {
+      walletInput.classList.remove("edit");
+      amountInput.classList.remove("edit");
+    }, 1000);
+    manualWalletsContainer.removeChild(parentElement);
+    renameNumberOfWallets();
   }
 });
 
+//rename wallets when someone is delete
+function renameNumberOfWallets() {
+  let numberOfWallet = document.querySelectorAll(".number-of-wallet");
+  console.log("number of wallets", numberOfWallet);
+
+  for (let i = 0; i < numberOfWallet.length; i++) {
+    console.log(i);
+    console.log("number of wallets length", numberOfWallet.length);
+    numberOfWallet[i].parentNode.id = i + 1;
+    numberOfWallet[i].innerHTML = i + 1;
+    numberOfNewWallet = i + 1;
+  }
+}
+
+//add new wallet element
 function addNewManualWallet() {
-  numberOfWallets += 1;
+  numberOfNewWallet += 1;
   let newWalletContainer = document.createElement("div");
-  newWalletContainer.classList.add(
-    `wallet-${numberOfWallets}-adress`,
-    "manual-wallets"
-  );
+  newWalletContainer.id = numberOfNewWallet;
+  newWalletContainer.classList.add("manual-wallet");
   newWalletContainer.innerHTML = `
-  <div class="manual-wallet">
-    <div>${numberOfWallets}</div>
-    <div>${walletInput.value}</div>
-    <div>${amountInput.value}</div>
+    <div class="number-of-wallet">${numberOfNewWallet}</div>
+    <div class="wallet-adress">${walletInput.value}</div>
+    <div class="wallet-amount">${amountInput.value}</div>
     <div>${tokenInput.value}</div>
     <a>
-      <img class="delete-wallet" data-wallet="${numberOfWallets}" src="../img/icons/close.svg"
+      <img class="edit-wallet" src="../img/icons/boton-editar.png"
         alt="cerrar pagina" />
     </a>
-  </div>`;
+    <a>
+      <img class="delete-wallet" src="../img/icons/cerrar.png"
+        alt="cerrar pagina" />
+    </a>`;
   manualWalletsContainer.append(newWalletContainer);
-  walletsManualArr.push(walletInput.value);
-  amountManualArr.push(amountInput.value);
-  domElementWallet = document.querySelectorAll(".manual-wallets");
+  //walletsManualArr.push(walletInput.value);
+  //amountManualArr.push(amountInput.value);
 }
 
-function deleteManualWallet(walletToDelete) {
-  domElementWallet.forEach((element) => {
-    if (element.classList[0] === `wallet-${walletToDelete}-adress`) {
-      manualWalletsContainer.removeChild(element);
-    }
+continueBtnManual.addEventListener("click", () => {
+  walletsManualArr = [];
+  amountManualArr = [];
+  let walletAdress = document.querySelectorAll(".wallet-adress");
+  let walletMount = document.querySelectorAll(".wallet-amount");
+
+  walletAdress.forEach((walletAddres) => {
+    walletsManualArr.push(walletAddres.innerHTML);
   });
+
+  walletMount.forEach((walletMount) => {
+    amountManualArr.push(walletMount.innerHTML);
+  });
+
+  setFinalResume();
+
+  manualDataContainer.style.display = "none";
+  resumenFinalContainer.style.display = "block";
+
+  console.log(walletsManualArr);
+  console.log(amountManualArr);
+});
+
+function setFinalResume() {
+  totalWallets.innerHTML = walletsManualArr.length;
 }
+
+atrasbtn.addEventListener("click", () => {
+  manualDataContainer.style.display = "flex";
+  resumenFinalContainer.style.display = "none";
+});
 
 export { walletsManualArr, amountManualArr, tokenToSendManual };
