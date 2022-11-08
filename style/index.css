@@ -357,10 +357,27 @@ nav button {
   display: block;
 }
 
+.option-red select {
+  height: 100%;
+  color: #a6903c;
+  border: none;
+  background: rgb(244, 244, 244);
+  text-align: center;
+}
+
+.option-red select:hover {
+  cursor: pointer;
+}
+
+.btnConnect img {
+  margin: 1rem;
+  width: 2.5rem;
+}
+
 /***** main ****/
 
 header {
-  margin-top: 8rem;
+  margin-top: 12rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -376,12 +393,12 @@ header {
   align-items: flex-start;
   flex-direction: column;
   margin: 15rem 0 10rem 0;
-  line-height: 1;
+  line-height: 0.8;
 }
 
 .slogan-header-container h1 {
   font-weight: 500;
-  font-size: 10rem;
+  font-size: 15rem;
   text-shadow: 0px 0px 5px rgba(255, 255, 255);
   margin-bottom: 1rem;
 }
@@ -412,7 +429,7 @@ header {
 .hologram-image-container {
   position: absolute;
   right: -20rem;
-  width: 60rem;
+  width: 80rem;
   z-index: -1;
 }
 
@@ -456,25 +473,43 @@ header {
 
 /*****send options section *****/
 
-#options-to-send {
+.options-to-send {
   width: 80%;
-  margin: 2rem auto;
+  margin: 5rem auto;
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
 }
 
-#options-to-send h1 {
-  font-weight: 300;
+.options-to-send h1 {
+  font-weight: 500;
   line-height: 1.5;
   margin: 0;
 }
 
-#options-to-send h2 {
-  margin: 0;
+.page-description {
+  width: 50%;
+  font-weight: 300;
+}
+
+.page-description span {
   font-weight: 500;
   font-style: italic;
+}
+
+.options-to-send h3 {
+  margin: 5rem 0 0;
+  font-weight: 500;
+  font-style: italic;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.metamask-icon {
+  width: 2.5rem;
+  margin: 1rem;
 }
 
 .options-to-send-container {
@@ -501,10 +536,6 @@ header {
   cursor: pointer;
   box-shadow: 0 0 3px #a6903c, 0 0 6px #a6903c, 0 0 15px #a6903c,
     0 0 30px #a6903c;
-}
-
-.option-to-send h3 {
-  font-weight: 300;
 }
 
 .icono-option-container {
@@ -729,6 +760,7 @@ header {
 }
 
 .drop-area {
+  position: relative;
   border: 2px dashed rgba(124, 124, 124, 0.5);
   height: 20rem;
   width: 70rem;
@@ -784,6 +816,32 @@ header {
 
 .status-text {
   padding: 0 1rem;
+}
+
+.plantilla {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: absolute;
+  width: 100%;
+  left: 0;
+  bottom: -5rem;
+  color: rgb(126, 126, 126);
+}
+
+.plantilla a {
+  text-decoration: underline;
+}
+
+.input-container-file {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5rem 0 2rem;
+}
+
+.input-container-file select {
+  width: 15rem;
 }
 
 /*****resumen final******/

@@ -41,7 +41,7 @@ optionManual.addEventListener("click", () => {
 //select type of token
 tokenInput.addEventListener("click", (e) => {
   switch (tokenInput.value) {
-    case "ETH":
+    case "ETH" || "BNB" || "MATIC" || "AVAX" || "FTM" || "ETC":
       labelAdress.innerHTML = "Cuenta o Wallet a enviar";
       walletInput.placeholder = "Escribe la wallet";
       labelAmount.innerHTML = "Monto a Enviar";
