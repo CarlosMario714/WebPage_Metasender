@@ -51,6 +51,7 @@ async function connectWallet() {
     })
     .then(() => {
       btnConnect.innerHTML = setWalletAddress();
+      isConnected = true
       listenChain();
     })
     .catch((x) => {
@@ -136,4 +137,4 @@ closeAlert.forEach((alert) => {
 //select chain
 optinonRed.addEventListener("click", setChain);
 
-export { chain, installAlert, disConnectedToMainet };
+export { chain, installAlert, disConnectedToMainet, isConnected, login };

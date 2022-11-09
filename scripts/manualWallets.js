@@ -1,3 +1,4 @@
+import { login, isConnected } from "./connectWallet.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -33,9 +34,11 @@ let tokenToSendManual = tokenInput.value;
 let numberOfNewWallet = 0;
 
 optionManual.addEventListener("click", () => {
-  manualDataContainer.style.display = "flex";
-  fileDataContainer.style.display = "none";
-  resumenFinalContainer.style.display = "none";
+  if(isConnected){
+    manualDataContainer.style.display = "flex";
+    fileDataContainer.style.display = "none";
+    resumenFinalContainer.style.display = "none";
+  }else login()
 });
 
 //select type of token
