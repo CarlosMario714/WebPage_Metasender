@@ -1150,6 +1150,18 @@ footer {
     0 0 30px #a6903c;
 }
 
+.palco-container table {
+  margin-top: 6rem;
+}
+
+.palco-container table th {
+  font-weight: 300;
+}
+
+.palco-container table .palco-table-firstRow th {
+  font-weight: bolder;
+}
+
 /* .containerInfoStages table {
   text-align: center;
   width: 100%;
