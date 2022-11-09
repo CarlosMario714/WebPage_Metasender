@@ -844,6 +844,10 @@ header {
   width: 15rem;
 }
 
+.continue-btn-file {
+  display: none;
+}
+
 /*****resumen final******/
 
 .resumen-final-container {

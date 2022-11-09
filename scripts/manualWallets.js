@@ -66,7 +66,51 @@ tokenInput.addEventListener("click", (e) => {
 });
 
 //verify data and add new wallet
-addWalletButton.addEventListener("click", (e) => {
+addWalletButton.addEventListener("click", () => {
+  if (walletInput.value && amountInput.value !== "") {
+    verifyData(walletInput.value, amountInput.value);
+  } else {
+    if (walletInput.value == "") {
+      spanWallet.innerHTML = "Completa este campo";
+      spanWallet.classList.add("is-active");
+      setTimeout(() => {
+        spanWallet.classList.remove("is-active");
+        spanWallet.innerHTML = walletInput.title;
+      }, 3000);
+    }
+
+    if (amountInput.value == "") {
+      spanAmount.innerHTML = "Completa este campo";
+      spanAmount.classList.add("is-active");
+      setTimeout(() => {
+        spanAmount.classList.remove("is-active");
+        spanAmount.innerHTML = amountInput.title;
+      }, 3000);
+    }
+  }
+});
+
+function verifyData(wallet, amount) {
+  let walletRegex = new RegExp(walletInput.pattern);
+  let AmountRegex = new RegExp(amountInput.pattern);
+
+  !walletRegex.exec(wallet)
+    ? spanWallet.classList.add("is-active")
+    : spanWallet.classList.remove("is-active");
+
+  !AmountRegex.exec(amount)
+    ? spanAmount.classList.add("is-active")
+    : spanAmount.classList.remove("is-active");
+
+  if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
+    addNewManualWallet();
+    walletInput.value = "";
+    amountInput.value = "";
+    continueBtnManual.classList.add("opacity");
+  }
+}
+
+function verifyData2() {
   if (walletInput.value && amountInput.value !== "") {
     let walletRegex = new RegExp(walletInput.pattern);
     let AmountRegex = new RegExp(amountInput.pattern);
@@ -79,10 +123,6 @@ addWalletButton.addEventListener("click", (e) => {
       ? spanAmount.classList.add("is-active")
       : spanAmount.classList.remove("is-active");
 
-    // console.log(
-    //   walletRegex.exec(walletInput.value) && AmountRegex.exec(amountInput.value)
-    // );
-
     if (
       walletRegex.exec(walletInput.value) &&
       AmountRegex.exec(amountInput.value)
@@ -93,7 +133,7 @@ addWalletButton.addEventListener("click", (e) => {
       continueBtnManual.classList.add("opacity");
     }
   }
-});
+}
 
 //delete wallet
 manualWalletsContainer.addEventListener("click", (e) => {
