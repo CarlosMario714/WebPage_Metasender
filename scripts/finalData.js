@@ -18,13 +18,13 @@ const finalData = {
 const btnProcessManual = document.querySelector(".continue-btn-manual");
 const btnProcessFile = document.querySelector(".continue-btn-file");
 
-btnProcessManual.addEventListener("click", () => {
-  processFinalData();
-});
+// btnProcessManual.addEventListener("click", () => {
+//   processFinalData();
+// });
 
-btnProcessFile.addEventListener("click", () => {
-  processFinalData();
-});
+// btnProcessFile.addEventListener("click", () => {
+//   processFinalData();
+// });
 
 function processFinalData() {
   if (walletsFileArr.length != 0 && amountFileArr.length != 0) {
@@ -45,4 +45,4 @@ function setFinalData(walletsArr, amountArr, tokenToSend) {
   console.log(finalData);
 }
 
-export { finalData };
+export { finalData, processFinalData };

@@ -1,4 +1,5 @@
 import { ercABI } from "./resume.js"
+const errorAlert = document.querySelector(".errorsAlert");
 
 export function removeClass( items, className ){
 
@@ -21,5 +22,13 @@ export async function getTokenSymbol( _address ) {
     const contract = new ethers.Contract( _address, ercABI, provider )
 
     return await contract.symbol();
+
+}
+
+export function showErrorAlert( msg ) {
+
+    errorAlert.children[1].innerHTML = msg
+
+    errorAlert.classList.add("showAlert");
 
 }

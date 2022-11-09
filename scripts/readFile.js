@@ -1,3 +1,4 @@
+import { login, isConnected } from "./connectWallet.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
@@ -20,8 +21,12 @@ button.addEventListener("click", () => {
 });
 
 optionFile.addEventListener("click", () => {
-  fileDataContainer.style.display = "flex";
-  manualDataContainer.style.display = "none";
+  
+  if( isConnected ){
+    fileDataContainer.style.display = "flex";
+    manualDataContainer.style.display = "none";
+  } else login()
+
 });
 
 //detecta cada vez que input cambia, osea cada vez que se sube un archivo

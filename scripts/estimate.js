@@ -28,21 +28,21 @@ function getContract() {
 	const signer = provider.getSigner();
 
 	return new ethers.Contract(
-		metasender.address,
+		metasender[`address_${ ethereum.chainId }`],
 		metasender.abi,
 		signer
 	);
 	
 }
 
-async function sendEthSameValue( addresses, amounts ) {
+async function sendNativeTokenSameValue( addresses, amounts ) {
 
 	const contract = getContract()
 
 	const txFee = await contract.txFee();
 
 	return await contract.estimateGas
-		.sendEthSameValue( addresses, amounts, 
+		.sendNativeTokenSameValue( addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
 		.catch((err) => console.log(err));
@@ -50,18 +50,17 @@ async function sendEthSameValue( addresses, amounts ) {
 	
 }
 
-async function sendEthDifferentValue( addresses, amounts ) {
+async function sendNativeTokenDifferentValue( addresses, amounts ) {
 
 	const contract = getContract()
 
 	const txFee = await contract.txFee();
 
 	return await contract.estimateGas
-		.sendEthDifferentValue(addresses, amounts, 
+		.sendNativeTokenDifferentValue(addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
 		.catch((err) => console.log(err));
-	
 	
 }
 
@@ -123,8 +122,8 @@ class MetasenderMethods {
 
 	constructor() {
 
-		this.sendEthDifferentValue = sendEthDifferentValue
-		this.sendEthSameValue = sendEthSameValue
+		this.sendNativeTokenDifferentValue = sendNativeTokenDifferentValue
+		this.sendNativeTokenSameValue = sendNativeTokenSameValue
 		this.sendIERC20DifferentValue = sendIERC20DifferentValue
 		this.sendIERC20SameValue = sendIERC20SameValue
 		this.sendIERC721 = sendIERC721
@@ -144,7 +143,7 @@ export async function estimateTx( tokenType, contAdd ) {
 
 		case 'ETH':
 			gasEstimation = await mSestimateFunc[
-				`sendEth${ isSameValue( finalData.amount ) }Value`
+				`sendNativeToken${ isSameValue( finalData.amount ) }Value`
 			]( finalData.wallets, finalData.amount )
 			break
 
