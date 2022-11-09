@@ -986,6 +986,7 @@ header {
 
 .container-buttons {
   display: flex;
+  align-items: center;
   justify-content: center;
   position: relative;
 }
@@ -993,6 +994,12 @@ header {
 .atras-btn {
   position: absolute;
   left: 0;
+}
+
+.blockExplorerLink{
+  position: absolute;
+  right: 0;
+  opacity: 0;
 }
 
 /**** foter ***/
@@ -1166,14 +1173,14 @@ footer {
   left: 0px;
   bottom: 80px;
   display: flex;
-  font-family: TomorrowBold;
+  font-family: 'Tomorrow';
   clip-path: circle(0% at 0 50%);
   transition: clip-path 1s ease;
   align-items: center;
   justify-content: center;
   min-width: 700px;
   height: 50px;
-  background: white;
+  background: rgb(197, 197, 197);
   /* z-index: 20; */
   font-size: 2rem;
 }

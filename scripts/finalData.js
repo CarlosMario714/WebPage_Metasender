@@ -42,7 +42,6 @@ function setFinalData(walletsArr, amountArr, tokenToSend) {
     ethers.utils.parseEther(amount.toString())
   );
   finalData.amount = amountInBigNumber;
-  console.log(finalData);
 }
 
 export { finalData, processFinalData };
