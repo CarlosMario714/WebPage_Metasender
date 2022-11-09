@@ -44,10 +44,7 @@ async function getTxCostAprox() {
 
     const contract = getContract()
 
-    const { gasEstimation } = await estimateTx( 
-        finalData.tokenToSend,
-        finalData.tokenAddress
-    )
+    const { gasEstimation } = await estimateTx()
 
     const txFee = await contract.txFee()
 

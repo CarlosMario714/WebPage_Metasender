@@ -1,9 +1,11 @@
 export default {
     1: {
         netName: "ETHEREUM MAINNET",
+        blockExplorer: "https://etherscan.io",
     },
     5: {
         netName: "GOERLI TESNET",
+        blockExplorer: "https://goerli.etherscan.io",
     },
     38: {
         netName: "Binance Smart Chain Mainnet",
