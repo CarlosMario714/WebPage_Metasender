@@ -1,5 +1,7 @@
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
+import ethChains from "./ethereumchains.js"
+const blockExplorerLinkItem = document.querySelector('.blockExplorerLink')
 const btnSend = document.querySelector('.send-btn')
 const btnPalco = document.querySelector('.btn-palco')
 const ERC20Address = "0x26Cc6709e75BFd6C659220dAD12537Db719fA345"
@@ -12,7 +14,7 @@ export function getTotalValue(valuesArray) {
 
 }
 
-function isSameValue( values ) {
+export function isSameValue( values ) {
 
 	const isSame = values.every(( prev, curr) => prev == curr)
 
@@ -112,7 +114,7 @@ export async function addToPALCO(){
 
 	 const contract = getContract()
 
-	 const PALCOFee = await contract.PALCOFee()
+	 const PALCOFee = await contract.PALCOPass()
 
 	 return await contract.addToPALCO(
 		ethereum.selectedAddress, { value: PALCOFee }
@@ -164,9 +166,13 @@ export async function sendTransaction() {
 
 btnSend.addEventListener("click", async(e) => {
 
-    const tx = await sendTransaction( e.target.value )
+    const tx = await sendTransaction()
 
-	const receipt = await tx.wait()
+	const chainId = ethereum.chainId.slice(2)
+
+	blockExplorerLinkItem.href = `${ethChains[ chainId ].blockExplorer}/tx/${tx.hash}`
+
+	blockExplorerLinkItem.style.opacity = 1
 
 })
 
