@@ -1,4 +1,5 @@
 import { addClass, removeClass } from "./tools.js";
+import ethChains from "./ethereumchains.js"
 const closeAlert = document.querySelectorAll(".closeAlert");
 const alertText = document.querySelector(".alert-text");
 const btnConnect = document.querySelector(".btnConnect");
@@ -59,163 +60,46 @@ async function connectWallet() {
 
 // it change the chain to Ethereum main net
 
-async function changeChain(chain) {
-  switch (chain) {
-    case "1":
-      optinonRed.style.width = "220px";
-      optionChainCurrency.innerHTML = "ETH";
-      optionChainCurrency.value = "ETH";
-      optionChainCurrencyFile.innerHTML = "ETH";
-      optionChainCurrency.value = "ETH";
-      return await window.ethereum.request({
-        //change
-        id: Number(chain),
-        jsonrpc: "2.0",
-        method: "wallet_switchEthereumChain",
-        params: [
-          {
-            chainId: "0x" + chain,
-          },
-        ],
-      });
-    case "5":
-      optinonRed.style.width = "170px";
-      optionChainCurrency.innerHTML = "ETH";
-      optionChainCurrency.value = "ETH";
-      optionChainCurrencyFile.innerHTML = "ETH";
-      optionChainCurrency.value = "ETH";
-      return await window.ethereum.request({
-        //change
-        id: Number(chain),
-        jsonrpc: "2.0",
-        method: "wallet_switchEthereumChain",
-        params: [
-          {
-            chainId: "0x" + chain,
-          },
-        ],
-      });
-    case "38":
-      optinonRed.style.width = "340px";
-      optionChainCurrency.innerHTML = "BNB";
-      optionChainCurrency.value = "BNB";
-      optionChainCurrencyFile.innerHTML = "BNB";
-      optionChainCurrency.value = "BNB";
-      return await window.ethereum.request({
-        //change
+async function addChain( chain ) {
+
+	return await window.ethereum.request({
+
         method: "wallet_addEthereumChain",
         params: [
           {
             chainId: "0x" + chain,
-            chainName: "Binance Smart Chain Mainnet",
+            chainName: ethChains[chain].netName,
             nativeCurrency: {
-              name: "BNB",
-              symbol: "BNB",
+              name: ethChains[chain].symbol,
+              symbol: ethChains[chain].symbol,
               decimals: 18,
             },
-            rpcUrls: ["https://bsc-dataseed1.binance.org"],
-            blockExplorerUrls: ["https://bscscan.com"],
+            rpcUrls: [ ethChains[chain].jsonRPC ],
+            blockExplorerUrls: [ ethChains[chain].blockExplorer ],
           },
         ],
-      });
-    case "89":
-      optinonRed.style.width = "200px";
-      optionChainCurrency.innerHTML = "MATIC";
-      optionChainCurrency.value = "MATIC";
-      optionChainCurrencyFile.innerHTML = "MATIC";
-      optionChainCurrency.value = "MATIC";
-      return await window.ethereum.request({
-        //change
-        method: "wallet_addEthereumChain",
-        params: [
-          {
-            chainId: "0x" + chain,
-            chainName: "Polygon Mainnet",
-            nativeCurrency: {
-              name: "MATIC",
-              symbol: "MATIC",
-              decimals: 18,
-            },
-            rpcUrls: ["https://polygon-rpc.com"],
-            blockExplorerUrls: ["https://polygonscan.com"],
-          },
-        ],
-      });
-    case "a86a":
-      optinonRed.style.width = "220px";
-      optionChainCurrency.innerHTML = "AVAX";
-      optionChainCurrency.value = "AVAX";
-      optionChainCurrencyFile.innerHTML = "AVAX";
-      optionChainCurrency.value = "AVAX";
-      return await window.ethereum.request({
-        //change
-        method: "wallet_addEthereumChain",
-        params: [
-          {
-            chainId: "0x" + chain,
-            chainName: "Avalanche C-Chain",
-            nativeCurrency: {
-              name: "AVAX",
-              symbol: "AVAX",
-              decimals: 18,
-            },
-            rpcUrls: ["https://api.avax.network/ext/bc/C/rpc"],
-            blockExplorerUrls: ["https://snowtrace.io"],
-          },
-        ],
-      });
-    case "fa":
-      optinonRed.style.width = "170px";
-      optionChainCurrency.innerHTML = "FTM";
-      optionChainCurrency.value = "FTM";
-      optionChainCurrencyFile.innerHTML = "FTM";
-      optionChainCurrency.value = "FTM";
-      return await window.ethereum.request({
-        //change
-        method: "wallet_addEthereumChain",
-        params: [
-          {
-            chainId: "0x" + chain,
-            chainName: "Fantom Opera",
-            nativeCurrency: {
-              name: "FTM",
-              symbol: "FTM",
-              decimals: 18,
-            },
-            rpcUrls: ["https://rpc.ftm.tools"],
-            blockExplorerUrls: ["https://ftmscan.com"],
-          },
-        ],
-      });
-    case "3d":
-      optinonRed.style.width = "300px";
-      optionChainCurrency.innerHTML = "ETC";
-      optionChainCurrency.value = "ETC";
-      optionChainCurrencyFile.innerHTML = "ETC";
-      optionChainCurrency.value = "ETC";
-      return await window.ethereum.request({
-        //change
-        method: "wallet_addEthereumChain",
-        params: [
-          {
-            chainId: "0x" + chain,
-            chainName: "Ethereum Classic Mainnet",
-            nativeCurrency: {
-              name: "ETC",
-              symbol: "ETC",
-              decimals: 18,
-            },
-            rpcUrls: ["https://www.ethercluster.com/etc"],
-            blockExplorerUrls: ["https://blockscout.com/etc/mainnet"],
-          },
-        ],
-      });
-  }
+    }).catch(error => console.log(error));
+
+}
+
+async function changeChain( chain ) {
+
+	await window.ethereum.request({
+		method: "wallet_switchEthereumChain",
+		params: [ { chainId: "0x" + chain } ],
+	})
+	.catch((error) => {
+		if(error.code == 4902){
+			addChain( chain )
+		}
+	});
+
 }
 
 function setChain(e) {
-  console.log(e.target.value);
+
   changeChain(e.target.value);
+
 }
 
 // calls connectWallet() and changeChain()
