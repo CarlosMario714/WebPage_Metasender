@@ -61,6 +61,7 @@ tokenInput.addEventListener("click", (e) => {
       labelAmount.innerHTML = "ID del token a enviar";
       amountInput.placeholder = "Escribe el ID del token";
       amountInput.pattern = `^\\d*\\d+$`;
+      amountInput.innerHTML = `Solo numeros enteros positivos`;
       break;
   }
 });
@@ -68,7 +69,7 @@ tokenInput.addEventListener("click", (e) => {
 //verify data and add new wallet
 addWalletButton.addEventListener("click", () => {
   if (walletInput.value && amountInput.value !== "") {
-    verifyData(walletInput.value, amountInput.value);
+    verifyData(walletInput.value, amountInput.value, true);
   } else {
     if (walletInput.value == "") {
       spanWallet.innerHTML = "Completa este campo";
@@ -90,22 +91,37 @@ addWalletButton.addEventListener("click", () => {
   }
 });
 
-function verifyData(wallet, amount) {
+function verifyData(wallet, amount, boolean) {
+  let dataFromManualWallets = boolean;
   let walletRegex = new RegExp(walletInput.pattern);
   let AmountRegex = new RegExp(amountInput.pattern);
 
-  !walletRegex.exec(wallet)
-    ? spanWallet.classList.add("is-active")
-    : spanWallet.classList.remove("is-active");
+  if (dataFromManualWallets) {
+    !walletRegex.exec(wallet)
+      ? spanWallet.classList.add("is-active")
+      : spanWallet.classList.remove("is-active");
 
-  !AmountRegex.exec(amount)
-    ? spanAmount.classList.add("is-active")
-    : spanAmount.classList.remove("is-active");
+    !AmountRegex.exec(amount)
+      ? spanAmount.classList.add("is-active")
+      : spanAmount.classList.remove("is-active");
+
+    if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
+      addNewManualWallet();
+      walletInput.value = "";
+      amountInput.value = "";
+      continueBtnManual.classList.add("opacity");
+    }
+  } else {
+    if (!walletRegex.exec(wallet)) {
+    }
+
+    if (!AmountRegex.exec(amount)) {
+    }
+  }
 
   if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
     addNewManualWallet();
-    walletInput.value = "";
-    amountInput.value = "";
+
     continueBtnManual.classList.add("opacity");
   }
 }
@@ -178,7 +194,7 @@ function renameNumberOfWallets() {
 }
 
 //add new wallet element
-function addNewManualWallet() {
+function addNewManualWallet(wallet, amount, typeOfToken) {
   numberOfNewWallet += 1;
   let newWalletContainer = document.createElement("div");
   newWalletContainer.id = numberOfNewWallet;
