@@ -143,19 +143,57 @@
             <div class="input-container">
               <label class="label-adress">Cuenta o Wallet a enviar</label>
               <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
-                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="wallet o Adress no valido" required />
-              <span class="input-error none span-wallet">wallet o Adress no valido</span>
+                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="0x + 40 caracteres alfanumericos sin espacios"
+                required />
+              <span class="input-error none span-wallet">"0x" + 40 caracteres alfanumericos sin espacios</span>
             </div>
             <div class="input-container">
               <label class="label-amount">Monto a Enviar</label>
               <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto"
-                pattern="^\d*\.\d+$|^\d*\d+$" title="Monto no valido" required />
-              <span class="input-error none span-amount">Monto no valido</span>
+                pattern="^\d*\.\d+$|^\d*\d+$" title="Solo numeros positivos" required />
+              <span class="input-error none span-amount">Solo numeros positivos</span>
             </div>
             <button class="add-wallet-button">+</button>
           </div>
         </div>
-        <div class="manual-wallets-container">
+        <div class="wallets-container">
+          <div class="manual-wallets-container">
+            <h2>Datos Correctos 1</h2>
+            <!-- <div id="1" class="manual-wallet">
+              <p class="number-of-wallet">1</p>
+              <p class="wallet-adress">0xf45025599c54930BF6C16C208f0507E80FEA5d84</p>
+
+              <p class="wallet-amount">1</p>
+              <p>ETH</p>
+              <a>
+                <img class="edit-wallet" src="../img/icons/boton-editar.png" alt="cerrar pagina" />
+              </a>
+              <a>
+                <img class="delete-wallet" src="../img/icons/cerrar.png" alt="cerrar pagina" />
+              </a>
+            </div> -->
+          </div>
+          <div class="incorrect-wallets-container">
+            <h2>Datos Incorrectos 0</h2>
+            <div class="wallet-errors-container">
+              <div id="1" class="manual-wallet">
+                <p class="number-of-wallet">1</p>
+                <p class="wallet-adress">0xf45025599c54930BF6C16C208f0507E80FEA5d84</p>
+                <p class="wallet-amount">1</p>
+                <p>ETH</p>
+                <a>
+                  <img class="edit-wallet" src="../img/icons/boton-editar.png" alt="cerrar pagina" />
+                </a>
+                <a>
+                  <img class="delete-wallet" src="../img/icons/cerrar.png" alt="cerrar pagina" />
+                </a>
+              </div>
+              <div class="wallet-errors">
+                <p><span>Wallet o Adress no valido: </span> "0x" + 40 caracteres alfanumericos sin espacios</p>
+                <p><span>Monto no valido:</span> Solo numeros positivos</p>
+              </div>
+            </div>
+          </div>
         </div>
         <button class="continue-btn-manual btn2">Continuar</button>
       </div>
@@ -225,8 +263,7 @@
         </h1>
         <p data-content="palco" data-type="palco-info">
           <span>Metasender</span> te cobrara un pequeño impuesto por cada lote de transacciones que
-          realices, puedes
-          realizar lotes de transacciones gratuitas de por vida volviendote parte de nuestro <span>Palco</span>
+          realices, puedes realizar lotes de transacciones gratuitas de por vida volviendote parte de nuestro <span>Palco</span>
         </p>
         <button class="btn-palco" data-content="palco" data-type="btn-palco">
           Comprar
