@@ -1,6 +1,6 @@
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
-const btnSend = document.querySelector('.btnSend')
+const btnSend = document.querySelector('.send-btn')
 const btnPalco = document.querySelector('.btn-palco')
 const ERC20Address = "0x26Cc6709e75BFd6C659220dAD12537Db719fA345"
 const ERC721Address = "0x38105D76bca204cEa0A38B7A52D24620AAb6DA60"
@@ -29,21 +29,21 @@ export function getContract() {
 	const signer = provider.getSigner();
 
 	return new ethers.Contract(
-		metasender.address,
+		metasender[`address_${ ethereum.chainId }`],
 		metasender.abi,
 		signer
 	);
 	
 }
 
-async function sendEthSameValue( addresses, amounts ) {
+async function sendNativeTokenSameValue( addresses, amounts ) {
 
 	const contract = getContract()
 
 	const txFee = await contract.txFee();
 
 	return await contract
-		.sendEthSameValue( addresses, amounts, 
+		.sendNativeTokenSameValue( addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
 		.catch((err) => console.log(err.error.message));
@@ -51,14 +51,14 @@ async function sendEthSameValue( addresses, amounts ) {
 	
 }
 
-async function sendEthDifferentValue( addresses, amounts ) {
+async function sendNativeTokenDifferentValue( addresses, amounts ) {
 
 	const contract = getContract()
 
 	const txFee = await contract.txFee();
 
 	return await contract
-		.sendEthDifferentValue(addresses, amounts, 
+		.sendNativeTokenDifferentValue(addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
 		.catch((err) => console.log(err.error.message));
@@ -114,7 +114,7 @@ export async function addToPALCO(){
 
 	 const PALCOFee = await contract.PALCOFee()
 
-	 return await contract.addPALCO(
+	 return await contract.addToPALCO(
 		ethereum.selectedAddress, { value: PALCOFee }
 	 )
 
@@ -124,8 +124,8 @@ class MetasenderMethods {
 
 	constructor() {
 
-		this.sendEthDifferentValue = sendEthDifferentValue
-		this.sendEthSameValue = sendEthSameValue
+		this.sendNativeTokenDifferentValue = sendNativeTokenDifferentValue
+		this.sendNativeTokenSameValue = sendNativeTokenSameValue
 		this.sendIERC20DifferentValue = sendIERC20DifferentValue
 		this.sendIERC20SameValue = sendIERC20SameValue
 		this.sendIERC721 = sendIERC721
@@ -137,23 +137,23 @@ class MetasenderMethods {
 
 const mSFunc = new MetasenderMethods()
 
-export async function sendTransaction( tokenType, contAdd ) {
+export async function sendTransaction() {
 
-	switch( tokenType ){
+	switch( finalData.tokenToSend ){
 
 		case 'ETH':
 			return await mSFunc[
-				`sendEth${ isSameValue( finalData.amount ) }Value`
+				`sendNativeToken${ isSameValue( finalData.amount ) }Value`
 			]( finalData.wallets, finalData.amount );
 
 		case 'ERC20':
 			return await mSFunc[
 				`sendIERC20${ isSameValue( finalData.amount ) }Value`
-			]( contAdd, finalData.wallets, finalData.amount );
+			]( finalData.tokenAddress, finalData.wallets, finalData.amount );
 
 		case 'ERC721':
 			return await mSFunc.sendIERC721( 
-				contAdd, 
+				finalData.tokenAddress, 
 				finalData.wallets, 
 				tokenIds
 			);
@@ -162,12 +162,12 @@ export async function sendTransaction( tokenType, contAdd ) {
 
 }
 
-// btnSend.addEventListener("click", async(e) => {
+btnSend.addEventListener("click", async(e) => {
 
-//     const tx = await sendTransaction( e.target.value )
+    const tx = await sendTransaction( e.target.value )
 
-// 	const receipt = await tx.wait()
+	const receipt = await tx.wait()
 
-// })
+})
 
 btnPalco.onclick = mSFunc.addPALCO

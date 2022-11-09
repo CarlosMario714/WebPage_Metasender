@@ -1,10 +1,21 @@
 const metasender = {
 	name: "Metasender",
 	//change
-	//mainet contract
-	// address: "",
-	//goeli contract
-	address: "0x17e230edb76658f78Cf79154f3F272c5D533dafe",
+	// Ethereum Networks
+	address_0x1: "",
+	address_0x5: "0x25604BB91DB2C95302cb0746eFeC239f394F252f",
+	// binance Networks
+	address_0x56: "",
+	address_0x61: "0xDD979b3a607c6255e124B80E7C0cF1d5F2649Bd5",
+	// polygon Networks
+	address_0x89: "",
+	address_0x13881: "0x8429B1975a180cbD4AbeefD27e0B669dD2179c00",
+	// Avalanche Networks
+	address_0xa86a: "",
+	address_0xa869: "0x8429B1975a180cbD4AbeefD27e0B669dD2179c00",
+	// fantom Networks
+	address_0xfa: "",
+	address_0xafa2: "0x4Ce6C8658e7cB676c24B212e0e60f9aa913f4ec4",
 	abi: [
 		{
 			"inputs": [],
@@ -27,7 +38,7 @@ const metasender = {
 					"type": "uint256"
 				}
 			],
-			"name": "LogETHBulkTransfer",
+			"name": "LogNativeTokenBulkTransfer",
 			"type": "event"
 		},
 		{
@@ -55,11 +66,11 @@ const metasender = {
 				{
 					"indexed": false,
 					"internalType": "address",
-					"name": "removedPALCO",
+					"name": "newPALCOMember",
 					"type": "address"
 				}
 			],
-			"name": "NewPALCO",
+			"name": "NewPALCOMember",
 			"type": "event"
 		},
 		{
@@ -87,11 +98,11 @@ const metasender = {
 				{
 					"indexed": false,
 					"internalType": "address",
-					"name": "removedPALCO",
+					"name": "addressToRemove",
 					"type": "address"
 				}
 			],
-			"name": "RemovePALCO",
+			"name": "RemoveToPALCO",
 			"type": "event"
 		},
 		{
@@ -100,11 +111,11 @@ const metasender = {
 				{
 					"indexed": false,
 					"internalType": "uint256",
-					"name": "newPALCOFee",
+					"name": "newPALCOPass",
 					"type": "uint256"
 				}
 			],
-			"name": "SetPALCOFee",
+			"name": "SetPALCOPass",
 			"type": "event"
 		},
 		{
@@ -179,7 +190,7 @@ const metasender = {
 		},
 		{
 			"inputs": [],
-			"name": "PALCOFee",
+			"name": "PALCOPass",
 			"outputs": [
 				{
 					"internalType": "uint256",
@@ -198,7 +209,7 @@ const metasender = {
 					"type": "address"
 				}
 			],
-			"name": "addPALCO",
+			"name": "addToPALCO",
 			"outputs": [],
 			"stateMutability": "payable",
 			"type": "function"
@@ -224,9 +235,9 @@ const metasender = {
 					"type": "address"
 				}
 			],
-			"name": "removePALCO",
+			"name": "removeToPALCO",
 			"outputs": [],
-			"stateMutability": "payable",
+			"stateMutability": "nonpayable",
 			"type": "function"
 		},
 		{
@@ -234,42 +245,6 @@ const metasender = {
 			"name": "renounceOwnership",
 			"outputs": [],
 			"stateMutability": "nonpayable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address[]",
-					"name": "_to",
-					"type": "address[]"
-				},
-				{
-					"internalType": "uint256[]",
-					"name": "_value",
-					"type": "uint256[]"
-				}
-			],
-			"name": "sendEthDifferentValue",
-			"outputs": [],
-			"stateMutability": "payable",
-			"type": "function"
-		},
-		{
-			"inputs": [
-				{
-					"internalType": "address[]",
-					"name": "_to",
-					"type": "address[]"
-				},
-				{
-					"internalType": "uint256",
-					"name": "_value",
-					"type": "uint256"
-				}
-			],
-			"name": "sendEthSameValue",
-			"outputs": [],
-			"stateMutability": "payable",
 			"type": "function"
 		},
 		{
@@ -344,12 +319,48 @@ const metasender = {
 		{
 			"inputs": [
 				{
+					"internalType": "address[]",
+					"name": "_to",
+					"type": "address[]"
+				},
+				{
+					"internalType": "uint256[]",
+					"name": "_value",
+					"type": "uint256[]"
+				}
+			],
+			"name": "sendNativeTokenDifferentValue",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "address[]",
+					"name": "_to",
+					"type": "address[]"
+				},
+				{
 					"internalType": "uint256",
-					"name": "_newPALCOFee",
+					"name": "_value",
 					"type": "uint256"
 				}
 			],
-			"name": "setPALCOFee",
+			"name": "sendNativeTokenSameValue",
+			"outputs": [],
+			"stateMutability": "payable",
+			"type": "function"
+		},
+		{
+			"inputs": [
+				{
+					"internalType": "uint256",
+					"name": "_newPALCOPass",
+					"type": "uint256"
+				}
+			],
+			"name": "setPALCOPass",
 			"outputs": [],
 			"stateMutability": "nonpayable",
 			"type": "function"
@@ -407,13 +418,7 @@ const metasender = {
 			"type": "function"
 		},
 		{
-			"inputs": [
-				{
-					"internalType": "address",
-					"name": "_address",
-					"type": "address"
-				}
-			],
+			"inputs": [],
 			"name": "withdrawTxFee",
 			"outputs": [],
 			"stateMutability": "nonpayable",

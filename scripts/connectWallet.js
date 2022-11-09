@@ -1,5 +1,6 @@
-import { addClass, removeClass } from "./tools.js";
+import { addClass, removeClass, showErrorAlert } from "./tools.js";
 import ethChains from "./ethereumchains.js"
+const selectChainItem = document.querySelector('.option-red select')
 const closeAlert = document.querySelectorAll(".closeAlert");
 const alertText = document.querySelector(".alert-text");
 const btnConnect = document.querySelector(".btnConnect");
@@ -26,7 +27,9 @@ function setWalletAddress() {
 
 function listenChain() {
   ethereum.on("chainChanged", (chainId) => {
-    if (chainId === chain) {
+    if ( ethChains[ chainId.slice(2) ] ) {
+
+      selectChainItem.value = chainId.slice(2)
       disConnectedToMainet.classList.remove("showAlert");
       connectedToMainet.classList.add("showAlert");
       connectedToMainet.style.zIndex = 50;
@@ -36,7 +39,7 @@ function listenChain() {
         connectedToMainet.style.zIndex = 0;
       }, 5000);
     } else {
-      disConnectedToMainet.classList.add("showAlert");
+      showErrorAlert('Chain Not Suported')
     }
   });
 }

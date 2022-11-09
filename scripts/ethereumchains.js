@@ -1,4 +1,10 @@
 export default {
+    1: {
+        netName: "ETHEREUM MAINNET",
+    },
+    5: {
+        netName: "GOERLI TESNET",
+    },
     38: {
         netName: "Binance Smart Chain Mainnet",
         jsonRPC: "https://bsc-dataseed1.binance.org",

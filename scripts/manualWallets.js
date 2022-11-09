@@ -1,4 +1,6 @@
 import { login, isConnected } from "./connectWallet.js";
+import setResumeInfo from "./resume.js";
+import { finalData, processFinalData } from "./finalData.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -34,11 +36,13 @@ let tokenToSendManual = tokenInput.value;
 let numberOfNewWallet = 0;
 
 optionManual.addEventListener("click", () => {
+
   if(isConnected){
     manualDataContainer.style.display = "flex";
     fileDataContainer.style.display = "none";
     resumenFinalContainer.style.display = "none";
   }else login()
+  
 });
 
 //select type of token
@@ -204,7 +208,7 @@ function addNewManualWallet() {
   //amountManualArr.push(amountInput.value);
 }
 
-continueBtnManual.addEventListener("click", () => {
+continueBtnManual.addEventListener("click", async() => {
   walletsManualArr = [];
   amountManualArr = [];
   let walletAdress = document.querySelectorAll(".wallet-adress");
@@ -218,17 +222,31 @@ continueBtnManual.addEventListener("click", () => {
     amountManualArr.push(walletMount.innerHTML);
   });
 
-  setFinalResume();
+  processFinalData()
+
+  await setFinalResume();
 
   manualDataContainer.style.display = "none";
   resumenFinalContainer.style.display = "block";
 
-  console.log(walletsManualArr);
-  console.log(amountManualArr);
 });
 
-function setFinalResume() {
-  totalWallets.innerHTML = walletsManualArr.length;
+async function setFinalResume() {
+
+  await setResumeInfo()
+
+  totalWallets.innerHTML = finalData.numAddresses;
+
+  totalTokens.innerHTML = finalData.totalToSend;
+
+  balanceTokens.innerHTML = finalData.userTokenBalance;
+
+  balanceEth.innerHTML = finalData.userETHBalance;
+
+  costoOperacion.innerHTML = finalData.txCost;
+
+  return
+
 }
 
 atrasbtn.addEventListener("click", () => {
