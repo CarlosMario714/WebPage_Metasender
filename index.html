@@ -143,13 +143,13 @@
             <div class="input-container">
               <label class="label-adress">Cuenta o Wallet a enviar</label>
               <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
-                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" required />
+                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="wallet o Adress no valido" required />
               <span class="input-error none span-wallet">wallet o Adress no valido</span>
             </div>
             <div class="input-container">
               <label class="label-amount">Monto a Enviar</label>
               <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto"
-                pattern="^\d*\.\d+$|^\d*\d+$" required />
+                pattern="^\d*\.\d+$|^\d*\d+$" title="Monto no valido" required />
               <span class="input-error none span-amount">Monto no valido</span>
             </div>
             <button class="add-wallet-button">+</button>
@@ -176,7 +176,8 @@
           <div class="input-container input-container-file">
             <label>Selecciona el Tipo de Token a Enviar</label>
             <select name="token" class="token-input-file" id="token-input" required>
-              <option name="chain-currency-file" selected value="ETH">ETH</option>
+              <option selected value="" readonly>--Token--</option>
+              <option name="chain-currency-file" value="ETH">ETH</option>
               <option value="ERC20">ERC20</option>
               <option value="ERC721">ERC721</option>
             </select>
