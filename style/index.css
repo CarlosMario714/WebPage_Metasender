@@ -674,7 +674,8 @@ header {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 50rem;
-  width: 75rem;
+  width: 82rem;
+  padding: 0 1rem;
 }
 
 .manual-wallets-container {

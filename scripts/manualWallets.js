@@ -34,15 +34,16 @@ let amountManualArr = [];
 let tokenToSendManual = tokenInput.value;
 
 let numberOfNewWallet = 0;
+let newWalletsFragment = document.createDocumentFragment();
+
+let newIncorrectsWalletsFragment = document.createDocumentFragment();
 
 optionManual.addEventListener("click", () => {
-
-  if(isConnected){
+  if (isConnected) {
     manualDataContainer.style.display = "flex";
     fileDataContainer.style.display = "none";
     resumenFinalContainer.style.display = "none";
-  }else login()
-  
+  } else login();
 });
 
 //select type of token
@@ -76,7 +77,10 @@ tokenInput.addEventListener("click", (e) => {
 //verify data and add new wallet
 addWalletButton.addEventListener("click", () => {
   if (walletInput.value && amountInput.value !== "") {
-    verifyData(walletInput.value, amountInput.value, true);
+    verifyData(walletInput.value, amountInput.value, tokenInput.value, true);
+    walletInput.value = "";
+    amountInput.value = "";
+    continueBtnManual.classList.add("opacity");
   } else {
     if (walletInput.value == "") {
       spanWallet.innerHTML = "Completa este campo";
@@ -98,7 +102,7 @@ addWalletButton.addEventListener("click", () => {
   }
 });
 
-function verifyData(wallet, amount, boolean) {
+function verifyData(wallet, amount, typeOfToken, boolean) {
   let dataFromManualWallets = boolean;
   let walletRegex = new RegExp(walletInput.pattern);
   let AmountRegex = new RegExp(amountInput.pattern);
@@ -113,10 +117,7 @@ function verifyData(wallet, amount, boolean) {
       : spanAmount.classList.remove("is-active");
 
     if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
-      addNewManualWallet();
-      walletInput.value = "";
-      amountInput.value = "";
-      continueBtnManual.classList.add("opacity");
+      addNewManualWallet(wallet, amount, typeOfToken);
     }
   } else {
     if (!walletRegex.exec(wallet)) {
@@ -124,35 +125,10 @@ function verifyData(wallet, amount, boolean) {
 
     if (!AmountRegex.exec(amount)) {
     }
-  }
 
-  if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
-    addNewManualWallet();
+    if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
+      addNewManualWallet(wallet, amount, typeOfToken);
 
-    continueBtnManual.classList.add("opacity");
-  }
-}
-
-function verifyData2() {
-  if (walletInput.value && amountInput.value !== "") {
-    let walletRegex = new RegExp(walletInput.pattern);
-    let AmountRegex = new RegExp(amountInput.pattern);
-
-    !walletRegex.exec(walletInput.value)
-      ? spanWallet.classList.add("is-active")
-      : spanWallet.classList.remove("is-active");
-
-    !AmountRegex.exec(amountInput.value)
-      ? spanAmount.classList.add("is-active")
-      : spanAmount.classList.remove("is-active");
-
-    if (
-      walletRegex.exec(walletInput.value) &&
-      AmountRegex.exec(amountInput.value)
-    ) {
-      addNewManualWallet();
-      walletInput.value = "";
-      amountInput.value = "";
       continueBtnManual.classList.add("opacity");
     }
   }
@@ -207,10 +183,10 @@ function addNewManualWallet(wallet, amount, typeOfToken) {
   newWalletContainer.id = numberOfNewWallet;
   newWalletContainer.classList.add("manual-wallet");
   newWalletContainer.innerHTML = `
-    <div class="number-of-wallet">${numberOfNewWallet}</div>
-    <div class="wallet-adress">${walletInput.value}</div>
-    <div class="wallet-amount">${amountInput.value}</div>
-    <div>${tokenInput.value}</div>
+    <p class="number-of-wallet">${numberOfNewWallet}</p>
+    <p class="wallet-adress">${wallet}</p>
+    <p class="wallet-amount">${amount}</p>
+    <p>${typeOfToken}</p>
     <a>
       <img class="edit-wallet" src="../img/icons/boton-editar.png"
         alt="cerrar pagina" />
@@ -219,12 +195,15 @@ function addNewManualWallet(wallet, amount, typeOfToken) {
       <img class="delete-wallet" src="../img/icons/cerrar.png"
         alt="cerrar pagina" />
     </a>`;
-  manualWalletsContainer.append(newWalletContainer);
-  //walletsManualArr.push(walletInput.value);
-  //amountManualArr.push(amountInput.value);
+  newWalletsFragment.appendChild(newWalletContainer);
 }
 
-continueBtnManual.addEventListener("click", async() => {
+function showWallets() {
+  console.log(newWalletsFragment);
+  manualWalletsContainer.appendChild(newWalletsFragment);
+}
+
+continueBtnManual.addEventListener("click", async () => {
   walletsManualArr = [];
   amountManualArr = [];
   let walletAdress = document.querySelectorAll(".wallet-adress");
@@ -238,18 +217,16 @@ continueBtnManual.addEventListener("click", async() => {
     amountManualArr.push(walletMount.innerHTML);
   });
 
-  processFinalData()
+  processFinalData();
 
   await setFinalResume();
 
   manualDataContainer.style.display = "none";
   resumenFinalContainer.style.display = "block";
-
 });
 
 async function setFinalResume() {
-
-  await setResumeInfo()
+  await setResumeInfo();
 
   totalWallets.innerHTML = finalData.numAddresses;
 
@@ -261,8 +238,7 @@ async function setFinalResume() {
 
   costoOperacion.innerHTML = finalData.txCost;
 
-  return
-
+  return;
 }
 
 atrasbtn.addEventListener("click", () => {
@@ -270,4 +246,10 @@ atrasbtn.addEventListener("click", () => {
   resumenFinalContainer.style.display = "none";
 });
 
-export { walletsManualArr, amountManualArr, tokenToSendManual };
+export {
+  walletsManualArr,
+  amountManualArr,
+  tokenToSendManual,
+  verifyData,
+  showWallets,
+};

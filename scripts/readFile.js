@@ -1,4 +1,5 @@
 import { login, isConnected } from "./connectWallet.js";
+import { verifyData, showWallets } from "./manualWallets.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
@@ -21,12 +22,10 @@ button.addEventListener("click", () => {
 });
 
 optionFile.addEventListener("click", () => {
-  
-  if( isConnected ){
+  if (isConnected) {
     fileDataContainer.style.display = "flex";
     manualDataContainer.style.display = "none";
-  } else login()
-
+  } else login();
 });
 
 //detecta cada vez que input cambia, osea cada vez que se sube un archivo
@@ -92,15 +91,18 @@ async function processFile() {
   const workbook = XLSX.readFile(data);
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
   const excelData = XLSX.utils.sheet_to_json(worksheet);
-  console.log(excelData);
+  //console.log(excelData);
 
-  for (const adress of excelData) {
-    walletsFileArr.push(adress.address);
-    amountFileArr.push(adress.amount);
+  for (const wallet of excelData) {
+    verifyData(wallet.address, wallet.amount, tokenInputFile.value, false);
+    //walletsFileArr.push(adress.address);
+    //amountFileArr.push(adress.amount);
   }
 
-  console.log(walletsFileArr);
-  console.log(amountFileArr);
+  showWallets();
+
+  fileDataContainer.style.display = "none";
+  manualDataContainer.style.display = "flex";
 }
 
 export { walletsFileArr, amountFileArr, tokenToSendFile };
