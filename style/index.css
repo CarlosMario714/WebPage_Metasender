@@ -664,7 +664,7 @@ header {
 
 .wallets-container {
   display: flex;
-  gap: 8rem;
+  gap: 4rem;
 }
 
 .manual-wallets-container,
@@ -674,7 +674,7 @@ header {
   overflow: hidden;
   overflow-y: scroll;
   max-height: 50rem;
-  width: 82rem;
+  min-width: 82rem;
   padding: 0 1rem;
 }
 
@@ -728,8 +728,23 @@ header {
   );
 }
 
+.number-of-wallet {
+  min-width: 1rem;
+  text-align: center;
+}
+
+.wallet-adress {
+  min-width: 50rem;
+  text-align: center;
+}
+
+.wallet-amount {
+  min-width: 10rem;
+  text-align: center;
+}
+
 .manual-wallet a {
-  width: 2.5rem;
+  min-width: 2.5rem;
 }
 
 .wallet-errors-container {
@@ -996,7 +1011,7 @@ header {
   left: 0;
 }
 
-.blockExplorerLink{
+.blockExplorerLink {
   position: absolute;
   right: 0;
   opacity: 0;
@@ -1172,7 +1187,7 @@ footer {
   left: 0px;
   bottom: 80px;
   display: flex;
-  font-family: 'Tomorrow';
+  font-family: "Tomorrow";
   clip-path: circle(0% at 0 50%);
   transition: clip-path 1s ease;
   align-items: center;
