@@ -21,7 +21,7 @@ const spanAmount = document.querySelector(".span-amount");
 const resumenFinalContainer = document.querySelector(
   ".resumen-final-container"
 );
-const blockExplorerLinkItem = document.querySelector('.blockExplorerLink')
+const blockExplorerLinkItem = document.querySelector(".blockExplorerLink");
 const atrasbtn = document.querySelector(".atras-btn");
 //resumen operacion
 const totalWallets = document.querySelector(".total-wallets");
@@ -34,10 +34,14 @@ let walletsManualArr = [];
 let amountManualArr = [];
 let tokenToSendManual = tokenInput.value;
 
-let numberOfNewWallet = 0;
+let numberOfCorrectNewWallet = 0;
+let numberOfIncorrectNewWallet = 0;
 let newWalletsFragment = document.createDocumentFragment();
 
 let newIncorrectsWalletsFragment = document.createDocumentFragment();
+const incorrectWalletsContainer = document.querySelector(
+  ".incorrect-wallets-container"
+);
 
 optionManual.addEventListener("click", () => {
   if (isConnected) {
@@ -81,7 +85,7 @@ addWalletButton.addEventListener("click", () => {
     verifyData(walletInput.value, amountInput.value, tokenInput.value, true);
     walletInput.value = "";
     amountInput.value = "";
-    showWallets()
+    showWallets(true, false);
     continueBtnManual.classList.add("opacity");
   } else {
     if (walletInput.value == "") {
@@ -104,8 +108,7 @@ addWalletButton.addEventListener("click", () => {
   }
 });
 
-function verifyData(wallet, amount, typeOfToken, boolean) {
-  let dataFromManualWallets = boolean;
+function verifyData(wallet, amount, typeOfToken, dataFromManualWallets) {
   let walletRegex = new RegExp(walletInput.pattern);
   let AmountRegex = new RegExp(amountInput.pattern);
 
@@ -119,17 +122,25 @@ function verifyData(wallet, amount, typeOfToken, boolean) {
       : spanAmount.classList.remove("is-active");
 
     if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
-      addNewManualWallet(wallet, amount, typeOfToken);
+      addNewManualWallet(wallet, amount, typeOfToken, true);
     }
   } else {
-    if (!walletRegex.exec(wallet)) {
-    }
+    if (!walletRegex.exec(wallet) || !AmountRegex.exec(amount)) {
+      if (!walletRegex.exec(wallet)) {
+        console.log("paila:", wallet);
+      }
 
-    if (!AmountRegex.exec(amount)) {
+      if (!AmountRegex.exec(amount)) {
+        console.log("paila:", amount);
+      }
+
+      addNewManualWallet(wallet, amount, typeOfToken, false);
+
+      showWallets(false, true);
     }
 
     if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
-      addNewManualWallet(wallet, amount, typeOfToken);
+      addNewManualWallet(wallet, amount, typeOfToken, true);
 
       continueBtnManual.classList.add("opacity");
     }
@@ -174,18 +185,19 @@ function renameNumberOfWallets() {
     console.log("number of wallets length", numberOfWallet.length);
     numberOfWallet[i].parentNode.id = i + 1;
     numberOfWallet[i].innerHTML = i + 1;
-    numberOfNewWallet = i + 1;
+    numberOfCorrectNewWallet = i + 1;
   }
 }
 
 //add new wallet element
-function addNewManualWallet(wallet, amount, typeOfToken) {
-  numberOfNewWallet += 1;
-  let newWalletContainer = document.createElement("div");
-  newWalletContainer.id = numberOfNewWallet;
-  newWalletContainer.classList.add("manual-wallet");
-  newWalletContainer.innerHTML = `
-    <p class="number-of-wallet">${numberOfNewWallet}</p>
+function addNewManualWallet(wallet, amount, typeOfToken, isOkWallet) {
+  if (isOkWallet) {
+    numberOfCorrectNewWallet += 1;
+    let newWalletContainer = document.createElement("div");
+    newWalletContainer.id = numberOfCorrectNewWallet;
+    newWalletContainer.classList.add("manual-wallet");
+    newWalletContainer.innerHTML = `
+    <p class="number-of-wallet">${numberOfCorrectNewWallet}</p>
     <p class="wallet-adress">${wallet}</p>
     <p class="wallet-amount">${amount}</p>
     <p>${typeOfToken}</p>
@@ -197,12 +209,36 @@ function addNewManualWallet(wallet, amount, typeOfToken) {
       <img class="delete-wallet" src="../img/icons/cerrar.png"
         alt="cerrar pagina" />
     </a>`;
-  newWalletsFragment.appendChild(newWalletContainer);
+    newWalletsFragment.appendChild(newWalletContainer);
+  } else {
+    numberOfIncorrectNewWallet += 1;
+    let newWalletErrorsContainer = document.createElement("div");
+    newWalletErrorsContainer.id = numberOfIncorrectNewWallet;
+    newWalletErrorsContainer.classList.add("wallet-errors-container");
+    newWalletErrorsContainer.innerHTML = `<div id="${numberOfIncorrectNewWallet}" class="manual-wallet">
+    <p class="number-of-wallet">${numberOfIncorrectNewWallet}</p>
+    <p class="wallet-adress">${wallet}</p>
+    <p class="wallet-amount">${amount}</p>
+    <p>${typeOfToken}</p>
+    <a>
+      <img class="edit-wallet" src="../img/icons/boton-editar.png" alt="cerrar pagina" />
+    </a>
+    <a>
+      <img class="delete-wallet" src="../img/icons/cerrar.png" alt="cerrar pagina" />
+    </a>
+  </div>
+  <div class="wallet-errors">
+    <p><span>Wallet o Adress no valido: </span> "0x" + 40 caracteres alfanumericos sin espacios</p>
+    <p><span>Monto no valido:</span> Solo numeros positivos</p>
+  </div>`;
+    newIncorrectsWalletsFragment.appendChild(newWalletErrorsContainer);
+  }
 }
 
-function showWallets() {
-  console.log(newWalletsFragment);
+function showWallets(showInOkWallets, showInErrorWallets) {
   manualWalletsContainer.appendChild(newWalletsFragment);
+
+  incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
 }
 
 continueBtnManual.addEventListener("click", async () => {
@@ -221,12 +257,13 @@ continueBtnManual.addEventListener("click", async () => {
 
   processFinalData();
 
+  console.log(finalData);
+
   await setFinalResume();
 
   manualDataContainer.style.display = "none";
   resumenFinalContainer.style.display = "block";
   blockExplorerLinkItem.style.opacity = 0;
-
 });
 
 async function setFinalResume() {
