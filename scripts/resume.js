@@ -1,5 +1,6 @@
 import { estimateTx } from "./estimate.js";
 import { finalData } from "./finalData.js";
+import ethChains from "./ethereumchains.js"
 import { getContract, getTotalValue } from "./transactions.js";
 export const ercABI = [
     'function balanceOf(address owner) view returns (uint balance)',
@@ -35,6 +36,16 @@ async function getUserTokenBalance( _address, tokenType ){
     const balance = Number(ethers.utils.formatEther(inBalance)) 
 
     return roundNumber( balance )
+
+}
+
+async function getTokenSymbol(){
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    const contract = new ethers.Contract( finalData.tokenAddress, ercABI, provider )
+
+    return await contract.symbol( ethereum.selectedAddress );
 
 }
 
@@ -83,6 +94,12 @@ export default async function setResumeInfo() {
             finalData.tokenAddress,
             finalData.tokenToSend
         )
+
+    finalData.NativeToken = ethChains[ ethereum.chainId.slice(2) ].symbol
+
+    finalData.tokenToSend == 'ETH' ? 
+        finalData.tokenSymbol = finalData.NativeToken :
+        finalData.tokenSymbol = await getTokenSymbol()
 
     finalData.txCost = await getTxCostAprox()
 

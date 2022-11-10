@@ -234,13 +234,13 @@ async function setFinalResume() {
 
   totalWallets.innerHTML = finalData.numAddresses;
 
-  totalTokens.innerHTML = finalData.totalToSend;
+  totalTokens.innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
 
-  balanceTokens.innerHTML = finalData.userTokenBalance;
+  balanceTokens.innerHTML = `${finalData.userTokenBalance} ${finalData.tokenSymbol}`;
 
-  balanceEth.innerHTML = finalData.userETHBalance;
+  balanceEth.innerHTML = `${finalData.userETHBalance} ${finalData.NativeToken}`;
 
-  costoOperacion.innerHTML = finalData.txCost;
+  costoOperacion.innerHTML = `${finalData.txCost} ${finalData.NativeToken}`;
 
   return;
 }

@@ -1,10 +1,12 @@
 export default {
     1: {
         netName: "ETHEREUM MAINNET",
+        symbol: "ETH",
         blockExplorer: "https://etherscan.io",
     },
     5: {
         netName: "GOERLI TESNET",
+        symbol: "ETH",
         blockExplorer: "https://goerli.etherscan.io",
     },
     38: {
