@@ -435,14 +435,14 @@ header {
 
 /* canvas */
 
-.logoContainer {
+.loaderContainer {
   width: 100vw;
   height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
   background: #fff;
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   z-index: 1000;
@@ -451,7 +451,7 @@ header {
   z-index: 1000;
 }
 
-.logoContainer .pageloader {
+.loaderContainer .pageloader {
   position: absolute;
   z-index: -1;
 }
@@ -1151,7 +1151,7 @@ footer {
 }
 
 .palco-container table {
-  margin-top: 6rem;
+  margin-bottom: 6rem;
 }
 
 .palco-container table th {
@@ -1162,23 +1162,10 @@ footer {
   font-weight: bolder;
 }
 
-/* .containerInfoStages table {
-  text-align: center;
-  width: 100%;
-}
-
-.containerInfoStages table td {
-  padding: 0rem 5rem;
-}
-
-.containerInfoStages table p {
-  font-weight: 300;
-} */
-
 /********** Alertas ***********/
 
 .installAlert,
-.connectedToMainet,
+.connectedToWeb3Netwrok,
 .disConnectedToMainet,
 .errorsAlert {
   position: fixed;
@@ -1205,7 +1192,7 @@ footer {
 }
 
 .installAlert img,
-.connectedToMainet img,
+.connectedToWeb3Netwrok img,
 .disConnectedToMainet img,
 .errorsAlert img {
   position: absolute;

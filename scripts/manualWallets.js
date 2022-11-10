@@ -21,6 +21,7 @@ const spanAmount = document.querySelector(".span-amount");
 const resumenFinalContainer = document.querySelector(
   ".resumen-final-container"
 );
+const blockExplorerLinkItem = document.querySelector(".blockExplorerLink");
 const atrasbtn = document.querySelector(".atras-btn");
 //resumen operacion
 const totalWallets = document.querySelector(".total-wallets");
@@ -262,6 +263,7 @@ continueBtnManual.addEventListener("click", async () => {
 
   manualDataContainer.style.display = "none";
   resumenFinalContainer.style.display = "block";
+  blockExplorerLinkItem.style.opacity = 0;
 });
 
 async function setFinalResume() {

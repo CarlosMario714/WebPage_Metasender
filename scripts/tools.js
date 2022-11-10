@@ -1,5 +1,6 @@
 import { ercABI } from "./resume.js"
 const errorAlert = document.querySelector(".errorsAlert");
+const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 
 export function removeClass( items, className ){
 
@@ -22,6 +23,28 @@ export async function getTokenSymbol( _address ) {
     const contract = new ethers.Contract( _address, ercABI, provider )
 
     return await contract.symbol();
+
+}
+
+export function handleError( error ){
+
+    if ( error.message ) showErrorAlert( error.message )
+
+    else showErrorAlert( error.error.message )
+
+}
+
+export function showConnectAlert() {
+
+    connectedToMainet.classList.add("showAlert");
+    connectedToMainet.style.zIndex = 50;
+
+    setTimeout(() => {
+
+      connectedToMainet.classList.remove("showAlert");
+      connectedToMainet.style.zIndex = 0;
+
+    }, 5000);
 
 }
 

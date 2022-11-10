@@ -1,6 +1,7 @@
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
+import { handleError  } from "./tools.js";
 const blockExplorerLinkItem = document.querySelector('.blockExplorerLink')
 const btnSend = document.querySelector('.send-btn')
 const btnPalco = document.querySelector('.btn-palco')
@@ -48,7 +49,7 @@ async function sendNativeTokenSameValue( addresses, amounts ) {
 		.sendNativeTokenSameValue( addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
-		.catch((err) => console.log(err.error.message));
+		.catch( handleError );
 	
 	
 }
@@ -63,7 +64,7 @@ async function sendNativeTokenDifferentValue( addresses, amounts ) {
 		.sendNativeTokenDifferentValue(addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
-		.catch((err) => console.log(err.error.message));
+		.catch( handleError );
 	
 	
 }
@@ -78,7 +79,7 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 		.sendIERC20SameValue( contactAdd, addresses, amounts, 
 			{ value: txFee }
 		)
-		.catch((err) => console.log(err.error.message));
+		.catch( handleError );
 	
 }
 
@@ -92,7 +93,7 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 		.sendIERC20DifferentValue( contactAdd, addresses, amounts,  
 			{ value: txFee }
 		)
-		.catch((err) => console.log(err.error.message));
+		.catch( handleError );
 	
 }
 
@@ -166,13 +167,15 @@ export async function sendTransaction() {
 
 btnSend.addEventListener("click", async(e) => {
 
-    const tx = await sendTransaction()
+    await sendTransaction().then(( tx ) => {
 
-	const chainId = ethereum.chainId.slice(2)
+		const chainId = ethereum.chainId.slice(2)
+	
+		blockExplorerLinkItem.href = `${ethChains[ chainId ].blockExplorer}/tx/${tx.hash}`
+	
+		blockExplorerLinkItem.style.opacity = 1
 
-	blockExplorerLinkItem.href = `${ethChains[ chainId ].blockExplorer}/tx/${tx.hash}`
-
-	blockExplorerLinkItem.style.opacity = 1
+	})
 
 })
 
