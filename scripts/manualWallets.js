@@ -38,6 +38,9 @@ let numberOfIncorrectNewWallet = 0;
 let newWalletsFragment = document.createDocumentFragment();
 
 let newIncorrectsWalletsFragment = document.createDocumentFragment();
+const incorrectWalletsContainer = document.querySelector(
+  ".incorrect-wallets-container"
+);
 
 optionManual.addEventListener("click", () => {
   if (isConnected) {
@@ -81,7 +84,7 @@ addWalletButton.addEventListener("click", () => {
     verifyData(walletInput.value, amountInput.value, tokenInput.value, true);
     walletInput.value = "";
     amountInput.value = "";
-    showWallets();
+    showWallets(true, false);
     continueBtnManual.classList.add("opacity");
   } else {
     if (walletInput.value == "") {
@@ -122,8 +125,6 @@ function verifyData(wallet, amount, typeOfToken, dataFromManualWallets) {
     }
   } else {
     if (!walletRegex.exec(wallet) || !AmountRegex.exec(amount)) {
-      addNewManualWallet(wallet, amount, typeOfToken, false);
-
       if (!walletRegex.exec(wallet)) {
         console.log("paila:", wallet);
       }
@@ -131,10 +132,14 @@ function verifyData(wallet, amount, typeOfToken, dataFromManualWallets) {
       if (!AmountRegex.exec(amount)) {
         console.log("paila:", amount);
       }
+
+      addNewManualWallet(wallet, amount, typeOfToken, false);
+
+      showWallets(false, true);
     }
 
     if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
-      addNewManualWallet(wallet, amount, typeOfToken, false);
+      addNewManualWallet(wallet, amount, typeOfToken, true);
 
       continueBtnManual.classList.add("opacity");
     }
@@ -229,8 +234,10 @@ function addNewManualWallet(wallet, amount, typeOfToken, isOkWallet) {
   }
 }
 
-function showWallets() {
+function showWallets(showInOkWallets, showInErrorWallets) {
   manualWalletsContainer.appendChild(newWalletsFragment);
+
+  incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
 }
 
 continueBtnManual.addEventListener("click", async () => {
