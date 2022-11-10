@@ -304,22 +304,6 @@ function showWallets(showInOkWallets, showInErrorWallets) {
   incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
 }
 
-async function setFinalResume() {
-  await setResumeInfo();
-
-  totalWallets.innerHTML = finalData.numAddresses;
-
-  totalTokens.innerHTML = finalData.totalToSend;
-
-  balanceTokens.innerHTML = finalData.userTokenBalance;
-
-  balanceEth.innerHTML = finalData.userETHBalance;
-
-  costoOperacion.innerHTML = finalData.txCost;
-
-  return;
-}
-
 //select type of token
 tokenInput.addEventListener("click", () => {
   changeTypeOfToken();
