@@ -1,4 +1,5 @@
 import { login, isConnected } from "./connectWallet.js";
+import { finalData } from "./finalData.js";
 import { verifyData, showWallets } from "./manualWallets.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
@@ -98,6 +99,8 @@ async function processFile() {
     //walletsFileArr.push(adress.address);
     //amountFileArr.push(adress.amount);
   }
+
+  //console.log(finalData);
 
   showWallets();
 
