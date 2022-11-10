@@ -1,5 +1,6 @@
 import { estimateTx } from "./estimate.js";
 import { finalData } from "./finalData.js";
+import ethChains from "./ethereumchains.js"
 import { getContract, getTotalValue } from "./transactions.js";
 export const ercABI = [
     'function balanceOf(address owner) view returns (uint balance)',
@@ -35,6 +36,16 @@ async function getUserTokenBalance( _address, tokenType ){
     const balance = Number(ethers.utils.formatEther(inBalance)) 
 
     return roundNumber( balance )
+
+}
+
+async function getTokenSymbol(){
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    const contract = new ethers.Contract( finalData.tokenAddress, ercABI, provider )
+
+    return await contract.symbol( ethereum.selectedAddress );
 
 }
 
@@ -77,14 +88,41 @@ export default async function setResumeInfo() {
 
     finalData.userETHBalance = await getUserBalance()
 
-    finalData.tokenToSend == 'ETH' ? 
-        finalData.userTokenBalance = finalData.userETHBalance :
+    finalData.txCost = await getTxCostAprox()
+
+    finalData.NativeToken = ethChains[ ethereum.chainId.slice(2) ].symbol
+
+    if( finalData.tokenToSend == 'ETH' ) {
+
+        finalData.userTokenBalance = finalData.userETHBalance
+
+        finalData.tokenSymbol = finalData.NativeToken
+
+        finalData.totalCost = finalData.txCost + finalData.totalToSend
+
+    } else  {
+
         finalData.userTokenBalance = await getUserTokenBalance(
             finalData.tokenAddress,
             finalData.tokenToSend
         )
 
-    finalData.txCost = await getTxCostAprox()
+        finalData.tokenSymbol = await getTokenSymbol()
+
+        finalData.totalCost = finalData.txCost
+
+     }
+
+    // finalData.tokenToSend == 'ETH' ? 
+    //     finalData.userTokenBalance = finalData.userETHBalance :
+    //     finalData.userTokenBalance = await getUserTokenBalance(
+    //         finalData.tokenAddress,
+    //         finalData.tokenToSend
+    //     )
+
+    // finalData.tokenToSend == 'ETH' ? 
+    //     finalData.tokenSymbol = finalData.NativeToken :
+    //     finalData.tokenSymbol = await getTokenSymbol()
 
     return
 
