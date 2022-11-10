@@ -25,10 +25,11 @@ const blockExplorerLinkItem = document.querySelector(".blockExplorerLink");
 const atrasbtn = document.querySelector(".atras-btn");
 //resumen operacion
 const totalWallets = document.querySelector(".total-wallets");
-const totalTokens = document.querySelector(".total-tokens");
+const totalTokens = document.querySelectorAll(".total-tokens");
 const balanceTokens = document.querySelector(".balance-tokens");
 const balanceEth = document.querySelector(".balance-eth");
 const costoOperacion = document.querySelector(".costo-operacion");
+const costoTotalOperacion = document.querySelector(".costo-operacion-total");
 
 let walletsManualArr = [];
 let amountManualArr = [];
@@ -257,8 +258,6 @@ continueBtnManual.addEventListener("click", async () => {
 
   processFinalData();
 
-  console.log(finalData);
-
   await setFinalResume();
 
   manualDataContainer.style.display = "none";
@@ -271,13 +270,17 @@ async function setFinalResume() {
 
   totalWallets.innerHTML = finalData.numAddresses;
 
-  totalTokens.innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+  totalTokens[0].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+
+  totalTokens[1].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
 
   balanceTokens.innerHTML = `${finalData.userTokenBalance} ${finalData.tokenSymbol}`;
 
   balanceEth.innerHTML = `${finalData.userETHBalance} ${finalData.NativeToken}`;
 
   costoOperacion.innerHTML = `${finalData.txCost} ${finalData.NativeToken}`;
+
+  costoTotalOperacion.innerHTML = `${finalData.totalCost} ${finalData.NativeToken}`;
 
   return;
 }
