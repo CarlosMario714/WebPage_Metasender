@@ -1,6 +1,20 @@
-import { getContract, getTotalValue, isSameValue } from "./transactions.js";
+import {  getTotalValue, isSameValue } from "./transactions.js";
+import { handleError  } from "./tools.js";
+import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
 const tokenIds = [12, 17, 18]
+
+function getContract() {
+	
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+	return new ethers.Contract(
+		metasender[`address_${ ethereum.chainId }`],
+		metasender.abi,
+		provider
+	);
+	
+}
 
 async function sendNativeTokenSameValue( addresses, amounts ) {
 
@@ -12,7 +26,7 @@ async function sendNativeTokenSameValue( addresses, amounts ) {
 		.sendNativeTokenSameValue( addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
-		.catch((err) => console.log(err));
+		.catch( handleError );
 	
 	
 }
@@ -27,7 +41,7 @@ async function sendNativeTokenDifferentValue( addresses, amounts ) {
 		.sendNativeTokenDifferentValue(addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
-		.catch((err) => console.log(err));
+		.catch( handleError );
 	
 }
 
@@ -41,7 +55,7 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 		.sendIERC20SameValue( contactAdd, addresses, amounts, 
 			{ value: txFee }
 		)
-		.catch((err) => console.log(err));
+		.catch( handleError );
 	
 }
 
@@ -55,7 +69,7 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 		.sendIERC20DifferentValue( contactAdd, addresses, amounts,  
 			{ value: txFee }
 		)
-		.catch((err) => console.log(err));
+		.catch( handleError );
 	
 }
 
@@ -69,7 +83,7 @@ async function sendIERC721( contactAdd, addresses, tokenIds) {
 		.sendIERC721( contactAdd, addresses, tokenIds,  
 			{ value: txFee }
 		)
-		.catch((err) => console.log(err));
+		.catch( handleError );
 
 }
 

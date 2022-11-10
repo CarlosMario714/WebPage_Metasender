@@ -1,11 +1,11 @@
-import { addClass, removeClass, showErrorAlert } from "./tools.js";
+import { handleError, removeClass, showErrorAlert, showConnectAlert } from "./tools.js";
 import ethChains from "./ethereumchains.js"
 const selectChainItem = document.querySelector('.option-red select')
 const closeAlert = document.querySelectorAll(".closeAlert");
 const alertText = document.querySelector(".alert-text");
 const btnConnect = document.querySelector(".btnConnect");
 const installAlert = document.querySelector(".installAlert");
-const connectedToMainet = document.querySelector(".connectedToMainet");
+const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const disConnectedToMainet = document.querySelector(".disConnectedToMainet");
 const errorAlert = document.querySelector(".errorsAlert");
 const optinonRed = document.querySelector(".option-red select");
@@ -26,27 +26,27 @@ function setWalletAddress() {
 }
 
 function listenChain() {
+
   ethereum.on("chainChanged", (chainId) => {
+
     if ( ethChains[ chainId.slice(2) ] ) {
 
       selectChainItem.value = chainId.slice(2)
-      disConnectedToMainet.classList.remove("showAlert");
-      connectedToMainet.classList.add("showAlert");
-      connectedToMainet.style.zIndex = 50;
 
-      setTimeout(() => {
-        connectedToMainet.classList.remove("showAlert");
-        connectedToMainet.style.zIndex = 0;
-      }, 5000);
-    } else {
-      showErrorAlert('Chain Not Suported')
+      showConnectAlert()
+
     }
+
+    else  showErrorAlert('Network Not Suported')
+
   });
+
 }
 
 // Connect with a ethereum account ( only compatible with metamask )
 
 async function connectWallet() {
+
   await window.ethereum
     .request({
       method: "wallet_requestPermissions",
@@ -60,6 +60,7 @@ async function connectWallet() {
     .catch((x) => {
       console.log(x.message);
     });
+
 }
 
 // it change the chain to Ethereum main net
@@ -96,6 +97,8 @@ async function changeChain( chain ) {
 		if(error.code == 4902){
 			addChain( chain )
 		}
+
+    else handleError( error )
 	});
 
 }
