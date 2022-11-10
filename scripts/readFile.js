@@ -1,6 +1,6 @@
 import { login, isConnected } from "./connectWallet.js";
 import { finalData } from "./finalData.js";
-import { verifyData, showWallets } from "./manualWallets.js";
+import { verifyFileData, showWallets } from "./manualWallets.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
@@ -95,7 +95,7 @@ async function processFile() {
   //console.log(excelData);
 
   for (const wallet of excelData) {
-    verifyData(wallet.address, wallet.amount, tokenInputFile.value, false);
+    verifyFileData(wallet.address, wallet.amount, tokenInputFile.value);
     //walletsFileArr.push(adress.address);
     //amountFileArr.push(adress.amount);
   }
