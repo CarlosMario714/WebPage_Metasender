@@ -35,7 +35,6 @@ export function handleError( error ){
 }
 
 export function showConnectAlert() {
-    console.log(connectedToMainet)
 
     connectedToMainet.classList.add("showAlert");
     connectedToMainet.style.zIndex = 50;
