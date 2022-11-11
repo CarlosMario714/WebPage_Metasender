@@ -1,6 +1,5 @@
-import { handleError, removeClass, showErrorAlert, showConnectAlert } from "./tools.js";
+import { handleError, removeClass, showErrorAlert, showConnectAlert, changeTokenItems } from "./tools.js";
 import ethChains from "./ethereumchains.js"
-const selectChainItem = document.querySelector('.option-red select')
 const closeAlert = document.querySelectorAll(".closeAlert");
 const alertText = document.querySelector(".alert-text");
 const btnConnect = document.querySelector(".btnConnect");
@@ -31,7 +30,7 @@ function listenChain() {
 
     if ( ethChains[ chainId.slice(2) ] ) {
 
-      selectChainItem.value = chainId.slice(2)
+      changeTokenItems( chainId )
 
       showConnectAlert()
 

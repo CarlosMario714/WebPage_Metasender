@@ -1,6 +1,8 @@
 import { login, isConnected } from "./connectWallet.js";
 import setResumeInfo from "./resume.js";
 import { finalData, processFinalData } from "./finalData.js";
+import ethChains from "./ethereumchains.js"
+import ethereumchains from "./ethereumchains.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -9,6 +11,7 @@ const walletInput = document.querySelector(".wallet-input");
 const amountInput = document.querySelector(".amount-input");
 const optionManual = document.querySelector(".option-manual");
 const optionFile = document.querySelector(".option-file");
+const tokenAddContainer = document.querySelectorAll(".token-address")[0];
 const manualDataContainer = document.querySelector(".manual-data-container");
 const fileDataContainer = document.querySelector(".file-data-container");
 const continueBtnManual = document.querySelector(".continue-btn-manual");
@@ -54,12 +57,13 @@ optionManual.addEventListener("click", () => {
 
 function changeTypeOfToken() {
   switch (tokenInput.value) {
-    case "ETH" || "BNB" || "MATIC" || "AVAX" || "FTM" || "ETC":
+    case "ETH":
       labelAdress.innerHTML = "Cuenta o Wallet a enviar";
       walletInput.placeholder = "Escribe la wallet";
       labelAmount.innerHTML = "Monto a Enviar";
       amountInput.placeholder = "Escribe el monto";
       amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
+      tokenAddContainer.style.display = 'none'
       break;
     case "ERC20":
       labelAdress.innerHTML = "Adress del contrato del token";
@@ -67,6 +71,7 @@ function changeTypeOfToken() {
       labelAmount.innerHTML = "Cantidad de tokens a enviar";
       amountInput.placeholder = "Escribe cantidad de tokens";
       amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
+      tokenAddContainer.style.display = 'block'
       break;
     case "ERC721":
       labelAdress.innerHTML = "Adress del contrato del token";
@@ -75,6 +80,7 @@ function changeTypeOfToken() {
       amountInput.placeholder = "Escribe el ID del token";
       amountInput.pattern = `^\\d*\\d+$`;
       amountInput.innerHTML = `Solo numeros enteros positivos`;
+      tokenAddContainer.style.display = 'block'
       break;
   }
 }

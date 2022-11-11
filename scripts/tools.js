@@ -1,6 +1,10 @@
 import { ercABI } from "./resume.js"
+import ethChains from "./ethereumchains.js"
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
+const selectChainItem = document.querySelector('.option-red select')
+const tokenInput = document.getElementById("token-input");
+const fileTokenInput = document.querySelector(".token-input-file");
 
 export function removeClass( items, className ){
 
@@ -53,5 +57,21 @@ export function showErrorAlert( msg ) {
     errorAlert.children[1].innerHTML = msg
 
     errorAlert.classList.add("showAlert");
+
+}
+
+export function changeTokenItems( chainId ) {
+
+    tokenInput.children[0].innerHTML = ethChains[ chainId.slice(2) ].symbol
+
+    fileTokenInput.children[1].innerHTML = ethChains[ chainId.slice(2) ].symbol
+
+    selectChainItem.value = chainId.slice(2)
+
+}
+
+export function verifyAddress( _address ) {
+
+    return ethers.utils.isAddress( _address )
 
 }
