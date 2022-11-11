@@ -1,57 +1,40 @@
-import { ercABI } from "./resume.js"
+import { ercABI } from "./resume.js";
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 
-export function removeClass( items, className ){
-
-    for( const item of items )
-        item.classList.remove( className )
-
+export function removeClass(items, className) {
+  for (const item of items) item.classList.remove(className);
 }
 
-export function addClass( items, className ){
-
-    for( const item of items )
-        item.classList.add( className )
-
+export function addClass(items, className) {
+  for (const item of items) item.classList.add(className);
 }
 
-export async function getTokenSymbol( _address ) {
+export async function getTokenSymbol(_address) {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const contract = new ethers.Contract(_address, ercABI, provider);
 
-    const contract = new ethers.Contract( _address, ercABI, provider )
-
-    return await contract.symbol();
-
+  return await contract.symbol();
 }
 
-export function handleError( error ){
-
-    if ( error.message ) showErrorAlert( error.message )
-
-    else showErrorAlert( error.error.message )
-
+export function handleError(error) {
+  if (error.message) showErrorAlert(error.message);
+  else showErrorAlert(error.error.message);
 }
 
 export function showConnectAlert() {
+  connectedToMainet.classList.add("showAlert");
+  connectedToMainet.style.zIndex = 50;
 
-    connectedToMainet.classList.add("showAlert");
-    connectedToMainet.style.zIndex = 50;
-
-    setTimeout(() => {
-
-      connectedToMainet.classList.remove("showAlert");
-      connectedToMainet.style.zIndex = 0;
-
-    }, 5000);
-
+  setTimeout(() => {
+    connectedToMainet.classList.remove("showAlert");
+    connectedToMainet.style.zIndex = 0;
+  }, 5000);
 }
 
-export function showErrorAlert( msg ) {
+export function showErrorAlert(msg) {
+  errorAlert.children[1].innerHTML = msg;
 
-    errorAlert.children[1].innerHTML = msg
-
-    errorAlert.classList.add("showAlert");
-
+  errorAlert.classList.add("showAlert");
 }

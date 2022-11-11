@@ -252,7 +252,6 @@ function addOkWalletElement(wallet, amount, typeOfToken) {
 //add new error wallet element
 function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
   numberOfIncorrectNewWallet += 1;
-  console.log(numberOfIncorrectNewWallet);
   let newWalletErrorsContainer = document.createElement("div");
   newWalletErrorsContainer.id = numberOfIncorrectNewWallet;
   newWalletErrorsContainer.classList.add("wallet-errors-container");

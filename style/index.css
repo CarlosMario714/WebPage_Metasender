@@ -843,7 +843,7 @@ header {
 .drop-area {
   position: relative;
   border: 2px dashed rgba(124, 124, 124, 0.5);
-  height: 20rem;
+  height: 30rem;
   width: 70rem;
   border-radius: 1rem;
   display: flex;
@@ -879,6 +879,10 @@ header {
   color: #000;
 }
 
+.drop-area button {
+  margin-bottom: 1rem;
+}
+
 .file-container {
   display: flex;
   align-items: center;
@@ -900,25 +904,41 @@ header {
 }
 
 .plantilla {
+  margin: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: absolute;
-  width: 100%;
-  left: 0;
   bottom: -5rem;
   color: rgb(126, 126, 126);
+}
+
+.plantilla > * {
+  margin: 0;
 }
 
 .plantilla a {
   text-decoration: underline;
 }
 
+.notas-archivo {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: rgb(126, 126, 126);
+}
+
+.notas-archivo > * {
+  margin: 0;
+}
+
 .input-container-file {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 5rem 0 2rem;
+  margin: 2rem 0;
 }
 
 .input-container-file select {
@@ -989,11 +1009,11 @@ header {
   margin: 0;
 }
 
-.resumen-totales:nth-child(3) h3{
+.resumen-totales:nth-child(3) h3 {
   line-height: 2rem;
 }
 
-.resumen:nth-child(5) p{
+.resumen:nth-child(5) p {
   font-weight: bolder;
   font-size: 2.5rem;
 }
