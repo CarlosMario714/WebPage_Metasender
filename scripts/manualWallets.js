@@ -56,7 +56,8 @@ optionManual.addEventListener("click", () => {
   } else login();
 });
 
-function changeTypeOfToken() {
+export function changeTypeOfToken() {
+  console.log()
   switch (tokenInput.value) {
     case "ETH":
       labelAdress.innerHTML = "Cuenta o Wallet a enviar";

@@ -1,3 +1,7 @@
+:root {
+  --form-ok-color: #a6903c;
+  --form-error-color: #f44336;
+}
 /*para que los elementos no se pasen del tamaño que uno le ponga*/
 html {
   box-sizing: border-box;
@@ -583,8 +587,8 @@ header {
 }
 
 .manual-inputs-container {
-  --form-ok-color: #a6903c;
-  --form-error-color: #f44336;
+  /* --form-ok-color: #a6903c;
+  --form-error-color: #f44336; */
   display: flex;
   align-items: flex-end;
   gap: 3rem;
@@ -755,7 +759,7 @@ header {
 }
 
 .manual-wallet a {
-  min-width: 2.5rem;
+  max-width: 2.5rem;
 }
 
 .wallet-errors-container {
