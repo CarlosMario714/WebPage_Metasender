@@ -708,6 +708,7 @@ header {
 }
 
 .manual-wallets-container h2 {
+  display: none;
   margin-top: 2rem;
   background: rgb(220, 255, 216);
   background: radial-gradient(
@@ -1091,7 +1092,7 @@ header {
   justify-content: center;
   width: 100%;
   height: 100%;
-  background: #e5e5e5;
+  background: white;
   border-radius: 2rem;
 }
 

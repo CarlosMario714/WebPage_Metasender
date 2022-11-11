@@ -20,6 +20,7 @@ const continueBtnFile = document.querySelector(".continue-btn-file");
 const tokenAddContainerMan = document.querySelectorAll(".token-address")[0];
 const tokenAddContainerFile = document.querySelectorAll(".token-address")[1];
 const spanContractAddress = document.querySelector(".span-contractaddres-file");
+const loaderSendProcess = document.querySelector(".loader-send-process");
 const tokenInput = document.getElementById("token-input");
 const tokenAddressInputFile = tokenAddContainerFile.children[1];
 const tokenAddressInputMan = tokenAddContainerMan.children[1];
@@ -94,6 +95,8 @@ async function processFile() {
 }
 
 function migrateInfo() {
+  loaderSendProcess.classList.toggle("show-loader-send-process");
+
   showWallets();
 
   fileDataContainer.style.display = "none";
@@ -105,6 +108,8 @@ function migrateInfo() {
   tokenInput.value = tokenInputFile.value;
 
   changeTypeOfToken();
+
+  loaderSendProcess.classList.toggle("show-loader-send-process");
 }
 
 function showFile(file) {
@@ -114,7 +119,6 @@ function showFile(file) {
   <div class="status">
     <span>${file.name}</span>
     <span class="status-text">
-      Loading...
     </span>
   </div>`;
   dropArea.removeChild(child1DropArea);

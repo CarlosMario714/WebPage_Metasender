@@ -26,6 +26,9 @@ const resumenFinalContainer = document.querySelector(
   ".resumen-final-container"
 );
 const blockExplorerLinkItem = document.querySelector(".blockExplorerLink");
+const tituloDatosCorrectos = document.querySelector(
+  ".manual-wallets-container h2"
+);
 const atrasbtn = document.querySelector(".atras-btn");
 //resumen operacion
 const totalWallets = document.querySelector(".total-wallets");
@@ -58,7 +61,6 @@ optionManual.addEventListener("click", () => {
 });
 
 export function changeTypeOfToken() {
-  console.log()
   switch (tokenInput.value) {
     case "ETH":
       labelAdress.innerHTML = "Cuenta o Wallet a enviar";
@@ -217,12 +219,13 @@ function deleteIncorrectWallet(event) {
   incorrectWalletsContainer.removeChild(
     event.target.parentNode.parentNode.parentNode
   );
+  renameNumberOfIncorrectWallets();
+  hideIncorrectWalletsContainer();
 }
 
 function editIncorrectWallet(event) {
   let parentElement = event.target.parentNode.parentNode.parentNode;
   let parentElement2 = event.target.parentNode.parentNode;
-  console.log(parentElement.childNodes);
   parentElement2.childNodes.forEach((element) => {
     if (element.classList == "wallet-adress") {
       walletInput.value = element.innerHTML;
@@ -238,7 +241,25 @@ function editIncorrectWallet(event) {
     amountInput.classList.remove("edit");
   }, 1000);
   incorrectWalletsContainer.removeChild(parentElement);
-  //renameNumberOfWallets();
+  renameNumberOfIncorrectWallets();
+  hideIncorrectWalletsContainer();
+}
+
+function renameNumberOfIncorrectWallets() {
+  let numberOfWallet = document.querySelectorAll(".number-of-incorrect-wallet");
+
+  for (let i = 0; i < numberOfWallet.length; i++) {
+    numberOfWallet[i].parentNode.id = i + 1;
+    numberOfWallet[i].innerHTML = i + 1;
+    numberOfIncorrectNewWallet = i + 1;
+  }
+}
+
+function hideIncorrectWalletsContainer() {
+  console.log(incorrectWalletsContainer.childNodes.length);
+  if (incorrectWalletsContainer.childNodes.length < 4) {
+    incorrectWalletsContainer.style.display = "none";
+  }
 }
 
 //add new ok wallet element
@@ -271,7 +292,7 @@ function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
   newWalletErrorsContainer.classList.add("wallet-errors-container");
   let walleterrorElement = `
   <div id="${numberOfIncorrectNewWallet}" class="manual-wallet">
-    <p class="number-of-wallet">${numberOfIncorrectNewWallet}</p>
+    <p class="number-of-wallet number-of-incorrect-wallet">${numberOfIncorrectNewWallet}</p>
     <p class="wallet-adress">${wallet}</p>
     <p class="wallet-amount">${amount}</p>
     <p>${typeOfToken}</p>
@@ -315,6 +336,7 @@ function showWallets() {
   manualWalletsContainer.appendChild(newWalletsFragment);
 
   if (newIncorrectsWalletsFragment.childNodes.length > 0) {
+    tituloDatosCorrectos.style.display = "block";
     incorrectWalletsContainer.style.display = "flex";
     incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
   }
