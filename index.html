@@ -143,9 +143,9 @@
             <div class="input-container">
               <label class="label-adress">Cuenta o Wallet a enviar</label>
               <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
-                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="0x + 40 caracteres alfanumericos sin espacios"
+                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="0x + 40 caracteres alfanumericos validos sin espacios"
                 required />
-              <span class="input-error none span-wallet">"0x" + 40 caracteres alfanumericos sin espacios</span>
+              <span class="input-error none span-wallet">"0x" + 40 caracteres alfanumericos validos sin espacios</span>
             </div>
             <div class="input-container">
               <label class="label-amount">Monto a Enviar</label>
@@ -157,7 +157,8 @@
           </div>
           <div class="token-address">
             <h2>Address del Contrato</h2>
-            <input type="text" placeholder="address del Contrato" name="token-addres" pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Addrres de contrato invalido">
+            <input type="text" placeholder="address del Contrato" name="token-addres"
+              pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Addrres de contrato invalido">
             <span class="input-error none span-wallet">Direccion de contrato invalido</span>
           </div>
         </div>
@@ -192,12 +193,15 @@
             <h2>Arrastra y suelta el archivo aqui</h2>
             <span>O</span>
             <button class="btn2">Selecciona tus archivos</button>
-            <div class="plantilla">
-              <p>*El archivo debe cumplir con la plantilla</p>
-              <a href="./download/metasender.xlsx" download="metasender.xlsx">Descargar Plantilla</a>
-            </div>
-
             <input type="file" name="" id="input-file" hidden>
+          </div>
+          <div class="plantilla">
+            <p>*El archivo debe cumplir con la plantilla: </p>
+            <a href="./download/metasender.xlsx" download="metasender.xlsx">Descargar Plantilla</a>
+          </div>
+          <div class="notas-archivo">
+            <p>*Cada dato en el archivo no debe contener espacios en blanco</p>
+            <p>*Si va a enviar ERC721, en la columna amount debe indicar el ID del token a enviar</p>
           </div>
           <div class="input-container input-container-file">
             <label>Selecciona el Tipo de Token a Enviar</label>
