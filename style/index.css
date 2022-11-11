@@ -597,7 +597,8 @@ header {
 }
 
 .input-container input,
-.input-container select {
+.input-container select,
+.token-address input {
   background: rgb(202, 202, 202);
   border-radius: 2rem;
   border: rgb(124, 124, 124) 1px solid;
@@ -606,7 +607,17 @@ header {
   color: black;
 }
 
-.input-container input[name="manual-wallet"] {
+.token-address {
+  margin-top: 2rem;
+  display: none;
+}
+
+.token-address h2 {
+  text-align: center;
+}
+
+.input-container input[name="manual-wallet"],
+.token-address input[name="token-addres"] {
   width: 55rem;
 }
 

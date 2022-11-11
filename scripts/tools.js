@@ -1,6 +1,9 @@
 import { ercABI } from "./resume.js";
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
+const selectChainItem = document.querySelector(".option-red select");
+const tokenInput = document.getElementById("token-input");
+const fileTokenInput = document.querySelector(".token-input-file");
 
 export function removeClass(items, className) {
   for (const item of items) item.classList.remove(className);
