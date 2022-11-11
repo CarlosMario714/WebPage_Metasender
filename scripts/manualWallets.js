@@ -303,7 +303,7 @@ function showWallets(showInOkWallets, showInErrorWallets) {
 
   incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
 
-  //continueBtnManual.style.display = "block";
+  continueBtnManual.style.display = "block";
 }
 
 //select type of token
