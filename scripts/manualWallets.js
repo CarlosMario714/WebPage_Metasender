@@ -308,6 +308,8 @@ function showWallets(showInOkWallets, showInErrorWallets) {
   manualWalletsContainer.appendChild(newWalletsFragment);
 
   incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
+
+  continueBtnManual.style.display = "block";
 }
 
 //select type of token
