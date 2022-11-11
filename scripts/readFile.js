@@ -1,6 +1,7 @@
 import { login, isConnected } from "./connectWallet.js";
 import { finalData } from "./finalData.js";
 import { verifyFileData, showWallets } from "./manualWallets.js";
+import { showErrorAlert } from "./tools.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
@@ -92,20 +93,28 @@ async function processFile() {
   const workbook = XLSX.readFile(data);
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
   const excelData = XLSX.utils.sheet_to_json(worksheet);
-  //console.log(excelData);
 
-  for (const wallet of excelData) {
-    verifyFileData(wallet.address, wallet.amount, tokenInputFile.value);
-    //walletsFileArr.push(adress.address);
-    //amountFileArr.push(adress.amount);
+  let confirmData = Object.keys(excelData[0]);
+
+  if (confirmData[0] === "address_to_send" && confirmData[1] === "amount") {
+    for (const wallet of excelData) {
+      wallet.address_to_send = wallet.address_to_send.trim();
+      wallet.amount = wallet.amount.toString().trim();
+      wallet.amount = Number(wallet.amount);
+      verifyFileData(
+        wallet.address_to_send,
+        wallet.amount,
+        tokenInputFile.value
+      );
+    }
+
+    showWallets();
+
+    fileDataContainer.style.display = "none";
+    manualDataContainer.style.display = "flex";
+  } else {
+    showErrorAlert("Archivo no valido. descarga la plantilla");
   }
-
-  //console.log(finalData);
-
-  showWallets();
-
-  fileDataContainer.style.display = "none";
-  manualDataContainer.style.display = "flex";
 }
 
 export { walletsFileArr, amountFileArr, tokenToSendFile };

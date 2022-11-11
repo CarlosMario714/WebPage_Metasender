@@ -1,8 +1,9 @@
 import { login, isConnected } from "./connectWallet.js";
 import setResumeInfo from "./resume.js";
 import { finalData, processFinalData } from "./finalData.js";
-import ethChains from "./ethereumchains.js"
+import ethChains from "./ethereumchains.js";
 import ethereumchains from "./ethereumchains.js";
+import { verifyAddress } from "./tools.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -63,7 +64,7 @@ function changeTypeOfToken() {
       labelAmount.innerHTML = "Monto a Enviar";
       amountInput.placeholder = "Escribe el monto";
       amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
-      tokenAddContainer.style.display = 'none'
+      tokenAddContainer.style.display = "none";
       break;
     case "ERC20":
       labelAdress.innerHTML = "Adress del contrato del token";
@@ -71,7 +72,7 @@ function changeTypeOfToken() {
       labelAmount.innerHTML = "Cantidad de tokens a enviar";
       amountInput.placeholder = "Escribe cantidad de tokens";
       amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
-      tokenAddContainer.style.display = 'block'
+      tokenAddContainer.style.display = "block";
       break;
     case "ERC721":
       labelAdress.innerHTML = "Adress del contrato del token";
@@ -80,7 +81,7 @@ function changeTypeOfToken() {
       amountInput.placeholder = "Escribe el ID del token";
       amountInput.pattern = `^\\d*\\d+$`;
       amountInput.innerHTML = `Solo numeros enteros positivos`;
-      tokenAddContainer.style.display = 'block'
+      tokenAddContainer.style.display = "block";
       break;
   }
 }
@@ -116,19 +117,22 @@ function verifyManualData(wallet, amount, typeOfToken) {
   let walletRegex = new RegExp(walletInput.pattern);
   let AmountRegex = new RegExp(amountInput.pattern);
 
-  !walletRegex.exec(wallet)
-    ? spanWallet.classList.add("is-active")
-    : spanWallet.classList.remove("is-active");
-
-  !AmountRegex.exec(amount)
-    ? spanAmount.classList.add("is-active")
-    : spanAmount.classList.remove("is-active");
-
-  if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
+  //if all data is ok
+  if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
     addOkWalletElement(wallet, amount, typeOfToken);
     walletInput.value = "";
     amountInput.value = "";
   }
+
+  //if is a wallet error
+  !verifyAddress(wallet)
+    ? spanWallet.classList.add("is-active")
+    : spanWallet.classList.remove("is-active");
+
+  //if is a wallet error
+  !AmountRegex.exec(amount)
+    ? spanAmount.classList.add("is-active")
+    : spanAmount.classList.remove("is-active");
 }
 
 function verifyFileData(wallet, amount, typeOfToken) {
@@ -138,24 +142,28 @@ function verifyFileData(wallet, amount, typeOfToken) {
   let amountError = "amount error";
   let allError = "all errors";
 
-  //if is ok data
-  if (walletRegex.exec(wallet) && AmountRegex.exec(amount)) {
+  //if is ok data data form file
+  if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
     addOkWalletElement(wallet, amount, typeOfToken);
   }
 
-  //if is error data
-  if (!walletRegex.exec(wallet) || !AmountRegex.exec(amount)) {
-    if (!walletRegex.exec(wallet) && !AmountRegex.exec(amount)) {
+  //if is a error data form file
+  if (!verifyAddress(wallet) || !AmountRegex.exec(amount)) {
+    //if the wallet have all errors
+    if (!verifyAddress(wallet) && !AmountRegex.exec(amount)) {
       addIncorrectWalletElement(wallet, amount, typeOfToken, allError);
 
       showWallets(false, true);
     } else {
-      if (!walletRegex.exec(wallet)) {
+      //if the wallet have only a specific error
+      //if is a wallet error
+      if (!verifyAddress(wallet)) {
         addIncorrectWalletElement(wallet, amount, typeOfToken, walletError);
 
         showWallets(false, true);
       }
 
+      //if is a amount error
       if (!AmountRegex.exec(amount)) {
         addIncorrectWalletElement(wallet, amount, typeOfToken, amountError);
 
@@ -258,7 +266,6 @@ function addOkWalletElement(wallet, amount, typeOfToken) {
 //add new error wallet element
 function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
   numberOfIncorrectNewWallet += 1;
-  console.log(numberOfIncorrectNewWallet);
   let newWalletErrorsContainer = document.createElement("div");
   newWalletErrorsContainer.id = numberOfIncorrectNewWallet;
   newWalletErrorsContainer.classList.add("wallet-errors-container");
@@ -277,7 +284,7 @@ function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
   </div>`;
   let onlyWalletError = `
   <div class="wallet-errors">
-    <p><span>Wallet o Adress no valido: </span> "0x" + 40 caracteres alfanumericos sin espacios</p>
+    <p><span>Wallet o Adress no valido: </span> "0x" + 40 caracteres alfanumericos validos sin espacios </p>
   </div>`;
   let onlyAmountError = `
   <div class="wallet-errors">
