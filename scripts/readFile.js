@@ -12,7 +12,7 @@ const child1DropArea = document.querySelector(".drop-area h2");
 const child2DropArea = document.querySelector(".drop-area span");
 const tokenInputFile = document.querySelector(".token-input-file");
 const continueBtnFile = document.querySelector(".continue-btn-file");
-
+let fileLoader = false
 let tokenToSendFile = "eth";
 let walletsFileArr = [];
 let amountFileArr = [];
@@ -65,8 +65,8 @@ dropArea.addEventListener("drop", (e) => {
   dragText.textContent = "arrastra y suelta el archivo ";
 });
 
-tokenInputFile.addEventListener("change", () => {
-  continueBtnFile.style.display = "block";
+tokenInputFile.addEventListener("change", (e) => {
+  console.log(e.target.value)
 });
 
 function showFile(file) {
@@ -85,10 +85,15 @@ function showFile(file) {
   dropArea.append(previewElement);
 }
 
+function ableContinueButton() {
+  continueBtnFile.style.display = "block";
+}
+
 continueBtnFile.addEventListener("click", processFile);
 
 async function processFile() {
   const data = await file.arrayBuffer();
+  ableContinueButton()
   const workbook = XLSX.readFile(data);
   const worksheet = workbook.Sheets[workbook.SheetNames[0]];
   const excelData = XLSX.utils.sheet_to_json(worksheet);
