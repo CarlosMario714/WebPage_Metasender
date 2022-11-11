@@ -143,9 +143,9 @@
             <div class="input-container">
               <label class="label-adress">Cuenta o Wallet a enviar</label>
               <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
-                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="0x + 40 caracteres alfanumericos sin espacios"
+                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="0x + 40 caracteres alfanumericos validos sin espacios"
                 required />
-              <span class="input-error none span-wallet">"0x" + 40 caracteres alfanumericos sin espacios</span>
+              <span class="input-error none span-wallet">"0x" + 40 caracteres alfanumericos validos sin espacios</span>
             </div>
             <div class="input-container">
               <label class="label-amount">Monto a Enviar</label>
@@ -157,7 +157,8 @@
           </div>
           <div class="token-address">
             <h2>Address del Contrato</h2>
-            <input type="text" placeholder="address del Contrato" name="token-addres" pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Addrres de contrato invalido">
+            <input type="text" placeholder="address del Contrato" name="token-addres"
+              pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Addrres de contrato invalido">
             <span class="input-error none span-wallet">Direccion de contrato invalido</span>
           </div>
         </div>
@@ -213,7 +214,8 @@
           </div>
           <div class="token-address">
             <h2>Address del Contrato</h2>
-            <input type="text" placeholder="address del Contrato" name="token-addres" pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Addrres de contrato invalido">
+            <input type="text" placeholder="address del Contrato" name="token-addres"
+              pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Addrres de contrato invalido">
             <span class="input-error none span-wallet">Direccion de contrato invalido</span>
           </div>
           <button class="continue-btn-file btn2">Continuar</button>
