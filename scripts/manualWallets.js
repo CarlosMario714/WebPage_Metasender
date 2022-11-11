@@ -34,6 +34,7 @@ const balanceTokens = document.querySelector(".balance-tokens");
 const balanceEth = document.querySelector(".balance-eth");
 const costoOperacion = document.querySelector(".costo-operacion");
 const costoTotalOperacion = document.querySelector(".costo-operacion-total");
+const loaderSendProcess = document.querySelector(".loader-send-process");
 
 let walletsManualArr = [];
 let amountManualArr = [];
@@ -89,9 +90,17 @@ export function changeTypeOfToken() {
 
 function addWallet() {
   if (walletInput.value && amountInput.value !== "") {
-    verifyManualData(walletInput.value, amountInput.value, tokenInput.value);
+    let walletWithoutSpaces = walletInput.value.trim();
+    let amountWithoutSpacesString = amountInput.value.toString().trim();
+    let amountWithoutSpacesNumber = Number(amountWithoutSpacesString);
 
-    showWallets(true, false);
+    verifyManualData(
+      walletWithoutSpaces,
+      amountWithoutSpacesNumber,
+      tokenInput.value
+    );
+
+    showWallets();
     continueBtnManual.classList.add("opacity");
   } else {
     if (walletInput.value == "") {
@@ -153,28 +162,18 @@ function verifyFileData(wallet, amount, typeOfToken) {
     //if the wallet have all errors
     if (!verifyAddress(wallet) && !AmountRegex.exec(amount)) {
       addIncorrectWalletElement(wallet, amount, typeOfToken, allError);
-
-      showWallets(false, true);
     } else {
       //if the wallet have only a specific error
       //if is a wallet error
       if (!verifyAddress(wallet)) {
         addIncorrectWalletElement(wallet, amount, typeOfToken, walletError);
-
-        showWallets(false, true);
       }
 
       //if is a amount error
       if (!AmountRegex.exec(amount)) {
         addIncorrectWalletElement(wallet, amount, typeOfToken, amountError);
-
-        showWallets(false, true);
       }
     }
-
-    addIncorrectWalletElement(wallet, amount, typeOfToken);
-
-    showWallets(false, true);
   }
 }
 
@@ -293,7 +292,7 @@ function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
   </div>`;
   let allErrors = `
   <div class="wallet-errors">
-    <p><span>Wallet o Adress no valido: </span> "0x" + 40 caracteres alfanumericos sin espacios</p>
+    <p><span>Wallet o Adress no valido: </span> "Address valida y sin espacios</p>
     <p><span>Monto no valido:</span> Solo numeros positivos</p>
   </div>`;
 
@@ -312,10 +311,13 @@ function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
   newIncorrectsWalletsFragment.appendChild(newWalletErrorsContainer);
 }
 
-function showWallets(showInOkWallets, showInErrorWallets) {
+function showWallets() {
   manualWalletsContainer.appendChild(newWalletsFragment);
 
-  incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
+  if (newIncorrectsWalletsFragment.childNodes.length > 0) {
+    incorrectWalletsContainer.style.display = "flex";
+    incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
+  }
 
   continueBtnManual.style.display = "block";
 }
@@ -370,7 +372,11 @@ continueBtnManual.addEventListener("click", async () => {
 
   processFinalData();
 
+  loaderSendProcess.classList.toggle("show-loader-send-process");
+
   await setFinalResume();
+
+  loaderSendProcess.classList.toggle("show-loader-send-process");
 
   manualDataContainer.style.display = "none";
   resumenFinalContainer.style.display = "block";

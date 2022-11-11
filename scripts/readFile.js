@@ -1,6 +1,10 @@
 import { login, isConnected } from "./connectWallet.js";
 import { finalData } from "./finalData.js";
-import { verifyFileData, showWallets, changeTypeOfToken } from "./manualWallets.js";
+import {
+  verifyFileData,
+  showWallets,
+  changeTypeOfToken,
+} from "./manualWallets.js";
 import { handleError, showErrorAlert, verifyAddress } from "./tools.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
@@ -17,117 +21,90 @@ const tokenAddContainerMan = document.querySelectorAll(".token-address")[0];
 const tokenAddContainerFile = document.querySelectorAll(".token-address")[1];
 const spanContractAddress = document.querySelector(".span-contractaddres-file");
 const tokenInput = document.getElementById("token-input");
-const tokenAddressInputFile = tokenAddContainerFile.children[1]
-const tokenAddressInputMan = tokenAddContainerMan.children[1]
-let fileLoaded = false
+const tokenAddressInputFile = tokenAddContainerFile.children[1];
+const tokenAddressInputMan = tokenAddContainerMan.children[1];
+let fileLoaded = false;
 let tokenToSendFile = "eth";
 let walletsFileArr = [];
 let amountFileArr = [];
 let file;
 
 function ableContinueButton() {
-
   continueBtnFile.style.display = "block";
-
 }
 
 function disableContinueButton() {
-
   continueBtnFile.style.display = "none";
 
   spanContractAddress.classList.add("is-active");
 
   setTimeout(() => {
-
     spanContractAddress.classList.remove("is-active");
-
   }, 3000);
-  
 }
 
 function handleContract() {
-
   tokenAddContainerFile.style.display = "block";
 
-  if ( verifyAddress( tokenAddressInputFile.value ) && fileLoaded) 
-
-      ableContinueButton()
-
-  else disableContinueButton()
-
+  if (verifyAddress(tokenAddressInputFile.value) && fileLoaded)
+    ableContinueButton();
+  else disableContinueButton();
 }
 
-function handleContinue(){
-
-  if ( tokenInputFile.value !== "" ){
-
-    if( tokenInputFile.value == "ETH" ){
-  
+function handleContinue() {
+  if (tokenInputFile.value !== "") {
+    if (tokenInputFile.value == "ETH") {
       tokenAddContainerFile.style.display = "none";
-  
-      if ( fileLoaded ) ableContinueButton()
-  
-    } else handleContract()
-  
-  }
 
+      if (fileLoaded) ableContinueButton();
+    } else handleContract();
+  }
 }
 
-function verifyData( excelData ) {
-
+function verifyData(excelData) {
   const confirmData = Object.keys(excelData[0]);
 
   if (confirmData[0] === "address" && confirmData[1] === "amount") {
-
     for (const wallet of excelData) {
       wallet.address = wallet.address.trim();
       wallet.amount = wallet.amount.toString().trim();
       wallet.amount = Number(wallet.amount);
-      verifyFileData(
-        wallet.address,
-        wallet.amount,
-        tokenInputFile.value
-      );
+      verifyFileData(wallet.address, wallet.amount, tokenInputFile.value);
     }
-
   } else {
     showErrorAlert("Archivo no valido. descarga la plantilla");
   }
-
 }
 
 async function processFile() {
+  return await file
+    .arrayBuffer()
+    .then((data) => {
+      fileLoaded = true;
 
-  return await file.arrayBuffer().then( data => {
+      const workbook = XLSX.readFile(data);
 
-    fileLoaded = true
+      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 
-    const workbook = XLSX.readFile(data);
+      const excelData = XLSX.utils.sheet_to_json(worksheet);
 
-    const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-
-    const excelData = XLSX.utils.sheet_to_json(worksheet);
-
-    verifyData( excelData )
-
-  }).catch( handleError );
-
+      verifyData(excelData);
+    })
+    .catch(handleError);
 }
 
-function migrateInfo(){
-
+function migrateInfo() {
   showWallets();
 
   fileDataContainer.style.display = "none";
 
   manualDataContainer.style.display = "flex";
 
-  tokenAddressInputMan.value = tokenAddressInputFile.value
+  tokenAddressInputMan.value = tokenAddressInputFile.value;
 
-  tokenInput.value = tokenInputFile.value
+  tokenInput.value = tokenInputFile.value;
 
-  changeTypeOfToken()
-
+  changeTypeOfToken();
 }
 
 function showFile(file) {
@@ -158,13 +135,13 @@ optionFile.addEventListener("click", () => {
 });
 
 //detecta cada vez que input cambia, osea cada vez que se sube un archivo
-input.addEventListener("change", async(e) => {
+input.addEventListener("change", async (e) => {
   e.preventDefault();
   file = e.target.files[0];
 
   showFile(file);
 
-  await processFile().then( handleContinue )
+  await processFile().then(handleContinue);
 
   dropArea.classList.add("active");
   dropArea.classList.remove("active");
@@ -185,29 +162,28 @@ dropArea.addEventListener("dragleave", (e) => {
 });
 
 //cuando de suelta un elemento en el area
-dropArea.addEventListener("drop", async(e) => {
+dropArea.addEventListener("drop", async (e) => {
   e.preventDefault();
   file = e.dataTransfer.files[0];
 
   showFile(file);
 
-  await processFile().then( handleContinue )
+  await processFile().then(handleContinue);
 
   dropArea.classList.remove("active");
 
   dragText.textContent = "arrastra y suelta el archivo ";
-
 });
 
 tokenInputFile.addEventListener("change", () => {
-  handleContinue()
+  handleContinue();
 });
 
-tokenAddressInputFile.addEventListener('input', () => {
-  handleContinue()
-})
+tokenAddressInputFile.addEventListener("input", () => {
+  handleContinue();
+});
 
-tokenAddressInputFile.addEventListener( 'change', handleContinue )
+tokenAddressInputFile.addEventListener("change", handleContinue);
 
 continueBtnFile.addEventListener("click", migrateInfo);
 
