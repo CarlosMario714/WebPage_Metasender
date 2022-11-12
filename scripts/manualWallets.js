@@ -374,7 +374,6 @@ incorrectWalletsContainer.addEventListener("click", (e) => {
 });
 
 function getAddAndAmounts() {
-
   const addresses = [];
 
   const amounts = [];
@@ -391,12 +390,10 @@ function getAddAndAmounts() {
     amounts.push(walletMount.innerHTML);
   });
 
-  return { addresses, amounts }
-
+  return { addresses, amounts };
 }
 
 async function setDataAndShowResume() {
-
   loaderSendProcess.classList.toggle("show-loader-send-process");
 
   await setFinalResume();
@@ -404,66 +401,55 @@ async function setDataAndShowResume() {
   loaderSendProcess.classList.toggle("show-loader-send-process");
 
   manualDataContainer.style.display = "none";
-  resumenFinalContainer.style.display = "block";
+  resumenFinalContainer.style.display = "flex";
   blockExplorerLinkItem.style.opacity = 0;
-
 }
 
-async function hadleAllowance( amounts ) {
-
-  if( tokenInput.value == "ERC20" ) return await isAproved( getTotalValue( amounts ))
-
-  else return { 
-    aprove: 0, 
-    totalAmount: 0, 
-    isAprovedA: true }
-
+async function hadleAllowance(amounts) {
+  if (tokenInput.value == "ERC20")
+    return await isAproved(getTotalValue(amounts));
+  else
+    return {
+      aprove: 0,
+      totalAmount: 0,
+      isAprovedA: true,
+    };
 }
 
-async function handleContinue(){
-  
-  const { addresses, amounts } = getAddAndAmounts()
+async function handleContinue() {
+  const { addresses, amounts } = getAddAndAmounts();
 
-  setFinalData( addresses, amounts);
+  setFinalData(addresses, amounts);
 
   // const { aprove, totalAmount, isAprovedA } = await hadleAllowance( finalData.amount )
 
   // if( !isAprovedA ) return handleError(`Allowance ${aprove} need ${totalAmount}`)
 
-  if( addresses.length == amounts.length && addresses.length > 0) {
-
-    if (tokenInput.value == 'ETH') setDataAndShowResume( addresses, amounts )
-
+  if (addresses.length == amounts.length && addresses.length > 0) {
+    if (tokenInput.value == "ETH") setDataAndShowResume(addresses, amounts);
     else {
-
-      if( verifyAddress( tokenAddContainer.children[1].value) ) setDataAndShowResume( addresses, amounts )
-
+      if (verifyAddress(tokenAddContainer.children[1].value))
+        setDataAndShowResume(addresses, amounts);
     }
-
   }
-
 }
 
 async function setFinalResume() {
-
   return await setResumeInfo().then(() => {
-
     totalWallets.innerHTML = finalData.numAddresses;
-  
-    totalTokens[0].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
-  
-    totalTokens[1].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
-  
-    balanceTokens.innerHTML = `${finalData.userTokenBalance} ${finalData.tokenSymbol}`;
-  
-    balanceEth.innerHTML = `${finalData.userETHBalance} ${finalData.NativeToken}`;
-  
-    costoOperacion.innerHTML = `${finalData.txCost} ${finalData.NativeToken}`;
-  
-    costoTotalOperacion.innerHTML = `${finalData.totalCost} ${finalData.NativeToken}`;
-  
-  });
 
+    totalTokens[0].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+
+    totalTokens[1].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+
+    balanceTokens.innerHTML = `${finalData.userTokenBalance} ${finalData.tokenSymbol}`;
+
+    balanceEth.innerHTML = `${finalData.userETHBalance} ${finalData.NativeToken}`;
+
+    costoOperacion.innerHTML = `${finalData.txCost} ${finalData.NativeToken}`;
+
+    costoTotalOperacion.innerHTML = `${finalData.totalCost} ${finalData.NativeToken}`;
+  });
 }
 
 atrasbtn.addEventListener("click", () => {
@@ -471,9 +457,6 @@ atrasbtn.addEventListener("click", () => {
   resumenFinalContainer.style.display = "none";
 });
 
-continueBtnManual.addEventListener("click", handleContinue );
+continueBtnManual.addEventListener("click", handleContinue);
 
-export {
-  verifyFileData,
-  showWallets,
-};
+export { verifyFileData, showWallets };

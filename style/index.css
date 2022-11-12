@@ -591,6 +591,8 @@ header {
   --form-error-color: #f44336; */
   display: flex;
   align-items: flex-end;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 3rem;
 }
 
@@ -679,7 +681,10 @@ header {
 
 .wallets-container {
   display: flex;
-  gap: 4rem;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }
 
 .manual-wallets-container,
@@ -761,6 +766,7 @@ header {
 
 .manual-wallet a {
   max-width: 2.5rem;
+  min-width: 2.5rem;
 }
 
 .wallet-errors-container {
@@ -926,6 +932,7 @@ header {
   align-items: center;
   bottom: -5rem;
   color: rgb(126, 126, 126);
+  text-align: center;
 }
 
 .plantilla > * {
@@ -944,6 +951,7 @@ header {
   align-items: center;
   width: 100%;
   color: rgb(126, 126, 126);
+  text-align: center;
 }
 
 .notas-archivo > * {
@@ -969,6 +977,9 @@ header {
 
 .resumen-final-container {
   display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .titulo-resumen {
@@ -1067,6 +1078,7 @@ header {
 
 .container-buttons {
   display: flex;
+  width: 100%;
   align-items: center;
   justify-content: center;
   position: relative;
@@ -1359,7 +1371,7 @@ footer {
   /* navbar */
 
   nav {
-    padding: 0 3rem;
+    padding: 0 3rem 0 0;
   }
 
   .hamburguer {
@@ -1491,6 +1503,22 @@ footer {
     width: 65rem;
     font-weight: 300;
   }
+  /*resume final*/
+  .resumen-container {
+    width: 80rem;
+  }
+
+  .resumen h3 {
+    font-size: 1.5rem;
+  }
+  .resumen h2 {
+    font-size: 2rem;
+  }
+  .resumen-totales h3 {
+    min-width: 10rem;
+    top: 0.5rem;
+    margin: 0;
+  }
 }
 
 @media (max-width: 900px) {
@@ -1514,6 +1542,29 @@ footer {
   .hologram-image-container {
     width: 40rem;
   }
+
+  /* options to send*/
+  .options-to-send {
+    width: 90%;
+  }
+  /*manual wallets*/
+  .manual-wallets-container p,
+  .incorrect-wallets-container p {
+    font-size: 1.5rem;
+  }
+
+  .number-of-wallet {
+    min-width: 1rem;
+  }
+
+  .wallet-adress {
+    min-width: 40rem;
+  }
+
+  .wallet-amount {
+    min-width: 8rem;
+    text-align: center;
+  }
 }
 
 @media (max-width: 800px) {
@@ -1523,9 +1574,56 @@ footer {
     width: 40rem;
     left: 10rem;
   }
+
+  /*options  to send*/
+  .options-to-send h1 {
+    text-align: center;
+    font-size: 2rem;
+  }
+
+  .page-description {
+    width: 40rem;
+  }
+  .options-to-send h3 {
+    flex-wrap: wrap;
+    width: 100%;
+    text-align: center;
+  }
+
+  /*drop area*/
+  .drop-area {
+    width: 60rem;
+  }
+
+  /*resume final*/
+  .resumen-container {
+    width: 60rem;
+  }
+
+  .resumen h3 {
+    font-size: 1.5rem;
+  }
+  .resumen h2 {
+    font-size: 2rem;
+  }
+  .resumen-totales h3 {
+    min-width: 10rem;
+    top: 0.5rem;
+    margin: 0;
+  }
+  .container-buttons {
+    width: 60rem;
+  }
 }
 
 @media (max-width: 700px) {
+  /*drop area*/
+  .drop-area {
+    width: 50rem;
+  }
+  .file-container {
+    width: 30rem;
+  }
   /*footer*/
   .footer-info-container {
     gap: 5rem;
@@ -1563,6 +1661,11 @@ footer {
   .hologram-image-container {
     left: 3rem;
     width: 40rem;
+  }
+  /*options  to send*/
+
+  .page-description {
+    width: 20rem;
   }
 
   /*footer*/
