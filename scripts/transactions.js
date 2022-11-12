@@ -46,7 +46,7 @@ async function sendNativeTokenSameValue( addresses, amounts ) {
 	const txFee = await contract.txFee();
 
 	return await contract
-		.sendNativeTokenSameValue( addresses, amounts, 
+		.sendNativeTokenSameValue( addresses, amounts[0], 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
 		.catch( handleError );
@@ -76,7 +76,7 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 	const txFee = await contract.txFee();
 
 	return await contract
-		.sendIERC20SameValue( contactAdd, addresses, amounts, 
+		.sendIERC20SameValue( contactAdd, addresses, amounts[0], 
 			{ value: txFee }
 		)
 		.catch( handleError );
@@ -84,6 +84,8 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 }
 
 async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
+
+	console.log( contactAdd, addresses, amounts )
 
 	const contract = getContract()
 
@@ -146,7 +148,7 @@ export async function sendTransaction() {
 
 		case 'ETH':
 			return await mSFunc[
-				`sendNativeToken${ isSameValue( finalData.amount ) }Value`
+				`sendNativeTokenDifferentValue`
 			]( finalData.wallets, finalData.amount );
 
 		case 'ERC20':
