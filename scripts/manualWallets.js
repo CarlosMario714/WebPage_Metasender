@@ -1,9 +1,10 @@
 import { login, isConnected } from "./connectWallet.js";
-import setResumeInfo from "./resume.js";
-import { finalData, processFinalData } from "./finalData.js";
+import setResumeInfo, { isAproved } from "./resume.js";
+import { finalData, setFinalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js";
 import ethereumchains from "./ethereumchains.js";
-import { verifyAddress } from "./tools.js";
+import { handleError, verifyAddress } from "./tools.js";
+import { getTotalValue } from "./transactions.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -38,11 +39,6 @@ const balanceEth = document.querySelector(".balance-eth");
 const costoOperacion = document.querySelector(".costo-operacion");
 const costoTotalOperacion = document.querySelector(".costo-operacion-total");
 const loaderSendProcess = document.querySelector(".loader-send-process");
-
-let walletsManualArr = [];
-let amountManualArr = [];
-let tokenToSendManual = tokenInput.value;
-
 let numberOfCorrectNewWallet = 0;
 let numberOfIncorrectNewWallet = 0;
 let newWalletsFragment = document.createDocumentFragment();
@@ -378,21 +374,29 @@ incorrectWalletsContainer.addEventListener("click", (e) => {
   }
 });
 
-continueBtnManual.addEventListener("click", async () => {
-  walletsManualArr = [];
-  amountManualArr = [];
-  let walletAdress = document.querySelectorAll(".wallet-adress");
-  let walletMount = document.querySelectorAll(".wallet-amount");
+function getAddAndAmounts() {
+
+  const addresses = [];
+
+  const amounts = [];
+
+  const walletAdress = document.querySelectorAll(".wallet-adress");
+
+  const walletMount = document.querySelectorAll(".wallet-amount");
 
   walletAdress.forEach((walletAddres) => {
-    walletsManualArr.push(walletAddres.innerHTML);
+    addresses.push(walletAddres.innerHTML);
   });
 
   walletMount.forEach((walletMount) => {
-    amountManualArr.push(walletMount.innerHTML);
+    amounts.push(walletMount.innerHTML);
   });
 
-  processFinalData();
+  return { addresses, amounts }
+
+}
+
+async function setDataAndShowResume() {
 
   loaderSendProcess.classList.toggle("show-loader-send-process");
 
@@ -403,26 +407,64 @@ continueBtnManual.addEventListener("click", async () => {
   manualDataContainer.style.display = "none";
   resumenFinalContainer.style.display = "block";
   blockExplorerLinkItem.style.opacity = 0;
-});
+
+}
+
+async function hadleAllowance( amounts ) {
+
+  if( tokenInput.value == "ERC20" ) return await isAproved( getTotalValue( amounts ))
+
+  else return { 
+    aprove: 0, 
+    totalAmount: 0, 
+    isAprovedA: true }
+
+}
+
+async function handleContinue(){
+  
+  const { addresses, amounts } = getAddAndAmounts()
+
+  setFinalData( addresses, amounts);
+
+  // const { aprove, totalAmount, isAprovedA } = await hadleAllowance( finalData.amount )
+
+  // if( !isAprovedA ) return handleError(`Allowance ${aprove} need ${totalAmount}`)
+
+  if( addresses.length == amounts.length && addresses.length > 0) {
+
+    if (tokenInput.value == 'ETH') setDataAndShowResume( addresses, amounts )
+
+    else {
+
+      if( verifyAddress( tokenAddContainer.children[1].value) ) setDataAndShowResume( addresses, amounts )
+
+    }
+
+  }
+
+}
 
 async function setFinalResume() {
-  await setResumeInfo();
 
-  totalWallets.innerHTML = finalData.numAddresses;
+  return await setResumeInfo().then(() => {
 
-  totalTokens[0].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+    totalWallets.innerHTML = finalData.numAddresses;
+  
+    totalTokens[0].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+  
+    totalTokens[1].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+  
+    balanceTokens.innerHTML = `${finalData.userTokenBalance} ${finalData.tokenSymbol}`;
+  
+    balanceEth.innerHTML = `${finalData.userETHBalance} ${finalData.NativeToken}`;
+  
+    costoOperacion.innerHTML = `${finalData.txCost} ${finalData.NativeToken}`;
+  
+    costoTotalOperacion.innerHTML = `${finalData.totalCost} ${finalData.NativeToken}`;
+  
+  });
 
-  totalTokens[1].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
-
-  balanceTokens.innerHTML = `${finalData.userTokenBalance} ${finalData.tokenSymbol}`;
-
-  balanceEth.innerHTML = `${finalData.userETHBalance} ${finalData.NativeToken}`;
-
-  costoOperacion.innerHTML = `${finalData.txCost} ${finalData.NativeToken}`;
-
-  costoTotalOperacion.innerHTML = `${finalData.totalCost} ${finalData.NativeToken}`;
-
-  return;
 }
 
 atrasbtn.addEventListener("click", () => {
@@ -430,10 +472,9 @@ atrasbtn.addEventListener("click", () => {
   resumenFinalContainer.style.display = "none";
 });
 
+continueBtnManual.addEventListener("click", handleContinue );
+
 export {
-  walletsManualArr,
-  amountManualArr,
-  tokenToSendManual,
   verifyFileData,
   showWallets,
 };
