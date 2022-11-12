@@ -63,28 +63,28 @@ optionManual.addEventListener("click", () => {
 export function changeTypeOfToken() {
   switch (tokenInput.value) {
     case "ETH":
-      labelAdress.innerHTML = "Cuenta o Wallet a enviar";
-      walletInput.placeholder = "Escribe la wallet";
-      labelAmount.innerHTML = "Monto a Enviar";
-      amountInput.placeholder = "Escribe el monto";
+      labelAdress.innerHTML = "Account or Wallet to send";
+      walletInput.placeholder = "Write the wallet";
+      labelAmount.innerHTML = "Amount to send";
+      amountInput.placeholder = "Write the amount";
       amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
       tokenAddContainer.style.display = "none";
       break;
     case "ERC20":
-      labelAdress.innerHTML = "Adress del contrato del token";
-      walletInput.placeholder = "Escribe el Adress del contrato";
-      labelAmount.innerHTML = "Cantidad de tokens a enviar";
-      amountInput.placeholder = "Escribe cantidad de tokens";
+      labelAdress.innerHTML = "Token Contract Address";
+      walletInput.placeholder = "Write the address of the contract";
+      labelAmount.innerHTML = "Amount of tokens to send";
+      amountInput.placeholder = "Write amount of tokens";
       amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
       tokenAddContainer.style.display = "block";
       break;
     case "ERC721":
-      labelAdress.innerHTML = "Adress del contrato del token";
-      walletInput.placeholder = "Escribe el Adress del contrato";
-      labelAmount.innerHTML = "ID del token a enviar";
-      amountInput.placeholder = "Escribe el ID del token";
+      labelAdress.innerHTML = "Token Contract Address";
+      walletInput.placeholder = "Write the address of the contract";
+      labelAmount.innerHTML = "ID of the token to send";
+      amountInput.placeholder = "Write the ID of the token";
       amountInput.pattern = `^\\d*\\d+$`;
-      amountInput.innerHTML = `Solo numeros enteros positivos`;
+      amountInput.innerHTML = `only positive integers`;
       tokenAddContainer.style.display = "block";
       break;
   }
@@ -106,7 +106,7 @@ function addWallet() {
     continueBtnManual.classList.add("opacity");
   } else {
     if (walletInput.value == "") {
-      spanWallet.innerHTML = "Completa este campo";
+      spanWallet.innerHTML = "Fill in this field";
       spanWallet.classList.add("is-active");
       setTimeout(() => {
         spanWallet.classList.remove("is-active");
@@ -115,7 +115,7 @@ function addWallet() {
     }
 
     if (amountInput.value == "") {
-      spanAmount.innerHTML = "Completa este campo";
+      spanAmount.innerHTML = "Fill in this field";
       spanAmount.classList.add("is-active");
       setTimeout(() => {
         spanAmount.classList.remove("is-active");
@@ -256,7 +256,6 @@ function renameNumberOfIncorrectWallets() {
 }
 
 function hideIncorrectWalletsContainer() {
-  console.log(incorrectWalletsContainer.childNodes.length);
   if (incorrectWalletsContainer.childNodes.length < 4) {
     incorrectWalletsContainer.style.display = "none";
   }
@@ -305,15 +304,15 @@ function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
   </div>`;
   let onlyWalletError = `
   <div class="wallet-errors">
-    <p><span>Wallet o Adress no valido: </span> "0x" + 40 caracteres alfanumericos validos sin espacios </p>
+    <p><span>Invalid Wallet or Address: </span>Add a valid Address without spaces</p>
   </div>`;
   let onlyAmountError = `
   <div class="wallet-errors">
-    <p><span>Monto no valido:</span> Solo numeros positivos</p>
+    <p><span>Monto no valido:</span> Only positive numbers</p>
   </div>`;
   let allErrors = `
   <div class="wallet-errors">
-    <p><span>Wallet o Adress no valido: </span> "Address valida y sin espacios</p>
+    <p><span>Invalid Wallet or Address:</span> "write a valid address without spaces</p>
     <p><span>Monto no valido:</span> Solo numeros positivos</p>
   </div>`;
 

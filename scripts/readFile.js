@@ -73,7 +73,7 @@ function verifyData(excelData) {
       verifyFileData(wallet.address, wallet.amount, tokenInputFile.value);
     }
   } else {
-    showErrorAlert("Archivo no valido. descarga la plantilla");
+    showErrorAlert("Invalid file. download the template");
   }
 }
 
@@ -155,14 +155,14 @@ input.addEventListener("change", async (e) => {
 dropArea.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropArea.classList.add("active");
-  dragText.textContent = "suelta para subir los archivos";
+  dragText.textContent = "Release to upload files";
 });
 
 //elementos que se estan arrastrando pero fuera del area
 dropArea.addEventListener("dragleave", (e) => {
   e.preventDefault();
   dropArea.classList.remove("active");
-  dragText.textContent = "arrastra y suelta el archivo ";
+  dragText.textContent = "drag and drop the file ";
 });
 
 //cuando de suelta un elemento en el area
@@ -176,7 +176,7 @@ dropArea.addEventListener("drop", async (e) => {
 
   dropArea.classList.remove("active");
 
-  dragText.textContent = "arrastra y suelta el archivo ";
+  dragText.textContent = "drag and drop the file ";
 });
 
 tokenInputFile.addEventListener("change", () => {

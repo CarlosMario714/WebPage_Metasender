@@ -493,7 +493,7 @@ header {
 }
 
 .page-description {
-  width: 50%;
+  width: 75rem;
   font-weight: 300;
 }
 
@@ -1355,7 +1355,7 @@ footer {
   }
 }
 
-@media (max-width: 980px) {
+@media (max-width: 1300px) {
   /* navbar */
 
   nav {
@@ -1459,6 +1459,72 @@ footer {
   }
 }
 
+@media (max-width: 1200px) {
+  /*header*/
+  .slogan-header-container {
+    line-height: 0.8;
+  }
+
+  .slogan-header-container h1 {
+    font-size: 10rem;
+  }
+
+  .slogan-header-container h1 span {
+    font-size: 3rem;
+  }
+
+  .slogan-header-container h2 {
+    font-size: 3rem;
+  }
+
+  .hologram-image-container {
+    width: 60rem;
+  }
+}
+
+@media (max-width: 1100px) {
+  .options-to-send h1 {
+    font-size: 3rem;
+  }
+  .page-description {
+    text-align: center;
+    width: 65rem;
+    font-weight: 300;
+  }
+}
+
+@media (max-width: 900px) {
+  /*header*/
+  .slogan-header-container {
+    line-height: 0.8;
+  }
+
+  .slogan-header-container h1 {
+    font-size: 8rem;
+  }
+
+  .slogan-header-container h1 span {
+    font-size: 2rem;
+  }
+
+  .slogan-header-container h2 {
+    font-size: 2rem;
+  }
+
+  .hologram-image-container {
+    width: 40rem;
+  }
+}
+
+@media (max-width: 800px) {
+  /*header*/
+
+  .hologram-image-container {
+    width: 40rem;
+    left: 10rem;
+  }
+}
+
 @media (max-width: 700px) {
   /*footer*/
   .footer-info-container {
@@ -1478,6 +1544,25 @@ footer {
 
   .community-options {
     height: 8rem;
+  }
+
+  /*header*/
+
+  .slogan-header-container h1 {
+    font-size: 6rem;
+  }
+
+  .slogan-header-container h1 span {
+    font-size: 2rem;
+  }
+
+  .slogan-header-container h2 {
+    font-size: 2rem;
+  }
+
+  .hologram-image-container {
+    left: 3rem;
+    width: 40rem;
   }
 
   /*footer*/

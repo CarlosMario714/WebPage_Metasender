@@ -17,19 +17,20 @@
 <body>
 
   <nav id="navbar">
-    <div class="logo-navbar-container">
+    <a class="logo-navbar-container" href="https://themetaloriandao.io/" target="_blank">
       <img src="./img/metalogo/20.png" alt="metalogo" height="80">
       <div class="logo-titlte">
         <p>THE</p>
         <p>METALORIAN</p>
         <p>DAO</p>
       </div>
-    </div>
+    </a>
 
     <div class="contenedor-botones-navbar">
-      <a class="btn btn-home close-sidenavbar" href="#Home" data-content="navbar" data-type="navbar-home">INICIO</a>
+      <a class="btn btn-home close-sidenavbar" href="#Home" data-content="navbar" data-type="navbar-home">HOME</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <a class="btn close-sidenavbar" href="#marketplace" data-content="navbar" data-type="navbar-marketplace">SEND</a>
+      <a class="btn close-sidenavbar" href="#options-to-send" data-content="navbar"
+        data-type="navbar-marketplace">SEND</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-palco" href="#palco">PALCO
       </a>
@@ -101,28 +102,27 @@
     </header>
 
     <section id="options-to-send" class="options-to-send">
-      <h1>Envia tokens a multiples cuentas a la vez
+      <h1>Send tokens to multiple accounts at once
       </h1>
-      <p class="page-description">Con <span>The MetaSender </span> puedes enviar tokens a multiples cuentas a la vez en
-        redes como
-        Ethereum, Binance,
-        Polygon, entre otras. A un precio reducido.</p>
-      <h3>Conecta tu Wallet <img class="metamask-icon" src="./img/icons/Metamask-icon.png" alt="icono metamask">, escoje
-        una red y selecciona
-        una forma de hacerlo:</h3>
+      <p class="page-description">With <span>The MetaSender </span> you can send tokens to multiple accounts at the same
+        time on networks like Ethereum, Binance, Polygon, among others. At a reduced price.</p>
+      <h3>Connect your Wallet <img class="metamask-icon" src="./img/icons/Metamask-icon.png" alt="icono metamask">,
+        choose
+        a network and select
+        one way to do it:</h3>
       <div class="options-to-send-container">
+        <a class="option-to-send option-file" href="#options-to-send">
+          <p>Send tokens by adding accounts from an Excel file</p>
+          <div class="icono-option-container">
+            <img src="./img/icons/upload-icon.png" alt="icono escribir">
+          </div>
+        </a>
         <a class="option-to-send option-manual" href="#options-to-send">
-          <p>Envia tokens agregando cuentas de forma manual</p>
+          <p>Send tokens by adding accounts manually</p>
           <div class="icono-option-container">
             <img src="./img/icons/contract.png" alt="icono escribir">
           </div>
 
-        </a>
-        <a class="option-to-send option-file" href="#options-to-send">
-          <p>Envia tokens agregando cuentas desde un archivo Excel</p>
-          <div class="icono-option-container">
-            <img src="./img/icons/upload-icon.png" alt="icono escribir">
-          </div>
         </a>
       </div>
     </section>
@@ -130,10 +130,10 @@
     <section id="send-process">
       <div class="manual-data-container">
         <div class="info-inputs-container">
-          <h2>Agrega cuentas</h2>
+          <h2>Add accounts</h2>
           <div class="manual-inputs-container">
             <div class="input-container">
-              <label>Tipo de Token</label>
+              <label>Token Type</label>
               <select name="token" class="token-input" id="token-input" required>
                 <option name="chain-currency" selected value="ETH">ETH</option>
                 <option value="ERC20">ERC20</option>
@@ -141,29 +141,29 @@
               </select>
             </div>
             <div class="input-container">
-              <label class="label-adress">Cuenta o Wallet a enviar</label>
+              <label class="label-adress">Account or Wallet to send</label>
               <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
-                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Adress valida sin espacios" required />
-              <span class="input-error none span-wallet">"0x" + 40 caracteres alfanumericos validos sin espacios</span>
+                pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Add a valid Address without spaces" required />
+              <span class="input-error none span-wallet">Add a valid Address without spaces</span>
             </div>
             <div class="input-container">
-              <label class="label-amount">Monto a Enviar</label>
+              <label class="label-amount">Amount to send</label>
               <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto"
-                pattern="^\d*\.\d+$|^\d*\d+$" title="Solo numeros positivos" required />
-              <span class="input-error none span-amount">Solo numeros positivos</span>
+                pattern="^\d*\.\d+$|^\d*\d+$" title="Only positive numbers" required />
+              <span class="input-error none span-amount">Only positive numbers</span>
             </div>
             <button class="add-wallet-button">+</button>
           </div>
           <div class="token-address">
-            <h2>Address del Contrato</h2>
+            <h2>Contract Address</h2>
             <input type="text" placeholder="address del Contrato" name="token-addres"
-              pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Addrres de contrato invalido">
-            <span class="input-error none span-wallet">Direccion de contrato invalido</span>
+              pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Invalid contract addres">
+            <span class="input-error none span-wallet">Invalid contract addres</span>
           </div>
         </div>
         <div class="wallets-container">
           <div class="manual-wallets-container">
-            <h2>Datos Correctos</h2>
+            <h2>Correct data</h2>
             <!-- <div id="1" class="manual-wallet">
               <p class="number-of-wallet">1</p>
               <p class="wallet-adress">0xf45025599c54930BF6C16C208f0507E80FEA5d84</p>
@@ -179,31 +179,31 @@
             </div> -->
           </div>
           <div class="incorrect-wallets-container">
-            <h2>Datos Incorrectos</h2>
+            <h2>Incorrect data</h2>
 
           </div>
         </div>
-        <button class="continue-btn-manual btn2">Continuar</button>
+        <button class="continue-btn-manual btn2">Continue</button>
       </div>
       <div class="file-data-container">
-        <h2 class="subir-archivo-titulo">Sube un archivo</h2>
+        <h2 class="subir-archivo-titulo">Upload a file</h2>
         <div class="drop-area-container">
           <div class="drop-area">
-            <h2>Arrastra y suelta el archivo aqui</h2>
+            <h2>Drag and drop the file here</h2>
             <span>O</span>
-            <button class="btn2">Selecciona tus archivos</button>
+            <button class="btn2">Select your files</button>
             <input type="file" name="" id="input-file" hidden>
           </div>
           <div class="plantilla">
-            <p>*El archivo debe cumplir con la plantilla: </p>
-            <a href="./download/metasender.xlsx" download="metasender.xlsx">Descargar Plantilla</a>
+            <p>*The file must comply with the template: </p>
+            <a href="./download/metasender.xlsx" download="metasender.xlsx">Download Template</a>
           </div>
           <div class="notas-archivo">
-            <p>*Cada dato en el archivo no debe contener espacios en blanco</p>
-            <p>*Si va a enviar ERC721, en la columna amount debe indicar el ID del token a enviar</p>
+            <p>*Each data in the file must not contain blank spaces</p>
+            <p>*If you are going to send ERC721, in the amount column you must indicate the ID of the token to send</p>
           </div>
           <div class="input-container input-container-file">
-            <label>Selecciona el Tipo de Token a Enviar</label>
+            <label>Select the Type of Token to Send</label>
             <select name="token" class="token-input-file" id="token-input" required>
               <option selected value="" readonly>--Token--</option>
               <option name="chain-currency-file" value="ETH">ETH</option>
@@ -212,54 +212,53 @@
             </select>
           </div>
           <div class="token-address">
-            <h2>Address del Contrato</h2>
-            <input type="text" placeholder="address del Contrato" name="token-addres"
-              title="Addrres de contrato invalido">
-            <span class="input-error none span-contractaddres-file">Direccion de contrato invalido</span>
+            <h2>Contract Address</h2>
+            <input type="text" placeholder="address del Contrato" name="token-addres" title="Invalid contract address">
+            <span class="input-error none span-contractaddres-file">Invalid contract address</span>
           </div>
-          <button class="continue-btn-file btn2">Continuar</button>
+          <button class="continue-btn-file btn2">Continue</button>
         </div>
       </div>
       <div class="resumen-final-container">
-        <h2 class="titulo-resumen">Resumen de la operacion</h2>
+        <h2 class="titulo-resumen">Summary of the operation</h2>
         <div class="resumen-container">
           <div class="resumen">
-            <h3>Total de wallets o Adress</h3>
+            <h3>Total wallets or Address</h3>
             <h2 class="total-wallets">0</h2>
           </div>
           <div class="resumen">
-            <h3>Total de tokens a enviar</h3>
+            <h3>Total tokens to send</h3>
             <h2 class="total-tokens">0</h2>
           </div>
           <div class="resumen">
-            <h3>Tu balance de tokens</h3>
+            <h3>Your token balance</h3>
             <h2 class="balance-tokens">0</h2>
           </div>
           <div class="resumen">
-            <h3>Tu Balance de ETH</h3>
+            <h3>Your ETH Balance</h3>
             <h2 class="balance-eth">0</h2>
           </div>
           <div class="resumen">
             <div class="resumen-totales">
-              <h3>Total de tokens a enviar</h3>
+              <h3>Total tokens to send</h3>
               <h2 class="total-tokens">0</h2>
             </div>
             <p>+</p>
             <div class="resumen-totales">
-              <h3>Costo Aproximado</br>( metasender fee + gas fee )</h3>
+              <h3>Approximate cost</br>( metasender fee + gas fee )</h3>
               <h2 class="costo-operacion">0</h2>
             </div>
             <p>=</p>
             <div class="resumen-totales">
-              <h3>Valor total Estimado</h3>
+              <h3>Estimated Total Value</h3>
               <h2 class="costo-operacion-total">0</h2>
             </div>
           </div>
         </div>
         <div class="container-buttons">
-          <button class="atras-btn btn2">Atras</button>
-          <button class="send-btn btn2">Enviar</button>
-          <a href="" target="_blank" class="blockExplorerLink">Ver Transaccion</a>
+          <button class="atras-btn btn2">Back</button>
+          <button class="send-btn btn2">Send</button>
+          <a href="" target="_blank" class="blockExplorerLink">See Transaction</a>
         </div>
       </div>
       <div class="loader-send-process">
@@ -270,18 +269,18 @@
     <section id="palco">
       <div class="palco-container">
         <h1 data-content="palco" data-type="palco-tittle">
-          <span>Se parte de nuestro</span>
+          <span>Be part of our</span>
           Palco
         </h1>
         <p data-content="palco" data-type="palco-info">
-          <span>Metasender</span> te cobrara un pequeño impuesto por cada lote de transacciones que
-          realices, puedes realizar lotes de transacciones gratuitas de por vida volviendote parte de nuestro
+          <span>The Metasender</span> will charge you a small tax for each batch of transactions that
+          you make, you can make lots of free transactions for life by becoming part of our
           <span>Palco</span>
         </p>
         <table>
           <tr class="palco-table-firstRow">
-            <th>Red</th>
-            <th>Impuesto por transaccion</th>
+            <th>network</th>
+            <th>transaction tax</th>
             <th>Palco</th>
           </tr>
           <tr>
@@ -319,7 +318,7 @@
     <div class="installAlert">
       <img src="./img/icons/alert.png" alt="alert" />
       <p data-content="alerts" data-type="install-metamask">
-        Por Favor Instala Metamask
+        Please Install Metamask
       </p>
       <div class="closeAlert">
         <div class="bar1"></div>
@@ -330,14 +329,14 @@
     <div class="connectedToWeb3Netwrok">
       <img src="./img/icons/alert.png" alt="alert" />
       <p data-content="alerts" data-type="connected-to-mainet">
-        Estas conectado a una red soportada
+        You are connected to a supported network
       </p>
     </div>
 
     <div class="disConnectedToMainet">
       <img src="./img/icons/alert.png" alt="alert" />
       <p data-content="alerts" data-type="disconnected-to-mainet">
-        Estas desconectado a la red de Ethereum
+        You are disconnected from the Ethereum network
       </p>
       <div class="closeAlert">
         <div class="bar1"></div>
@@ -387,38 +386,30 @@
   <footer id=" footer">
     <div class="footer-info-container">
       <div class="footer-logo-links-container">
-        <div class="logo-footer-container">
+        <a class="logo-footer-container" href="https://themetaloriandao.io/" target="_blank">
           <img src="./img/metalogo/20.png" alt="metalogo" />
           <div class="logo-titlte">
             <p>THE</p>
             <p>METALORIAN</p>
             <p>DAO</p>
           </div>
-        </div>
+        </a>
         <div class="footer-links-container">
           <div class="links-column">
-            <a href="#Home" data-content="navbar" data-type="navbar-home">Inicio</a>
-            <a href="#marketplace" data-content="navbar" data-type="navbar-marketplace">Tienda</a>
-            <a data-content="navbar" data-type="navbar-palco" href="#palco">Sobre Nosotros
-            </a>
-          </div>
-          <div class="links-column">
-            <a class="btn-faq" data-content="navbar-palco-options" data-type="faq">FAQs</a>
-            <a href="#stages" data-content="navbar-palco-options" data-type="options-stages">Etapas</a>
-            <a href="#team" data-content="navbar-palco-options" data-type="options-team">Equipo</a>
+            <a href="#Home" data-content="navbar" data-type="navbar-home">Home</a>
+            <a href="#options-to-send" data-content="navbar" data-type="navbar-marketplace">Send</a>
 
           </div>
           <div class="links-column">
-            <a href="#nftSales" data-content="navbar-community-options" data-type="options-investors">Comunidad
-              Inversora</a>
-            <a href="https://discord.gg/T9GQekdFXp" target="_blank" data-content="navbar-community-options"
-              data-type="join-discord">Únete a nuestro Discord</a>
+            <a data-content="navbar" data-type="navbar-palco" href="#palco">Palco
+            </a>
+            <a class="btn-faq" data-content="navbar-palco-options" data-type="faq">TUTORIAL</a>
           </div>
         </div>
       </div>
       <div class="footer-redes-container">
 
-        <h4 data-content="footer" data-type="footer-followus">Síguenos</h4>
+        <h4 data-content="footer" data-type="footer-followus">Follow Us</h4>
 
         <div class="footer-followus">
           <a href="https://twitter.com/Metalorian_Dao" target="_blank">
@@ -447,7 +438,7 @@
 
     </div>
     <div class="final-text">
-      The Metalorian DAO 2022
+      The MetaSender - A Metalorian's DApp 2022
     </div>
 
   </footer>
