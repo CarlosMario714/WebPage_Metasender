@@ -1,9 +1,3 @@
-import { walletsFileArr, amountFileArr, tokenToSendFile } from "./readFile.js";
-import {
-  walletsManualArr,
-  amountManualArr,
-  tokenToSendManual,
-} from "./manualWallets.js";
 const finalData = {
   tokenToSend: "ETH",
   tokenAddress: "",
@@ -15,33 +9,24 @@ const finalData = {
   userETHBalance: 0,
   userTokenBalance: 0,
 };
-const btnProcessManual = document.querySelector(".continue-btn-manual");
-const btnProcessFile = document.querySelector(".continue-btn-file");
+const tokenInput = document.getElementById("token-input");
+const tokenAddContainerMan = document.querySelectorAll(".token-address")[0];
+const tokenAddressInputMan = tokenAddContainerMan.children[1];
 
-// btnProcessManual.addEventListener("click", () => {
-//   processFinalData();
-// });
+function setFinalData(walletsArr, amountArr) {
 
-// btnProcessFile.addEventListener("click", () => {
-//   processFinalData();
-// });
+  finalData.tokenToSend = tokenInput.value;
 
-function processFinalData() {
-  if (walletsFileArr.length != 0 && amountFileArr.length != 0) {
-    setFinalData(walletsFileArr, amountFileArr, tokenToSendFile);
-  } else if (walletsManualArr.length != 0 && amountManualArr.length != 0) {
-    setFinalData(walletsManualArr, amountManualArr, tokenToSendManual);
-  }
-}
-
-function setFinalData(walletsArr, amountArr, tokenToSend) {
-  //console.log(typeof amountArr[0]);
-  finalData.tokenToSend = tokenToSend;
   finalData.wallets = [...walletsArr];
-  let amountInBigNumber = amountArr.map((amount) =>
-    ethers.utils.parseEther(amount.toString())
-  );
-  finalData.amount = amountInBigNumber;
+
+  tokenInput.value == "ERC721" ?
+    finalData.amount = amountArr.map(amount => Number(amount)):
+    finalData.amount = amountArr.map((amount) =>
+      ethers.utils.parseEther(amount.toString())
+    );
+
+  finalData.tokenAddress = tokenAddressInputMan.value
+
 }
 
-export { finalData, processFinalData };
+export { finalData, setFinalData };

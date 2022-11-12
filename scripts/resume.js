@@ -2,10 +2,31 @@ import { estimateTx } from "./estimate.js";
 import { finalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
 import { getContract, getTotalValue } from "./transactions.js";
+import metasender from "./contracts/metasender.js";
 export const ercABI = [
     'function balanceOf(address owner) view returns (uint balance)',
-    'function symbol() public view returns (string)'
+    'function symbol() public view returns (string)',
+    'function allowance(address owner, address spender) external view returns (uint256)',
 ]
+
+export async function isAproved( amount ) {
+
+    const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+    const contract = new ethers.Contract( finalData.tokenAddress, ercABI, provider )
+
+    const tokensAproved = await contract.allowance( 
+        ethereum.selectedAddress, 
+        metasender[`address_0x${ ethereum.chainId.slice(2) }`]
+    )
+
+    const aprove = Number(ethers.utils.formatEther(tokensAproved))
+
+    const totalAmount = Number(ethers.utils.formatEther(amount))
+
+    return { aprove, totalAmount, isAprovedA: aprove >= totalAmount}
+
+}
 
 function roundNumber( num ) {
     return (Math.round(num * 1000)) / 1000
@@ -112,17 +133,6 @@ export default async function setResumeInfo() {
         finalData.totalCost = finalData.txCost
 
      }
-
-    // finalData.tokenToSend == 'ETH' ? 
-    //     finalData.userTokenBalance = finalData.userETHBalance :
-    //     finalData.userTokenBalance = await getUserTokenBalance(
-    //         finalData.tokenAddress,
-    //         finalData.tokenToSend
-    //     )
-
-    // finalData.tokenToSend == 'ETH' ? 
-    //     finalData.tokenSymbol = finalData.NativeToken :
-    //     finalData.tokenSymbol = await getTokenSymbol()
 
     return
 
