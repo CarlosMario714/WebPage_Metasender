@@ -3,7 +3,7 @@ import setResumeInfo, { isAproved } from "./resume.js";
 import { finalData, setFinalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js";
 import ethereumchains from "./ethereumchains.js";
-import { handleError, verifyAddress } from "./tools.js";
+import { handleError, verifyAddress, showErrorAlert } from "./tools.js";
 import { getTotalValue } from "./transactions.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
@@ -254,7 +254,8 @@ function renameNumberOfIncorrectWallets() {
 function hideIncorrectWalletsContainer() {
   if (incorrectWalletsContainer.childNodes.length < 4) {
     incorrectWalletsContainer.style.display = "none";
-  }
+    return true;
+  } else return false;
 }
 
 //add new ok wallet element
@@ -417,13 +418,16 @@ async function hadleAllowance(amounts) {
 }
 
 async function handleContinue() {
+  if (!hideIncorrectWalletsContainer())
+    return showErrorAlert(`Fix Incorrect Info`);
+
   const { addresses, amounts } = getAddAndAmounts();
 
   setFinalData(addresses, amounts);
 
   // const { aprove, totalAmount, isAprovedA } = await hadleAllowance( finalData.amount )
 
-  // if( !isAprovedA ) return handleError(`Allowance ${aprove} need ${totalAmount}`)
+  // if( !isAprovedA ) return showErrorAlert(`Allowance ${aprove} need ${totalAmount}`)
 
   if (addresses.length == amounts.length && addresses.length > 0) {
     if (tokenInput.value == "ETH") setDataAndShowResume(addresses, amounts);
