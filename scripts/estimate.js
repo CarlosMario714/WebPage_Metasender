@@ -1,26 +1,14 @@
 import {  getTotalValue, isSameValue } from "./transactions.js";
-import { handleError  } from "./tools.js";
+import { getContract, handleError  } from "./tools.js";
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
-const tokenIds = [12, 17, 18]
-
-function getContract() {
-	
-	const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-	const signer = provider.getSigner();
-
-	return new ethers.Contract(
-		metasender[`address_${ ethereum.chainId }`],
-		metasender.abi,
-		signer
-	);
-	
-}
 
 async function sendNativeTokenSameValue( addresses, amounts ) {
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -30,12 +18,14 @@ async function sendNativeTokenSameValue( addresses, amounts ) {
 		)
 		.catch( handleError );
 	
-	
 }
 
 async function sendNativeTokenDifferentValue( addresses, amounts ) {
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -49,7 +39,10 @@ async function sendNativeTokenDifferentValue( addresses, amounts ) {
 
 async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -63,7 +56,10 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 
 async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -75,16 +71,14 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 	
 }
 
-
-// "0x26Cc6709e75BFd6C659220dAD12537Db719fA345",
-// ["0x4057171680FA6f9A9E65707076c1b18eE078eBbA"],
-// [ethers.utils.parseEther('1')],
-
 async function sendIERC721( contactAdd, addresses, tokenIds ) {
 
 	console.log( contactAdd, addresses, tokenIds )
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 

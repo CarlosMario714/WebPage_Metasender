@@ -1,10 +1,11 @@
 import { login, isConnected } from "./connectWallet.js";
-import setResumeInfo, { isAproved } from "./resume.js";
+import setResumeInfo, { isAproved, isERC721Aproved } from "./resume.js";
 import { finalData, setFinalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js";
 import ethereumchains from "./ethereumchains.js";
 import { handleError, verifyAddress, showErrorAlert } from "./tools.js";
 import { getTotalValue } from "./transactions.js";
+import { handleAllowance } from "./allowance.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -406,14 +407,11 @@ async function setDataAndShowResume() {
   blockExplorerLinkItem.style.opacity = 0;
 }
 
-async function hadleAllowance(amounts) {
+async function isTokenAproved(amounts) {
   if (tokenInput.value == "ERC20")
     return await isAproved(getTotalValue(amounts));
   else
-    return {
-      aproveAmount: 0,
-      aproveAmount: true,
-    };
+    return await isERC721Aproved( amounts);
 }
 
 async function handleContinue() {
@@ -424,9 +422,9 @@ async function handleContinue() {
 
   setFinalData(addresses, amounts);
 
-  // const { aprove, totalAmount, isAprovedA } = await hadleAllowance( finalData.amount )
+  const { isAproved, notAproved } = await isTokenAproved( finalData.amount )
 
-  // if( !isAprovedA ) return showErrorAlert(`Allowance ${aprove} need ${totalAmount}`)
+  if( !isAproved ) return handleAllowance( notAproved )
 
   if (addresses.length == amounts.length && addresses.length > 0) {
     if (tokenInput.value == "ETH") setDataAndShowResume(addresses, amounts);
