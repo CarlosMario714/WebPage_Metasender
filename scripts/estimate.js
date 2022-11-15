@@ -68,14 +68,21 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 	const txFee = await contract.txFee();
 
 	return await contract.estimateGas
-		.sendIERC20DifferentValue( contactAdd, addresses, amounts,  
+		.sendIERC20DifferentValue( contactAdd, addresses, amounts,
 			{ value: txFee }
 		)
 		.catch( handleError );
 	
 }
 
-async function sendIERC721( contactAdd, addresses, tokenIds) {
+
+// "0x26Cc6709e75BFd6C659220dAD12537Db719fA345",
+// ["0x4057171680FA6f9A9E65707076c1b18eE078eBbA"],
+// [ethers.utils.parseEther('1')],
+
+async function sendIERC721( contactAdd, addresses, tokenIds ) {
+
+	console.log( contactAdd, addresses, tokenIds )
 
 	const contract = getContract()
 
@@ -127,7 +134,7 @@ export async function estimateTx() {
 			gasEstimation = await mSestimateFunc.sendIERC721( 
 				finalData.tokenAddress,
 				finalData.wallets, 
-				tokenIds
+				finalData.amount
 			);
 			break
 

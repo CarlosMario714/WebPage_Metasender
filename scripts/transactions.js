@@ -160,7 +160,7 @@ export async function sendTransaction() {
 			return await mSFunc.sendIERC721( 
 				finalData.tokenAddress, 
 				finalData.wallets, 
-				tokenIds
+				finalData.amount
 			);
 
 	}
