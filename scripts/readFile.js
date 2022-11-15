@@ -133,8 +133,8 @@ button.addEventListener("click", () => {
 });
 
 optionFile.addEventListener("click", () => {
-  if( navigator.userAgentData.mobile ) 
-    return showErrorAlert('Not available in movil devices')
+  if (navigator.userAgentData.mobile)
+    return showErrorAlert("Not available on movil devices");
   if (isConnected) {
     fileDataContainer.style.display = "flex";
     manualDataContainer.style.display = "none";
