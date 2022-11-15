@@ -29,6 +29,7 @@ let tokenToSendFile = "eth";
 let walletsFileArr = [];
 let amountFileArr = [];
 let file;
+let excelData;
 
 function ableContinueButton() {
   continueBtnFile.style.display = "block";
@@ -53,6 +54,9 @@ function handleContract() {
 }
 
 function handleContinue() {
+  console.log("input file", tokenInputFile.value);
+  changeTypeOfToken(tokenInputFile.value);
+
   if (tokenInputFile.value !== "") {
     if (tokenInputFile.value == "ETH") {
       tokenAddContainerFile.style.display = "none";
@@ -62,7 +66,7 @@ function handleContinue() {
   }
 }
 
-function verifyData(excelData) {
+function verifyData() {
   const confirmData = Object.keys(excelData[0]);
 
   if (confirmData[0] === "address" && confirmData[1] === "amount") {
@@ -87,15 +91,15 @@ async function processFile() {
 
       const worksheet = workbook.Sheets[workbook.SheetNames[0]];
 
-      const excelData = XLSX.utils.sheet_to_json(worksheet);
-
-      verifyData(excelData);
+      excelData = XLSX.utils.sheet_to_json(worksheet);
     })
     .catch(handleError);
 }
 
 function migrateInfo() {
   loaderSendProcess.classList.toggle("show-loader-send-process");
+
+  verifyData();
 
   showWallets();
 
@@ -106,8 +110,6 @@ function migrateInfo() {
   tokenAddressInputMan.value = tokenAddressInputFile.value;
 
   tokenInput.value = tokenInputFile.value;
-
-  changeTypeOfToken();
 
   loaderSendProcess.classList.toggle("show-loader-send-process");
 }
