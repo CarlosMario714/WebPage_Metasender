@@ -20,11 +20,7 @@ export async function isAproved( amount ) {
         metasender[`address_${ ethereum.chainId }`]
     )
 
-    const aproveAmount = Number(ethers.utils.formatEther(tokensAproved))
-
-    const totalAmount = Number(ethers.utils.formatEther(amount))
-
-    return { notAproved: totalAmount - aproveAmount, isAproved: aproveAmount >= totalAmount}
+    return { notAproved: amount - tokensAproved, isAproved: tokensAproved >= amount}
 
 }
 

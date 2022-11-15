@@ -50,6 +50,8 @@ const incorrectWalletsContainer = document.querySelector(
 );
 
 optionManual.addEventListener("click", () => {
+  if( navigator.userAgentData.mobile ) 
+    return showErrorAlert('Not available in movil devices')
   if (isConnected) {
     manualDataContainer.style.display = "flex";
     fileDataContainer.style.display = "none";
@@ -418,7 +420,6 @@ async function isTokenAproved(amounts) {
 }
 
 async function handleContinue() {
-  console.log(amountInput.pattern);
 
   if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
@@ -438,6 +439,7 @@ async function handleContinue() {
         setDataAndShowResume(addresses, amounts);
     }
   }
+
 }
 
 async function setFinalResume() {
