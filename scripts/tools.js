@@ -75,3 +75,13 @@ export function verifyAddress( _address ) {
     return ethers.utils.isAddress( _address )
 
 }
+
+export function getContract(address, abi) {
+	
+	const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+	const signer = provider.getSigner();
+
+	return new ethers.Contract( address, abi, signer);
+	
+}

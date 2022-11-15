@@ -1,7 +1,7 @@
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
-import { handleError  } from "./tools.js";
+import { getContract, handleError  } from "./tools.js";
 const blockExplorerLinkItem = document.querySelector('.blockExplorerLink')
 const btnSend = document.querySelector('.send-btn')
 const btnPalco = document.querySelector('.btn-palco')
@@ -25,23 +25,12 @@ export function isSameValue( values ) {
 
 }
 
-export function getContract() {
-	
-	const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-	const signer = provider.getSigner();
-
-	return new ethers.Contract(
-		metasender[`address_${ ethereum.chainId }`],
-		metasender.abi,
-		signer
-	);
-	
-}
-
 async function sendNativeTokenSameValue( addresses, amounts ) {
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -56,7 +45,10 @@ async function sendNativeTokenSameValue( addresses, amounts ) {
 
 async function sendNativeTokenDifferentValue( addresses, amounts ) {
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -71,7 +63,10 @@ async function sendNativeTokenDifferentValue( addresses, amounts ) {
 
 async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -85,9 +80,10 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 
 async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 
-	console.log( contactAdd, addresses, amounts )
-
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -101,7 +97,10 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 
 async function sendIERC721( contactAdd, addresses, tokenIds) {
 
-	const contract = getContract()
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	const txFee = await contract.txFee();
 
@@ -115,7 +114,10 @@ async function sendIERC721( contactAdd, addresses, tokenIds) {
 
 export async function addToPALCO(){
 
-	 const contract = getContract()
+	 const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
 
 	 const PALCOFee = await contract.PALCOPass()
 
