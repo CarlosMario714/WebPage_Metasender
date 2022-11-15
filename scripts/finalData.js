@@ -14,19 +14,17 @@ const tokenAddContainerMan = document.querySelectorAll(".token-address")[0];
 const tokenAddressInputMan = tokenAddContainerMan.children[1];
 
 function setFinalData(walletsArr, amountArr) {
-
   finalData.tokenToSend = tokenInput.value;
 
   finalData.wallets = walletsArr;
 
-  tokenInput.value == "ERC721" ?
-    finalData.amount = amountArr.map(amount => Number(amount)):
-    finalData.amount = amountArr.map((amount) =>
-      ethers.utils.parseEther(amount.toString())
-    );
+  tokenInput.value == "ERC721"
+    ? (finalData.amount = amountArr.map((amount) => Number(amount)))
+    : (finalData.amount = amountArr.map((amount) =>
+        ethers.utils.parseEther(amount.toString())
+      ));
 
-  finalData.tokenAddress = tokenAddressInputMan.value
-
+  finalData.tokenAddress = tokenAddressInputMan.value;
 }
 
 export { finalData, setFinalData };

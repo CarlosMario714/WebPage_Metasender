@@ -56,8 +56,9 @@ optionManual.addEventListener("click", () => {
   } else login();
 });
 
-export function changeTypeOfToken() {
-  switch (tokenInput.value) {
+export function changeTypeOfToken(valueTokenInput) {
+  console.log("cambier el tipo de token", valueTokenInput);
+  switch (valueTokenInput) {
     case "ETH":
       labelAdress.innerHTML = "Account or Wallet to send";
       walletInput.placeholder = "Write the wallet";
@@ -67,16 +68,16 @@ export function changeTypeOfToken() {
       tokenAddContainer.style.display = "none";
       break;
     case "ERC20":
-      labelAdress.innerHTML = "Token Contract Address";
-      walletInput.placeholder = "Write the address of the contract";
+      labelAdress.innerHTML = "Account or Wallet to send";
+      walletInput.placeholder = "Write the wallet";
       labelAmount.innerHTML = "Amount of tokens to send";
       amountInput.placeholder = "Write amount of tokens";
       amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
       tokenAddContainer.style.display = "block";
       break;
     case "ERC721":
-      labelAdress.innerHTML = "Token Contract Address";
-      walletInput.placeholder = "Write the address of the contract";
+      labelAdress.innerHTML = "Write the wallet";
+      walletInput.placeholder = "Write the wallet";
       labelAmount.innerHTML = "ID of the token to send";
       amountInput.placeholder = "Write the ID of the token";
       amountInput.pattern = `^\\d*\\d+$`;
@@ -149,6 +150,8 @@ function verifyFileData(wallet, amount, typeOfToken) {
   let walletError = "wallet error";
   let amountError = "amount error";
   let allError = "all errors";
+
+  console.log(amountInput.pattern);
 
   //if is ok data data form file
   if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
@@ -342,7 +345,7 @@ function showWallets() {
 
 //select type of token
 tokenInput.addEventListener("click", () => {
-  changeTypeOfToken();
+  changeTypeOfToken(tokenInput.value);
 });
 
 //verify data and add new wallet
@@ -417,6 +420,8 @@ async function hadleAllowance(amounts) {
 }
 
 async function handleContinue() {
+  console.log(amountInput.pattern);
+
   if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
 
