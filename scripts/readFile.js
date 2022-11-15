@@ -54,7 +54,6 @@ function handleContract() {
 }
 
 function handleContinue() {
-  console.log("input file", tokenInputFile.value);
   changeTypeOfToken(tokenInputFile.value);
 
   if (tokenInputFile.value !== "") {

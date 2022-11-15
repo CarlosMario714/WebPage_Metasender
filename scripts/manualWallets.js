@@ -40,6 +40,9 @@ const balanceEth = document.querySelector(".balance-eth");
 const costoOperacion = document.querySelector(".costo-operacion");
 const costoTotalOperacion = document.querySelector(".costo-operacion-total");
 const loaderSendProcess = document.querySelector(".loader-send-process");
+const aproveErc20Container = document.querySelector(".aprove-erc20-container");
+const closeAprovalErc20 = document.querySelector(".close-aproval-erc20");
+const aprovalToSendTokensWindow = document.querySelector(".aprove-erc20");
 let numberOfCorrectNewWallet = 0;
 let numberOfIncorrectNewWallet = 0;
 let newWalletsFragment = document.createDocumentFragment();
@@ -60,7 +63,6 @@ optionManual.addEventListener("click", () => {
 });
 
 export function changeTypeOfToken(valueTokenInput) {
-  console.log("cambier el tipo de token", valueTokenInput);
   switch (valueTokenInput) {
     case "ETH":
       labelAdress.innerHTML = "Account or Wallet to send";
@@ -153,8 +155,6 @@ function verifyFileData(wallet, amount, typeOfToken) {
   let walletError = "wallet error";
   let amountError = "amount error";
   let allError = "all errors";
-
-  console.log(amountInput.pattern);
 
   //if is ok data data form file
   if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
@@ -420,6 +420,8 @@ async function isTokenAproved(amounts) {
 }
 
 async function handleContinue() {
+  
+  aproveErc20Container.classList.toggle("show-aprove-erc20-container");
 
   if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
@@ -459,6 +461,10 @@ async function setFinalResume() {
     costoTotalOperacion.innerHTML = `${finalData.totalCost} ${finalData.NativeToken}`;
   });
 }
+
+closeAprovalErc20.addEventListener("click", () => {
+  aproveErc20Container.classList.toggle("show-aprove-erc20-container");
+});
 
 atrasbtn.addEventListener("click", () => {
   manualDataContainer.style.display = "flex";

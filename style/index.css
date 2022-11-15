@@ -986,10 +986,15 @@ header {
   left: 0;
   background: rgba(126, 126, 126, 0.2);
   backdrop-filter: blur(5px);
+  z-index: 2;
+}
+
+.show-aprove-erc20-container {
+  display: flex;
 }
 
 .aprove-erc20 {
-  display: none;
+  display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -997,9 +1002,50 @@ header {
   height: 50rem;
   background: white;
   border-radius: 2rem;
+  padding: 4rem;
+  position: relative;
 }
 
-.aprove-erc721 {
+.close-aproval-erc20 {
+  width: 2.5rem;
+  position: absolute;
+  top: 3rem;
+  right: 3rem;
+}
+
+.aprove-erc20 h2 {
+  background: rgb(126, 126, 126);
+  background: radial-gradient(
+    circle,
+    rgba(126, 126, 126, 0.2) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.aprove-erc20 span {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.aprove-erc20 p {
+  font-weight: 300;
+}
+
+.total-envio-erc20-aproval > * {
+  margin: 0;
+}
+
+.total-envio-erc20-aproval {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(126, 126, 126, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 1rem;
+  border-radius: 1rem;
+  font-weight: 300;
 }
 
 /*****resumen final******/
@@ -1135,6 +1181,7 @@ header {
   height: 100%;
   background: white;
   border-radius: 2rem;
+  z-index: 1;
 }
 
 .loader-send-process img {
