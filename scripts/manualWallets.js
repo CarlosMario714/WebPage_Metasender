@@ -411,9 +411,8 @@ async function hadleAllowance(amounts) {
     return await isAproved(getTotalValue(amounts));
   else
     return {
-      aprove: 0,
-      totalAmount: 0,
-      isAprovedA: true,
+      aproveAmount: 0,
+      aproveAmount: true,
     };
 }
 

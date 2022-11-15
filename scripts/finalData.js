@@ -17,7 +17,7 @@ function setFinalData(walletsArr, amountArr) {
 
   finalData.tokenToSend = tokenInput.value;
 
-  finalData.wallets = [...walletsArr];
+  finalData.wallets = walletsArr;
 
   tokenInput.value == "ERC721" ?
     finalData.amount = amountArr.map(amount => Number(amount)):

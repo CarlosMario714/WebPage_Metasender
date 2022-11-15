@@ -20,11 +20,11 @@ export async function isAproved( amount ) {
         metasender[`address_0x${ ethereum.chainId.slice(2) }`]
     )
 
-    const aprove = Number(ethers.utils.formatEther(tokensAproved))
+    const aproveAmount = Number(ethers.utils.formatEther(tokensAproved))
 
     const totalAmount = Number(ethers.utils.formatEther(amount))
 
-    return { aprove, totalAmount, isAprovedA: aprove >= totalAmount}
+    return { aproveAmount, isAproved: aproveAmount >= totalAmount}
 
 }
 
@@ -66,7 +66,7 @@ async function getTokenSymbol(){
 
     const contract = new ethers.Contract( finalData.tokenAddress, ercABI, provider )
 
-    return await contract.symbol( ethereum.selectedAddress );
+    return await contract.symbol();
 
 }
 
