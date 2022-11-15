@@ -420,8 +420,6 @@ async function isTokenAproved(amounts) {
 }
 
 async function handleContinue() {
-  
-  aproveErc20Container.classList.toggle("show-aprove-erc20-container");
 
   if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
@@ -430,9 +428,9 @@ async function handleContinue() {
 
   setFinalData(addresses, amounts);
 
-  const { isAproved, notAproved } = await isTokenAproved( finalData.amount )
+  const { isAproved } = await isTokenAproved( finalData.amount )
 
-  if( !isAproved ) return handleAllowance( notAproved )
+  if( !isAproved ) return handleAllowance()
 
   if (addresses.length == amounts.length && addresses.length > 0) {
     if (tokenInput.value == "ETH") setDataAndShowResume(addresses, amounts);

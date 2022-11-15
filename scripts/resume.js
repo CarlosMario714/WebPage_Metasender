@@ -4,14 +4,16 @@ import { finalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
 import { getTotalValue } from "./transactions.js";
 import metasender from "./contracts/metasender.js";
-import { getContract } from './tools.js';
+import { getContract, getTokenSymbol } from './tools.js';
 export const ercABI = [
     'function balanceOf(address owner) view returns (uint balance)',
     'function symbol() public view returns (string)',
     'function allowance(address owner, address spender) external view returns (uint256)',
 ]
 
-export async function isAproved( amount ) {
+export async function isAproved( amounts ) {
+
+    const needAmount = Number(ethers.utils.formatEther(amounts))
 
     const contract = getContract(finalData.tokenAddress, erc[20])
 
@@ -20,7 +22,11 @@ export async function isAproved( amount ) {
         metasender[`address_${ ethereum.chainId }`]
     )
 
-    return { notAproved: amount - tokensAproved, isAproved: tokensAproved >= amount}
+    const aprove = Number(ethers.utils.formatEther(tokensAproved))
+
+    finalData.tokensToAprove = needAmount - aprove 
+
+    return { notAproved: needAmount - aprove, isAproved: aprove >= needAmount}
 
 }
 
@@ -68,7 +74,9 @@ async function setERC721Aproved( tokenIds ) {
 
         if ( !aproved[ tokenId ] ) notAproved.push( tokenId )
 
-    return { isAproved: notAproved.length == 0, notAproved }
+    finalData.tokensToAprove = notAproved.length
+
+    return { isAproved: notAproved.length == 0, notAproved: notAproved.length }
     
 }
 
@@ -76,7 +84,7 @@ export async function isERC721Aproved( tokenIds ) {
 
     const isAproved = await isApprovedForAll()
 
-    if ( !isAproved ) return { isAproved }
+    if ( isAproved ) return { isAproved }
 
     return await setERC721Aproved( tokenIds )
 
@@ -113,16 +121,6 @@ async function getUserTokenBalance( _address, tokenType ){
     const balance = Number(ethers.utils.formatEther(inBalance)) 
 
     return roundNumber( balance )
-
-}
-
-async function getTokenSymbol(){
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-    const contract = new ethers.Contract( finalData.tokenAddress, ercABI, provider )
-
-    return await contract.symbol();
 
 }
 
@@ -187,7 +185,7 @@ export default async function setResumeInfo() {
             finalData.tokenToSend
         )
 
-        finalData.tokenSymbol = await getTokenSymbol()
+        finalData.tokenSymbol = await getTokenSymbol( finalData.tokenAddress )
 
         finalData.totalCost = finalData.txCost
 

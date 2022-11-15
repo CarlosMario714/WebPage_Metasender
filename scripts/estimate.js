@@ -73,8 +73,6 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 
 async function sendIERC721( contactAdd, addresses, tokenIds ) {
 
-	console.log( contactAdd, addresses, tokenIds )
-
 	const contract = getContract( 
 		metasender[`address_${ ethereum.chainId }`], 
 		metasender.abi
