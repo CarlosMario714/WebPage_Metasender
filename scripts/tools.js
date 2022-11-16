@@ -1,5 +1,8 @@
 import { ercABI } from "./resume.js";
 import ethChains from "./ethereumchains.js";
+import metasender from "./contracts/metasender.js";
+import { finalData } from "./finalData.js";
+const btnConnect = document.querySelector(".btnConnect");
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const selectChainItem = document.querySelector(".option-red select");
@@ -117,4 +120,44 @@ export function userDeviceInfo() {
     };
     return userInfo;
   }
+}
+
+export async function isPalco() {
+
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
+
+	return contract.PALCO( ethereum.selectedAddress )
+	    .catch( handleError )
+
+
+}
+
+export async function handleTxFee() {
+
+	const contract = getContract( 
+		metasender[`address_${ ethereum.chainId }`], 
+		metasender.abi
+	)
+
+  const isPalcoM = await isPalco()
+    .catch( handleError )
+
+  if ( isPalcoM ) return 0
+
+  return await contract.txFee()
+    .catch( handleError )
+
+}
+
+export async function handlePalco(){
+
+  finalData.isPalco = await isPalco()
+
+  if( finalData.isPalco ) btnConnect.classList.add('isPalco')
+
+  else btnConnect.classList.remove('isPalco')
+
 }

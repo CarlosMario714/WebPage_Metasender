@@ -203,6 +203,10 @@ nav button {
   z-index: 0;
 }
 
+.isPalco {
+  background-color: #000;
+}
+
 .contenedor-botones-navbar .btn {
   height: 50%;
   color: #a6903c;
@@ -256,6 +260,8 @@ nav button {
   border: none;
   background: rgb(244, 244, 244);
   text-align: center;
+  white-space:pre-wrap;
+  word-wrap: break-word;
 }
 
 .option-red select:hover {

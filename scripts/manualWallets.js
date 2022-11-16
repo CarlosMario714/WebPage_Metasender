@@ -396,8 +396,9 @@ async function setDataAndShowResume() {
 async function isTokenAproved(amounts) {
   if (tokenInput.value == "ERC20")
     return await isAproved(getTotalValue(amounts));
-  else
+  if (tokenInput.value == "ERC721")
     return await isERC721Aproved( amounts);
+  else return { isAproved: true }
 }
 
 async function handleContinue() {
