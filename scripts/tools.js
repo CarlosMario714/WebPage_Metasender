@@ -1,87 +1,120 @@
-import { ercABI } from "./resume.js"
-import ethChains from "./ethereumchains.js"
+import { ercABI } from "./resume.js";
+import ethChains from "./ethereumchains.js";
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
-const selectChainItem = document.querySelector('.option-red select')
+const selectChainItem = document.querySelector(".option-red select");
 const tokenInput = document.getElementById("token-input");
 const fileTokenInput = document.querySelector(".token-input-file");
 
-export function removeClass( items, className ){
-
-    for( const item of items )
-        item.classList.remove( className )
-
+export function removeClass(items, className) {
+  for (const item of items) item.classList.remove(className);
 }
 
-export function addClass( items, className ){
-
-    for( const item of items )
-        item.classList.add( className )
-
+export function addClass(items, className) {
+  for (const item of items) item.classList.add(className);
 }
 
-export async function getTokenSymbol( _address ) {
+export async function getTokenSymbol(_address) {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const contract = new ethers.Contract(_address, ercABI, provider);
 
-    const contract = new ethers.Contract( _address, ercABI, provider )
-
-    return await contract.symbol();
-
+  return await contract.symbol();
 }
 
-export function handleError( error ){
-
-    if ( error.message ) showErrorAlert( error.message )
-
-    else showErrorAlert( error.error.message )
-
+export function handleError(error) {
+  if (error.message) showErrorAlert(error.message);
+  else showErrorAlert(error.error.message);
 }
 
 export function showConnectAlert() {
+  connectedToMainet.classList.add("showAlert");
+  connectedToMainet.style.zIndex = 50;
 
-    connectedToMainet.classList.add("showAlert");
-    connectedToMainet.style.zIndex = 50;
-
-    setTimeout(() => {
-
-      connectedToMainet.classList.remove("showAlert");
-      connectedToMainet.style.zIndex = 0;
-
-    }, 5000);
-
+  setTimeout(() => {
+    connectedToMainet.classList.remove("showAlert");
+    connectedToMainet.style.zIndex = 0;
+  }, 5000);
 }
 
-export function showErrorAlert( msg ) {
+export function showErrorAlert(msg) {
+  errorAlert.children[1].innerHTML = msg;
 
-    errorAlert.children[1].innerHTML = msg
-
-    errorAlert.classList.add("showAlert");
-
+  errorAlert.classList.add("showAlert");
 }
 
-export function changeTokenItems( chainId ) {
+export function changeTokenItems(chainId) {
+  tokenInput.children[0].innerHTML = ethChains[chainId.slice(2)].symbol;
 
-    tokenInput.children[0].innerHTML = ethChains[ chainId.slice(2) ].symbol
+  fileTokenInput.children[1].innerHTML = ethChains[chainId.slice(2)].symbol;
 
-    fileTokenInput.children[1].innerHTML = ethChains[ chainId.slice(2) ].symbol
-
-    selectChainItem.value = chainId.slice(2)
-
+  selectChainItem.value = chainId.slice(2);
 }
 
-export function verifyAddress( _address ) {
-
-    return ethers.utils.isAddress( _address )
-
+export function verifyAddress(_address) {
+  return ethers.utils.isAddress(_address);
 }
 
 export function getContract(address, abi) {
-	
-	const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-	const signer = provider.getSigner();
+  const signer = provider.getSigner();
 
-	return new ethers.Contract( address, abi, signer);
-	
+  return new ethers.Contract(address, abi, signer);
+}
+
+export function userDeviceInfo() {
+  const isMobile = {
+      android: () => navigator.userAgent.match(/android/i),
+      ios: () => navigator.userAgent.match(/iphone|ipad|ipod/i),
+      windows: () => navigator.userAgent.match(/windows phone/i),
+      any: function () {
+        return this.android() || this.ios() || this.windows();
+      },
+    },
+    isDesktop = {
+      linux: () => navigator.userAgent.match(/linux/i),
+      mac: () => navigator.userAgent.match(/mac os/i),
+      windows: () => navigator.userAgent.match(/windows nt/i),
+      any: function () {
+        return this.linux() || this.mac() || this.windows();
+      },
+    },
+    isBrowser = {
+      chrome: () => navigator.userAgent.match(/chrome/i),
+      safari: () => navigator.userAgent.match(/safari/i),
+      firefox: () => navigator.userAgent.match(/firefox/i),
+      opera: () => navigator.userAgent.match(/opera|opera mini/i),
+      ie: () => navigator.userAgent.match(/msie|iemobile/i),
+      edge: () => navigator.userAgent.match(/edge/i),
+      any: function () {
+        return (
+          this.chrome() ||
+          this.safari() ||
+          this.firefox() ||
+          this.opera() ||
+          this.ie() ||
+          this.edge()
+        );
+      },
+    };
+  let userInfo;
+
+  if (isDesktop.any()) {
+    userInfo = {
+      desktop: true,
+      mobile: false,
+      operatingSistem: isDesktop.any(),
+      browser: isBrowser.any(),
+    };
+    return userInfo;
+  } else {
+    userInfo = {
+      desktop: false,
+      mobile: true,
+      operatingSistem: isMobile.any(),
+      browser: isBrowser.any(),
+    };
+    return userInfo;
+  }
 }

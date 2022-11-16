@@ -164,19 +164,6 @@
         <div class="wallets-container">
           <div class="manual-wallets-container">
             <h2>Correct data</h2>
-            <!-- <div id="1" class="manual-wallet">
-              <p class="number-of-wallet">1</p>
-              <p class="wallet-adress">0xf45025599c54930BF6C16C208f0507E80FEA5d84</p>
-
-              <p class="wallet-amount">1</p>
-              <p>ETH</p>
-              <a>
-                <img class="edit-wallet" src="../img/icons/boton-editar.png" alt="cerrar pagina" />
-              </a>
-              <a>
-                <img class="delete-wallet" src="../img/icons/cerrar.png" alt="cerrar pagina" />
-              </a>
-            </div> -->
           </div>
           <div class="incorrect-wallets-container">
             <h2>Incorrect data</h2>
@@ -296,38 +283,78 @@
           you make, you can make lots of free transactions for life by becoming part of our
           <span>Palco</span>
         </p>
-        <table>
-          <tr class="palco-table-firstRow">
-            <th>network</th>
-            <th>transaction tax</th>
-            <th>Palco</th>
-          </tr>
-          <tr>
-            <th>Ethereum</th>
-            <th>0.0075 ETH</th>
-            <th>1 ETH</th>
-          </tr>
-          <tr>
-            <th>BSC</th>
-            <th>0.035 BNB</th>
-            <th>5 BNB</th>
-          </tr>
-          <tr>
-            <th>Polygon</th>
-            <th>10 MATIC</th>
-            <th>1500 MATIC</th>
-          </tr>
-          <tr>
-            <th>Avalanche</th>
-            <th>0.6 AVAX</th>
-            <th>90 AVAX</th>
-          </tr>
-          <tr>
-            <th>Fantom</th>
-            <th>45 FTM</th>
-            <th>6000 FTM</th>
-          </tr>
-        </table>
+        <div class="tables-palco-container">
+          <div class="table-container">
+            <table>
+              <h3 class="table-title-normal-user">Normal user</h3>
+              <tr class="palco-table-firstRow">
+                <th>Network</th>
+                <th>Transaction tax</th>
+                <!-- <th>Palco</th> -->
+              </tr>
+              <tr>
+                <th>Ethereum</th>
+                <th>0.0075 ETH</th>
+                <!-- <th>1 ETH</th> -->
+              </tr>
+              <tr>
+                <th>BSC</th>
+                <th>0.035 BNB</th>
+                <!-- <th>5 BNB</th> -->
+              </tr>
+              <tr>
+                <th>Polygon</th>
+                <th>10 MATIC</th>
+                <!-- <th>1500 MATIC</th> -->
+              </tr>
+              <tr>
+                <th>Avalanche</th>
+                <th>0.6 AVAX</th>
+                <!-- <th>90 AVAX</th> -->
+              </tr>
+              <tr>
+                <th>Fantom</th>
+                <th>45 FTM</th>
+                <!-- <th>6000 FTM</th> -->
+              </tr>
+            </table>
+          </div>
+          <div class="table-container">
+            <table>
+              <h3 class="table-title-palco-user">Palco user</h3>
+              <tr class="palco-table-firstRow">
+                <th>Network</th>
+                <th>Transaction tax</th>
+                <!-- <th>Palco</th> -->
+              </tr>
+              <tr>
+                <th>Ethereum</th>
+                <th>0 ETH</th>
+                <!-- <th>1 ETH</th> -->
+              </tr>
+              <tr>
+                <th>BSC</th>
+                <th>0 BNB</th>
+                <!-- <th>5 BNB</th> -->
+              </tr>
+              <tr>
+                <th>Polygon</th>
+                <th>0 MATIC</th>
+                <!-- <th>1500 MATIC</th> -->
+              </tr>
+              <tr>
+                <th>Avalanche</th>
+                <th>0 AVAX</th>
+                <!-- <th>90 AVAX</th> -->
+              </tr>
+              <tr>
+                <th>Fantom</th>
+                <th>0 FTM</th>
+                <!-- <th>6000 FTM</th> -->
+              </tr>
+            </table>
+          </div>
+        </div>
         <button class="btn-palco" data-content="palco" data-type="btn-palco">
           Comprar
         </button>
@@ -371,35 +398,6 @@
         <div class="bar2"></div>
       </div>
     </div>
-
-    <!-- <div class="manual-data-container">
-      <div class="manual-data">
-        <h4>Añade manualmente los datos</h4>
-        <div class="manual-wallets">
-          <div class="input-container">
-            <label>adress</label>
-            <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet" required />
-          </div>
-          <div class="input-container">
-            <label>monto</label>
-            <input class="amount-input" type="text" name="manual-wallet" placeholder="Escribe el monto" required />
-          </div>
-          <button class="add-wallet-button">+</button>
-        </div>
-      </div>
-      <button class="process-btn-manual">process data</button>
-    </div>-->
-
-    <!-- <div class="send-container">
-      <button class="btnConnect">Connect wallet</button>
-      <select name="eth-network" id="eth-network-select">
-        <option value="1">Mainnet</option>
-        <option value="5">Goerli</option>
-      </select>
-      <button class="btnSend" value="ETH">send</button>
-      <button class="btnEstimate" value="ETH">estimate</button>
-    </div> -->
-
   </main>
 
   <footer id=" footer">
