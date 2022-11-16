@@ -1,4 +1,4 @@
-import { handleError, removeClass, showErrorAlert, showConnectAlert, changeTokenItems } from "./tools.js";
+import { handleError, removeClass, showErrorAlert, showConnectAlert, changeTokenItems, handlePalco } from "./tools.js";
 import ethChains from "./ethereumchains.js"
 const closeAlert = document.querySelectorAll(".closeAlert");
 const btnConnect = document.querySelector(".btnConnect");
@@ -18,11 +18,13 @@ function setWalletAddress() {
 
 function listenChain() {
 
-  ethereum.on("chainChanged", (chainId) => {
+  ethereum.on("chainChanged", async (chainId) => {
 
     if ( ethChains[ chainId.slice(2) ] ) {
 
       changeTokenItems( chainId )
+
+      await handlePalco()
 
       showConnectAlert()
 
@@ -43,10 +45,11 @@ async function connectWallet() {
       method: "wallet_requestPermissions",
       params: [{ eth_accounts: {} }],
     })
-    .then(() => {
+    .then( async () => {
       btnConnect.innerHTML = setWalletAddress();
       isConnected = true
       listenChain();
+      await handlePalco()
     })
     .catch( handleError );
 
@@ -130,6 +133,6 @@ closeAlert.forEach((alert) => {
 });
 
 //select chain
-optinonRed.addEventListener("click", setChain);
+optinonRed.addEventListener("change", setChain);
 
 export { chain, installAlert, isConnected, login };

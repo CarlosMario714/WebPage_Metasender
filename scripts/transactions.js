@@ -1,13 +1,10 @@
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
-import { getContract, handleError  } from "./tools.js";
+import { getContract, handleError, handleTxFee  } from "./tools.js";
 const blockExplorerLinkItem = document.querySelector('.blockExplorerLink')
 const btnSend = document.querySelector('.send-btn')
 const btnPalco = document.querySelector('.btn-palco')
-const ERC20Address = "0x26Cc6709e75BFd6C659220dAD12537Db719fA345"
-const ERC721Address = "0x38105D76bca204cEa0A38B7A52D24620AAb6DA60"
-const tokenIds = [12, 17, 18]
 
 export function getTotalValue(valuesArray) {
 
@@ -32,7 +29,7 @@ async function sendNativeTokenSameValue( addresses, amounts ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract
 		.sendNativeTokenSameValue( addresses, amounts[0], 
@@ -50,7 +47,7 @@ async function sendNativeTokenDifferentValue( addresses, amounts ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract
 		.sendNativeTokenDifferentValue(addresses, amounts, 
@@ -68,7 +65,7 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract
 		.sendIERC20SameValue( contactAdd, addresses, amounts[0], 
@@ -85,7 +82,7 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract
 		.sendIERC20DifferentValue( contactAdd, addresses, amounts,  
@@ -102,7 +99,7 @@ async function sendIERC721( contactAdd, addresses, tokenIds) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract
 		.sendIERC721( contactAdd, addresses, tokenIds,  

@@ -1,9 +1,11 @@
+import idioms from "./idioms.js";
 import { login, isConnected } from "./connectWallet.js";
 import setResumeInfo from "./resume.js";
 import { finalData, setFinalData } from "./finalData.js";
 import { verifyAddress, showErrorAlert } from "./tools.js";
 import { getTotalValue } from "./transactions.js";
 import { handleAllowance, isAproved, isERC721Aproved } from "./allowance.js";
+import { languaje } from "./translate.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -60,34 +62,24 @@ optionManual.addEventListener("click", () => {
   } else login();
 });
 
-export function changeTypeOfToken(valueTokenInput) {
-  switch (valueTokenInput) {
-    case "ETH":
-      labelAdress.innerHTML = "Account or Wallet to send";
-      walletInput.placeholder = "Write the wallet";
-      labelAmount.innerHTML = "Amount to send";
-      amountInput.placeholder = "Write the amount";
-      amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
-      tokenAddContainer.style.display = "none";
-      break;
-    case "ERC20":
-      labelAdress.innerHTML = "Account or Wallet to send";
-      walletInput.placeholder = "Write the wallet";
-      labelAmount.innerHTML = "Amount of tokens to send";
-      amountInput.placeholder = "Write amount of tokens";
-      amountInput.pattern = `^\\d*\\.\\d+$|^\\d*\\d+$`;
-      tokenAddContainer.style.display = "block";
-      break;
-    case "ERC721":
-      labelAdress.innerHTML = "Write the wallet";
-      walletInput.placeholder = "Write the wallet";
-      labelAmount.innerHTML = "ID of the token to send";
-      amountInput.placeholder = "Write the ID of the token";
-      amountInput.pattern = `^\\d*\\d+$`;
-      amountInput.innerHTML = `only positive integers`;
-      tokenAddContainer.style.display = "block";
-      break;
-  }
+export function changeTypeOfToken( tokenType ) {
+
+  labelAdress.innerHTML = idioms[ languaje ][tokenType].labelAdress;
+
+  walletInput.placeholder = idioms[ languaje ][tokenType].walletInput;
+
+  labelAmount.innerHTML = idioms[ languaje ][tokenType].labelAmount;
+
+  amountInput.placeholder = idioms[ languaje ][tokenType].amountInput_placeHolder;
+
+  amountInput.pattern = idioms[ languaje ][tokenType].amountInput_pattern;
+
+  amountInput.innerHTML = idioms[ languaje ][tokenType].amountInput_text;
+
+  if( tokenType == "ETH") tokenAddContainer.style.display = "none";
+
+  else tokenAddContainer.style.display = "block";
+
 }
 
 function addWallet() {
@@ -126,7 +118,6 @@ function addWallet() {
 }
 
 function verifyManualData(wallet, amount, typeOfToken) {
-  let walletRegex = new RegExp(walletInput.pattern);
   let AmountRegex = new RegExp(amountInput.pattern);
 
   //if all data is ok
@@ -289,7 +280,7 @@ function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
   let newWalletErrorsContainer = document.createElement("div");
   newWalletErrorsContainer.id = numberOfIncorrectNewWallet;
   newWalletErrorsContainer.classList.add("wallet-errors-container");
-  let walleterrorElement = `
+  const walleterrorElement = `
   <div id="${numberOfIncorrectNewWallet}" class="manual-wallet">
     <p class="number-of-wallet number-of-incorrect-wallet">${numberOfIncorrectNewWallet}</p>
     <p class="wallet-adress">${wallet}</p>
@@ -302,19 +293,12 @@ function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
       <img class="delete-wallet" src="../img/icons/cerrar.png" alt="cerrar pagina" />
     </a>
   </div>`;
-  let onlyWalletError = `
-  <div class="wallet-errors">
-    <p><span>Invalid Wallet or Address: </span>Add a valid Address without spaces</p>
-  </div>`;
-  let onlyAmountError = `
-  <div class="wallet-errors">
-    <p><span>Monto no valido:</span> Only positive numbers</p>
-  </div>`;
-  let allErrors = `
-  <div class="wallet-errors">
-    <p><span>Invalid Wallet or Address:</span> "write a valid address without spaces</p>
-    <p><span>Monto no valido:</span> Solo numeros positivos</p>
-  </div>`;
+
+  const onlyWalletError = idioms[ languaje ].incorrectElement.onlyWalletError;
+
+  const onlyAmountError = idioms[ languaje ].incorrectElement.onlyAmountError;
+
+  const allErrors = idioms[ languaje ].incorrectElement.allErrors;
 
   switch (whatError) {
     case "wallet error":
@@ -412,8 +396,9 @@ async function setDataAndShowResume() {
 async function isTokenAproved(amounts) {
   if (tokenInput.value == "ERC20")
     return await isAproved(getTotalValue(amounts));
-  else
+  if (tokenInput.value == "ERC721")
     return await isERC721Aproved( amounts);
+  else return { isAproved: true }
 }
 
 async function handleContinue() {

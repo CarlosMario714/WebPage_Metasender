@@ -4,7 +4,7 @@ import { finalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
 import { getTotalValue } from "./transactions.js";
 import metasender from "./contracts/metasender.js";
-import { getContract, getTokenSymbol } from './tools.js';
+import { getContract, getTokenSymbol, handleTxFee } from './tools.js';
 export const ercABI = [
     'function balanceOf(address owner) view returns (uint balance)',
     'function symbol() public view returns (string)',
@@ -13,7 +13,7 @@ export const ercABI = [
 
 function roundNumber( num ) {
 
-    return (Math.round(num * 1000)) / 1000
+    return (Math.round(num * 1000000)) / 1000000
 
 }
 
@@ -56,7 +56,7 @@ async function getTxCostAprox() {
 
     const { gasEstimation } = await estimateTx()
 
-    const txFee = await contract.txFee()
+    const txFee = await handleTxFee()
 
     const gasPrice = await provider.getGasPrice();
 
