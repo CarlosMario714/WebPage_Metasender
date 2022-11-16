@@ -1,11 +1,9 @@
 import { login, isConnected } from "./connectWallet.js";
-import setResumeInfo, { isAproved, isERC721Aproved } from "./resume.js";
+import setResumeInfo from "./resume.js";
 import { finalData, setFinalData } from "./finalData.js";
-import ethChains from "./ethereumchains.js";
-import ethereumchains from "./ethereumchains.js";
-import { handleError, verifyAddress, showErrorAlert } from "./tools.js";
+import { verifyAddress, showErrorAlert } from "./tools.js";
 import { getTotalValue } from "./transactions.js";
-import { handleAllowance } from "./allowance.js";
+import { handleAllowance, isAproved, isERC721Aproved } from "./allowance.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -187,7 +185,6 @@ function deleteOkWallet(event) {
 
 function editOkWallet(event) {
   let parentElement = event.target.parentNode.parentNode;
-  //console.log(parentElement.childNodes);
   parentElement.childNodes.forEach((element) => {
     if (element.classList == "wallet-adress") {
       walletInput.value = element.innerHTML;

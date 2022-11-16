@@ -8,6 +8,85 @@ const btnAprove = document.querySelector('.btn-aprove')
 const totalToAprove = document.querySelector('.total-to-Aprove')
 const blockExprorerAprove = document.querySelector('.blockExprorerAprove')
 
+async function isApprovedForAll() {
+
+    const contract = getContract(finalData.tokenAddress, erc[721])
+
+    return await contract.isApprovedForAll( 
+        ethereum.selectedAddress,
+        metasender[`address_${ ethereum.chainId }`]
+    )
+
+}
+
+async function getApproved( tokenId, metasenderAdd ) {
+
+    const contract = getContract(finalData.tokenAddress, erc[721])
+
+    const aprovAddres = await contract.getApproved( tokenId )
+
+    return aprovAddres == metasenderAdd
+}
+
+async function getERC721Approved( tokenIds ) {
+
+    const metasenderAdd = metasender[`address_${ ethereum.chainId }`]
+
+    const aproved = {}
+
+    for ( const tokenId of tokenIds ) 
+
+        aproved[tokenId] = await getApproved( tokenId, metasenderAdd )
+
+    return aproved
+
+}
+
+async function setERC721Aproved( tokenIds ) {
+
+    const aproved = await getERC721Approved( tokenIds )
+
+    const notAproved = []
+
+    for( const tokenId of tokenIds ) 
+
+        if ( !aproved[ tokenId ] ) notAproved.push( tokenId )
+
+    finalData.tokensToAprove = notAproved.length
+
+    return { isAproved: notAproved.length == 0, notAproved: notAproved.length }
+    
+}
+
+export async function isERC721Aproved( tokenIds ) {
+
+    const isAproved = await isApprovedForAll()
+
+    if ( isAproved ) return { isAproved }
+
+    return await setERC721Aproved( tokenIds )
+
+}
+
+export async function isAproved( amounts ) {
+
+    const needAmount = Number(ethers.utils.formatEther(amounts))
+
+    const contract = getContract(finalData.tokenAddress, erc[20])
+
+    const tokensAproved = await contract.allowance( 
+        ethereum.selectedAddress, 
+        metasender[`address_${ ethereum.chainId }`]
+    )
+
+    const aprove = Number(ethers.utils.formatEther(tokensAproved))
+
+    finalData.tokensToAprove = needAmount
+
+    return { notAproved: needAmount - aprove, isAproved: aprove >= needAmount}
+
+}
+
 export async function handleAllowance() {
   
     aproveErc20Container.classList.toggle("show-aprove-erc20-container");
@@ -29,8 +108,11 @@ async function handleAproveTx( tx ) {
     showErrorAlert('Wait to transaction confirmation')
 
     await tx.wait()
-
-    aproveErc20Container.classList.toggle("show-aprove-erc20-container");
+        .then(() => 
+    
+            aproveErc20Container.classList.toggle("show-aprove-erc20-container")
+    
+        ).catch( handleError )
 
 }
 
@@ -40,8 +122,6 @@ async function getER20Aprove() {
         finalData.tokenAddress,
         erc[20]
     )
-
-    console.log(finalData.tokensToAprove)
 
     const amount = ethers.utils.parseEther(`${finalData.tokensToAprove}`)
 

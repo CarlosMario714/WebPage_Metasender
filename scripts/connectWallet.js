@@ -1,19 +1,12 @@
 import { handleError, removeClass, showErrorAlert, showConnectAlert, changeTokenItems } from "./tools.js";
 import ethChains from "./ethereumchains.js"
 const closeAlert = document.querySelectorAll(".closeAlert");
-const alertText = document.querySelector(".alert-text");
 const btnConnect = document.querySelector(".btnConnect");
 const installAlert = document.querySelector(".installAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const disConnectedToMainet = document.querySelector(".disConnectedToMainet");
 const errorAlert = document.querySelector(".errorsAlert");
 const optinonRed = document.querySelector(".option-red select");
-const optionChainCurrency = document.querySelector(
-  'option[name="chain-currency"]'
-);
-const optionChainCurrencyFile = document.querySelector(
-  'option[name="chain-currency-file"]'
-);
 //change
 const chain = "0x5";
 let isConnected = false;
@@ -56,9 +49,7 @@ async function connectWallet() {
       isConnected = true
       listenChain();
     })
-    .catch((x) => {
-      console.log(x.message);
-    });
+    .catch( handleError );
 
 }
 
@@ -82,7 +73,7 @@ async function addChain( chain ) {
             blockExplorerUrls: [ ethChains[chain].blockExplorer ],
           },
         ],
-    }).catch(error => console.log(error));
+    }).catch( handleError );
 
 }
 
@@ -93,11 +84,11 @@ async function changeChain( chain ) {
 		params: [ { chainId: "0x" + chain } ],
 	})
 	.catch((error) => {
-		if(error.code == 4902){
-			addChain( chain )
-		}
+
+		if(error.code == 4902) addChain( chain )
 
     else handleError( error )
+    
 	});
 
 }
