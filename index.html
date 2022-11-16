@@ -234,41 +234,52 @@
             </span>
           </div>
           <button class="continue-btn-file btn2" data-content="send-process"
-            data-type="span-contract-continue">Continue</button>
+            data-type="send-process-continue">Continue</button>
         </div>
       </div>
       <div class="resumen-final-container">
-        <h2 class="titulo-resumen">Summary of the operation</h2>
+        <h2 class="titulo-resumen" data-content="send-process"
+        data-type="send-process-resume-title">
+          Summary of the operation
+        </h2>
         <div class="resumen-container">
           <div class="resumen">
-            <h3>Total wallets or Address</h3>
+            <h3 data-content="send-process"
+            data-type="send-process-resume-totalwallets">
+            Total wallets or Address</h3>
             <h2 class="total-wallets">0</h2>
           </div>
           <div class="resumen">
-            <h3>Total tokens to send</h3>
+            <h3 data-content="send-process"
+            data-type="send-process-resume-totalTokens">Total tokens to send</h3>
             <h2 class="total-tokens">0</h2>
           </div>
           <div class="resumen">
-            <h3>Your token balance</h3>
+            <h3 data-content="send-process"
+            data-type="send-process-resume-tokenBalance">Your token balance</h3>
             <h2 class="balance-tokens">0</h2>
           </div>
           <div class="resumen">
-            <h3>Your ETH Balance</h3>
+            <h3 data-content="send-process"
+            data-type="send-process-resume-balance">Your native token Balance</h3>
             <h2 class="balance-eth">0</h2>
           </div>
           <div class="resumen">
             <div class="resumen-totales">
-              <h3>Total tokens to send</h3>
+              <h3 data-content="send-process"
+              data-type="send-process-resume-totalTokens">Total tokens to send</h3>
               <h2 class="total-tokens">0</h2>
             </div>
             <p>+</p>
             <div class="resumen-totales">
-              <h3>Approximate cost</br>( metasender fee + gas fee )</h3>
+              <h3 data-content="send-process"
+              data-type="send-process-resume-txCost">Approximate cost</br>( metasender fee + gas fee )</h3>
               <h2 class="costo-operacion">0</h2>
             </div>
             <p>=</p>
             <div class="resumen-totales">
-              <h3>Estimated Total Value</h3>
+              <h3 data-content="send-process"
+              data-type="send-process-resume-totalValue">Estimated Total Value</h3>
               <h2 class="costo-operacion-total">0</h2>
             </div>
           </div>
@@ -276,7 +287,8 @@
         <div class="container-buttons">
           <button class="atras-btn btn2">Back</button>
           <button class="send-btn btn2">Send</button>
-          <a href="" target="_blank" class="blockExplorerLink">See Transaction</a>
+          <a href="" target="_blank" class="blockExplorerLink" data-content="send-process"
+          data-type="send-process-resume-bELink">See Transaction</a>
         </div>
       </div>
       <div class="aprove-erc20-container">
@@ -284,18 +296,19 @@
           <a>
             <img class="close-aproval-erc20" src="../img/icons/cerrar.png" alt="cerrar pagina" />
           </a>
-          <h2>Approval to transfer tokens</h2>
-          <p><span>The MetaSender</span> requires your <span>approval</span> in order to transfer your tokens to the
+          <h2 data-content="send-process"
+          data-type="send-process-aproval-title">Approval to transfer tokens</h2>
+          <p data-content="send-process"
+          data-type="send-process-aproval-text"><span>The MetaSender</span> requires your <span>approval</span> in order to transfer your tokens to the
             added addresses and to proceed to the next step of the operation:</p>
           <div class="total-envio-erc20-aproval">
-            <h3>Total Tokens to send:</h3>
-            <h3 class="total-to-Aprove">3 TMDH</h3>
-            <!-- <h3>Total tokens ERC20 to send:</h3>
-            <h3>20 USDT</h3> -->
+            <h3 data-content="send-process"
+            data-type="send-process-aproval-tokens">Total Tokens to send:</h3>
+            <h3 class="total-to-Aprove">0</h3>
           </div>
           <button class="btn2 aprove-button btn-aprove">Approve to MetaSender</button>
-          <a target="_blank" href="" class="blockExprorerAprove">See transaction</a>
-          <!-- <button class="btn2">Approve the send of 20 USDT and continue with the final resume</button> -->
+          <a target="_blank" href="" class="blockExprorerAprove" data-content="send-process"
+          data-type="send-process-resume-bELink">See transaction</a>
         </div>
       </div>
       <div class="loader-send-process">
@@ -305,9 +318,8 @@
 
     <section id="palco">
       <div class="palco-container">
-        <h1 data-content="palco" data-type="palco-tittle">
-          <span>Be part of our</span>
-          Palco
+        <h1 data-content="palco" data-type="palco-title">
+          <span>Be part of our</span> Palco
         </h1>
         <p data-content="palco" data-type="palco-info">
           <span>The Metasender</span> will charge you a small tax for each batch of transactions that
@@ -503,6 +515,7 @@
   <script src="./scripts/manualWallets.js" type="module"></script>
   <script src="./scripts/finalData.js" type="module"></script>
   <script src="./scripts/eventListeners.js" type="module"></script>
+  <script src="./scripts/translate.js" type="module"></script>
 </body>
 
 </html>

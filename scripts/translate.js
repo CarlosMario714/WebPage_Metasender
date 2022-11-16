@@ -1,4 +1,8 @@
+import idioms from "./idioms.js";
 const languageButtons = document.querySelector(".language");
+const textsToTranslate = document.querySelectorAll("[data-content]");
+const titlesToTranslate = document.querySelectorAll('[title]')
+
 let languaje = "es";
 
 function translateText( items, property, texts ) {
@@ -19,11 +23,7 @@ function translateText( items, property, texts ) {
 
 async function changeLanguage(element) {
 
-  const textsToTranslate = document.querySelectorAll("[data-content]");
-
-  const requestJson = await fetch(`../json/${element}.json`);
-
-  const texts = await requestJson.json();
+  const texts = idioms[ element ];
 
   translateText( textsToTranslate, 'innerHTML', texts )
 
