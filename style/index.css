@@ -944,6 +944,10 @@ header {
   font-weight: 300;
 }
 
+.blockExprorerAprove {
+  display: none;
+}
+
 /*****resumen final******/
 
 .resumen-final-container {

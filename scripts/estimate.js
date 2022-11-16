@@ -73,8 +73,6 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 
 async function sendIERC721( contactAdd, addresses, tokenIds ) {
 
-	console.log( contactAdd, addresses, tokenIds )
-
 	const contract = getContract( 
 		metasender[`address_${ ethereum.chainId }`], 
 		metasender.abi
@@ -139,9 +137,3 @@ export async function estimateTx() {
 	else return { verify: false }
 
 }
-
-// console.log(sendIERC20DifferentValue(
-// 	"0x26Cc6709e75BFd6C659220dAD12537Db719fA345",
-// 	["0x4057171680FA6f9A9E65707076c1b18eE078eBbA"],
-// 	[ethers.utils.parseEther('1')]
-// ))
