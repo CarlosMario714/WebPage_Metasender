@@ -5,7 +5,12 @@ import {
   showWallets,
   changeTypeOfToken,
 } from "./manualWallets.js";
-import { handleError, showErrorAlert, verifyAddress } from "./tools.js";
+import {
+  handleError,
+  showErrorAlert,
+  verifyAddress,
+  userDeviceInfo,
+} from "./tools.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
@@ -133,8 +138,9 @@ button.addEventListener("click", () => {
 });
 
 optionFile.addEventListener("click", () => {
-  if (navigator.userAgentData.mobile)
-    return showErrorAlert("Not available on movil devices");
+  let userInfo = userDeviceInfo();
+  console.log(userInfo);
+  if (userInfo.mobile) return showErrorAlert("Not available on movil devices");
   if (isConnected) {
     fileDataContainer.style.display = "flex";
     manualDataContainer.style.display = "none";
