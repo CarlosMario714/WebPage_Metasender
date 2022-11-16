@@ -1095,8 +1095,8 @@ header {
 /* palco */
 
 .palco-container {
-  width: 65%;
-  margin: 10rem auto;
+  width: 130rem;
+  margin: 5rem auto;
   display: flex;
   flex-direction: column;
 }
@@ -1125,7 +1125,7 @@ header {
   background: rgba(126, 126, 126, 0.2);
   backdrop-filter: blur(10px);
   padding: 2rem;
-  border-radius: 1rem;
+  border-radius: 5rem;
   font-weight: 300;
 }
 
@@ -1211,6 +1211,46 @@ header {
 
 .palco-container table .palco-table-firstRow th {
   font-weight: bolder;
+}
+
+/****** tutorial *******/
+
+.tutotial-container {
+  display: flex;
+  flex-direction: column;
+  width: 130rem;
+  margin: 0 auto 6rem;
+}
+
+.tutotial-container p {
+  font-weight: 300;
+}
+
+.tutotial-container p span {
+  font-weight: 500;
+}
+
+.btn-tutorial {
+  margin: 5rem;
+  width: 30rem;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background: rgba(126, 126, 126, 0.2);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem;
+  border-radius: 5rem;
+  font-weight: 300;
+}
+
+.btn-tutorial span {
+  font-weight: 500;
+}
+
+.btn-tutorial:hover {
+  box-shadow: 0 0 3px #a6903c, 0 0 6px #a6903c, 0 0 15px #a6903c,
+    0 0 30px #a6903c;
 }
 
 /********** Alertas ***********/
@@ -1318,7 +1358,7 @@ footer {
 .footer-logo-links-container {
   display: flex;
   flex-direction: column;
-  width: 40rem;
+  width: 30rem;
 }
 
 .logo-footer-container {
@@ -1332,8 +1372,9 @@ footer {
 }
 
 .footer-links-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .links-column {
@@ -1342,21 +1383,9 @@ footer {
   width: 10rem;
 }
 
-.links-column:nth-child(1) {
-  width: 15rem;
-}
-
-.links-column:nth-child(2) {
-  width: 10rem;
-}
-
-.links-column:nth-child(3) {
-  width: 20rem;
-}
-
 .links-column a {
   text-transform: lowercase;
-  text-align: start;
+  text-align: center;
   text-decoration: underline;
   font-size: 1.6rem;
 }
@@ -1396,7 +1425,7 @@ footer {
 }
 
 .final-text {
-  margin-top: 2rem;
+  margin: 2rem auto 0;
   color: rgb(126, 126, 126);
 }
 
