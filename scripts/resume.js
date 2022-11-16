@@ -4,83 +4,12 @@ import { finalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
 import { getTotalValue } from "./transactions.js";
 import metasender from "./contracts/metasender.js";
-import { getContract } from './tools.js';
+import { getContract, getTokenSymbol } from './tools.js';
 export const ercABI = [
     'function balanceOf(address owner) view returns (uint balance)',
     'function symbol() public view returns (string)',
     'function allowance(address owner, address spender) external view returns (uint256)',
 ]
-
-export async function isAproved( amount ) {
-
-    const contract = getContract(finalData.tokenAddress, erc[20])
-
-    const tokensAproved = await contract.allowance( 
-        ethereum.selectedAddress, 
-        metasender[`address_${ ethereum.chainId }`]
-    )
-
-    return { notAproved: amount - tokensAproved, isAproved: tokensAproved >= amount}
-
-}
-
-async function isApprovedForAll() {
-
-    const contract = getContract(finalData.tokenAddress, erc[721])
-
-    return await contract.isApprovedForAll( 
-        ethereum.selectedAddress,
-        metasender[`address_${ ethereum.chainId }`]
-    )
-
-}
-
-async function getApproved( tokenId, metasenderAdd ) {
-
-    const contract = getContract(finalData.tokenAddress, erc[721])
-
-    const aprovAddres = await contract.getApproved( tokenId )
-
-    return aprovAddres == metasenderAdd
-}
-
-async function getERC721Approved( tokenIds ) {
-
-    const metasenderAdd = metasender[`address_${ ethereum.chainId }`]
-
-    const aproved = {}
-
-    for ( const tokenId of tokenIds ) 
-
-        aproved[tokenId] = await getApproved( tokenId, metasenderAdd )
-
-    return aproved
-
-}
-
-async function setERC721Aproved( tokenIds ) {
-
-    const aproved = await getERC721Approved( tokenIds )
-
-    const notAproved = []
-
-    for( const tokenId of tokenIds ) 
-
-        if ( !aproved[ tokenId ] ) notAproved.push( tokenId )
-
-    return { isAproved: notAproved.length == 0, notAproved }
-    
-}
-
-export async function isERC721Aproved( tokenIds ) {
-
-    const isAproved = await isApprovedForAll()
-
-    if ( !isAproved ) return { isAproved }
-
-    return await setERC721Aproved( tokenIds )
-
-}
 
 function roundNumber( num ) {
 
@@ -113,16 +42,6 @@ async function getUserTokenBalance( _address, tokenType ){
     const balance = Number(ethers.utils.formatEther(inBalance)) 
 
     return roundNumber( balance )
-
-}
-
-async function getTokenSymbol(){
-
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-    const contract = new ethers.Contract( finalData.tokenAddress, ercABI, provider )
-
-    return await contract.symbol();
 
 }
 
@@ -187,7 +106,7 @@ export default async function setResumeInfo() {
             finalData.tokenToSend
         )
 
-        finalData.tokenSymbol = await getTokenSymbol()
+        finalData.tokenSymbol = await getTokenSymbol( finalData.tokenAddress )
 
         finalData.totalCost = finalData.txCost
 

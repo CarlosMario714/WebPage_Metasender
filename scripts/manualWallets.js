@@ -1,11 +1,9 @@
 import { login, isConnected } from "./connectWallet.js";
-import setResumeInfo, { isAproved, isERC721Aproved } from "./resume.js";
+import setResumeInfo from "./resume.js";
 import { finalData, setFinalData } from "./finalData.js";
-import ethChains from "./ethereumchains.js";
-import ethereumchains from "./ethereumchains.js";
-import { handleError, verifyAddress, showErrorAlert } from "./tools.js";
+import { verifyAddress, showErrorAlert } from "./tools.js";
 import { getTotalValue } from "./transactions.js";
-import { handleAllowance } from "./allowance.js";
+import { handleAllowance, isAproved, isERC721Aproved } from "./allowance.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -187,7 +185,6 @@ function deleteOkWallet(event) {
 
 function editOkWallet(event) {
   let parentElement = event.target.parentNode.parentNode;
-  //console.log(parentElement.childNodes);
   parentElement.childNodes.forEach((element) => {
     if (element.classList == "wallet-adress") {
       walletInput.value = element.innerHTML;
@@ -420,8 +417,6 @@ async function isTokenAproved(amounts) {
 }
 
 async function handleContinue() {
-  
-  aproveErc20Container.classList.toggle("show-aprove-erc20-container");
 
   if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
@@ -430,9 +425,9 @@ async function handleContinue() {
 
   setFinalData(addresses, amounts);
 
-  const { isAproved, notAproved } = await isTokenAproved( finalData.amount )
+  const { isAproved } = await isTokenAproved( finalData.amount )
 
-  if( !isAproved ) return handleAllowance( notAproved )
+  if( !isAproved ) return handleAllowance()
 
   if (addresses.length == amounts.length && addresses.length > 0) {
     if (tokenInput.value == "ETH") setDataAndShowResume(addresses, amounts);

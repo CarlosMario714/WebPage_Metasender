@@ -108,7 +108,7 @@ async function sendIERC721( contactAdd, addresses, tokenIds) {
 		.sendIERC721( contactAdd, addresses, tokenIds,  
 			{ value: txFee }
 		)
-		.catch((err) => console.log(err));
+		.catch( handleError );
 
 }
 
@@ -124,6 +124,7 @@ export async function addToPALCO(){
 	 return await contract.addToPALCO(
 		ethereum.selectedAddress, { value: PALCOFee }
 	 )
+	 .catch( handleError );
 
 }
 

@@ -8,6 +8,7 @@ const finalData = {
   txCost: 0,
   userETHBalance: 0,
   userTokenBalance: 0,
+  tokensToAprove: 0,
 };
 const tokenInput = document.getElementById("token-input");
 const tokenAddContainerMan = document.querySelectorAll(".token-address")[0];
