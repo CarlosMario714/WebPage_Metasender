@@ -139,7 +139,6 @@ button.addEventListener("click", () => {
 
 optionFile.addEventListener("click", () => {
   let userInfo = userDeviceInfo();
-  console.log(userInfo);
   if (userInfo.mobile) return showErrorAlert("Not available on movil devices");
   if (isConnected) {
     fileDataContainer.style.display = "flex";

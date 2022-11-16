@@ -9,6 +9,7 @@ const finalData = {
   userETHBalance: 0,
   userTokenBalance: 0,
   tokensToAprove: 0,
+  isPalco: false
 };
 const tokenInput = document.getElementById("token-input");
 const tokenAddContainerMan = document.querySelectorAll(".token-address")[0];

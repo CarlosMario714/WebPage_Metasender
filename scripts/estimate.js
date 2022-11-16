@@ -1,5 +1,5 @@
 import {  getTotalValue, isSameValue } from "./transactions.js";
-import { getContract, handleError  } from "./tools.js";
+import { getContract, handleError, handleTxFee  } from "./tools.js";
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
 
@@ -10,7 +10,7 @@ async function sendNativeTokenSameValue( addresses, amounts ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract.estimateGas
 		.sendNativeTokenSameValue( addresses, amounts[0], 
@@ -27,7 +27,7 @@ async function sendNativeTokenDifferentValue( addresses, amounts ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract.estimateGas
 		.sendNativeTokenDifferentValue(addresses, amounts, 
@@ -44,7 +44,7 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract.estimateGas
 		.sendIERC20SameValue( contactAdd, addresses, amounts[0], 
@@ -61,7 +61,7 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract.estimateGas
 		.sendIERC20DifferentValue( contactAdd, addresses, amounts,
@@ -78,7 +78,7 @@ async function sendIERC721( contactAdd, addresses, tokenIds ) {
 		metasender.abi
 	)
 
-	const txFee = await contract.txFee();
+	const txFee = await handleTxFee();
 
 	return await contract.estimateGas
 		.sendIERC721( contactAdd, addresses, tokenIds,  
@@ -107,6 +107,8 @@ export const mSestimateFunc = new MetasenderMethods()
 export async function estimateTx() {
 
 	let gasEstimation
+
+	console.log( finalData.wallets )
 
 	switch( finalData.tokenToSend ){
 

@@ -203,6 +203,10 @@ nav button {
   z-index: 0;
 }
 
+.isPalco {
+  background-color: #000;
+}
+
 .contenedor-botones-navbar .btn {
   height: 50%;
   color: #a6903c;
