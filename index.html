@@ -329,10 +329,10 @@
         <div class="tables-palco-container">
           <div class="table-container">
             <table>
-              <h3 class="table-title-normal-user">Normal user</h3>
+              <h3 class="table-title-normal-user"  data-content="palco" data-type="palco-normalUser">Normal user</h3>
               <tr class="palco-table-firstRow">
-                <th>Network</th>
-                <th>Transaction tax</th>
+                <th data-content="palco" data-type="palco-network">Network</th>
+                <th data-content="palco" data-type="palco-fees">Transaction tax</th>
                 <!-- <th>Palco</th> -->
               </tr>
               <tr>
@@ -364,10 +364,10 @@
           </div>
           <div class="table-container">
             <table>
-              <h3 class="table-title-palco-user">Palco user*</h3>
+              <h3 class="table-title-palco-user" data-content="palco" data-type="palco-palcoMember">Palco member*</h3>
               <tr class="palco-table-firstRow">
-                <th>Network</th>
-                <th>Transaction tax</th>
+                <th data-content="palco" data-type="palco-network">Network</th>
+                <th data-content="palco" data-type="palco-fees">Transaction tax</th>
                 <!-- <th>Palco</th> -->
               </tr>
               <tr>
@@ -396,18 +396,18 @@
                 <!-- <th>6000 FTM</th> -->
               </tr>
             </table>
-            <p>*The Palco user will have these benefits only in the network that buys the subscription.</p>
+            <p data-content="palco" data-type="palco-alert">*The Palco member will have these benefits only in the network that buys the subscription.</p>
           </div>
         </div>
-        <p data-content="palco" data-type="palco-info">
+        <p data-content="palco" data-type="palco-prices-texts">
           Be part of our <span>Palco,</span> connect your wallet, choose the network in which you want to be part of the
           Palco and click on buy.
         </p>
         <div class="table-container2">
           <table>
-            <h3 class="table-title-palco-user">Palco prices</h3>
+            <h3 class="table-title-palco-user" data-content="palco" data-type="palco-prices-title">Palco prices</h3>
             <tr class="palco-table-firstRow">
-              <th>Network</th>
+              <th data-content="palco" data-type="palco-network">Network</th>
               <th>Price Subscription</th>
               <!-- <th>Palco</th> -->
             </tr>
@@ -465,8 +465,8 @@
 
     <div class="disConnectedToMainet">
       <img src="./img/icons/alert.png" alt="alert" />
-      <p data-content="alerts" data-type="disconnected-to-mainet">
-        You are disconnected from the Ethereum network
+      <p data-content="alerts" data-type="Not Suported network">
+        Network Not Supported
       </p>
       <div class="closeAlert">
         <div class="bar1"></div>
@@ -504,7 +504,7 @@
           <div class="links-column">
             <a data-content="navbar" data-type="navbar-palco" href="#palco">Palco
             </a>
-            <a class="btn-faq" data-content="navbar-palco-options" data-type="faq">TUTORIAL</a>
+            <a class="btn-faq">TUTORIAL</a>
           </div>
         </div>
       </div>

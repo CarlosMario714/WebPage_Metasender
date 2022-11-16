@@ -49,7 +49,21 @@ export default {
         },
         "palco": {
             "palco-title": "<span>Be part of our</span> Palco",
-            "palco-info": "<span>The Metasender</span> will charge you a small tax for each batch of transactions that you make, you can make lots of free transactions for life by becoming part of our <span>Palco</span>"
+            "palco-info": "<span>The Metasender</span> will charge you a small tax for each batch of transactions that you make, you can make lots of free transactions for life by becoming part of our <span>Palco</span>",
+            "palco-normalUser": "Normal user",
+            "palco-network": "Network",
+            "palco-fees": "Transaction tax",
+            "palco-palcoMember": "Palco member*",
+            "palco-alert": "*The Palco member will have these benefits only in the network that buys the subscription.",
+            "palco-prices-texts": "Be part of our <span>Palco,</span> connect your wallet, choose the network in which you want to be part of the Palco and click on buy.",
+            "palco-prices-title": "Palco prices",
+        },
+        "footer": {
+            "footer-followus": "Follow Us"
+        },
+        "alerts": {
+            "install-metamask": "Please Install Metamask",
+            "Not Suported network": "Network Not Supported"
         }
     },
     es: {
@@ -102,7 +116,21 @@ export default {
         },
         "palco": {
             "palco-title": "<span>Sé parte de nuestro</span> Palco",
-            "palco-info": "<span>El Metasender</span> te cobrará un pequeño impuesto por cada lote de transacciones que realices, puedes realizar muchas transacciones gratis de por vida siendo parte de nuestro <span>Palco</span>"
+            "palco-info": "<span>El Metasender</span> te cobrará un pequeño impuesto por cada lote de transacciones que realices, puedes realizar muchas transacciones gratis de por vida siendo parte de nuestro <span>Palco</span>",
+            "palco-normalUser": "Usuario normal",
+            "palco-network": "Red",
+            "palco-fees": "Impuesto a las transacciones",
+            "palco-palcoMember": "Miembro del Palco*",
+            "palco-alert": "*El miembro del Palco tendrá estos beneficios solo en la red que compre la suscripción.",
+            "palco-prices-texts": "Forma parte de nuestro <span>Palco,</span> conecta tu wallet, elige la red en la que quieres formar parte de la Palco y haz clic en comprar.",
+            "palco-prices-title": "Precios del Palco",
+        },
+        "footer": {
+            "footer-followus": "Síguenos"
+        },
+        "alerts": {
+            "install-metamask": "Instale Metamask",
+            "Not Suported network": "Red no compatible"
         }
     }
 }
