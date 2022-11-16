@@ -57,6 +57,7 @@ export default {
             "palco-alert": "*The Palco member will have these benefits only in the network that buys the subscription.",
             "palco-prices-texts": "Be part of our <span>Palco,</span> connect your wallet, choose the network in which you want to be part of the Palco and click on buy.",
             "palco-prices-title": "Palco prices",
+            "btn-palco": "Buy <span>Palco</span> Now"
         },
         "footer": {
             "footer-followus": "Follow Us"
@@ -124,6 +125,7 @@ export default {
             "palco-alert": "*El miembro del Palco tendrá estos beneficios solo en la red que compre la suscripción.",
             "palco-prices-texts": "Forma parte de nuestro <span>Palco,</span> conecta tu wallet, elige la red en la que quieres formar parte de la Palco y haz clic en comprar.",
             "palco-prices-title": "Precios del Palco",
+            "btn-palco": "Compre <span>Palco</span> ahora"
         },
         "footer": {
             "footer-followus": "Síguenos"
