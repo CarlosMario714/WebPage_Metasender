@@ -29,8 +29,7 @@
     <div class="contenedor-botones-navbar">
       <a class="btn btn-home close-sidenavbar" href="#Home" data-content="navbar" data-type="navbar-home">HOME</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <a class="btn close-sidenavbar" href="#options-to-send" data-content="navbar"
-        data-type="navbar-send">SEND</a>
+      <a class="btn close-sidenavbar" href="#options-to-send" data-content="navbar" data-type="navbar-send">SEND</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-palco" href="#palco">PALCO
       </a>
@@ -39,8 +38,8 @@
       </a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <button data-content="navbar" data-type="navbar-connect" class="btnConnect btn">
-        CONNECT WALLET 
-        <img src="./img/icons/Metamask-icon.png"alt="icono metamask">
+        CONNECT WALLET
+        <img src="./img/icons/Metamask-icon.png" alt="icono metamask">
       </button>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <div class="btn option-red">
@@ -96,7 +95,7 @@
           <span>The<br></span>
           MetaSender<br>
         </h1>
-        <h2  data-content="header" data-type="header-slogan-subtitle">A Metalorian's DApp</h2>
+        <h2 data-content="header" data-type="header-slogan-subtitle">A Metalorian's DApp</h2>
         <div class="hologram-image-container">
           <img src="./img/imagenes/metalogo.png" alt="imagen fondo header" />
         </div>
@@ -106,9 +105,11 @@
     <section id="options-to-send" class="options-to-send">
       <h1 data-content="description" data-type="description-title">Send tokens to multiple accounts at once
       </h1>
-      <p class="page-description" data-content="description" data-type="description-text">With <span>The MetaSender </span> you can send tokens to multiple accounts at the same
+      <p class="page-description" data-content="description" data-type="description-text">With <span>The MetaSender
+        </span> you can send tokens to multiple accounts at the same
         time on networks like Ethereum, Binance, Polygon, among others. At a reduced price.</p>
-      <h3 data-content="description" data-type="description-action">Connect your Wallet <img class="metamask-icon" src="./img/icons/Metamask-icon.png" alt="icono metamask"> choose a network and select one way to do it:</h3>
+      <h3 data-content="description" data-type="description-action">Connect your Wallet <img class="metamask-icon"
+          src="./img/icons/Metamask-icon.png" alt="icono metamask"> choose a network and select one way to do it:</h3>
       <div class="options-to-send-container">
         <button class="option-to-send option-file" href="#options-to-send">
           <p data-content="description" data-type="description-send-file">
@@ -149,17 +150,19 @@
               </label>
               <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
                 pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Add a valid Address without spaces" required />
-              <span class="input-error none span-wallet"  data-content="send-process" data-type="send-process-span-wallet">
+              <span class="input-error none span-wallet" data-content="send-process"
+                data-type="send-process-span-wallet">
                 Add a valid Address without spaces
               </span>
             </div>
             <div class="input-container">
-              <label class="label-amount"  data-content="send-process" data-type="send-process-label-amount">
+              <label class="label-amount" data-content="send-process" data-type="send-process-label-amount">
                 Amount to send
               </label>
               <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto"
                 pattern="^\d*\.\d+$|^\d*\d+$" title="Only positive numbers" required />
-              <span class="input-error none span-amount" data-content="send-process" data-type="send-process-span-amount">
+              <span class="input-error none span-amount" data-content="send-process"
+                data-type="send-process-span-amount">
                 Only positive numbers
               </span>
             </div>
@@ -169,7 +172,8 @@
             <h2 data-content="send-process" data-type="send-process-contract-address">Contract Address</h2>
             <input type="text" placeholder="address del Contrato" name="token-addres"
               pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Invalid contract addres">
-            <span class="input-error none span-wallet" data-content="send-process" data-type="send-process-span-contract-address">
+            <span class="input-error none span-wallet" data-content="send-process"
+              data-type="send-process-span-contract-address">
               Invalid contract addres
             </span>
           </div>
@@ -177,19 +181,6 @@
         <div class="wallets-container">
           <div class="manual-wallets-container">
             <h2 data-content="send-process" data-type="send-process-correct-data">Correct data</h2>
-            <!-- <div id="1" class="manual-wallet">
-              <p class="number-of-wallet">1</p>
-              <p class="wallet-adress">0xf45025599c54930BF6C16C208f0507E80FEA5d84</p>
-
-              <p class="wallet-amount">1</p>
-              <p>ETH</p>
-              <a>
-                <img class="edit-wallet" src="../img/icons/boton-editar.png" alt="cerrar pagina" />
-              </a>
-              <a>
-                <img class="delete-wallet" src="../img/icons/cerrar.png" alt="cerrar pagina" />
-              </a>
-            </div> -->
           </div>
           <div class="incorrect-wallets-container">
             <h2 data-content="send-process" data-type="send-process-incorrect-data">Incorrect data</h2>
@@ -201,26 +192,32 @@
         </button>
       </div>
       <div class="file-data-container">
-        <h2 class="subir-archivo-titulo" data-content="send-process" data-type="send-process-file-title">Upload a file</h2>
+        <h2 class="subir-archivo-titulo" data-content="send-process" data-type="send-process-file-title">Upload a file
+        </h2>
         <div class="drop-area-container">
           <div class="drop-area">
             <h2 data-content="send-process" data-type="send-process-drop-title">Drag and drop the file here</h2>
             <span>O</span>
-            <button class="btn2" data-content="send-process" data-type="send-process-drop-btnSelect">Select your files</button>
+            <button class="btn2" data-content="send-process" data-type="send-process-drop-btnSelect">Select your
+              files</button>
             <input type="file" name="" id="input-file" hidden>
           </div>
           <div class="plantilla">
             <p data-content="send-process" data-type="send-process-template-text">
-              *The file must comply with the template: 
+              *The file must comply with the template:
             </p>
-            <a href="./download/metasender.xlsx" download="metasender.xlsx" data-content="send-process" data-type="send-process-template-link">Download Template</a>
+            <a href="./download/metasender.xlsx" download="metasender.xlsx" data-content="send-process"
+              data-type="send-process-template-link">Download Template</a>
           </div>
           <div class="notas-archivo">
-            <p data-content="send-process" data-type="send-process-template-condition1">*Each data in the file must not contain blank spaces</p>
-            <p data-content="send-process" data-type="send-process-template-condition2">*If you are going to send ERC721, in the amount column you must indicate the ID of the token to send</p>
+            <p data-content="send-process" data-type="send-process-template-condition1">*Each data in the file must not
+              contain blank spaces</p>
+            <p data-content="send-process" data-type="send-process-template-condition2">*If you are going to send
+              ERC721, in the amount column you must indicate the ID of the token to send</p>
           </div>
           <div class="input-container input-container-file">
-            <label data-content="send-process" data-type="send-process-file-label-tokenType">Select the Type of Token to Send</label>
+            <label data-content="send-process" data-type="send-process-file-label-tokenType">Select the Type of Token to
+              Send</label>
             <select name="token" class="token-input-file" id="token-input" required>
               <option selected value="" readonly>--Token--</option>
               <option name="chain-currency-file" value="ETH">ETH</option>
@@ -229,13 +226,15 @@
             </select>
           </div>
           <div class="token-address">
-            <h2  data-content="send-process" data-type="send-process-contract-address">Contract Address</h2>
+            <h2 data-content="send-process" data-type="send-process-contract-address">Contract Address</h2>
             <input type="text" placeholder="address del Contrato" name="token-addres" title="Invalid contract address">
-            <span class="input-error none span-contractaddres-file" data-content="send-process" data-type="send-process-span-contract-address">
+            <span class="input-error none span-contractaddres-file" data-content="send-process"
+              data-type="send-process-span-contract-address">
               Invalid contract address
             </span>
           </div>
-          <button class="continue-btn-file btn2" data-content="send-process" data-type="span-contract-continue">Continue</button>
+          <button class="continue-btn-file btn2" data-content="send-process"
+            data-type="span-contract-continue">Continue</button>
         </div>
       </div>
       <div class="resumen-final-container">
@@ -315,38 +314,78 @@
           you make, you can make lots of free transactions for life by becoming part of our
           <span>Palco</span>
         </p>
-        <table>
-          <tr class="palco-table-firstRow">
-            <th>network</th>
-            <th>transaction tax</th>
-            <th>Palco</th>
-          </tr>
-          <tr>
-            <th>Ethereum</th>
-            <th>0.0075 ETH</th>
-            <th>1 ETH</th>
-          </tr>
-          <tr>
-            <th>BSC</th>
-            <th>0.035 BNB</th>
-            <th>5 BNB</th>
-          </tr>
-          <tr>
-            <th>Polygon</th>
-            <th>10 MATIC</th>
-            <th>1500 MATIC</th>
-          </tr>
-          <tr>
-            <th>Avalanche</th>
-            <th>0.6 AVAX</th>
-            <th>90 AVAX</th>
-          </tr>
-          <tr>
-            <th>Fantom</th>
-            <th>45 FTM</th>
-            <th>6000 FTM</th>
-          </tr>
-        </table>
+        <div class="tables-palco-container">
+          <div class="table-container">
+            <table>
+              <h3 class="table-title-normal-user">Normal user</h3>
+              <tr class="palco-table-firstRow">
+                <th>Network</th>
+                <th>Transaction tax</th>
+                <!-- <th>Palco</th> -->
+              </tr>
+              <tr>
+                <th>Ethereum</th>
+                <th>0.0075 ETH</th>
+                <!-- <th>1 ETH</th> -->
+              </tr>
+              <tr>
+                <th>BSC</th>
+                <th>0.035 BNB</th>
+                <!-- <th>5 BNB</th> -->
+              </tr>
+              <tr>
+                <th>Polygon</th>
+                <th>10 MATIC</th>
+                <!-- <th>1500 MATIC</th> -->
+              </tr>
+              <tr>
+                <th>Avalanche</th>
+                <th>0.6 AVAX</th>
+                <!-- <th>90 AVAX</th> -->
+              </tr>
+              <tr>
+                <th>Fantom</th>
+                <th>45 FTM</th>
+                <!-- <th>6000 FTM</th> -->
+              </tr>
+            </table>
+          </div>
+          <div class="table-container">
+            <table>
+              <h3 class="table-title-palco-user">Palco user</h3>
+              <tr class="palco-table-firstRow">
+                <th>Network</th>
+                <th>Transaction tax</th>
+                <!-- <th>Palco</th> -->
+              </tr>
+              <tr>
+                <th>Ethereum</th>
+                <th>0 ETH</th>
+                <!-- <th>1 ETH</th> -->
+              </tr>
+              <tr>
+                <th>BSC</th>
+                <th>0 BNB</th>
+                <!-- <th>5 BNB</th> -->
+              </tr>
+              <tr>
+                <th>Polygon</th>
+                <th>0 MATIC</th>
+                <!-- <th>1500 MATIC</th> -->
+              </tr>
+              <tr>
+                <th>Avalanche</th>
+                <th>0 AVAX</th>
+                <!-- <th>90 AVAX</th> -->
+              </tr>
+              <tr>
+                <th>Fantom</th>
+                <th>0 FTM</th>
+                <!-- <th>6000 FTM</th> -->
+              </tr>
+            </table>
+          </div>
+        </div>
         <button class="btn-palco" data-content="palco" data-type="btn-palco">
           Comprar
         </button>
@@ -390,35 +429,6 @@
         <div class="bar2"></div>
       </div>
     </div>
-
-    <!-- <div class="manual-data-container">
-      <div class="manual-data">
-        <h4>Añade manualmente los datos</h4>
-        <div class="manual-wallets">
-          <div class="input-container">
-            <label>adress</label>
-            <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet" required />
-          </div>
-          <div class="input-container">
-            <label>monto</label>
-            <input class="amount-input" type="text" name="manual-wallet" placeholder="Escribe el monto" required />
-          </div>
-          <button class="add-wallet-button">+</button>
-        </div>
-      </div>
-      <button class="process-btn-manual">process data</button>
-    </div>-->
-
-    <!-- <div class="send-container">
-      <button class="btnConnect">Connect wallet</button>
-      <select name="eth-network" id="eth-network-select">
-        <option value="1">Mainnet</option>
-        <option value="5">Goerli</option>
-      </select>
-      <button class="btnSend" value="ETH">send</button>
-      <button class="btnEstimate" value="ETH">estimate</button>
-    </div> -->
-
   </main>
 
   <footer id=" footer">
