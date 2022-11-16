@@ -1116,17 +1116,21 @@ header {
 }
 
 .btn-palco {
-  display: flex;
+  margin: 5rem;
+  width: 30rem;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
-  margin: 0 0 0 2rem;
+  text-align: center;
   background: rgba(126, 126, 126, 0.2);
   backdrop-filter: blur(10px);
-  width: 20rem;
-  height: 6rem;
-  border-radius: 3rem;
-  border: none;
+  padding: 2rem;
+  border-radius: 1rem;
+  font-weight: 300;
+}
+
+.btn-palco span {
+  font-weight: 500;
 }
 
 .btn-palco:hover {
@@ -1137,7 +1141,7 @@ header {
 .tables-palco-container {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   margin-bottom: 4rem;
 }
@@ -1152,10 +1156,18 @@ header {
 
 .table-container table {
   width: 100%;
+  margin-bottom: 1rem;
 }
 
-.table-palco-container table {
-  margin-bottom: 6rem;
+.table-container table th,
+.table-container2 table th {
+  width: 50%;
+}
+
+.table-container p {
+  margin: 0;
+  font-weight: 500;
+  color: rgb(126, 126, 126);
 }
 
 .table-title-normal-user {
@@ -1182,6 +1194,19 @@ header {
 
 .palco-container table th {
   font-weight: 300;
+}
+
+.table-container2 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.table-container2 table,
+.table-container2 h3 {
+  width: 50%;
 }
 
 .palco-container table .palco-table-firstRow th {
