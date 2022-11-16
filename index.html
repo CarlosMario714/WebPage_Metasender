@@ -30,16 +30,18 @@
       <a class="btn btn-home close-sidenavbar" href="#Home" data-content="navbar" data-type="navbar-home">HOME</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <a class="btn close-sidenavbar" href="#options-to-send" data-content="navbar"
-        data-type="navbar-marketplace">SEND</a>
+        data-type="navbar-send">SEND</a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-palco" href="#palco">PALCO
       </a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <a class="community-navbar-btn btn" href="#nftSales" data-content="navbar" data-type="navbar-community">TUTORIAL
+      <a class="community-navbar-btn btn" href="#nftSales" data-content="navbar" data-type="navbar-tutorial">TUTORIAL
       </a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <button class="btnConnect btn">CONNECT WALLET <img src="./img/icons/Metamask-icon.png"
-          alt="icono metamask"></button>
+      <button data-content="navbar" data-type="navbar-connect" class="btnConnect btn">
+        CONNECT WALLET 
+        <img src="./img/icons/Metamask-icon.png"alt="icono metamask">
+      </button>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <div class="btn option-red">
         <select name="red" style="width: 220px;" required>
@@ -90,11 +92,11 @@
       </div>
 
       <div class="slogan-header-container">
-        <h1 data-content="header" data-type="header-slogan">
+        <h1>
           <span>The<br></span>
           MetaSender<br>
         </h1>
-        <h2>A Metalorian's DApp</h2>
+        <h2  data-content="header" data-type="header-slogan-subtitle">A Metalorian's DApp</h2>
         <div class="hologram-image-container">
           <img src="./img/imagenes/metalogo.png" alt="imagen fondo header" />
         </div>
@@ -102,23 +104,24 @@
     </header>
 
     <section id="options-to-send" class="options-to-send">
-      <h1>Send tokens to multiple accounts at once
+      <h1 data-content="description" data-type="description-title">Send tokens to multiple accounts at once
       </h1>
-      <p class="page-description">With <span>The MetaSender </span> you can send tokens to multiple accounts at the same
+      <p class="page-description" data-content="description" data-type="description-text">With <span>The MetaSender </span> you can send tokens to multiple accounts at the same
         time on networks like Ethereum, Binance, Polygon, among others. At a reduced price.</p>
-      <h3>Connect your Wallet <img class="metamask-icon" src="./img/icons/Metamask-icon.png" alt="icono metamask">
-        choose
-        a network and select
-        one way to do it:</h3>
+      <h3 data-content="description" data-type="description-action">Connect your Wallet <img class="metamask-icon" src="./img/icons/Metamask-icon.png" alt="icono metamask"> choose a network and select one way to do it:</h3>
       <div class="options-to-send-container">
         <button class="option-to-send option-file" href="#options-to-send">
-          <p>Send tokens by adding accounts from an Excel file</p>
+          <p data-content="description" data-type="description-send-file">
+            Send tokens by adding accounts from an Excel file.
+          </p>
           <div class="icono-option-container">
             <img src="./img/icons/upload-icon.png" alt="icono escribir">
           </div>
         </button>
         <button class="option-to-send option-manual" href="#options-to-send">
-          <p>Send tokens by adding accounts manually</p>
+          <p data-content="description" data-type="description-send-manual">
+            Send tokens by adding accounts manually.
+          </p>
           <div class="icono-option-container">
             <img src="./img/icons/contract.png" alt="icono escribir">
           </div>
@@ -130,10 +133,10 @@
     <section id="send-process">
       <div class="manual-data-container">
         <div class="info-inputs-container">
-          <h2>Add accounts</h2>
+          <h2 data-content="send-process" data-type="send-process-title">Add accounts</h2>
           <div class="manual-inputs-container">
             <div class="input-container">
-              <label>Token Type</label>
+              <label data-content="send-process" data-type="send-process-label-token-type">Token Type</label>
               <select name="token" class="token-input" id="token-input" required>
                 <option name="chain-currency" selected value="ETH">ETH</option>
                 <option value="ERC20">ERC20</option>
@@ -141,29 +144,39 @@
               </select>
             </div>
             <div class="input-container">
-              <label class="label-adress">Account or Wallet to send</label>
+              <label class="label-adress" data-content="send-process" data-type="send-process-label-wallet">
+                Account or Wallet to send
+              </label>
               <input class="wallet-input" type="text" name="manual-wallet" placeholder="Escribe la wallet"
                 pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Add a valid Address without spaces" required />
-              <span class="input-error none span-wallet">Add a valid Address without spaces</span>
+              <span class="input-error none span-wallet"  data-content="send-process" data-type="send-process-span-wallet">
+                Add a valid Address without spaces
+              </span>
             </div>
             <div class="input-container">
-              <label class="label-amount">Amount to send</label>
+              <label class="label-amount"  data-content="send-process" data-type="send-process-label-amount">
+                Amount to send
+              </label>
               <input class="amount-input" type="text" name="amount-input" placeholder="Escribe el monto"
                 pattern="^\d*\.\d+$|^\d*\d+$" title="Only positive numbers" required />
-              <span class="input-error none span-amount">Only positive numbers</span>
+              <span class="input-error none span-amount" data-content="send-process" data-type="send-process-span-amount">
+                Only positive numbers
+              </span>
             </div>
             <button class="add-wallet-button">+</button>
           </div>
           <div class="token-address">
-            <h2>Contract Address</h2>
+            <h2 data-content="send-process" data-type="send-process-contract-address">Contract Address</h2>
             <input type="text" placeholder="address del Contrato" name="token-addres"
               pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Invalid contract addres">
-            <span class="input-error none span-wallet">Invalid contract addres</span>
+            <span class="input-error none span-wallet" data-content="send-process" data-type="send-process-span-contract-address">
+              Invalid contract addres
+            </span>
           </div>
         </div>
         <div class="wallets-container">
           <div class="manual-wallets-container">
-            <h2>Correct data</h2>
+            <h2 data-content="send-process" data-type="send-process-correct-data">Correct data</h2>
             <!-- <div id="1" class="manual-wallet">
               <p class="number-of-wallet">1</p>
               <p class="wallet-adress">0xf45025599c54930BF6C16C208f0507E80FEA5d84</p>
@@ -179,31 +192,35 @@
             </div> -->
           </div>
           <div class="incorrect-wallets-container">
-            <h2>Incorrect data</h2>
+            <h2 data-content="send-process" data-type="send-process-incorrect-data">Incorrect data</h2>
 
           </div>
         </div>
-        <button class="continue-btn-manual btn2">Continue</button>
+        <button class="continue-btn-manual btn2" data-content="send-process" data-type="send-process-continue">
+          Continue
+        </button>
       </div>
       <div class="file-data-container">
-        <h2 class="subir-archivo-titulo">Upload a file</h2>
+        <h2 class="subir-archivo-titulo" data-content="send-process" data-type="send-process-file-title">Upload a file</h2>
         <div class="drop-area-container">
           <div class="drop-area">
-            <h2>Drag and drop the file here</h2>
+            <h2 data-content="send-process" data-type="send-process-drop-title">Drag and drop the file here</h2>
             <span>O</span>
-            <button class="btn2">Select your files</button>
+            <button class="btn2" data-content="send-process" data-type="send-process-drop-btnSelect">Select your files</button>
             <input type="file" name="" id="input-file" hidden>
           </div>
           <div class="plantilla">
-            <p>*The file must comply with the template: </p>
-            <a href="./download/metasender.xlsx" download="metasender.xlsx">Download Template</a>
+            <p data-content="send-process" data-type="send-process-template-text">
+              *The file must comply with the template: 
+            </p>
+            <a href="./download/metasender.xlsx" download="metasender.xlsx" data-content="send-process" data-type="send-process-template-link">Download Template</a>
           </div>
           <div class="notas-archivo">
-            <p>*Each data in the file must not contain blank spaces</p>
-            <p>*If you are going to send ERC721, in the amount column you must indicate the ID of the token to send</p>
+            <p data-content="send-process" data-type="send-process-template-condition1">*Each data in the file must not contain blank spaces</p>
+            <p data-content="send-process" data-type="send-process-template-condition2">*If you are going to send ERC721, in the amount column you must indicate the ID of the token to send</p>
           </div>
           <div class="input-container input-container-file">
-            <label>Select the Type of Token to Send</label>
+            <label data-content="send-process" data-type="send-process-file-label-tokenType">Select the Type of Token to Send</label>
             <select name="token" class="token-input-file" id="token-input" required>
               <option selected value="" readonly>--Token--</option>
               <option name="chain-currency-file" value="ETH">ETH</option>
@@ -212,11 +229,13 @@
             </select>
           </div>
           <div class="token-address">
-            <h2>Contract Address</h2>
+            <h2  data-content="send-process" data-type="send-process-contract-address">Contract Address</h2>
             <input type="text" placeholder="address del Contrato" name="token-addres" title="Invalid contract address">
-            <span class="input-error none span-contractaddres-file">Invalid contract address</span>
+            <span class="input-error none span-contractaddres-file" data-content="send-process" data-type="send-process-span-contract-address">
+              Invalid contract address
+            </span>
           </div>
-          <button class="continue-btn-file btn2">Continue</button>
+          <button class="continue-btn-file btn2" data-content="send-process" data-type="span-contract-continue">Continue</button>
         </div>
       </div>
       <div class="resumen-final-container">
