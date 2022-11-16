@@ -1,8 +1,8 @@
 import idioms from "./idioms.js";
+import { changeTypeOfToken } from "./manualWallets.js";
 const languageButtons = document.querySelector(".language");
 const textsToTranslate = document.querySelectorAll("[data-content]");
-const titlesToTranslate = document.querySelectorAll('[title]')
-const placeHolderTranslate = document.querySelectorAll('[placeholder]')
+const tokenInput = document.getElementById("token-input");
 
 let languaje = "es";
 
@@ -28,27 +28,20 @@ async function changeLanguage(element) {
 
   translateItems( textsToTranslate, 'innerHTML', texts )
 
-  //traduccion formulario
-//   inputName.placeholder = texts["form"]["input-name-placeholder"];
-//   inputName.title = texts["form"]["input-name-title"];
-//   inputEmail.placeholder = texts["form"]["input-email-placeholder"];
-//   inputEmail.title = texts["form"]["input-email-title"];
-//   inputWallet.placeholder = texts["form"]["input-wallet-placeholder"];
-//   inputWallet.title = texts["form"]["input-wallet-title"];
-//   inputSubmit.value = texts["form"]["input-submit-value"];
+  changeTypeOfToken( tokenInput.value )
 
 }
 
 function toggleLanguage(e) {
 
   if (e.target.dataset.function == "en") {
-    changeLanguage(e.target.dataset.function);
     languaje = "en";
+    changeLanguage(e.target.dataset.function);
   }
 
   if (e.target.dataset.function == "es") {
-    changeLanguage(e.target.dataset.function);
     languaje = "es";
+    changeLanguage(e.target.dataset.function);
   }
 
 }

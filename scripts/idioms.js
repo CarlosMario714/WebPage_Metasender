@@ -18,6 +18,7 @@ export default {
         },
         "send-process": {
             "send-process-title": "Add accounts",
+            "send-process-label-token-type": "Token Type",
             "send-process-label-wallet": "Account or Wallet to send",
             "send-process-span-wallet": "Account or Wallet to send",
             "send-process-label-amount": "Amount to send",
@@ -59,13 +60,42 @@ export default {
             "palco-prices-title": "Palco prices",
             "btn-palco": "Buy <span>Palco</span> Now"
         },
+        "incorrectElement": {
+            "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address: </span>Add a valid Address without spaces</p></div>",
+            "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Monto no valido:</span> Only positive numbers</p> </div>",
+            "allErrors": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address:</span> write a valid address without spaces</p> <p><span>Monto no valido:</span> Solo numeros positivos</p></div>"
+        },
         "footer": {
             "footer-followus": "Follow Us"
         },
         "alerts": {
             "install-metamask": "Please Install Metamask",
             "Not Suported network": "Network Not Supported"
-        }
+        },
+        "ETH": {
+            "labelAdress": "Account or Wallet to send",
+            "walletInput": "Write the wallet",
+            "labelAmount": "Amount to send",
+            "amountInput_placeHolder": "Write the amount",
+            "amountInput_pattern": "^\\d*\\.\\d+$|^\\d*\\d+$",
+            "amountInput_text": "only positive numbers"
+        },
+        "ERC20": {
+            "labelAdress": "Account or Wallet to send",
+            "walletInput": "Write the wallet",
+            "labelAmount": "Amount of tokens to send",
+            "amountInput_placeHolder": "Write amount of tokens",
+            "amountInput_pattern": "^\\d*\\.\\d+$|^\\d*\\d+$",
+            "amountInput_text": "only positive numbers"
+        },
+        "ERC721": {
+            "labelAdress": "Account or Wallet to send",
+            "walletInput": "Write the wallet",
+            "labelAmount": "ID of the token to send",
+            "amountInput_placeHolder": "Write the ID of the token",
+            "amountInput_pattern": "^\\d*\\d+$",
+            "amountInput_text": "only positive integers"
+        },
     },
     es: {
         "navbar": {
@@ -86,6 +116,7 @@ export default {
         },
         "send-process": {
             "send-process-title": "Agregar cuentas",
+            "send-process-label-token-type": "Tipo de Token",
             "send-process-label-wallet": "Cuenta o Wallet para enviar",
             "send-process-span-wallet": "Cuenta o Wallet para enviar",
             "send-process-label-amount": "cantidad a enviar",
@@ -127,12 +158,41 @@ export default {
             "palco-prices-title": "Precios del Palco",
             "btn-palco": "Compre <span>Palco</span> ahora"
         },
+        "incorrectElement": {
+            "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Wallet no válida: </span>Agregue una dirección válida sin espacios</p></div>",
+            "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Monto no valido:</span> Solo números positivos</p> </div>",
+            "allErrors": "<div class=\"wallet-errors\"><p><span>Wallet no válida:</span> escriba una dirección válida sin espacios</p> <p><span>Monto no valido:</span> Solo numeros positivos</p></div>"
+        },
         "footer": {
             "footer-followus": "Síguenos"
         },
         "alerts": {
             "install-metamask": "Instale Metamask",
             "Not Suported network": "Red no compatible"
-        }
+        },
+        "ETH": {
+            "labelAdress": "Wallet para enviar",
+            "walletInput": "Escribe la wallet",
+            "labelAmount": "Cantidad a enviar",
+            "amountInput_placeHolder": "Cantidad a enviar",
+            "amountInput_pattern": "^\\d*\\.\\d+$|^\\d*\\d+$",
+            "amountInput_text": "Solo numeros positivos"
+        },
+        "ERC20": {
+            "labelAdress": "Wallet para enviar",
+            "walletInput": "Escribe la wallet",
+            "labelAmount": "Cantidad de tokens a enviar",
+            "amountInput_placeHolder": "Escribe la cantidad de tokens",
+            "amountInput_pattern": "^\\d*\\.\\d+$|^\\d*\\d+$",
+            "amountInput_text": "solo numeros positivos"
+        },
+        "ERC721": {
+            "labelAdress": "Wallet para enviar",
+            "walletInput": "Escribe la wallet",
+            "labelAmount": "ID del token a enviar",
+            "amountInput_placeHolder": "Escribe el ID del token",
+            "amountInput_pattern": "^\\d*\\d+$",
+            "amountInput_text": "Solo enteros positivos"
+        },
     }
 }
