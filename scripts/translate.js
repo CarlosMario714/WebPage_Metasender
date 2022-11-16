@@ -1,7 +1,12 @@
+import idioms from "./idioms.js";
 const languageButtons = document.querySelector(".language");
+const textsToTranslate = document.querySelectorAll("[data-content]");
+const titlesToTranslate = document.querySelectorAll('[title]')
+const placeHolderTranslate = document.querySelectorAll('[placeholder]')
+
 let languaje = "es";
 
-function translateText( items, property, texts ) {
+function translateItems( items, property, texts ) {
 
   for (const textToTranslate of items) {
 
@@ -19,13 +24,9 @@ function translateText( items, property, texts ) {
 
 async function changeLanguage(element) {
 
-  const textsToTranslate = document.querySelectorAll("[data-content]");
+  const texts = idioms[ element ];
 
-  const requestJson = await fetch(`../json/${element}.json`);
-
-  const texts = await requestJson.json();
-
-  translateText( textsToTranslate, 'innerHTML', texts )
+  translateItems( textsToTranslate, 'innerHTML', texts )
 
   //traduccion formulario
 //   inputName.placeholder = texts["form"]["input-name-placeholder"];
@@ -35,6 +36,7 @@ async function changeLanguage(element) {
 //   inputWallet.placeholder = texts["form"]["input-wallet-placeholder"];
 //   inputWallet.title = texts["form"]["input-wallet-title"];
 //   inputSubmit.value = texts["form"]["input-submit-value"];
+
 }
 
 function toggleLanguage(e) {

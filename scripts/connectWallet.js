@@ -4,7 +4,6 @@ const closeAlert = document.querySelectorAll(".closeAlert");
 const btnConnect = document.querySelector(".btnConnect");
 const installAlert = document.querySelector(".installAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
-const disConnectedToMainet = document.querySelector(".disConnectedToMainet");
 const errorAlert = document.querySelector(".errorsAlert");
 const optinonRed = document.querySelector(".option-red select");
 //change
@@ -29,7 +28,7 @@ function listenChain() {
 
     }
 
-    else  showErrorAlert('Network Not Suported')
+    else  showErrorAlert('Network Not Supported')
 
   });
 
@@ -124,7 +123,7 @@ btnConnect.addEventListener("click", () => {
 closeAlert.forEach((alert) => {
   alert.addEventListener("click", function () {
     removeClass(
-      [connectedToMainet, disConnectedToMainet, installAlert, errorAlert],
+      [connectedToMainet, installAlert, errorAlert],
       "showAlert"
     );
   });
@@ -133,4 +132,4 @@ closeAlert.forEach((alert) => {
 //select chain
 optinonRed.addEventListener("click", setChain);
 
-export { chain, installAlert, disConnectedToMainet, isConnected, login };
+export { chain, installAlert, isConnected, login };
