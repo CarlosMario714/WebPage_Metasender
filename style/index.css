@@ -678,6 +678,11 @@ header {
   );
 }
 
+.individual-wallet-container {
+  display: flex;
+  flex-direction: column;
+}
+
 .manual-wallet {
   margin: 2rem 0 0;
   width: 100%;
@@ -712,6 +717,19 @@ header {
 .manual-wallet a {
   max-width: 2.5rem;
   min-width: 2.5rem;
+}
+
+.repeated-wallet {
+  width: 20rem;
+  font-weight: 500;
+  font-style: italic;
+  margin: 0;
+  background: rgb(255, 234, 216);
+  background: radial-gradient(
+    circle,
+    rgb(255, 234, 216) 50%,
+    rgba(255, 255, 255, 1) 100%
+  );
 }
 
 .wallet-errors-container {

@@ -63,7 +63,8 @@ export default {
         "incorrectElement": {
             "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address: </span>Add a valid Address without spaces</p></div>",
             "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Monto no valido:</span> Only positive numbers</p> </div>",
-            "allErrors": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address:</span> write a valid address without spaces</p> <p><span>Monto no valido:</span> Solo numeros positivos</p></div>"
+            "allErrors": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address:</span> write a valid address without spaces</p> <p><span>Monto no valido:</span> Solo numeros positivos</p></div>",
+            "repitedWallet": `<p class="repeated-wallet">Wallet Repetida</p>`,
         },
         "footer": {
             "footer-followus": "Follow Us"
@@ -162,7 +163,8 @@ export default {
         "incorrectElement": {
             "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Wallet no válida: </span>Agregue una dirección válida sin espacios</p></div>",
             "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Monto no valido:</span> Solo números positivos</p> </div>",
-            "allErrors": "<div class=\"wallet-errors\"><p><span>Wallet no válida:</span> escriba una dirección válida sin espacios</p> <p><span>Monto no valido:</span> Solo numeros positivos</p></div>"
+            "allErrors": "<div class=\"wallet-errors\"><p><span>Wallet no válida:</span> escriba una dirección válida sin espacios</p> <p><span>Monto no valido:</span> Solo numeros positivos</p></div>",
+            "repitedWallet": `<p class="repeated-wallet">Wallet Repetida</p>`,
         },
         "footer": {
             "footer-followus": "Síguenos"

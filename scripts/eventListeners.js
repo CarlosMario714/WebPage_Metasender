@@ -10,6 +10,7 @@ import {
 } from "./manualWallets.js";
 import {
   file,
+  handleDelete,
   handleDrop,
   handleFileContinue,
   migrateInfo,
@@ -134,7 +135,7 @@ button.addEventListener("click", () => {
 // ?
 
 optionFile.addEventListener("click", () => {
-  let userInfo = userDeviceInfo();
+  const userInfo = userDeviceInfo();
   if (userInfo.mobile) return showErrorAlert("Not available on movil devices");
   if (isConnected) {
     fileDataContainer.style.display = "flex";
@@ -222,8 +223,8 @@ incorrectWalletsContainer.addEventListener("click", (e) => {
 // this show the option to add adress and amount manually
 
 optionManual.addEventListener("click", () => {
-  if (navigator.userAgentData.mobile)
-    return showErrorAlert("Not available in movil devices");
+  const userInfo = userDeviceInfo();
+  if (userInfo.mobile) return showErrorAlert("Not available in movil devices");
   if (isConnected) {
     manualDataContainer.style.display = "flex";
     fileDataContainer.style.display = "none";
