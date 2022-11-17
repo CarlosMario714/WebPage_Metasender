@@ -8,6 +8,7 @@ const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const selectChainItem = document.querySelector(".option-red select");
 const tokenInput = document.getElementById("token-input");
 const fileTokenInput = document.querySelector(".token-input-file");
+const installAlert = document.querySelector(".installAlert");
 
 export function removeClass(items, className) {
   for (const item of items) item.classList.remove(className);
@@ -26,8 +27,8 @@ export async function getTokenSymbol(_address) {
 }
 
 export function handleError(error) {
-  if (error.message) showErrorAlert(error.message);
-  else showErrorAlert(error.error.message);
+  if (error.error.message) showErrorAlert(error.error.message);
+  else showErrorAlert(error.message);
 }
 
 export function showConnectAlert() {
@@ -159,5 +160,11 @@ export async function handlePalco(){
   if( finalData.isPalco ) btnConnect.classList.add('isPalco')
 
   else btnConnect.classList.remove('isPalco')
+
+}
+
+export function showInstallAlert() {
+
+  if ( ! window.ethereum ) installAlert.classList.add( "showAlert" )
 
 }

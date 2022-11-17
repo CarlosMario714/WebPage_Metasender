@@ -3,10 +3,11 @@ import erc from './ercABI.js'
 import { getContract, getTokenSymbol, handleError, showErrorAlert } from "./tools.js"
 import metasender from "./contracts/metasender.js"
 import ethereumchains from "./ethereumchains.js";
+import { getTotalValue } from "./transactions.js";
 const aproveErc20Container = document.querySelector(".aprove-erc20-container");
-const btnAprove = document.querySelector('.btn-aprove')
 const totalToAprove = document.querySelector('.total-to-Aprove')
 const blockExprorerAprove = document.querySelector('.blockExprorerAprove')
+const tokenInput = document.getElementById("token-input");
 
 async function isApprovedForAll() {
 
@@ -147,7 +148,19 @@ async function getER721Aprove() {
     
 }
 
-async function handleAproval() {
+export async function isTokenAproved(amounts) {
+
+  if (tokenInput.value == "ERC20")
+    return await isAproved(getTotalValue(amounts));
+
+  if (tokenInput.value == "ERC721")
+    return await isERC721Aproved( amounts );
+
+  else return { isAproved: true }
+  
+}
+
+export async function handleAproval() {
 
     if( finalData.tokenToSend == "ERC20")
         return await getER20Aprove()
@@ -160,5 +173,3 @@ async function handleAproval() {
             .catch( handleError )
 
 }
-
-btnAprove.onclick = handleAproval
