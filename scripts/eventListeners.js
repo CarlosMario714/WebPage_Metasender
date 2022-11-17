@@ -2,10 +2,10 @@ import { addWallet, deleteOkWallet, editOkWallet } from "./addWallet.js";
 import { handleAproval } from "./allowance.js";
 import { isConnected, login, setChain } from "./connectWallet.js";
 import { changeTypeOfToken, handleManualContinue, deleteIncorrectWallet, renameNumberOfWallets, editIncorrectWallet } from "./manualWallets.js";
-import { file, handleDrop, handleFileContinue, migrateInfo, processFile, showFile } from "./readFile.js";
+import { file, handleDelete, handleDrop, handleFileContinue, migrateInfo, processFile, showFile } from "./readFile.js";
 import { handleSend, metasenderFunctions } from "./transactions.js";
 import { toggleLanguage } from "./translate.js";
-import { removeClass, showErrorAlert, userDeviceInfo } from "./tools.js";
+import { handleError, removeClass, showErrorAlert, userDeviceInfo } from "./tools.js";
 
 // navbar
 const hamburguer = document.querySelector(".hamburguer");
@@ -132,7 +132,9 @@ input.addEventListener("change", async (e) => {
 
     showFile(file);
 
-    await processFile().then(handleFileContinue);
+    await processFile()
+        .then( handleFileContinue )
+        .catch( handleError );
 
     dropArea.classList.add("active");
     dropArea.classList.remove("active");
@@ -144,6 +146,8 @@ dropArea.addEventListener("dragover", (e) => {
     dropArea.classList.add("active");
     dragText.textContent = "Release to upload files";
 });
+
+dropArea.addEventListener('click', handleDelete )
 
 //elementos que se estan arrastrando pero fuera del area
 dropArea.addEventListener("dragleave", (e) => {
@@ -205,7 +209,9 @@ incorrectWalletsContainer.addEventListener("click", (e) => {
 // this show the option to add adress and amount manually
 
 optionManual.addEventListener("click", () => {
-    if (navigator.userAgentData.mobile)
+    // change
+    // if (navigator.userAgentData.mobile)
+    if(false)
         return showErrorAlert('Not available in movil devices')
     if (isConnected) {
         manualDataContainer.style.display = "flex";

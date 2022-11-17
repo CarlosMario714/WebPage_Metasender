@@ -70,7 +70,8 @@ export default {
         },
         "alerts": {
             "install-metamask": "Please Install Metamask",
-            "Not Suported network": "Network Not Supported"
+            "Not Suported network": "Network Not Supported",
+            "batch_max": "Error: maximum 255 per lot"
         },
         "ETH": {
             "labelAdress": "Account or Wallet to send",
@@ -168,7 +169,8 @@ export default {
         },
         "alerts": {
             "install-metamask": "Instale Metamask",
-            "Not Suported network": "Red no compatible"
+            "Not Suported network": "Red no compatible",
+            "batch_max": "Error: maximo 255 por lote"
         },
         "ETH": {
             "labelAdress": "Wallet para enviar",
