@@ -2,7 +2,7 @@ import idioms from "./idioms.js";
 import { login, isConnected } from "./connectWallet.js";
 import setResumeInfo from "./resume.js";
 import { finalData, setFinalData } from "./finalData.js";
-import { verifyAddress, showErrorAlert } from "./tools.js";
+import { verifyAddress, showErrorAlert, userDeviceInfo } from "./tools.js";
 import { getTotalValue } from "./transactions.js";
 import { handleAllowance, isAproved, isERC721Aproved } from "./allowance.js";
 import { languaje } from "./translate.js";
@@ -53,8 +53,8 @@ const incorrectWalletsContainer = document.querySelector(
 );
 
 optionManual.addEventListener("click", () => {
-  if( navigator.userAgentData.mobile ) 
-    return showErrorAlert('Not available in movil devices')
+  let userInfo = userDeviceInfo();
+  if (userInfo.mobile) return showErrorAlert("Not available in movil devices");
   if (isConnected) {
     manualDataContainer.style.display = "flex";
     fileDataContainer.style.display = "none";
@@ -62,24 +62,21 @@ optionManual.addEventListener("click", () => {
   } else login();
 });
 
-export function changeTypeOfToken( tokenType ) {
+export function changeTypeOfToken(tokenType) {
+  labelAdress.innerHTML = idioms[languaje][tokenType].labelAdress;
 
-  labelAdress.innerHTML = idioms[ languaje ][tokenType].labelAdress;
+  walletInput.placeholder = idioms[languaje][tokenType].walletInput;
 
-  walletInput.placeholder = idioms[ languaje ][tokenType].walletInput;
+  labelAmount.innerHTML = idioms[languaje][tokenType].labelAmount;
 
-  labelAmount.innerHTML = idioms[ languaje ][tokenType].labelAmount;
+  amountInput.placeholder = idioms[languaje][tokenType].amountInput_placeHolder;
 
-  amountInput.placeholder = idioms[ languaje ][tokenType].amountInput_placeHolder;
+  amountInput.pattern = idioms[languaje][tokenType].amountInput_pattern;
 
-  amountInput.pattern = idioms[ languaje ][tokenType].amountInput_pattern;
+  amountInput.innerHTML = idioms[languaje][tokenType].amountInput_text;
 
-  amountInput.innerHTML = idioms[ languaje ][tokenType].amountInput_text;
-
-  if( tokenType == "ETH") tokenAddContainer.style.display = "none";
-
+  if (tokenType == "ETH") tokenAddContainer.style.display = "none";
   else tokenAddContainer.style.display = "block";
-
 }
 
 function addWallet() {
@@ -294,11 +291,11 @@ function addIncorrectWalletElement(wallet, amount, typeOfToken, whatError) {
     </a>
   </div>`;
 
-  const onlyWalletError = idioms[ languaje ].incorrectElement.onlyWalletError;
+  const onlyWalletError = idioms[languaje].incorrectElement.onlyWalletError;
 
-  const onlyAmountError = idioms[ languaje ].incorrectElement.onlyAmountError;
+  const onlyAmountError = idioms[languaje].incorrectElement.onlyAmountError;
 
-  const allErrors = idioms[ languaje ].incorrectElement.allErrors;
+  const allErrors = idioms[languaje].incorrectElement.allErrors;
 
   switch (whatError) {
     case "wallet error":
@@ -396,13 +393,11 @@ async function setDataAndShowResume() {
 async function isTokenAproved(amounts) {
   if (tokenInput.value == "ERC20")
     return await isAproved(getTotalValue(amounts));
-  if (tokenInput.value == "ERC721")
-    return await isERC721Aproved( amounts);
-  else return { isAproved: true }
+  if (tokenInput.value == "ERC721") return await isERC721Aproved(amounts);
+  else return { isAproved: true };
 }
 
 async function handleContinue() {
-
   if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
 
@@ -410,9 +405,9 @@ async function handleContinue() {
 
   setFinalData(addresses, amounts);
 
-  const { isAproved } = await isTokenAproved( finalData.amount )
+  const { isAproved } = await isTokenAproved(finalData.amount);
 
-  if( !isAproved ) return handleAllowance()
+  if (!isAproved) return handleAllowance();
 
   if (addresses.length == amounts.length && addresses.length > 0) {
     if (tokenInput.value == "ETH") setDataAndShowResume(addresses, amounts);
@@ -421,7 +416,6 @@ async function handleContinue() {
         setDataAndShowResume(addresses, amounts);
     }
   }
-
 }
 
 async function setFinalResume() {
