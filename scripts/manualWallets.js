@@ -20,35 +20,30 @@ const tituloDatosCorrectos = document.querySelector(
 export const walletCount = {
   correct: 0,
   incorrect: 0,
-}
+};
 export let newWalletsFragment = document.createDocumentFragment();
 export let newIncorrectsWalletsFragment = document.createDocumentFragment();
 const incorrectWalletsContainer = document.querySelector(
   ".incorrect-wallets-container"
 );
 
-export function changeTypeOfToken( item ) {
+export function changeTypeOfToken(item) {
+  let tokenType = item;
 
-  let tokenType = item
+  if (item.target) tokenType = item.target.value;
 
-  if (item.target) tokenType = item.target.value
+  walletInput.placeholder = idioms[languaje][tokenType].walletInput;
 
-  labelAdress.innerHTML = idioms[ languaje ][tokenType].labelAdress;
+  labelAmount.innerHTML = idioms[languaje][tokenType].labelAmount;
 
-  walletInput.placeholder = idioms[ languaje ][tokenType].walletInput;
+  amountInput.placeholder = idioms[languaje][tokenType].amountInput_placeHolder;
 
-  labelAmount.innerHTML = idioms[ languaje ][tokenType].labelAmount;
+  amountInput.pattern = idioms[languaje][tokenType].amountInput_pattern;
 
-  amountInput.placeholder = idioms[ languaje ][tokenType].amountInput_placeHolder;
+  amountInput.innerHTML = idioms[languaje][tokenType].amountInput_text;
 
-  amountInput.pattern = idioms[ languaje ][tokenType].amountInput_pattern;
-
-  amountInput.innerHTML = idioms[ languaje ][tokenType].amountInput_text;
-
-  if( tokenType == "ETH") tokenAddContainer.style.display = "none";
-
+  if (tokenType == "ETH") tokenAddContainer.style.display = "none";
   else tokenAddContainer.style.display = "block";
-
 }
 
 //rename wallets when someone is delete
@@ -139,11 +134,9 @@ function getAddAndAmounts() {
   });
 
   return { addresses, amounts };
-
 }
 
 export async function handleManualContinue() {
-
   if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
 
@@ -151,9 +144,9 @@ export async function handleManualContinue() {
 
   setFinalData(addresses, amounts);
 
-  const { isAproved } = await isTokenAproved( finalData.amount )
+  const { isAproved } = await isTokenAproved(finalData.amount);
 
-  if( !isAproved ) return handleAllowance()
+  if (!isAproved) return handleAllowance();
 
   if (addresses.length == amounts.length && addresses.length > 0) {
     if (tokenInput.value == "ETH") setDataAndShowResume(addresses, amounts);
@@ -162,5 +155,4 @@ export async function handleManualContinue() {
         setDataAndShowResume(addresses, amounts);
     }
   }
-
 }

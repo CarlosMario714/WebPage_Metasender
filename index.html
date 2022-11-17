@@ -33,12 +33,12 @@
       <a class="about-navbar-btn btn" data-content="navbar" data-type="navbar-palco" href="#palco">PALCO
       </a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
-      <a class="community-navbar-btn btn" href="#nftSales">TUTORIAL
-      </a>
+      <a class="community-navbar-btn btn" href="#tutorial">TUTORIAL </a>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <button data-content="navbar" data-type="navbar-connect" class="btnConnect btn">
         CONNECT WALLET
         <img src="./img/icons/Metamask-icon.png" alt="icono metamask" />
+        <div class="isPalco">PALCO MEMBER</div>
       </button>
       <div class="symbol" style="color: #a6903c; user-select: none">|</div>
       <div class="btn option-red">
@@ -236,6 +236,9 @@
               *If you are going to send ERC721, in the amount column you must
               indicate the ID of the token to send
             </p>
+            <p>
+              *Maximum 255 transactions per operation
+            </p>
           </div>
           <div class="input-container input-container-file">
             <label data-content="send-process" data-type="send-process-file-label-tokenType">Select the Type of Token to
@@ -261,8 +264,9 @@
           <button class="continue-btn-file btn2" data-content="send-process" data-type="span-contract-continue">
             Continue
           </button>
-          <button class="continue-btn-file btn2" data-content="send-process"
-            data-type="send-process-continue">Continue</button>
+          <button class="continue-btn-file btn2" data-content="send-process" data-type="send-process-continue">
+            Continue
+          </button>
         </div>
       </div>
       <div class="resumen-final-container">
@@ -272,36 +276,47 @@
         <div class="resumen-container">
           <div class="resumen">
             <h3 data-content="send-process" data-type="send-process-resume-totalwallets">
-              Total wallets or Address</h3>
+              Total wallets or Address
+            </h3>
             <h2 class="total-wallets">0</h2>
           </div>
           <div class="resumen">
-            <h3 data-content="send-process" data-type="send-process-resume-totalTokens">Total tokens to send</h3>
+            <h3 data-content="send-process" data-type="send-process-resume-totalTokens">
+              Total tokens to send
+            </h3>
             <h2 class="total-tokens">0</h2>
           </div>
           <div class="resumen">
-            <h3 data-content="send-process" data-type="send-process-resume-tokenBalance">Your token balance</h3>
+            <h3 data-content="send-process" data-type="send-process-resume-tokenBalance">
+              Your token balance
+            </h3>
             <h2 class="balance-tokens">0</h2>
           </div>
           <div class="resumen">
-            <h3 data-content="send-process" data-type="send-process-resume-balance">Your native token Balance</h3>
+            <h3 data-content="send-process" data-type="send-process-resume-balance">
+              Your native token Balance
+            </h3>
             <h2 class="balance-eth">0</h2>
           </div>
           <div class="resumen">
             <div class="resumen-totales">
-              <h3 data-content="send-process" data-type="send-process-resume-totalTokens">Total tokens to send</h3>
+              <h3 data-content="send-process" data-type="send-process-resume-totalTokens">
+                Total tokens to send
+              </h3>
               <h2 class="total-tokens">0</h2>
             </div>
             <p>+</p>
             <div class="resumen-totales">
-              <h3>Approximate cost<br />( metasender fee + gas fee )</h3>
-              <h3 data-content="send-process" data-type="send-process-resume-txCost">Approximate cost</br>( metasender
-                fee + gas fee )</h3>
+              <h3 data-content="send-process" data-type="send-process-resume-txCost">
+                Approximate cost<br />( metasender fee + gas fee )
+              </h3>
               <h2 class="costo-operacion">0</h2>
             </div>
             <p>=</p>
             <div class="resumen-totales">
-              <h3 data-content="send-process" data-type="send-process-resume-totalValue">Estimated Total Value</h3>
+              <h3 data-content="send-process" data-type="send-process-resume-totalValue">
+                Estimated Total Value
+              </h3>
               <h2 class="costo-operacion-total">0</h2>
             </div>
           </div>
@@ -318,26 +333,24 @@
           <a>
             <img class="close-aproval-erc20" src="../img/icons/cerrar.png" alt="cerrar pagina" />
           </a>
-          <h2>Approval to transfer tokens</h2>
-          <p>
+          <h2 data-content="send-process" data-type="send-process-aproval-title">
+            Approval to transfer tokens
+          </h2>
+          <p data-content="send-process" data-type="send-process-aproval-text">
             <span>The MetaSender</span> requires your <span>approval</span> in
             order to transfer your tokens to the added addresses and to
             proceed to the next step of the operation:
           </p>
-          <h2 data-content="send-process" data-type="send-process-aproval-title">Approval to transfer tokens</h2>
-          <p data-content="send-process" data-type="send-process-aproval-text"><span>The MetaSender</span> requires
-            your <span>approval</span> in order to transfer your tokens to the
-            added addresses and to proceed to the next step of the operation:</p>
           <div class="total-envio-erc20-aproval">
-            <h3 data-content="send-process" data-type="send-process-aproval-tokens">Total Tokens to send:</h3>
+            <h3 data-content="send-process" data-type="send-process-aproval-tokens">
+              Total Tokens to send:
+            </h3>
             <h3 class="total-to-Aprove">0</h3>
           </div>
+          <!-- <button class="btn2">Approve the send of 20 USDT and continue with the final resume</button> -->
           <button class="btn2 aprove-button btn-aprove">
             Approve to MetaSender
           </button>
-          <a target="_blank" href="" class="blockExprorerAprove">See transaction</a>
-          <!-- <button class="btn2">Approve the send of 20 USDT and continue with the final resume</button> -->
-          <button class="btn2 aprove-button btn-aprove">Approve to MetaSender</button>
           <a target="_blank" href="" class="blockExprorerAprove" data-content="send-process"
             data-type="send-process-resume-bELink">See transaction</a>
         </div>
@@ -361,7 +374,9 @@
         <div class="tables-palco-container">
           <div class="table-container">
             <table>
-              <h3 class="table-title-normal-user" data-content="palco" data-type="palco-normalUser">Normal user</h3>
+              <h3 class="table-title-normal-user" data-content="palco" data-type="palco-normalUser">
+                Normal user
+              </h3>
               <tr class="palco-table-firstRow">
                 <th>Network</th>
                 <th>Transaction tax</th>
@@ -390,7 +405,9 @@
           </div>
           <div class="table-container">
             <table>
-              <h3 class="table-title-palco-user" data-content="palco" data-type="palco-palcoMember">Palco member*</h3>
+              <h3 class="table-title-palco-user" data-content="palco" data-type="palco-palcoMember">
+                Palco member*
+              </h3>
               <tr class="palco-table-firstRow">
                 <th>Network</th>
                 <th>Transaction tax</th>
@@ -416,17 +433,21 @@
                 <th>0 FTM</th>
               </tr>
             </table>
-            <p data-content="palco" data-type="palco-alert">*The Palco member will have these benefits only in the
-              network that buys the subscription.</p>
+            <p data-content="palco" data-type="palco-alert">
+              *The Palco member will have these benefits only in the network
+              that buys the subscription.
+            </p>
           </div>
         </div>
         <p data-content="palco" data-type="palco-prices-texts">
-          Be part of our <span>Palco,</span> connect your wallet, choose the network in which you want to be part of the
-          Palco and click on buy.
+          Be part of our <span>Palco,</span> connect your wallet, choose the
+          network in which you want to be part of the Palco and click on buy.
         </p>
         <div class="table-container2">
           <table>
-            <h3 class="table-title-palco-user" data-content="palco" data-type="palco-prices-title">Palco prices</h3>
+            <h3 class="table-title-palco-user" data-content="palco" data-type="palco-prices-title">
+              Palco prices
+            </h3>
             <tr class="palco-table-firstRow">
               <th data-content="palco" data-type="palco-network">Network</th>
               <th>Price Subscription</th>
@@ -464,7 +485,8 @@
       <div class="tutotial-container">
         <h1>Tutorial</h1>
         <p>
-          Look at our tutorial in our documentation so you can see how <span>The MetaSender</span>
+          Look at our tutorial in our documentation so you can see how
+          <span>The MetaSender</span>
           works:
         </p>
         <a href="" target="_blank" class="btn-tutorial">See <span>Tutorial</span></a>
@@ -474,7 +496,8 @@
     <div class="installAlert">
       <img src="./img/icons/alert.png" alt="alert" />
       <p data-content="alerts" data-type="install-metamask">
-        Please Install Metamask
+        The MetaSender will only work <br />
+        on a desktop browser with metamask installed
       </p>
       <div class="closeAlert">
         <div class="bar1"></div>
@@ -529,7 +552,7 @@
           <div class="links-column">
             <a data-content="navbar" data-type="navbar-palco" href="#palco">Palco
             </a>
-            <a class="btn-faq">TUTORIAL</a>
+            <a class="btn-faq" href="#tutorial">TUTORIAL</a>
           </div>
         </div>
       </div>
