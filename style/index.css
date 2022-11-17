@@ -833,6 +833,10 @@ header {
   background: #a6913c68;
 }
 
+.delete-file {
+  width: 1rem;
+}
+
 #preview {
   margin-top: 1rem;
 }

@@ -1,3 +1,4 @@
+import idioms from "./idioms.js";
 import {
   showWallets,
   changeTypeOfToken,
@@ -8,6 +9,7 @@ import {
   verifyAddress,
   userDeviceInfo,
 } from "./tools.js";
+import { languaje } from "./translate.js";
 import { verifyFileData } from "./verify.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
@@ -81,18 +83,49 @@ function verifyData() {
 }
 
 export async function processFile() {
-  return await file
-    .arrayBuffer()
-    .then((data) => {
-      fileLoaded = true;
 
-      const workbook = XLSX.readFile(data);
+  return new Promise( async( resolve, reject ) => {
+  
+    return await file
+      .arrayBuffer()
+      .then((data) => {
+        fileLoaded = true;
+  
+        const workbook = XLSX.readFile(data);
+  
+        const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+  
+        excelData = XLSX.utils.sheet_to_json(worksheet);
+  
+        if ( excelData.length > 255 ) 
+          return reject( idioms[ languaje].alerts.batch_max)
 
-      const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+        return resolve()
+      })
+      .catch((e) => {
 
-      excelData = XLSX.utils.sheet_to_json(worksheet);
-    })
-    .catch(handleError);
+        handleError(e)
+        
+        reject(e)
+
+      });
+
+  })
+  
+  // return await file
+  //   .arrayBuffer()
+  //   .then((data) => {
+  //     fileLoaded = true;
+
+  //     const workbook = XLSX.readFile(data);
+
+  //     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
+
+  //     excelData = XLSX.utils.sheet_to_json(worksheet);
+
+  //     if( excelData )
+  //   })
+  //   .catch(handleError);
 }
 
 export function migrateInfo() {
@@ -121,11 +154,34 @@ export function showFile(file) {
     <span>${file.name}</span>
     <span class="status-text">
     </span>
-  </div>`;
+  </div>
+  <a>
+    <img class="delete-file" src="../img/icons/cerrar.png" alt="cerrar pagina" />
+  </a>`;
   dropArea.removeChild(child1DropArea);
   dropArea.removeChild(child2DropArea);
   dropArea.removeChild(button);
   dropArea.append(previewElement);
+}
+
+export function deleteFile(){
+
+    dropArea.removeChild(dropArea.children[1])
+
+    dropArea.append(child1DropArea);
+
+    dropArea.append(child2DropArea);
+
+    dropArea.append(button);
+
+    dropArea.classList.remove('active')
+
+}
+
+export function handleDelete(e) {
+
+  if (e.target.className == "delete-file") deleteFile()
+
 }
 
 async function handleDrop( e ) {

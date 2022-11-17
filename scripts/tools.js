@@ -27,7 +27,7 @@ export async function getTokenSymbol(_address) {
 }
 
 export function handleError(error) {
-  if (error.error.message) showErrorAlert(error.error.message);
+  if ( error.error ) showErrorAlert(error.error.message);
   else showErrorAlert(error.message);
 }
 

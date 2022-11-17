@@ -18,7 +18,12 @@ import {
 } from "./readFile.js";
 import { handleSend, metasenderFunctions } from "./transactions.js";
 import { toggleLanguage } from "./translate.js";
-import { removeClass, showErrorAlert, userDeviceInfo } from "./tools.js";
+import {
+  handleError,
+  removeClass,
+  showErrorAlert,
+  userDeviceInfo,
+} from "./tools.js";
 
 // navbar
 const hamburguer = document.querySelector(".hamburguer");
@@ -157,6 +162,8 @@ dropArea.addEventListener("dragover", (e) => {
   dragText.textContent = "Release to upload files";
 });
 
+dropArea.addEventListener("click", handleDelete);
+
 //elementos que se estan arrastrando pero fuera del area
 dropArea.addEventListener("dragleave", (e) => {
   e.preventDefault();
@@ -215,8 +222,8 @@ incorrectWalletsContainer.addEventListener("click", (e) => {
 // this show the option to add adress and amount manually
 
 optionManual.addEventListener("click", () => {
-  let userInfo = userDeviceInfo();
-  if (userInfo.mobile) return showErrorAlert("Not available in movil devices");
+  if (navigator.userAgentData.mobile)
+    return showErrorAlert("Not available in movil devices");
   if (isConnected) {
     manualDataContainer.style.display = "flex";
     fileDataContainer.style.display = "none";
