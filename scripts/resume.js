@@ -1,4 +1,3 @@
-import erc from './ercABI.js'
 import { estimateTx } from "./estimate.js";
 import { finalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
@@ -10,6 +9,19 @@ export const ercABI = [
     'function symbol() public view returns (string)',
     'function allowance(address owner, address spender) external view returns (uint256)',
 ]
+const totalWallets = document.querySelector(".total-wallets");
+const totalTokens = document.querySelectorAll(".total-tokens");
+const balanceTokens = document.querySelector(".balance-tokens");
+const balanceEth = document.querySelector(".balance-eth");
+const costoOperacion = document.querySelector(".costo-operacion");
+const costoTotalOperacion = document.querySelector(".costo-operacion-total");
+const loaderSendProcess = document.querySelector(".loader-send-process");
+const manualDataContainer = document.querySelector(".manual-data-container");
+const resumenFinalContainer = document.querySelector(
+    ".resumen-final-container"
+);
+const blockExplorerLinkItem = document.querySelector(".blockExplorerLink");
+
 
 function roundNumber( num ) {
 
@@ -113,5 +125,43 @@ export default async function setResumeInfo() {
      }
 
     return
+
+}
+
+async function setFinalResume() {
+
+  return await setResumeInfo().then(() => {
+
+    totalWallets.innerHTML = finalData.numAddresses;
+
+    totalTokens[0].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+
+    totalTokens[1].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
+
+    balanceTokens.innerHTML = `${finalData.userTokenBalance} ${finalData.tokenSymbol}`;
+
+    balanceEth.innerHTML = `${finalData.userETHBalance} ${finalData.NativeToken}`;
+
+    costoOperacion.innerHTML = `${finalData.txCost} ${finalData.NativeToken}`;
+
+    costoTotalOperacion.innerHTML = `${finalData.totalCost} ${finalData.NativeToken}`;
+
+  });
+  
+}
+
+export async function setDataAndShowResume() {
+
+  loaderSendProcess.classList.toggle("show-loader-send-process");
+
+  await setFinalResume();
+
+  loaderSendProcess.classList.toggle("show-loader-send-process");
+
+  manualDataContainer.style.display = "none";
+
+  resumenFinalContainer.style.display = "flex";
+
+  blockExplorerLinkItem.style.opacity = 0;
 
 }

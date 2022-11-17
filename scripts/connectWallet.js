@@ -1,14 +1,8 @@
 import { handleError, removeClass, showErrorAlert, showConnectAlert, changeTokenItems, handlePalco } from "./tools.js";
 import ethChains from "./ethereumchains.js"
-const closeAlert = document.querySelectorAll(".closeAlert");
 const btnConnect = document.querySelector(".btnConnect");
 const installAlert = document.querySelector(".installAlert");
-const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
-const errorAlert = document.querySelector(".errorsAlert");
-const optinonRed = document.querySelector(".option-red select");
-//change
-const chain = "0x5";
-let isConnected = false;
+export let isConnected = false;
 
 function setWalletAddress() {
   let start = ethereum.selectedAddress.match(/^\w{5}/);
@@ -95,7 +89,7 @@ async function changeChain( chain ) {
 
 }
 
-function setChain(e) {
+export function setChain(e) {
 
   changeChain(e.target.value);
 
@@ -103,7 +97,7 @@ function setChain(e) {
 
 // calls connectWallet() and changeChain()
 
-async function login() {
+export async function login() {
   if (window.ethereum) {
     connectWallet();
 
@@ -112,27 +106,3 @@ async function login() {
     installAlert.classList.add("showAlert");
   }
 }
-
-// set function to the buttons
-
-btnConnect.addEventListener("click", () => {
-  if (!isConnected) {
-    login();
-  }
-});
-
-//close alerts
-
-closeAlert.forEach((alert) => {
-  alert.addEventListener("click", function () {
-    removeClass(
-      [connectedToMainet, installAlert, errorAlert],
-      "showAlert"
-    );
-  });
-});
-
-//select chain
-optinonRed.addEventListener("change", setChain);
-
-export { chain, installAlert, isConnected, login };

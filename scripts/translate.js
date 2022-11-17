@@ -1,6 +1,5 @@
 import idioms from "./idioms.js";
 import { changeTypeOfToken } from "./manualWallets.js";
-const languageButtons = document.querySelector(".language");
 const textsToTranslate = document.querySelectorAll("[data-content]");
 const tokenInput = document.getElementById("token-input");
 
@@ -32,7 +31,7 @@ async function changeLanguage(element) {
 
 }
 
-function toggleLanguage(e) {
+export function toggleLanguage(e) {
 
   if (e.target.dataset.function == "en") {
     languaje = "en";
@@ -45,7 +44,5 @@ function toggleLanguage(e) {
   }
 
 }
-
-languageButtons.addEventListener("click", toggleLanguage);
 
 export { languaje };

@@ -1,10 +1,9 @@
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
-import { getContract, handleError, handleTxFee  } from "./tools.js";
+import { getContract, handleError, handleTxFee, showInstallAlert  } from "./tools.js";
+import { isConnected, login } from "./connectWallet.js";
 const blockExplorerLinkItem = document.querySelector('.blockExplorerLink')
-const btnSend = document.querySelector('.send-btn')
-const btnPalco = document.querySelector('.btn-palco')
 
 export function getTotalValue(valuesArray) {
 
@@ -109,9 +108,9 @@ async function sendIERC721( contactAdd, addresses, tokenIds) {
 
 }
 
-export async function addToPALCO(){
+async function addToPALCO(){
 
-	 const contract = getContract( 
+	const contract = getContract( 
 		metasender[`address_${ ethereum.chainId }`], 
 		metasender.abi
 	)
@@ -125,6 +124,15 @@ export async function addToPALCO(){
 
 }
 
+export async function hadlePalco() {
+
+	showInstallAlert()
+
+	if ( isConnected ) return await addToPALCO()
+
+	else login()
+
+}
 class MetasenderMethods {
 
 	constructor() {
@@ -134,30 +142,30 @@ class MetasenderMethods {
 		this.sendIERC20DifferentValue = sendIERC20DifferentValue
 		this.sendIERC20SameValue = sendIERC20SameValue
 		this.sendIERC721 = sendIERC721
-		this.addPALCO = addToPALCO
+		this.addPALCO = hadlePalco
 
 	}
 
 }
 
-const mSFunc = new MetasenderMethods()
+export const metasenderFunctions = new MetasenderMethods()
 
 export async function sendTransaction() {
 
 	switch( finalData.tokenToSend ){
 
 		case 'ETH':
-			return await mSFunc[
+			return await metasenderFunctions[
 				`sendNativeTokenDifferentValue`
 			]( finalData.wallets, finalData.amount );
 
 		case 'ERC20':
-			return await mSFunc[
+			return await metasenderFunctions[
 				`sendIERC20${ isSameValue( finalData.amount ) }Value`
 			]( finalData.tokenAddress, finalData.wallets, finalData.amount );
 
 		case 'ERC721':
-			return await mSFunc.sendIERC721( 
+			return await metasenderFunctions.sendIERC721( 
 				finalData.tokenAddress, 
 				finalData.wallets, 
 				finalData.amount
@@ -167,7 +175,7 @@ export async function sendTransaction() {
 
 }
 
-btnSend.addEventListener("click", async(e) => {
+export async function handleSend() {
 
     await sendTransaction().then(( tx ) => {
 
@@ -179,6 +187,4 @@ btnSend.addEventListener("click", async(e) => {
 
 	})
 
-})
-
-btnPalco.onclick = mSFunc.addPALCO
+}

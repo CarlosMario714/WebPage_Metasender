@@ -1,7 +1,4 @@
-import { login, isConnected } from "./connectWallet.js";
-import { finalData } from "./finalData.js";
 import {
-  verifyFileData,
   showWallets,
   changeTypeOfToken,
 } from "./manualWallets.js";
@@ -11,13 +8,12 @@ import {
   verifyAddress,
   userDeviceInfo,
 } from "./tools.js";
+import { verifyFileData } from "./verify.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
 const button = dropArea.querySelector("button");
-const input = dropArea.querySelector("#input-file");
 const fileDataContainer = document.querySelector(".file-data-container");
 const manualDataContainer = document.querySelector(".manual-data-container");
-const optionFile = document.querySelector(".option-file");
 const child1DropArea = document.querySelector(".drop-area h2");
 const child2DropArea = document.querySelector(".drop-area span");
 const tokenInputFile = document.querySelector(".token-input-file");
@@ -30,7 +26,6 @@ const tokenInput = document.getElementById("token-input");
 const tokenAddressInputFile = tokenAddContainerFile.children[1];
 const tokenAddressInputMan = tokenAddContainerMan.children[1];
 let fileLoaded = false;
-let tokenToSendFile = "eth";
 let walletsFileArr = [];
 let amountFileArr = [];
 let file;
@@ -57,9 +52,9 @@ function handleContract() {
     ableContinueButton();
   else disableContinueButton();
 }
+export function handleFileContinue() {
 
-function handleContinue() {
-  changeTypeOfToken(tokenInputFile.value);
+  changeTypeOfToken( tokenInputFile.value );
 
   if (tokenInputFile.value !== "") {
     if (tokenInputFile.value == "ETH") {
@@ -85,7 +80,7 @@ function verifyData() {
   }
 }
 
-async function processFile() {
+export async function processFile() {
   return await file
     .arrayBuffer()
     .then((data) => {
@@ -100,7 +95,7 @@ async function processFile() {
     .catch(handleError);
 }
 
-function migrateInfo() {
+export function migrateInfo() {
   loaderSendProcess.classList.toggle("show-loader-send-process");
 
   verifyData();
@@ -118,7 +113,7 @@ function migrateInfo() {
   loaderSendProcess.classList.toggle("show-loader-send-process");
 }
 
-function showFile(file) {
+export function showFile(file) {
   const previewElement = document.createElement("div");
   previewElement.classList.add("file-container");
   previewElement.innerHTML = `<img src="../img/icons/excel-icon.png" alt="${file.name}" width="50">
@@ -133,70 +128,20 @@ function showFile(file) {
   dropArea.append(previewElement);
 }
 
-button.addEventListener("click", () => {
-  input.click();
-});
-
-optionFile.addEventListener("click", () => {
-  let userInfo = userDeviceInfo();
-  if (userInfo.mobile) return showErrorAlert("Not available on movil devices");
-  if (isConnected) {
-    fileDataContainer.style.display = "flex";
-    manualDataContainer.style.display = "none";
-  } else login();
-});
-
-//detecta cada vez que input cambia, osea cada vez que se sube un archivo
-input.addEventListener("change", async (e) => {
+async function handleDrop( e ) {
+  
   e.preventDefault();
-  file = e.target.files[0];
 
-  showFile(file);
-
-  await processFile().then(handleContinue);
-
-  dropArea.classList.add("active");
-  dropArea.classList.remove("active");
-});
-
-//elementos que se estan arrastrando encima del area
-dropArea.addEventListener("dragover", (e) => {
-  e.preventDefault();
-  dropArea.classList.add("active");
-  dragText.textContent = "Release to upload files";
-});
-
-//elementos que se estan arrastrando pero fuera del area
-dropArea.addEventListener("dragleave", (e) => {
-  e.preventDefault();
-  dropArea.classList.remove("active");
-  dragText.textContent = "drag and drop the file ";
-});
-
-//cuando de suelta un elemento en el area
-dropArea.addEventListener("drop", async (e) => {
-  e.preventDefault();
   file = e.dataTransfer.files[0];
 
   showFile(file);
 
-  await processFile().then(handleContinue);
+  await processFile().then( handleFileContinue );
 
   dropArea.classList.remove("active");
 
   dragText.textContent = "drag and drop the file ";
-});
+  
+}
 
-tokenInputFile.addEventListener("change", () => {
-  handleContinue();
-});
-
-tokenAddressInputFile.addEventListener("input", () => {
-  handleContinue();
-});
-
-tokenAddressInputFile.addEventListener("change", handleContinue);
-
-continueBtnFile.addEventListener("click", migrateInfo);
-
-export { walletsFileArr, amountFileArr, tokenToSendFile };
+export { walletsFileArr, amountFileArr, file, handleDrop };

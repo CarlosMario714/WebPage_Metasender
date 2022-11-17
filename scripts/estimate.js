@@ -108,8 +108,6 @@ export async function estimateTx() {
 
 	let gasEstimation
 
-	console.log( finalData.wallets )
-
 	switch( finalData.tokenToSend ){
 
 		case 'ETH':
