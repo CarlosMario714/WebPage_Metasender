@@ -11,21 +11,28 @@ const btnConnect = document.querySelector(".btnConnect");
 const installAlert = document.querySelector(".installAlert");
 export let isConnected = false;
 
-function setWalletAddress() {
-  let isPalco = `<div class="isPalco">PALCO MEMBER</div>`;
-  let start = ethereum.selectedAddress.match(/^\w{5}/);
-  let end = ethereum.selectedAddress.match(/\w{4}$/);
+async function setWalletAddress() {
+
+  const isPalco = await handlePalco();
+
+  const start = ethereum.selectedAddress.match(/^\w{5}/);
+
+  const end = ethereum.selectedAddress.match(/\w{4}$/);
+
   return start + "..." + end + isPalco;
+  
 }
 
 function listenChain() {
   ethereum.on("chainChanged", async (chainId) => {
     if (ethChains[chainId.slice(2)]) {
+
       changeTokenItems(chainId);
 
-      await handlePalco();
+      btnConnect.innerHTML = await setWalletAddress();
 
       showConnectAlert();
+
     } else showErrorAlert("Network Not Supported");
   });
 }
@@ -39,10 +46,9 @@ async function connectWallet() {
       params: [{ eth_accounts: {} }],
     })
     .then(async () => {
-      btnConnect.innerHTML = setWalletAddress();
+      btnConnect.innerHTML = await setWalletAddress();
       isConnected = true;
       listenChain();
-      await handlePalco();
     })
     .catch(handleError);
 }

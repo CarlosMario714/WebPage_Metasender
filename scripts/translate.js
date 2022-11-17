@@ -3,7 +3,7 @@ import { changeTypeOfToken } from "./manualWallets.js";
 const textsToTranslate = document.querySelectorAll("[data-content]");
 const tokenInput = document.getElementById("token-input");
 
-let languaje = "es";
+let languaje = "en";
 
 function translateItems( items, property, texts ) {
 
