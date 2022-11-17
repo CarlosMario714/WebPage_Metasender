@@ -157,9 +157,9 @@ export async function handlePalco(){
 
   finalData.isPalco = await isPalco()
 
-  if( finalData.isPalco ) btnConnect.classList.add('isPalco')
+  if( finalData.isPalco ) return '<div class="isPalco">PALCO MEMBER</div>'
 
-  else btnConnect.classList.remove('isPalco')
+  else return ""
 
 }
 

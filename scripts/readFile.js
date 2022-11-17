@@ -27,6 +27,7 @@ const loaderSendProcess = document.querySelector(".loader-send-process");
 const tokenInput = document.getElementById("token-input");
 const tokenAddressInputFile = tokenAddContainerFile.children[1];
 const tokenAddressInputMan = tokenAddContainerMan.children[1];
+const extention = /.xlsx/
 let fileLoaded = false;
 let walletsFileArr = [];
 let amountFileArr = [];
@@ -89,7 +90,6 @@ export async function processFile() {
     return await file
       .arrayBuffer()
       .then((data) => {
-        fileLoaded = true;
   
         const workbook = XLSX.readFile(data);
   
@@ -100,7 +100,16 @@ export async function processFile() {
         if ( excelData.length > 255 ) 
           return reject( idioms[ languaje].alerts.batch_max)
 
-        return resolve()
+        if ( extention.exec( file.name ) ) {
+
+          fileLoaded = true;
+
+          return resolve()
+
+        }
+
+        return reject( idioms[ languaje ].alerts.incorrect_file)
+
       })
       .catch((e) => {
 
@@ -192,7 +201,12 @@ async function handleDrop( e ) {
 
   showFile(file);
 
-  await processFile().then( handleFileContinue );
+  await processFile()
+    .then(handleFileContinue)
+    .catch((e) => {
+        showErrorAlert(e)
+        deleteFile()
+    });
 
   dropArea.classList.remove("active");
 

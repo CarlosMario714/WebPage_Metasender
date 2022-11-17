@@ -9,6 +9,7 @@ import {
   editIncorrectWallet,
 } from "./manualWallets.js";
 import {
+  deleteFile,
   file,
   handleDelete,
   handleDrop,
@@ -150,7 +151,12 @@ input.addEventListener("change", async (e) => {
 
   showFile(file);
 
-  await processFile().then(handleFileContinue);
+  await processFile()
+    .then(handleFileContinue)
+    .catch((e) => {
+      showErrorAlert(e);
+      deleteFile();
+    });
 
   dropArea.classList.add("active");
   dropArea.classList.remove("active");

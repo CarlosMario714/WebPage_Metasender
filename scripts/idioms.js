@@ -60,6 +60,10 @@ export default {
             "palco-prices-title": "Palco prices",
             "btn-palco": "Buy <span>Palco</span> Now"
         },
+        "tutorial": {
+            "tutorial-text": "Look at our tutorial in our documentation so you can see how <span>The MetaSender</span> works:",
+            "tutorial-btn": "See <span>Tutorial</span>"
+        },
         "incorrectElement": {
             "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address: </span>Add a valid Address without spaces</p></div>",
             "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Monto no valido:</span> Only positive numbers</p> </div>",
@@ -72,7 +76,8 @@ export default {
         "alerts": {
             "install-metamask": "Please Install Metamask",
             "Not Suported network": "Network Not Supported",
-            "batch_max": "Error: maximum 255 per lot"
+            "batch_max": "Error: maximum 255 per lot",
+            "incorrect_file": "Error: file not compatible"
         },
         "ETH": {
             "labelAdress": "Account or Wallet to send",
@@ -160,6 +165,10 @@ export default {
             "palco-prices-title": "Precios del Palco",
             "btn-palco": "Compre <span>Palco</span> ahora"
         },
+        "tutorial": {
+            "tutorial-text": "Mire nuestro tutorial en nuestra documentación para que pueda ver cómo funciona <span>The MetaSender</span>:",
+            "tutorial-btn": "Ver <span>Tutorial</span>"
+        },
         "incorrectElement": {
             "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Wallet no válida: </span>Agregue una dirección válida sin espacios</p></div>",
             "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Monto no valido:</span> Solo números positivos</p> </div>",
@@ -172,7 +181,8 @@ export default {
         "alerts": {
             "install-metamask": "Instale Metamask",
             "Not Suported network": "Red no compatible",
-            "batch_max": "Error: maximo 255 por lote"
+            "batch_max": "Error: maximo 255 por lote",
+            "incorrect_file": "Error: archivo no compatible"
         },
         "ETH": {
             "labelAdress": "Wallet para enviar",
