@@ -25,7 +25,7 @@ const blockExplorerLinkItem = document.querySelector(".blockExplorerLink");
 
 function roundNumber( num ) {
 
-    return (Math.round(num * 1000000)) / 1000000
+    return (Math.round(num * 100000)) / 100000
 
 }
 

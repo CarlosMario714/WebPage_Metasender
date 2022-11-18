@@ -12,11 +12,15 @@ async function sendNativeTokenSameValue( addresses, amounts ) {
 
 	const txFee = await handleTxFee();
 
-	return await contract.estimateGas
+	const gasEstimation = await contract.estimateGas
 		.sendNativeTokenSameValue( addresses, amounts[0], 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
 		.catch( handleError );
+
+	if( gasEstimation ) return gasEstimation
+
+	else return ethers.utils.parseEther("0")
 	
 }
 
@@ -29,11 +33,15 @@ async function sendNativeTokenDifferentValue( addresses, amounts ) {
 
 	const txFee = await handleTxFee();
 
-	return await contract.estimateGas
+	const gasEstimation = await contract.estimateGas
 		.sendNativeTokenDifferentValue(addresses, amounts, 
 			{ value: getTotalValue( amounts ).add(txFee) }
 		)
 		.catch( handleError );
+
+	if( gasEstimation ) return gasEstimation
+
+	else return ethers.utils.parseEther("0")
 	
 }
 
@@ -46,11 +54,15 @@ async function sendIERC20SameValue( contactAdd, addresses, amounts ) {
 
 	const txFee = await handleTxFee();
 
-	return await contract.estimateGas
+	const gasEstimation = await contract.estimateGas
 		.sendIERC20SameValue( contactAdd, addresses, amounts[0], 
 			{ value: txFee }
 		)
 		.catch( handleError );
+
+	if( gasEstimation ) return gasEstimation
+
+	else return ethers.utils.parseEther("0")
 	
 }
 
@@ -63,13 +75,18 @@ async function sendIERC20DifferentValue( contactAdd, addresses, amounts ) {
 
 	const txFee = await handleTxFee();
 
-	return await contract.estimateGas
+	const gasEstimation = await contract.estimateGas
 		.sendIERC20DifferentValue( contactAdd, addresses, amounts,
 			{ value: txFee }
 		)
 		.catch( handleError );
+
+	if( gasEstimation ) return gasEstimation
+
+	else return ethers.utils.parseEther("0")
 	
 }
+
 
 async function sendIERC721( contactAdd, addresses, tokenIds ) {
 
@@ -80,11 +97,15 @@ async function sendIERC721( contactAdd, addresses, tokenIds ) {
 
 	const txFee = await handleTxFee();
 
-	return await contract.estimateGas
+	const gasEstimation = await contract.estimateGas
 		.sendIERC721( contactAdd, addresses, tokenIds,  
 			{ value: txFee }
 		)
 		.catch( handleError );
+
+	if( gasEstimation ) return gasEstimation
+
+	else return ethers.utils.parseEther("0")
 
 }
 

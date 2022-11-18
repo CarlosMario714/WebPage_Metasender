@@ -13,7 +13,11 @@ export function getTotalValue(valuesArray) {
 
 export function isSameValue( values ) {
 
-	const isSame = values.every(( prev, curr) => prev == curr)
+	const isSame = values.every((prev) => 
+	
+		prev.toString() == values[1].toString()
+
+	)
 
 	if ( isSame ) return 'Same'
 
@@ -156,7 +160,7 @@ export async function sendTransaction() {
 
 		case 'ETH':
 			return await metasenderFunctions[
-				`sendNativeTokenDifferentValue`
+				`sendNativeToken${ isSameValue( finalData.amount ) }Value`
 			]( finalData.wallets, finalData.amount );
 
 		case 'ERC20':

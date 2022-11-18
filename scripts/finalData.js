@@ -26,6 +26,8 @@ async function setFinalData(walletsArr, amountArr) {
 
   if (tokenInput.value == "ERC20" ) finalData.decimals = await getDecimals()
 
+  else finalData.decimals = 18
+
   tokenInput.value == "ERC721"
     ? (finalData.amount = amountArr.map((amount) => Number(amount)))
     : (finalData.amount = amountArr.map((amount) =>
