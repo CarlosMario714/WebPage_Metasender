@@ -17,7 +17,7 @@ export function verifyFileData(wallet, amount, typeOfToken) {
 
   walletAdressForVerify.push(wallet);
 
-  //if is ok data data form file
+  //if is ok data data from file
   if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
     walletAdressForVerify.forEach((wallet, index) => {
       walletAdressForVerify.indexOf(wallet) !== index
@@ -27,22 +27,19 @@ export function verifyFileData(wallet, amount, typeOfToken) {
     addOkWalletElement(wallet, amount, typeOfToken, repitedWallet);
   }
 
-  //if is a error data form file
-  if (!verifyAddress(wallet) || !AmountRegex.exec(amount)) {
-    //if the wallet have all errors
-    if (!verifyAddress(wallet) && !AmountRegex.exec(amount)) {
-      addIncorrectWalletElement(wallet, amount, typeOfToken, allError);
-    } else {
-      //if the wallet have only a specific error
-      //if is a wallet error
-      if (!verifyAddress(wallet)) {
-        addIncorrectWalletElement(wallet, amount, typeOfToken, walletError);
-      }
+  //if the wallet have all errors
+  if (!verifyAddress(wallet) && !AmountRegex.exec(amount)) {
+    addIncorrectWalletElement(wallet, amount, typeOfToken, allError);
+  } else {
+    //if the wallet have only a specific error
+    //if is a wallet error
+    if (!verifyAddress(wallet)) {
+      addIncorrectWalletElement(wallet, amount, typeOfToken, walletError);
+    }
 
-      //if is a amount error
-      if (!AmountRegex.exec(amount)) {
-        addIncorrectWalletElement(wallet, amount, typeOfToken, amountError);
-      }
+    //if is a amount error
+    if (!AmountRegex.exec(amount)) {
+      addIncorrectWalletElement(wallet, amount, typeOfToken, amountError);
     }
   }
 }
