@@ -15,7 +15,7 @@ export function isSameValue( values ) {
 
 	const isSame = values.every((prev) => 
 	
-		prev.toString() == values[1].toString()
+		prev.toString() == values[0].toString()
 
 	)
 
