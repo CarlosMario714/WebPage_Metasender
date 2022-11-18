@@ -97,7 +97,7 @@ export function addIncorrectWalletElement(
 }
 
 export function deleteOkWallet(event) {
-  manualWalletsContainer.removeChild(event.target.parentNode.parentNode);
+  manualWalletsContainer.removeChild(event.target.parentNode.parentNode.parentNode);
 }
 
 export function editOkWallet(event) {
