@@ -13,20 +13,18 @@ export function verifyFileData(wallet, amount, typeOfToken) {
   let walletError = "wallet error";
   let amountError = "amount error";
   let allError = "all errors";
+  let repitedWallet = false;
 
   walletAdressForVerify.push(wallet);
-
-  console.log(walletAdressForVerify);
-  console.log(wallet);
-  console.log("wallet repetida", walletAdressForVerify.includes(wallet));
 
   //if is ok data data form file
   if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
     walletAdressForVerify.forEach((wallet, index) => {
       walletAdressForVerify.indexOf(wallet) !== index
-        ? addOkWalletElement(wallet, amount, typeOfToken, true)
-        : addOkWalletElement(wallet, amount, typeOfToken, false);
+        ? (repitedWallet = true)
+        : (repitedWallet = false);
     });
+    addOkWalletElement(wallet, amount, typeOfToken, repitedWallet);
   }
 
   //if is a error data form file

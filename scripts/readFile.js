@@ -1,8 +1,5 @@
 import idioms from "./idioms.js";
-import {
-  showWallets,
-  changeTypeOfToken,
-} from "./manualWallets.js";
+import { showWallets, changeTypeOfToken } from "./manualWallets.js";
 import {
   handleError,
   showErrorAlert,
@@ -27,7 +24,7 @@ const loaderSendProcess = document.querySelector(".loader-send-process");
 const tokenInput = document.getElementById("token-input");
 const tokenAddressInputFile = tokenAddContainerFile.children[1];
 const tokenAddressInputMan = tokenAddContainerMan.children[1];
-const extention = /.xlsx/
+const extention = new RegExp(/.xlsx$/);
 let fileLoaded = false;
 let walletsFileArr = [];
 let amountFileArr = [];
@@ -56,8 +53,7 @@ function handleContract() {
   else disableContinueButton();
 }
 export function handleFileContinue() {
-
-  changeTypeOfToken( tokenInputFile.value );
+  changeTypeOfToken(tokenInputFile.value);
 
   if (tokenInputFile.value !== "") {
     if (tokenInputFile.value == "ETH") {
@@ -84,43 +80,34 @@ function verifyData() {
 }
 
 export async function processFile() {
-
-  return new Promise( async( resolve, reject ) => {
-  
+  return new Promise(async (resolve, reject) => {
     return await file
       .arrayBuffer()
       .then((data) => {
-  
         const workbook = XLSX.readFile(data);
-  
+
         const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-  
+
         excelData = XLSX.utils.sheet_to_json(worksheet);
-  
-        if ( excelData.length > 255 ) 
-          return reject( idioms[ languaje].alerts.batch_max)
 
-        if ( extention.exec( file.name ) ) {
+        if (excelData.length > 255)
+          return reject(idioms[languaje].alerts.batch_max);
 
+        if (extention.exec(file.name)) {
           fileLoaded = true;
 
-          return resolve()
-
+          return resolve();
         }
 
-        return reject( idioms[ languaje ].alerts.incorrect_file)
-
+        return reject(idioms[languaje].alerts.incorrect_file);
       })
       .catch((e) => {
+        handleError(e);
 
-        handleError(e)
-        
-        reject(e)
-
+        reject(e);
       });
+  });
 
-  })
-  
   // return await file
   //   .arrayBuffer()
   //   .then((data) => {
@@ -173,28 +160,23 @@ export function showFile(file) {
   dropArea.append(previewElement);
 }
 
-export function deleteFile(){
+export function deleteFile() {
+  dropArea.removeChild(dropArea.children[1]);
 
-    dropArea.removeChild(dropArea.children[1])
+  dropArea.append(child1DropArea);
 
-    dropArea.append(child1DropArea);
+  dropArea.append(child2DropArea);
 
-    dropArea.append(child2DropArea);
+  dropArea.append(button);
 
-    dropArea.append(button);
-
-    dropArea.classList.remove('active')
-
+  dropArea.classList.remove("active");
 }
 
 export function handleDelete(e) {
-
-  if (e.target.className == "delete-file") deleteFile()
-
+  if (e.target.className == "delete-file") deleteFile();
 }
 
-async function handleDrop( e ) {
-  
+async function handleDrop(e) {
   e.preventDefault();
 
   file = e.dataTransfer.files[0];
@@ -204,14 +186,13 @@ async function handleDrop( e ) {
   await processFile()
     .then(handleFileContinue)
     .catch((e) => {
-        showErrorAlert(e)
-        deleteFile()
+      showErrorAlert(e);
+      deleteFile();
     });
 
   dropArea.classList.remove("active");
 
   dragText.textContent = "drag and drop the file ";
-  
 }
 
 export { walletsFileArr, amountFileArr, file, handleDrop };

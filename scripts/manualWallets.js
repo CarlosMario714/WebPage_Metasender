@@ -28,6 +28,8 @@ const incorrectWalletsContainer = document.querySelector(
 );
 
 export function changeTypeOfToken(item) {
+  if (item === "") return;
+
   let tokenType = item;
 
   if (item.target) tokenType = item.target.value;
