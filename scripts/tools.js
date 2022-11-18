@@ -144,7 +144,6 @@ export async function handleTxFee() {
 
   return await contract.txFee().catch(handleError);
 
-  return await contract.txFee().catch(handleError);
 }
 
 export async function handlePalco() {
