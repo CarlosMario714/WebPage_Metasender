@@ -28,6 +28,9 @@ const incorrectWalletsContainer = document.querySelector(
 );
 
 export function changeTypeOfToken(item) {
+
+  if( item === "") return
+
   let tokenType = item;
 
   if (item.target) tokenType = item.target.value;
@@ -43,7 +46,9 @@ export function changeTypeOfToken(item) {
   amountInput.innerHTML = idioms[languaje][tokenType].amountInput_text;
 
   if (tokenType == "ETH") tokenAddContainer.style.display = "none";
+
   else tokenAddContainer.style.display = "block";
+
 }
 
 //rename wallets when someone is delete
@@ -142,7 +147,7 @@ export async function handleManualContinue() {
 
   const { addresses, amounts } = getAddAndAmounts();
 
-  setFinalData(addresses, amounts);
+  await setFinalData(addresses, amounts);
 
   const { isAproved } = await isTokenAproved(finalData.amount);
 
