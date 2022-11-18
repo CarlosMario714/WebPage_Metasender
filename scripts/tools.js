@@ -27,7 +27,7 @@ export async function getTokenSymbol(_address) {
 }
 
 export function handleError(error) {
-  if ( error.error ) showErrorAlert(error.error.message);
+  if (error.error) showErrorAlert(error.error.message);
   else showErrorAlert(error.message);
 }
 
@@ -124,47 +124,36 @@ export function userDeviceInfo() {
 }
 
 export async function isPalco() {
+  const contract = getContract(
+    metasender[`address_${ethereum.chainId}`],
+    metasender.abi
+  );
 
-	const contract = getContract( 
-		metasender[`address_${ ethereum.chainId }`], 
-		metasender.abi
-	)
-
-	return contract.PALCO( ethereum.selectedAddress )
-	    .catch( handleError )
-
-
+  return contract.PALCO(ethereum.selectedAddress).catch(handleError);
 }
 
 export async function handleTxFee() {
+  const contract = getContract(
+    metasender[`address_${ethereum.chainId}`],
+    metasender.abi
+  );
 
-	const contract = getContract( 
-		metasender[`address_${ ethereum.chainId }`], 
-		metasender.abi
-	)
+  const isPalcoM = await isPalco().catch(handleError);
 
-  const isPalcoM = await isPalco()
-    .catch( handleError )
+  if (isPalcoM) return ethers.utils.parseEther("0");
 
-  if ( isPalcoM ) return ethers.utils.parseEther('0')
+  return await contract.txFee().catch(handleError);
 
-  return await contract.txFee()
-    .catch( handleError )
-
+  return await contract.txFee().catch(handleError);
 }
 
-export async function handlePalco(){
+export async function handlePalco() {
+  finalData.isPalco = await isPalco();
 
-  finalData.isPalco = await isPalco()
-
-  if( finalData.isPalco ) return '<div class="isPalco">PALCO MEMBER</div>'
-
-  else return ""
-
+  if (finalData.isPalco) return '<div class="isPalco">PALCO MEMBER</div>';
+  else return "";
 }
 
 export function showInstallAlert() {
-
-  if ( ! window.ethereum ) installAlert.classList.add( "showAlert" )
-
+  if (!window.ethereum) installAlert.classList.add("showAlert");
 }

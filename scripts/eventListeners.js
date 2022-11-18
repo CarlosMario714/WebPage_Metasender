@@ -9,7 +9,7 @@ import {
   editIncorrectWallet,
 } from "./manualWallets.js";
 import {
-    deleteFile,
+  deleteFile,
   file,
   handleDelete,
   handleDrop,
@@ -154,8 +154,8 @@ input.addEventListener("change", async (e) => {
   await processFile()
     .then(handleFileContinue)
     .catch((e) => {
-        showErrorAlert(e)
-        deleteFile()
+      showErrorAlert(e);
+      deleteFile();
     });
 
   dropArea.classList.add("active");
@@ -229,9 +229,8 @@ incorrectWalletsContainer.addEventListener("click", (e) => {
 // this show the option to add adress and amount manually
 
 optionManual.addEventListener("click", () => {
-    const userInfo = userDeviceInfo();
-  if (userInfo.mobile)
-    return showErrorAlert("Not available in movil devices");
+  const userInfo = userDeviceInfo();
+  if (userInfo.mobile) return showErrorAlert("Not available in movil devices");
   if (isConnected) {
     manualDataContainer.style.display = "flex";
     fileDataContainer.style.display = "none";

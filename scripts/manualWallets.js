@@ -28,8 +28,7 @@ const incorrectWalletsContainer = document.querySelector(
 );
 
 export function changeTypeOfToken(item) {
-
-  if( item === "") return
+  if (item === "") return;
 
   let tokenType = item;
 
@@ -46,9 +45,7 @@ export function changeTypeOfToken(item) {
   amountInput.innerHTML = idioms[languaje][tokenType].amountInput_text;
 
   if (tokenType == "ETH") tokenAddContainer.style.display = "none";
-
   else tokenAddContainer.style.display = "block";
-
 }
 
 //rename wallets when someone is delete
