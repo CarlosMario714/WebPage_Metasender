@@ -22,11 +22,11 @@ export function verifyFileData(wallet, amount, typeOfToken) {
 
   //if is ok data data form file
   if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
-    if (walletAdressForVerify.includes(wallet)) {
-      addOkWalletElement(wallet, amount, typeOfToken, true);
-    } else {
-      addOkWalletElement(wallet, amount, typeOfToken, false);
-    }
+    walletAdressForVerify.forEach((wallet, index) => {
+      walletAdressForVerify.indexOf(wallet) !== index
+        ? addOkWalletElement(wallet, amount, typeOfToken, true)
+        : addOkWalletElement(wallet, amount, typeOfToken, false);
+    });
   }
 
   //if is a error data form file
