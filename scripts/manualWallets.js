@@ -144,7 +144,7 @@ export async function handleManualContinue() {
 
   const { addresses, amounts } = getAddAndAmounts();
 
-  setFinalData(addresses, amounts);
+  await setFinalData(addresses, amounts);
 
   const { isAproved } = await isTokenAproved(finalData.amount);
 

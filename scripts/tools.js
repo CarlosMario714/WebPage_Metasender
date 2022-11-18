@@ -140,7 +140,9 @@ export async function handleTxFee() {
 
   const isPalcoM = await isPalco().catch(handleError);
 
-  if (isPalcoM) return 0;
+  if (isPalcoM) return ethers.utils.parseEther("0");
+
+  return await contract.txFee().catch(handleError);
 
   return await contract.txFee().catch(handleError);
 }

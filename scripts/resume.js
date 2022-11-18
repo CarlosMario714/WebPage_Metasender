@@ -2,7 +2,7 @@ import { estimateTx } from "./estimate.js";
 import { finalData } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
 import { getTotalValue } from "./transactions.js";
-import metasender from "./contracts/metasender.js";
+import erc from './ercABI.js'
 import { getContract, getTokenSymbol, handleTxFee } from './tools.js';
 export const ercABI = [
     'function balanceOf(address owner) view returns (uint balance)',
@@ -29,6 +29,17 @@ function roundNumber( num ) {
 
 }
 
+export async function getDecimals() {
+
+    const contract = getContract(
+        finalData.tokenAddress, 
+        erc[20]
+    )
+
+    return await contract.decimals()
+
+}
+
 async function getUserBalance() {
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -51,7 +62,7 @@ async function getUserTokenBalance( _address, tokenType ){
 
     if ( tokenType == 'ERC721') return inBalance
 
-    const balance = Number(ethers.utils.formatEther(inBalance)) 
+    const balance = Number(ethers.utils.formatUnits(inBalance, finalData.decimals)) 
 
     return roundNumber( balance )
 
@@ -60,11 +71,6 @@ async function getUserTokenBalance( _address, tokenType ){
 async function getTxCostAprox() {
 
     const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-    const contract = getContract( 
-		metasender[`address_${ ethereum.chainId }`], 
-		metasender.abi
-	)
 
     const { gasEstimation } = await estimateTx()
 
@@ -82,9 +88,9 @@ async function getTxCostAprox() {
 
 function getTotalToSend() {
 
-    return Number(ethers.utils.formatEther(
-            getTotalValue( finalData.amount )
-        ))
+    return Number(ethers.utils.formatUnits(
+            getTotalValue( finalData.amount ), finalData.decimals
+    ))
     
 
 }

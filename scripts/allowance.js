@@ -71,7 +71,7 @@ export async function isERC721Aproved( tokenIds ) {
 
 export async function isAproved( amounts ) {
 
-    const needAmount = Number(ethers.utils.formatEther(amounts))
+    const needAmount = Number(ethers.utils.formatUnits(amounts, finalData.decimals))
 
     const contract = getContract(finalData.tokenAddress, erc[20])
 
@@ -80,7 +80,7 @@ export async function isAproved( amounts ) {
         metasender[`address_${ ethereum.chainId }`]
     )
 
-    const aprove = Number(ethers.utils.formatEther(tokensAproved))
+    const aprove = Number(ethers.utils.formatUnits(tokensAproved, finalData.decimals))
 
     finalData.tokensToAprove = needAmount
 
@@ -124,7 +124,7 @@ async function getER20Aprove() {
         erc[20]
     )
 
-    const amount = ethers.utils.parseEther(`${finalData.tokensToAprove}`)
+    const amount = ethers.utils.parseUnits(`${finalData.tokensToAprove}`, finalData.decimals)
 
     return await contract.approve(
         metasender[`address_${ ethereum.chainId }`],

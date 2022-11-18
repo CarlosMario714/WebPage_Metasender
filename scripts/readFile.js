@@ -24,7 +24,7 @@ const loaderSendProcess = document.querySelector(".loader-send-process");
 const tokenInput = document.getElementById("token-input");
 const tokenAddressInputFile = tokenAddContainerFile.children[1];
 const tokenAddressInputMan = tokenAddContainerMan.children[1];
-const extention = new RegExp(/.xlsx$/);
+const extention = /.xlsx$/;
 let fileLoaded = false;
 let walletsFileArr = [];
 let amountFileArr = [];
@@ -107,21 +107,6 @@ export async function processFile() {
         reject(e);
       });
   });
-
-  // return await file
-  //   .arrayBuffer()
-  //   .then((data) => {
-  //     fileLoaded = true;
-
-  //     const workbook = XLSX.readFile(data);
-
-  //     const worksheet = workbook.Sheets[workbook.SheetNames[0]];
-
-  //     excelData = XLSX.utils.sheet_to_json(worksheet);
-
-  //     if( excelData )
-  //   })
-  //   .catch(handleError);
 }
 
 export function migrateInfo() {
