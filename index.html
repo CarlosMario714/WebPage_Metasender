@@ -178,14 +178,14 @@
             <button class="add-wallet-button">+</button>
           </div>
           <div class="token-address">
-            <h2 data-content="send-process" data-type="send-process-contract-address">
+            <h3 data-content="send-process" data-type="send-process-contract-address">
               Contract Address
-            </h2>
+            </h3>
             <input type="text" placeholder="address del Contrato" name="token-addres"
               pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Invalid contract addres" />
             <span class="input-error none span-wallet" data-content="send-process"
               data-type="send-process-span-contract-address">
-              Invalid contract addres
+              Invalid contract address
             </span>
           </div>
         </div>
@@ -229,7 +229,7 @@
             <h2 data-content="send-process" data-type="send-process-drop-title">
               Drag and drop the file here
             </h2>
-            <span>O</span>
+            <span data-content="send-process" data-type="send-process-file-or">Or</span>
             <button class="btn2" data-content="send-process" data-type="send-process-drop-btnSelect">
               Select your files
             </button>
@@ -250,7 +250,8 @@
               *If you are going to send ERC721, in the amount column you must
               indicate the ID of the token to send
             </p>
-            <p>*Maximum 255 transactions per operation</p>
+            <p data-content="send-process" data-type="send-process-template-condition3">*Maximum 255 transactions per
+              operation</p>
           </div>
           <div class="input-container input-container-file">
             <label data-content="send-process" data-type="send-process-file-label-tokenType">Select the Type of Token to
@@ -334,8 +335,10 @@
           </div>
         </div>
         <div class="container-buttons">
-          <button class="atras-btn btn2">Back</button>
-          <button class="send-btn btn2">Send</button>
+          <button class="atras-btn btn2" data-content="send-process"
+            data-type="send-process-resume-backBtn">Back</button>
+          <button class="send-btn btn2" data-content="send-process"
+            data-type="send-process-resume-sendBtn">Send</button>
           <a href="" target="_blank" class="blockExplorerLink" data-content="send-process"
             data-type="send-process-resume-bELink">See Transaction</a>
         </div>
@@ -390,8 +393,8 @@
                 Normal user
               </h3>
               <tr class="palco-table-firstRow">
-                <th>Network</th>
-                <th>Transaction tax</th>
+                <th data-content="palco" data-type="palco-network">Network</th>
+                <th data-content="palco" data-type="palco-fees">Transaction tax</th>
               </tr>
               <tr>
                 <th>Ethereum</th>
@@ -421,8 +424,8 @@
                 Palco member*
               </h3>
               <tr class="palco-table-firstRow">
-                <th>Network</th>
-                <th>Transaction tax</th>
+                <th data-content="palco" data-type="palco-network">Network</th>
+                <th data-content="palco" data-type="palco-fees">Transaction tax</th>
               </tr>
               <tr>
                 <th>Ethereum</th>
@@ -452,7 +455,7 @@
           </div>
         </div>
         <p data-content="palco" data-type="palco-prices-texts">
-          Be part of our <span>Palco,</span> connect your wallet, choose the
+          <span>To be part of our Palco,</span> connect your wallet, choose the
           network in which you want to be part of the Palco and click on buy.
         </p>
         <div class="table-container2">
@@ -462,7 +465,7 @@
             </h3>
             <tr class="palco-table-firstRow">
               <th data-content="palco" data-type="palco-network">Network</th>
-              <th>Price Subscription</th>
+              <th data-content="palco" data-type="palco-subscription">Price Subscription</th>
             </tr>
             <tr>
               <th>Ethereum</th>

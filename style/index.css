@@ -488,7 +488,7 @@ header {
   position: relative;
 }
 
-/*manual data */
+/* manual data */
 
 .manual-data-container {
   display: none;
@@ -567,6 +567,7 @@ header {
   border-radius: 1rem;
   line-height: 1.5;
   padding: 1rem;
+  z-index: 1;
 }
 
 .input-error.is-active {
@@ -595,8 +596,9 @@ header {
   display: none;
 }
 
-.token-address h2 {
+.token-address h3 {
   text-align: center;
+  margin-bottom: 1rem;
 }
 
 .add-wallet-button:hover {

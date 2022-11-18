@@ -97,12 +97,15 @@ export function addIncorrectWalletElement(
 }
 
 export function deleteOkWallet(event) {
-  manualWalletsContainer.removeChild(event.target.parentNode.parentNode);
+  manualWalletsContainer.removeChild(
+    event.target.parentNode.parentNode.parentNode
+  );
 }
 
 export function editOkWallet(event) {
-  let parentElement = event.target.parentNode.parentNode;
-  parentElement.childNodes.forEach((element) => {
+  let parentElementContainer = event.target.parentNode.parentNode.parentNode;
+  let parentElementWallet = event.target.parentNode.parentNode;
+  parentElementWallet.childNodes.forEach((element) => {
     if (element.classList == "wallet-adress") {
       walletInput.value = element.innerHTML;
     }
@@ -116,7 +119,7 @@ export function editOkWallet(event) {
     walletInput.classList.remove("edit");
     amountInput.classList.remove("edit");
   }, 1000);
-  manualWalletsContainer.removeChild(parentElement);
+  manualWalletsContainer.removeChild(parentElementContainer);
   renameNumberOfWallets();
 }
 
@@ -136,7 +139,8 @@ export function addWallet() {
     continueBtnManual.classList.add("opacity");
   } else {
     if (walletInput.value == "") {
-      spanWallet.innerHTML = "Fill in this field";
+      spanWallet.innerHTML =
+        idioms[languaje]["send-process"]["send-process-span-field"];
       spanWallet.classList.add("is-active");
       setTimeout(() => {
         spanWallet.classList.remove("is-active");
@@ -145,7 +149,8 @@ export function addWallet() {
     }
 
     if (amountInput.value == "") {
-      spanAmount.innerHTML = "Fill in this field";
+      spanAmount.innerHTML =
+        idioms[languaje]["send-process"]["send-process-span-field"];
       spanAmount.classList.add("is-active");
       setTimeout(() => {
         spanAmount.classList.remove("is-active");

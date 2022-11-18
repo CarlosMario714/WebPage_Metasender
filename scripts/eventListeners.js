@@ -19,13 +19,14 @@ import {
   showFile,
 } from "./readFile.js";
 import { handleSend, metasenderFunctions } from "./transactions.js";
-import { toggleLanguage } from "./translate.js";
+import { toggleLanguage, languaje } from "./translate.js";
 import {
   handleError,
   removeClass,
   showErrorAlert,
   userDeviceInfo,
 } from "./tools.js";
+import idioms from "./idioms.js";
 
 // navbar
 const hamburguer = document.querySelector(".hamburguer");
@@ -39,12 +40,11 @@ const optinonRed = document.querySelector(".option-red select");
 const closeAlert = document.querySelectorAll(".closeAlert");
 const btnConnect = document.querySelector(".btnConnect");
 // file wallets
-// change
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
-const input = dropArea.querySelector("#input-file");
-const optionFile = document.querySelector(".option-file");
-const button = dropArea.querySelector("button");
+const inputFileToUpload = dropArea.querySelector("#input-file");
+const optionUploadFile = document.querySelector(".option-file");
+const buttonUploadFile = dropArea.querySelector("button");
 const tokenAddContainerFile = document.querySelectorAll(".token-address")[1];
 const tokenAddressInputFile = tokenAddContainerFile.children[1];
 const tokenInputFile = document.querySelector(".token-input-file");
@@ -127,15 +127,11 @@ optinonRed.addEventListener("change", setChain);
 /***************************************************************************/
 /************************ FILE WALLETS *************************************/
 
-// ?
-
-button.addEventListener("click", () => {
-  input.click();
+buttonUploadFile.addEventListener("click", () => {
+  inputFileToUpload.click();
 });
 
-// ?
-
-optionFile.addEventListener("click", () => {
+optionUploadFile.addEventListener("click", () => {
   const userInfo = userDeviceInfo();
   if (userInfo.mobile) return showErrorAlert("Not available on movil devices");
   if (isConnected) {
@@ -145,7 +141,7 @@ optionFile.addEventListener("click", () => {
 });
 
 //detecta cada vez que input cambia, osea cada vez que se sube un archivo
-input.addEventListener("change", async (e) => {
+inputFileToUpload.addEventListener("change", async (e) => {
   e.preventDefault();
   file = e.target.files[0];
 
@@ -166,7 +162,8 @@ input.addEventListener("change", async (e) => {
 dropArea.addEventListener("dragover", (e) => {
   e.preventDefault();
   dropArea.classList.add("active");
-  dragText.textContent = "Release to upload files";
+  dragText.textContent =
+    idioms[languaje]["send-process"]["send-process-drop-release"];
 });
 
 dropArea.addEventListener("click", handleDelete);
@@ -175,7 +172,9 @@ dropArea.addEventListener("click", handleDelete);
 dropArea.addEventListener("dragleave", (e) => {
   e.preventDefault();
   dropArea.classList.remove("active");
-  dragText.textContent = "drag and drop the file ";
+
+  dragText.textContent =
+    idioms[languaje]["send-process"]["send-process-drop-title"];
 });
 
 //cuando de suelta un elemento en el area

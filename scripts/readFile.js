@@ -10,11 +10,11 @@ import { languaje } from "./translate.js";
 import { verifyFileData } from "./verify.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
-const button = dropArea.querySelector("button");
+const buttonToUploadFile = dropArea.querySelector("button");
 const fileDataContainer = document.querySelector(".file-data-container");
 const manualDataContainer = document.querySelector(".manual-data-container");
-const child1DropArea = document.querySelector(".drop-area h2");
-const child2DropArea = document.querySelector(".drop-area span");
+const dropAreaH2 = document.querySelector(".drop-area h2");
+const dropAreaSpan = document.querySelector(".drop-area span");
 const tokenInputFile = document.querySelector(".token-input-file");
 const continueBtnFile = document.querySelector(".continue-btn-file");
 const tokenAddContainerMan = document.querySelectorAll(".token-address")[0];
@@ -112,6 +112,7 @@ export async function processFile() {
 export function migrateInfo() {
   loaderSendProcess.classList.toggle("show-loader-send-process");
 
+  //seria mejor que esta funcion devuelva una promesa, por si el archivo no es correcto no pase a la siguiente seccion
   verifyData();
 
   showWallets();
@@ -139,20 +140,20 @@ export function showFile(file) {
   <a>
     <img class="delete-file" src="../img/icons/cerrar.png" alt="cerrar pagina" />
   </a>`;
-  dropArea.removeChild(child1DropArea);
-  dropArea.removeChild(child2DropArea);
-  dropArea.removeChild(button);
+  dropArea.removeChild(dropAreaH2);
+  dropArea.removeChild(dropAreaSpan);
+  dropArea.removeChild(buttonToUploadFile);
   dropArea.append(previewElement);
 }
 
 export function deleteFile() {
   dropArea.removeChild(dropArea.children[1]);
 
-  dropArea.append(child1DropArea);
+  dropArea.append(dropAreaH2);
 
-  dropArea.append(child2DropArea);
+  dropArea.append(dropAreaSpan);
 
-  dropArea.append(button);
+  dropArea.append(buttonToUploadFile);
 
   dropArea.classList.remove("active");
 }
@@ -177,7 +178,8 @@ async function handleDrop(e) {
 
   dropArea.classList.remove("active");
 
-  dragText.textContent = "drag and drop the file ";
+  dragText.textContent =
+    idioms[languaje]["send-process"]["send-process-drop-title"];
 }
 
 export { walletsFileArr, amountFileArr, file, handleDrop };
