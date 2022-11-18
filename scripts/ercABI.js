@@ -3,7 +3,8 @@ export default {
         'function balanceOf(address owner) view returns (uint balance)',
         'function symbol() public view returns (string)',
         'function allowance(address owner, address spender) external view returns (uint256)',
-        'function approve(address spender, uint256 amount) external returns (bool)'
+        'function approve(address spender, uint256 amount) external returns (bool)',
+        'function decimals() public view returns (uint8)'
     ],
     721: [
         'function balanceOf(address owner) view returns (uint balance)',
