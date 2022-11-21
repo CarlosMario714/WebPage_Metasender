@@ -1,7 +1,11 @@
 import idioms from "./idioms.js";
 import { setDataAndShowResume } from "./resume.js";
 import { finalData, setFinalData } from "./finalData.js";
-import { verifyAddress, showErrorAlert, changeWalletsTokenType } from "./tools.js";
+import {
+  verifyAddress,
+  showErrorAlert,
+  changeWalletsTokenType,
+} from "./tools.js";
 import { handleAllowance, isTokenAproved } from "./allowance.js";
 import { languaje } from "./translate.js";
 import { deleteOkWallet, editOkWallet } from "./addWallet.js";
@@ -41,7 +45,7 @@ export function changeTypeOfToken(item) {
 
   if (item.target) tokenType = item.target.value;
 
-  changeWalletsTokenType()
+  changeWalletsTokenType();
 
   walletInput.placeholder = idioms[languaje][tokenType].walletInput;
 
@@ -72,6 +76,7 @@ export function deleteIncorrectWallet(event) {
   incorrectWalletsContainer.removeChild(
     event.target.parentNode.parentNode.parentNode
   );
+  walletCount.incorrect -= 1;
   renameNumberOfIncorrectWallets();
   hideIncorrectWalletsContainer();
 }
@@ -89,6 +94,7 @@ export function editIncorrectWallet(event) {
   });
   walletInput.classList.add("edit");
   amountInput.classList.add("edit");
+  walletCount.incorrect -= 1;
   setTimeout(() => {
     walletInput.classList.remove("edit");
     amountInput.classList.remove("edit");
