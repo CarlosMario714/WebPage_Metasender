@@ -3,6 +3,8 @@ import ethChains from "./ethereumchains.js";
 import metasender from "./contracts/metasender.js";
 import { finalData } from "./finalData.js";
 import ethereumchains from "./ethereumchains.js";
+import idioms from "./idioms.js";
+import { languaje } from "./translate.js";
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const selectChainItem = document.querySelector(".option-red select");
@@ -161,9 +163,9 @@ export function showInstallAlert() {
 
 export function deleteBatch() {
 
-  manWalletsCont.innerHTML = ''
+  manWalletsCont.innerHTML = idioms[ languaje ]['send-process'].correct_data_Title
 
-  manIncorrectWalletsCont.innerHTML = '';
+  manIncorrectWalletsCont.innerHTML = idioms[ languaje ]['send-process'].incorrect_data_Title;
 
 }
 

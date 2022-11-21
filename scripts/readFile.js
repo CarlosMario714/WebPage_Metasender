@@ -133,7 +133,7 @@ export function migrateInfo() {
   loaderSendProcess.classList.toggle("show-loader-send-process");
 }
 
-export function showFile(file) {
+export function showFile() {
   const previewElement = document.createElement("div");
   previewElement.classList.add("file-container");
   previewElement.innerHTML = `<img src="../img/icons/excel-icon.png" alt="${file.name}" width="50">
@@ -172,7 +172,7 @@ async function handleDrop(e) {
 
   file = e.dataTransfer.files[0];
 
-  showFile(file);
+  showFile();
 
   await processFile()
     .then(handleFileContinue)

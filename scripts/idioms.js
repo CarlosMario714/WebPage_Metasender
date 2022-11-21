@@ -55,6 +55,8 @@ export default {
             "send-process-aprove-btn": "Approve to The MetaSender",
             "send-process-resume-backBtn": "Back",
             "send-process-resume-sendBtn": "Send",
+            correct_data_Title: "<h2 data-content=\"send-process\" data-type=\"send-process-correct-data\">Correct data</h2>",
+            incorrect_data_Title: "<h2 data-content=\"send-process\" data-type=\"send-process-incorrect-data\">Incorrect data</h2>"
         },
         "palco": {
             "palco-title": "<span>Be part of our</span> Palco",
@@ -140,7 +142,7 @@ export default {
             "send-process-span-field": "Completa este campo",
             "send-process-contract-address": "Dirección del contrato",
             "send-process-span-contract-address": "Dirección de contrato no válida",
-            "send-process-correct-data": "datos correctos",
+            "send-process-correct-data": "Datos correctos",
             "send-process-incorrect-data": "Datos Incorrectos",
             "span-contract-continue": "Continuar",
             "send-process-continue": "Continuar",
@@ -169,6 +171,8 @@ export default {
             "send-process-aprove-btn": "Aprovar a The MetaSender",
             "send-process-resume-backBtn": "Atras",
             "send-process-resume-sendBtn": "Enviar",
+            correct_data_Title: "<h2 data-content=\"send-process\" data-type=\"send-process-correct-data\">Datos correctos</h2>",
+            incorrect_data_Title: "<h2 data-content=\"send-process\" data-type=\"send-process-incorrect-data\">Datos Incorrectos</h2>"
         },
         "palco": {
             "palco-title": "<span>Sé parte de nuestro</span> Palco",
