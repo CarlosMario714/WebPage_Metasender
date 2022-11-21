@@ -149,11 +149,13 @@ function getAddAndAmounts() {
 }
 
 export async function handleManualContinue() {
-  if (hideIncorrectWalletsContainer())
+  if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
 
-  if (!verifyAddress(tokenAddContainer.children[1].value))
-    return showErrorAlert(`Incorrect contract adress`);
+  if (tokenInput.value === "ERC20" || tokenInput.value === "ERC721") {
+    if (!verifyAddress(tokenAddContainer.children[1].value))
+      return showErrorAlert(`Incorrect contract adress`);
+  }
 
   const { addresses, amounts } = getAddAndAmounts();
 
