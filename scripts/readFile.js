@@ -1,10 +1,11 @@
 import idioms from "./idioms.js";
-import { showWallets, changeTypeOfToken } from "./manualWallets.js";
+import { showWallets, changeTypeOfToken, handleIncorrectWalletClick, handleWalletsClicks } from "./manualWallets.js";
 import {
   handleError,
   showErrorAlert,
   verifyAddress,
   userDeviceInfo,
+  deleteBatch,
 } from "./tools.js";
 import { languaje } from "./translate.js";
 import { verifyFileData } from "./verify.js";
@@ -22,6 +23,9 @@ const tokenAddContainerFile = document.querySelectorAll(".token-address")[1];
 const spanContractAddress = document.querySelector(".span-contractaddres-file");
 const loaderSendProcess = document.querySelector(".loader-send-process");
 const tokenInput = document.getElementById("token-input");
+const walletsCont = document.querySelector('.wallets-container')
+const manWalletsCont = document.querySelector('.manual-wallets-container')
+const manIncorrectWalletsCont = document.querySelector('.incorrect-wallets-container')
 const tokenAddressInputFile = tokenAddContainerFile.children[1];
 const tokenAddressInputMan = tokenAddContainerMan.children[1];
 const extention = /.xlsx$/;
@@ -52,7 +56,11 @@ function handleContract() {
     ableContinueButton();
   else disableContinueButton();
 }
+
 export function handleFileContinue() {
+
+  deleteBatch()
+
   changeTypeOfToken(tokenInputFile.value);
 
   if (tokenInputFile.value !== "") {

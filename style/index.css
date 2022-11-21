@@ -757,12 +757,23 @@ header {
 }
 
 .continue-btn-manual {
-  display: none;
+  display: block;
 }
 
 .continue-btn-manual.opacity {
   display: block;
   animation: opacity 2s ease;
+}
+
+.send-process-buttons-container {
+  width: 82rem;
+  display: none;
+  justify-content: center;
+}
+
+.send-process-buttons-container .continue-btn-delete{
+  position: absolute;
+  left: 0;
 }
 
 /* file data */

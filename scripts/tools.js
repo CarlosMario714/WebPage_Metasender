@@ -156,3 +156,11 @@ export async function handlePalco() {
 export function showInstallAlert() {
   if (!window.ethereum) installAlert.classList.add("showAlert");
 }
+
+export function deleteBatch() {
+
+  manWalletsCont.innerHTML = ''
+
+  manIncorrectWalletsCont.innerHTML = '';
+
+}

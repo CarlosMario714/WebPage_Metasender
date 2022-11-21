@@ -4,9 +4,11 @@ import { finalData, setFinalData } from "./finalData.js";
 import { verifyAddress, showErrorAlert } from "./tools.js";
 import { handleAllowance, isTokenAproved } from "./allowance.js";
 import { languaje } from "./translate.js";
+import { deleteOkWallet, editOkWallet } from "./addWallet.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
+const manWalletsBtnsContainer = document.querySelector('.send-process-buttons-container')
 const walletInput = document.querySelector(".wallet-input");
 const amountInput = document.querySelector(".amount-input");
 const tokenAddContainer = document.querySelectorAll(".token-address")[0];
@@ -45,6 +47,7 @@ export function changeTypeOfToken(item) {
   amountInput.innerHTML = idioms[languaje][tokenType].amountInput_text;
 
   if (tokenType == "ETH") tokenAddContainer.style.display = "none";
+
   else tokenAddContainer.style.display = "block";
 }
 
@@ -115,7 +118,7 @@ export function showWallets() {
     incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
   }
 
-  continueBtnManual.style.display = "block";
+  handleManButtons()
 }
 
 function getAddAndAmounts() {
@@ -139,7 +142,7 @@ function getAddAndAmounts() {
 }
 
 export async function handleManualContinue() {
-  if (!hideIncorrectWalletsContainer())
+  if (hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
 
   const { addresses, amounts } = getAddAndAmounts();
@@ -157,4 +160,25 @@ export async function handleManualContinue() {
         setDataAndShowResume(addresses, amounts);
     }
   }
+}
+
+export function handleWalletsClicks( e ) {
+
+  if (e.target.classList[0] == "delete-wallet") {
+    deleteOkWallet(e);
+    renameNumberOfWallets();
+  }
+
+  if (e.target.classList[0] == "edit-wallet") {
+    editOkWallet(e);
+  }
+
+}
+
+export function handleIncorrectWalletClick( e ) {
+
+  if (e.target.classList[0] == "delete-wallet") deleteIncorrectWallet(e);
+
+  if (e.target.classList[0] == "edit-wallet") editIncorrectWallet(e);
+
 }
