@@ -33,7 +33,7 @@ export function addOkWalletElement(wallet, amount, typeOfToken, repitedWallet) {
     <p class="number-of-wallet">${walletCount.correct}</p>
     <p class="wallet-adress">${wallet}</p>
     <p class="wallet-amount">${amount}</p>
-    <p>${typeOfToken}</p>
+    <p class="token-type" >${typeOfToken}</p>
     <a>
       <img class="edit-wallet" src="../img/icons/boton-editar.png"
       alt="cerrar pagina" />
@@ -70,7 +70,7 @@ export function addIncorrectWalletElement(
       <p class="number-of-wallet number-of-incorrect-wallet">${walletCount.incorrect}</p>
       <p class="wallet-adress">${wallet}</p>
       <p class="wallet-amount">${amount}</p>
-      <p>${typeOfToken}</p>
+      <p class="token-type" >${typeOfToken}</p>
       <a>
         <img class="edit-wallet" src="../img/icons/boton-editar.png" alt="cerrar pagina" />
       </a>

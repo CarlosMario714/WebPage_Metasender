@@ -2,6 +2,7 @@ import { ercABI } from "./resume.js";
 import ethChains from "./ethereumchains.js";
 import metasender from "./contracts/metasender.js";
 import { finalData } from "./finalData.js";
+import ethereumchains from "./ethereumchains.js";
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const selectChainItem = document.querySelector(".option-red select");
@@ -163,5 +164,19 @@ export function deleteBatch() {
   manWalletsCont.innerHTML = ''
 
   manIncorrectWalletsCont.innerHTML = '';
+
+}
+
+export function changeWalletsTokenType() {
+
+  const walletsTokenType = document.querySelectorAll('.token-type')
+
+  if (walletsTokenType.length == 0 ) return
+
+  walletsTokenType.forEach( e => {
+    tokenInput.value == 'ETH'
+      ? e.innerHTML = ethereumchains[ ethereum.chainId ].symbol
+      : e.innerHTML = tokenInput.value
+  })
 
 }
