@@ -63,9 +63,9 @@ export async function isERC721Aproved( tokenIds ) {
 
     const isAproved = await isApprovedForAll()
 
-    if ( isAproved ) return { isAproved }
+    return { isAproved }
 
-    return await setERC721Aproved( tokenIds )
+    // return await setERC721Aproved( tokenIds )
 
 }
 
