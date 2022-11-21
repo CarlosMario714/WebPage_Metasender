@@ -58,7 +58,7 @@ const manualWalletsContainer = document.querySelector(
 const incorrectWalletsContainer = document.querySelector(
   ".incorrect-wallets-container"
 );
-const deleteBatchBtn = document.querySelector('.continue-btn-delete')
+const deleteBatchBtn = document.querySelector(".continue-btn-delete");
 const continueBtnManual = document.querySelector(".continue-btn-manual");
 const optionManual = document.querySelector(".option-manual");
 const manualDataContainer = document.querySelector(".manual-data-container");
@@ -206,11 +206,11 @@ addWalletButton.addEventListener("click", addWallet);
 
 // this handle onclick in the address and amount item
 
-manualWalletsContainer.addEventListener("click", handleWalletsClicks );
+manualWalletsContainer.addEventListener("click", handleWalletsClicks);
 
 // this handle onclick in the address and amount item in incorrect data
 
-incorrectWalletsContainer.addEventListener("click", handleIncorrectWalletClick );
+incorrectWalletsContainer.addEventListener("click", handleIncorrectWalletClick);
 
 // this show the option to add adress and amount manually
 
@@ -226,7 +226,7 @@ optionManual.addEventListener("click", () => {
 
 // this delete all the wallets
 
-deleteBatchBtn.onclick = deleteBatch
+deleteBatchBtn.onclick = deleteBatch;
 
 // this is the continue button
 

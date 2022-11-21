@@ -8,7 +8,9 @@ import { deleteOkWallet, editOkWallet } from "./addWallet.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
-const manWalletsBtnsContainer = document.querySelector('.send-process-buttons-container')
+const manWalletsBtnsContainer = document.querySelector(
+  ".send-process-buttons-container"
+);
 const walletInput = document.querySelector(".wallet-input");
 const amountInput = document.querySelector(".amount-input");
 const tokenAddContainer = document.querySelectorAll(".token-address")[0];
@@ -18,6 +20,9 @@ const labelAdress = document.querySelector(".label-adress");
 const labelAmount = document.querySelector(".label-amount");
 const tituloDatosCorrectos = document.querySelector(
   ".manual-wallets-container h2"
+);
+const sendProcessButtonsContainer = document.querySelector(
+  ".send-process-buttons-container"
 );
 export const walletCount = {
   correct: 0,
@@ -47,7 +52,6 @@ export function changeTypeOfToken(item) {
   amountInput.innerHTML = idioms[languaje][tokenType].amountInput_text;
 
   if (tokenType == "ETH") tokenAddContainer.style.display = "none";
-
   else tokenAddContainer.style.display = "block";
 }
 
@@ -118,6 +122,10 @@ export function showWallets() {
     incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
   }
 
+  sendProcessButtonsContainer.style.display = "flex";
+
+  // continueBtnManual.style.display = "block";
+  // continueBtnManual.classList.add("opacity");
 }
 
 function getAddAndAmounts() {
@@ -144,6 +152,9 @@ export async function handleManualContinue() {
   if (hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
 
+  if (!verifyAddress(tokenAddContainer.children[1].value))
+    return showErrorAlert(`Incorrect contract adress`);
+
   const { addresses, amounts } = getAddAndAmounts();
 
   await setFinalData(addresses, amounts);
@@ -161,8 +172,7 @@ export async function handleManualContinue() {
   }
 }
 
-export function handleWalletsClicks( e ) {
-
+export function handleWalletsClicks(e) {
   if (e.target.classList[0] == "delete-wallet") {
     deleteOkWallet(e);
     renameNumberOfWallets();
@@ -171,13 +181,10 @@ export function handleWalletsClicks( e ) {
   if (e.target.classList[0] == "edit-wallet") {
     editOkWallet(e);
   }
-
 }
 
-export function handleIncorrectWalletClick( e ) {
-
+export function handleIncorrectWalletClick(e) {
   if (e.target.classList[0] == "delete-wallet") deleteIncorrectWallet(e);
 
   if (e.target.classList[0] == "edit-wallet") editIncorrectWallet(e);
-
 }

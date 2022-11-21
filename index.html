@@ -181,9 +181,9 @@
             <h3 data-content="send-process" data-type="send-process-contract-address">
               Contract Address
             </h3>
-            <input type="text" placeholder="address del Contrato" name="token-addres"
+            <input type="text" placeholder="address del Contrato" name="token-addres" class="input-contract-manual"
               pattern="(^[0x]+)([A-Za-z0-9]{40})(?!.)" title="Invalid contract addres" />
-            <span class="input-error none span-wallet" data-content="send-process"
+            <span class="input-error none span-contract-manual" data-content="send-process"
               data-type="send-process-span-contract-address">
               Invalid contract address
             </span>
@@ -368,8 +368,8 @@
             <h3 class="total-to-Aprove">0</h3>
           </div>
           <!-- <button class="btn2">Approve the send of 20 USDT and continue with the final resume</button> -->
-          <button class="btn2 aprove-button btn-aprove">
-            Approve to MetaSender
+          <button class="btn2 aprove-button btn-aprove" data-content="send-process" data-type="send-process-aprove-btn">
+            Approve to The MetaSender
           </button>
           <a target="_blank" href="" class="blockExprorerAprove" data-content="send-process"
             data-type="send-process-resume-bELink">See transaction</a>

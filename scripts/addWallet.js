@@ -17,6 +17,10 @@ const spanWallet = document.querySelector(".span-wallet");
 const spanAmount = document.querySelector(".span-amount");
 const tokenInput = document.getElementById("token-input");
 const continueBtnManual = document.querySelector(".continue-btn-manual");
+const spanContractAdressManual = document.querySelector(
+  ".span-contract-manual"
+);
+const inputContractManual = document.querySelector(".input-contract-manual");
 
 //add new ok wallet element
 export function addOkWalletElement(wallet, amount, typeOfToken, repitedWallet) {
@@ -124,7 +128,15 @@ export function editOkWallet(event) {
 }
 
 export function addWallet() {
-  if (walletInput.value && amountInput.value !== "") {
+  if (tokenInput.value !== "ERC20" && tokenInput.value !== "ERC721") {
+    addNativeCurrencyWallet();
+  } else {
+    addTokenWallet();
+  }
+}
+
+function addNativeCurrencyWallet() {
+  if (walletInput.value !== "" && amountInput.value !== "") {
     let walletWithoutSpaces = walletInput.value.trim();
     let amountWithoutSpacesString = amountInput.value.toString().trim();
     let amountWithoutSpacesNumber = Number(amountWithoutSpacesString);
@@ -136,8 +148,39 @@ export function addWallet() {
     );
 
     showWallets();
-    continueBtnManual.classList.add("opacity");
+    //continueBtnManual.classList.add("opacity");
   } else {
+    empyField(true, false);
+  }
+}
+
+function addTokenWallet() {
+  if (
+    walletInput.value !== "" &&
+    amountInput.value !== "" &&
+    inputContractManual.value !== ""
+  ) {
+    let walletWithoutSpaces = walletInput.value.trim();
+    let amountWithoutSpacesString = amountInput.value.toString().trim();
+    let amountWithoutSpacesNumber = Number(amountWithoutSpacesString);
+    let contractWithoutSpaces = inputContractManual.value.trim();
+    inputContractManual.value = contractWithoutSpaces;
+
+    verifyManualData(
+      walletWithoutSpaces,
+      amountWithoutSpacesNumber,
+      tokenInput.value
+    );
+
+    showWallets();
+    //continueBtnManual.classList.add("opacity");
+  } else {
+    empyField(false, true);
+  }
+}
+
+function empyField(verify2Inputs, verify3Inputs) {
+  if (verify2Inputs) {
     if (walletInput.value == "") {
       spanWallet.innerHTML =
         idioms[languaje]["send-process"]["send-process-span-field"];
@@ -155,6 +198,38 @@ export function addWallet() {
       setTimeout(() => {
         spanAmount.classList.remove("is-active");
         spanAmount.innerHTML = amountInput.title;
+      }, 3000);
+    }
+  }
+
+  if (verify3Inputs) {
+    if (walletInput.value == "") {
+      spanWallet.innerHTML =
+        idioms[languaje]["send-process"]["send-process-span-field"];
+      spanWallet.classList.add("is-active");
+      setTimeout(() => {
+        spanWallet.classList.remove("is-active");
+        spanWallet.innerHTML = walletInput.title;
+      }, 3000);
+    }
+
+    if (amountInput.value == "") {
+      spanAmount.innerHTML =
+        idioms[languaje]["send-process"]["send-process-span-field"];
+      spanAmount.classList.add("is-active");
+      setTimeout(() => {
+        spanAmount.classList.remove("is-active");
+        spanAmount.innerHTML = amountInput.title;
+      }, 3000);
+    }
+
+    if (inputContractManual.value == "") {
+      spanContractAdressManual.innerHTML =
+        idioms[languaje]["send-process"]["send-process-span-field"];
+      spanContractAdressManual.classList.add("is-active");
+      setTimeout(() => {
+        spanContractAdressManual.classList.remove("is-active");
+        spanContractAdressManual.innerHTML = inputContractManual.title;
       }, 3000);
     }
   }
