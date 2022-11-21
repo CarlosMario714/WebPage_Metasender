@@ -104,6 +104,7 @@ export function deleteOkWallet(event) {
   manualWalletsContainer.removeChild(
     event.target.parentNode.parentNode.parentNode
   );
+  walletCount.correct -= 1;
 }
 
 export function editOkWallet(event) {
@@ -119,6 +120,7 @@ export function editOkWallet(event) {
   });
   walletInput.classList.add("edit");
   amountInput.classList.add("edit");
+  walletCount.correct -= 1;
   setTimeout(() => {
     walletInput.classList.remove("edit");
     amountInput.classList.remove("edit");
