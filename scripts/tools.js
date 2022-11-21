@@ -2,13 +2,14 @@ import { ercABI } from "./resume.js";
 import ethChains from "./ethereumchains.js";
 import metasender from "./contracts/metasender.js";
 import { finalData } from "./finalData.js";
-const btnConnect = document.querySelector(".btnConnect");
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const selectChainItem = document.querySelector(".option-red select");
 const tokenInput = document.getElementById("token-input");
 const fileTokenInput = document.querySelector(".token-input-file");
 const installAlert = document.querySelector(".installAlert");
+const manWalletsCont = document.querySelector('.manual-wallets-container')
+const manIncorrectWalletsCont = document.querySelector('.incorrect-wallets-container')
 
 export function removeClass(items, className) {
   for (const item of items) item.classList.remove(className);

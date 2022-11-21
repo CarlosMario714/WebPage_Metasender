@@ -118,7 +118,6 @@ export function showWallets() {
     incorrectWalletsContainer.appendChild(newIncorrectsWalletsFragment);
   }
 
-  handleManButtons()
 }
 
 function getAddAndAmounts() {

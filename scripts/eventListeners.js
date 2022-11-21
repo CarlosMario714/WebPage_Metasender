@@ -20,6 +20,7 @@ import {
 import { handleSend, metasenderFunctions } from "./transactions.js";
 import { toggleLanguage, languaje } from "./translate.js";
 import {
+  deleteBatch,
   removeClass,
   showErrorAlert,
   userDeviceInfo,
@@ -225,7 +226,7 @@ optionManual.addEventListener("click", () => {
 
 // this delete all the wallets
 
-deleteBatchBtn.onclick = 
+deleteBatchBtn.onclick = deleteBatch
 
 // this is the continue button
 
