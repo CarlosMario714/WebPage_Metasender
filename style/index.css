@@ -594,6 +594,7 @@ header {
 .token-address {
   margin-top: 2rem;
   display: none;
+  position: relative;
 }
 
 .token-address h3 {

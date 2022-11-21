@@ -116,6 +116,7 @@ export function showWallets() {
   }
 
   continueBtnManual.style.display = "block";
+  continueBtnManual.classList.add("opacity");
 }
 
 function getAddAndAmounts() {
@@ -141,6 +142,9 @@ function getAddAndAmounts() {
 export async function handleManualContinue() {
   if (!hideIncorrectWalletsContainer())
     return showErrorAlert(`Fix Incorrect Info`);
+
+  if (!verifyAddress(tokenAddContainer.children[1].value))
+    return showErrorAlert(`Incorrect contract adress`);
 
   const { addresses, amounts } = getAddAndAmounts();
 
