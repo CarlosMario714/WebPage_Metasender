@@ -9,7 +9,7 @@ const spanContractAdressManual = document.querySelector(
   ".span-contract-manual"
 );
 const inputContractManual = document.querySelector(".input-contract-manual");
-let walletAdressForVerify = [];
+export let walletAdressForVerify = [];
 
 // verify the info of the excel file
 

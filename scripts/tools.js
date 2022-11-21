@@ -5,6 +5,7 @@ import { finalData } from "./finalData.js";
 import ethereumchains from "./ethereumchains.js";
 import idioms from "./idioms.js";
 import { languaje } from "./translate.js";
+import { walletAdressForVerify } from "./verify.js";
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const selectChainItem = document.querySelector(".option-red select");
@@ -160,8 +161,8 @@ export async function handlePalco() {
 export function showInstallAlert() {
   if (!window.ethereum) installAlert.classList.add("showAlert");
 }
-
 export function deleteBatch() {
+  walletAdressForVerify = []
 
   manWalletsCont.innerHTML = idioms[ languaje ]['send-process'].correct_data_Title
 
