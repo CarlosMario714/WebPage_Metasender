@@ -107,7 +107,7 @@ export default async function setResumeInfo() {
 
     finalData.txCost = await getTxCostAprox()
 
-    finalData.NativeToken = ethChains[ ethereum.chainId.slice(2) ].symbol
+    finalData.NativeToken = ethChains[ ethereum.chainId ].symbol
 
     if( finalData.tokenToSend == 'ETH' ) {
 

@@ -1,67 +1,67 @@
 export default {
-    1: {
+    "0x1": {
         netName: "ETHEREUM MAINNET",
         symbol: "ETH",
         blockExplorer: "https://etherscan.io",
     },
-    5: {
+    "0x5": {
         netName: "GOERLI TESNET",
         symbol: "ETH",
         blockExplorer: "https://goerli.etherscan.io",
     },
-    38: {
+    "0x38": {
         netName: "Binance Smart Chain Mainnet",
         jsonRPC: "https://bsc-dataseed1.binance.org",
-        chainId: 38,
+        chainId: 56,
         symbol: "BNB",
         blockExplorer: "https://bscscan.com",
     },
-    61: {
+    "0x61": {
         netName: "Binance Smart Chain Testnet",
         jsonRPC: "https://data-seed-prebsc-1-s1.binance.org:8545",
-        chainId: 61,
+        chainId: 97,
         symbol: "tBNB",
         blockExplorer: "https://testnet.bscscan.com",
     },
-    89: {
+    "0x89": {
         netName: "Polygon Mainnet",
         jsonRPC: "https://polygon-rpc.com/",
         chainId: 89,
         symbol: "MATIC",
         blockExplorer: "https://polygonscan.com",
     },
-    13881: {
+    "0x13881": {
         netName: "Mumbai",
         jsonRPC: "https://matic-mumbai.chainstacklabs.com",
         chainId: 13881,
         symbol: "MATIC",
         blockExplorer: "https://mumbai.polygonscan.com",
     },
-    a86a: {
+    "0xa86a": {
         netName: "Avalanche C-Chain",
         jsonRPC: "https://api.avax.network/ext/bc/C/rpc",
-        chainId: "a86a",
+        chainId: 43114,
         symbol: "AVAX",
         blockExplorer: "https://snowtrace.io",
     },
-    a869: {
+    "0xa869": {
         netName: "Avalanche Fuji Testnet",
         jsonRPC: "https://api.avax-test.network/ext/bc/C/rpc",
-        chainId: "a869",
+        chainId: 43113,
         symbol: "AVAX",
         blockExplorer: "https://testnet.snowtrace.io",
     },
-    fa: {
+    "0xfa": {
         netName: "Fantom Opera",
         jsonRPC: "https://rpc.ftm.tools",
-        chainId: "fa",
+        chainId: 250,
         symbol: "FTM",
         blockExplorer: "https://ftmscan.com",
     },
-    fa2: {
+    "0xfa2": {
         netName: "Fantom Testnet",
         jsonRPC: "https://rpc.testnet.fantom.network",
-        chainId: "fa2",
+        chainId: 4002,
         symbol: "FTM",
         blockExplorer: "https://testnet.ftmscan.com",
     },

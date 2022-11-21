@@ -100,7 +100,7 @@ export async function handleAllowance() {
 
 async function handleAproveTx( tx ) {
 
-    const blockExplorer = ethereumchains[ ethereum.chainId.slice(2) ].blockExplorer
+    const blockExplorer = ethereumchains[ ethereum.chainId ].blockExplorer
 
     blockExprorerAprove.style.display = 'block'
 

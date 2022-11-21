@@ -183,7 +183,7 @@ export async function handleSend() {
 
     await sendTransaction().then(( tx ) => {
 
-		const chainId = ethereum.chainId.slice(2)
+		const chainId = ethereum.chainId
 	
 		blockExplorerLinkItem.href = `${ethChains[ chainId ].blockExplorer}/tx/${tx.hash}`
 	
