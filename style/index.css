@@ -767,6 +767,7 @@ header {
 }
 
 .send-process-buttons-container {
+  position: relative;
   width: 82rem;
   display: none;
   justify-content: center;

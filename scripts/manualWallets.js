@@ -1,7 +1,7 @@
 import idioms from "./idioms.js";
 import { setDataAndShowResume } from "./resume.js";
 import { finalData, setFinalData } from "./finalData.js";
-import { verifyAddress, showErrorAlert } from "./tools.js";
+import { verifyAddress, showErrorAlert, changeWalletsTokenType } from "./tools.js";
 import { handleAllowance, isTokenAproved } from "./allowance.js";
 import { languaje } from "./translate.js";
 import { deleteOkWallet, editOkWallet } from "./addWallet.js";
@@ -40,6 +40,8 @@ export function changeTypeOfToken(item) {
   let tokenType = item;
 
   if (item.target) tokenType = item.target.value;
+
+  changeWalletsTokenType()
 
   walletInput.placeholder = idioms[languaje][tokenType].walletInput;
 

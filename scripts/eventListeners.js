@@ -145,7 +145,7 @@ inputFileToUpload.addEventListener("change", async (e) => {
   e.preventDefault();
   file = e.target.files[0];
 
-  showFile(file);
+  showFile();
 
   await processFile()
     .then(handleFileContinue)

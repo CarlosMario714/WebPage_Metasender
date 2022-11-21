@@ -5,6 +5,7 @@ import {
   showConnectAlert,
   changeTokenItems,
   handlePalco,
+  changeWalletsTokenType,
 } from "./tools.js";
 import ethChains from "./ethereumchains.js";
 const btnConnect = document.querySelector(".btnConnect");
@@ -25,6 +26,8 @@ function listenChain() {
   ethereum.on("chainChanged", async (chainId) => {
     if (ethChains[chainId]) {
       changeTokenItems(chainId);
+
+      changeWalletsTokenType()
 
       btnConnect.innerHTML = await setWalletAddress();
 

@@ -1,4 +1,5 @@
 import { addIncorrectWalletElement, addOkWalletElement } from "./addWallet.js";
+import ethereumchains from "./ethereumchains.js";
 import { verifyAddress } from "./tools.js";
 const spanWallet = document.querySelector(".span-wallet");
 const spanAmount = document.querySelector(".span-amount");
@@ -18,6 +19,9 @@ export function verifyFileData(wallet, amount, typeOfToken) {
   let amountError = "amount error";
   let allError = "all errors";
   let repitedWallet = false;
+  typeOfToken == 'ETH' 
+    ? typeOfToken = ethereumchains[ ethereum.chainId ].symbol
+    : typeOfToken;
 
   walletAdressForVerify.push(wallet);
 
@@ -52,6 +56,9 @@ export function verifyFileData(wallet, amount, typeOfToken) {
 
 export function verifyManualData(wallet, amount, typeOfToken) {
   const amountRegex = new RegExp(amountInput.pattern);
+  typeOfToken == 'ETH' 
+    ? typeOfToken = ethereumchains[ ethereum.chainId ].symbol
+    : typeOfToken;
 
   //if is selected native blockchain currency
   if (typeOfToken !== "ERC20" && typeOfToken !== "ERC721") {
