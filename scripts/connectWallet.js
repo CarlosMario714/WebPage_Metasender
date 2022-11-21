@@ -73,7 +73,6 @@ async function addChain(chain) {
 }
 
 async function changeChain(chain) {
-  console.log(chain)
   await window.ethereum
     .request({
       method: "wallet_switchEthereumChain",

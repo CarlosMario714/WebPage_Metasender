@@ -4,9 +4,8 @@ import { isConnected, login, setChain } from "./connectWallet.js";
 import {
   changeTypeOfToken,
   handleManualContinue,
-  deleteIncorrectWallet,
-  renameNumberOfWallets,
-  editIncorrectWallet,
+  handleWalletsClicks,
+  handleIncorrectWalletClick,
 } from "./manualWallets.js";
 import {
   deleteFile,
@@ -21,7 +20,7 @@ import {
 import { handleSend, metasenderFunctions } from "./transactions.js";
 import { toggleLanguage, languaje } from "./translate.js";
 import {
-  handleError,
+  deleteBatch,
   removeClass,
   showErrorAlert,
   userDeviceInfo,
@@ -59,6 +58,7 @@ const manualWalletsContainer = document.querySelector(
 const incorrectWalletsContainer = document.querySelector(
   ".incorrect-wallets-container"
 );
+const deleteBatchBtn = document.querySelector(".continue-btn-delete");
 const continueBtnManual = document.querySelector(".continue-btn-manual");
 const optionManual = document.querySelector(".option-manual");
 const manualDataContainer = document.querySelector(".manual-data-container");
@@ -206,24 +206,11 @@ addWalletButton.addEventListener("click", addWallet);
 
 // this handle onclick in the address and amount item
 
-manualWalletsContainer.addEventListener("click", (e) => {
-  if (e.target.classList[0] == "delete-wallet") {
-    deleteOkWallet(e);
-    renameNumberOfWallets();
-  }
-
-  if (e.target.classList[0] == "edit-wallet") {
-    editOkWallet(e);
-  }
-});
+manualWalletsContainer.addEventListener("click", handleWalletsClicks);
 
 // this handle onclick in the address and amount item in incorrect data
 
-incorrectWalletsContainer.addEventListener("click", (e) => {
-  if (e.target.classList[0] == "delete-wallet") deleteIncorrectWallet(e);
-
-  if (e.target.classList[0] == "edit-wallet") editIncorrectWallet(e);
-});
+incorrectWalletsContainer.addEventListener("click", handleIncorrectWalletClick);
 
 // this show the option to add adress and amount manually
 
@@ -236,6 +223,10 @@ optionManual.addEventListener("click", () => {
     resumenFinalContainer.style.display = "none";
   } else login();
 });
+
+// this delete all the wallets
+
+deleteBatchBtn.onclick = deleteBatch;
 
 // this is the continue button
 
