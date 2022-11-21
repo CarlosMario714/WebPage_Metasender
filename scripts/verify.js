@@ -1,5 +1,6 @@
 import { addIncorrectWalletElement, addOkWalletElement } from "./addWallet.js";
 import ethereumchains from "./ethereumchains.js";
+import { finalData } from "./finalData.js";
 import { verifyAddress } from "./tools.js";
 const spanWallet = document.querySelector(".span-wallet");
 const spanAmount = document.querySelector(".span-amount");
@@ -9,7 +10,6 @@ const spanContractAdressManual = document.querySelector(
   ".span-contract-manual"
 );
 const inputContractManual = document.querySelector(".input-contract-manual");
-export let walletAdressForVerify = [];
 
 // verify the info of the excel file
 
@@ -23,12 +23,12 @@ export function verifyFileData(wallet, amount, typeOfToken) {
     ? typeOfToken = ethereumchains[ ethereum.chainId ].symbol
     : typeOfToken;
 
-  walletAdressForVerify.push(wallet);
+  finalData.repeated.push(wallet);
 
   //if is ok data data from file
   if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
-    walletAdressForVerify.forEach((wallet, index) => {
-      walletAdressForVerify.indexOf(wallet) !== index
+    finalData.repeated.forEach((wallet, index) => {
+      finalData.repeated.indexOf(wallet) !== index
         ? (repitedWallet = true)
         : (repitedWallet = false);
     });

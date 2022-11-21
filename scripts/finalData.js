@@ -4,6 +4,7 @@ const finalData = {
   tokenAddress: "",
   wallets: [],
   amount: [],
+  repeated: [],
   numAddresses: 0,
   totalToSend: 0,
   txCost: 0,
