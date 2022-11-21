@@ -23,7 +23,7 @@ async function setWalletAddress() {
 
 function listenChain() {
   ethereum.on("chainChanged", async (chainId) => {
-    if (ethChains[chainId.slice(2)]) {
+    if (ethChains[chainId]) {
       changeTokenItems(chainId);
 
       btnConnect.innerHTML = await setWalletAddress();
@@ -57,7 +57,7 @@ async function addChain(chain) {
       method: "wallet_addEthereumChain",
       params: [
         {
-          chainId: "0x" + chain,
+          chainId: chain,
           chainName: ethChains[chain].netName,
           nativeCurrency: {
             name: ethChains[chain].symbol,
@@ -73,10 +73,11 @@ async function addChain(chain) {
 }
 
 async function changeChain(chain) {
+  console.log(chain)
   await window.ethereum
     .request({
       method: "wallet_switchEthereumChain",
-      params: [{ chainId: "0x" + chain }],
+      params: [{ chainId: chain }],
     })
     .catch((error) => {
       if (error.code == 4902) addChain(chain);
@@ -92,10 +93,10 @@ export function setChain(e) {
 
 export async function login() {
   if (window.ethereum) {
-    connectWallet();
+    await connectWallet();
 
     //change
-    changeChain(5);
+    await changeChain('0x5');
   } else {
     installAlert.classList.add("showAlert");
   }

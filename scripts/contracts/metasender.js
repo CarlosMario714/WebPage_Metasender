@@ -15,7 +15,7 @@ const metasender = {
 	address_0xa869: "0x8429B1975a180cbD4AbeefD27e0B669dD2179c00",
 	// fantom Networks
 	// address_0xfa: "",
-	address_0xafa2: "0x4Ce6C8658e7cB676c24B212e0e60f9aa913f4ec4",
+	address_0xfa2: "0x4Ce6C8658e7cB676c24B212e0e60f9aa913f4ec4",
 	abi: [
 		"function PALCO( address _address ) public view returns( bool )",
 		"function txFee() public view returns( uint256 )",

@@ -48,11 +48,11 @@ export function showErrorAlert(msg) {
 }
 
 export function changeTokenItems(chainId) {
-  tokenInput.children[0].innerHTML = ethChains[chainId.slice(2)].symbol;
+  tokenInput.children[0].innerHTML = ethChains[chainId].symbol;
 
-  fileTokenInput.children[1].innerHTML = ethChains[chainId.slice(2)].symbol;
+  fileTokenInput.children[1].innerHTML = ethChains[chainId].symbol;
 
-  selectChainItem.value = chainId.slice(2);
+  selectChainItem.value = chainId;
 }
 
 export function verifyAddress(_address) {
