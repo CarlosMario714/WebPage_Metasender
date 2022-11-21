@@ -771,9 +771,10 @@ header {
   width: 82rem;
   display: none;
   justify-content: center;
+  position: relative;
 }
 
-.send-process-buttons-container .continue-btn-delete{
+.send-process-buttons-container .continue-btn-delete {
   position: absolute;
   left: 0;
 }
