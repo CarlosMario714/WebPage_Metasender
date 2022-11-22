@@ -73,6 +73,7 @@ export function renameNumberOfWallets() {
 }
 
 export function deleteIncorrectWallet(event) {
+  console.log(incorrectWalletsContainer);
   incorrectWalletsContainer.removeChild(
     event.target.parentNode.parentNode.parentNode
   );
@@ -115,7 +116,7 @@ export function renameNumberOfIncorrectWallets() {
 }
 
 function hideIncorrectWalletsContainer() {
-  if (incorrectWalletsContainer.childNodes.length < 4) {
+  if (incorrectWalletsContainer.childNodes.length <= 1) {
     incorrectWalletsContainer.style.display = "none";
     return true;
   } else return false;
@@ -141,24 +142,22 @@ function getAddAndAmounts() {
 
   const amounts = [];
 
-  let notMatch = 0
+  let notMatch = 0;
 
   const walletAdress = document.querySelectorAll(".wallet-adress");
 
   const walletAmount = document.querySelectorAll(".wallet-amount");
 
   walletAmount.forEach((walletAmount, i) => {
+    const amount = Number(walletAmount.innerHTML);
 
-    const amount = Number(walletAmount.innerHTML)
+    const regex = new RegExp(amountInput.pattern);
 
-    const regex = new RegExp(amountInput.pattern)
-
-    if( regex.exec(`${amount}`) ) notMatch++
+    if (regex.exec(`${amount}`)) notMatch++;
 
     amounts.push(amount);
 
     addresses.push(walletAdress[i].innerHTML);
-
   });
 
   return { addresses, amounts, isMatching: notMatch == 0 };
@@ -166,20 +165,19 @@ function getAddAndAmounts() {
 
 export async function handleManualContinue() {
   if (!hideIncorrectWalletsContainer())
-    return showErrorAlert( idioms[ languaje ].alerts.incorrect_info );
+    return showErrorAlert(idioms[languaje].alerts.incorrect_info);
 
-  if ( tokenInput.value !== "ETH" ) {
+  if (tokenInput.value !== "ETH") {
     if (!verifyAddress(tokenAddContainer.children[1].value))
-      return showErrorAlert(idioms[ languaje ].alerts.contract_address);
+      return showErrorAlert(idioms[languaje].alerts.contract_address);
   }
 
   const { addresses, amounts, isMatching } = getAddAndAmounts();
 
-  if ( isMatching ) 
+  if (isMatching)
     return showErrorAlert(
-      'Error: ' +
-      idioms[languaje][tokenInput.value].amountInput_text
-      )
+      "Error: " + idioms[languaje][tokenInput.value].amountInput_text
+    );
 
   await setFinalData(addresses, amounts);
 
