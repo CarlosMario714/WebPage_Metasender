@@ -168,6 +168,6 @@ export async function setDataAndShowResume() {
 
   resumenFinalContainer.style.display = "flex";
 
-  blockExplorerLinkItem.style.opacity = 0;
+  blockExplorerLinkItem.style.display = 'none';
 
 }

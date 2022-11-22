@@ -1125,7 +1125,7 @@ header {
 .blockExplorerLink {
   position: absolute;
   right: 0;
-  opacity: 0;
+  display: none;
 }
 
 /* loader send process */

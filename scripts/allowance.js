@@ -28,7 +28,7 @@ async function getApproved( tokenId, metasenderAdd ) {
         .catch( handleError )
 
     return aprovAddres == metasenderAdd
-    
+
 }
 
 async function getERC721Approved( tokenIds ) {
@@ -101,6 +101,8 @@ export async function handleAllowance() {
 
     totalToAprove.innerHTML = `${ finalData.tokensToAprove } ${ symbol }`
 
+    blockExprorerAprove.style.display = 'none'
+
 }
 
 async function handleAproveTx( tx ) {
@@ -116,7 +118,7 @@ async function handleAproveTx( tx ) {
     await tx.wait()
         .then(() => 
     
-            aproveErc20Container.classList.toggle("show-aprove-erc20-container")
+            aproveErc20Container.classList.remove("show-aprove-erc20-container")
     
         ).catch( handleError )
 

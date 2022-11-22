@@ -187,7 +187,7 @@ export async function handleSend() {
 	
 		blockExplorerLinkItem.href = `${ethChains[ chainId ].blockExplorer}/tx/${tx.hash}`
 	
-		blockExplorerLinkItem.style.opacity = 1
+		blockExplorerLinkItem.style.display = 'block'
 
 	})
 
