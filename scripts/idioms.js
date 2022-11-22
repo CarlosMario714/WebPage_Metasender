@@ -88,7 +88,9 @@ export default {
             "install-metamask": "The MetaSender will only work <br />on a desktop browser with metamask installed",
             "Not Suported network": "Network Not Supported",
             "batch_max": "Error: maximum 255 per lot",
-            "incorrect_file": "Error: file not compatible"
+            "incorrect_file": "Error: file not compatible",
+            contract_address: "Error: Incorrect Contract Address",
+            incorrect_info: "Error: Fix Incorrect Info"
         },
         "ETH": {
             "labelAdress": "Account or Wallet to send",
@@ -204,7 +206,9 @@ export default {
             "install-metamask": "The MetaSender solo funciona en un navegardor<br />  de escritorio con Metamask instalado",
             "Not Suported network": "Red no compatible",
             "batch_max": "Error: maximo 255 por lote",
-            "incorrect_file": "Error: archivo no compatible"
+            "incorrect_file": "Error: archivo no compatible",
+            contract_address: "Error: Direccion de contrato incorrecta",
+            incorrect_info: "Error: Corrija información incorrecta"
         },
         "ETH": {
             "labelAdress": "Wallet para enviar",

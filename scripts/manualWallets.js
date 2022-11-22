@@ -141,31 +141,45 @@ function getAddAndAmounts() {
 
   const amounts = [];
 
+  let notMatch = 0
+
   const walletAdress = document.querySelectorAll(".wallet-adress");
 
-  const walletMount = document.querySelectorAll(".wallet-amount");
+  const walletAmount = document.querySelectorAll(".wallet-amount");
 
-  walletAdress.forEach((walletAddres) => {
-    addresses.push(walletAddres.innerHTML);
+  walletAmount.forEach((walletAmount, i) => {
+
+    const amount = Number(walletAmount.innerHTML)
+
+    const regex = new RegExp(amountInput.pattern)
+
+    if( regex.exec(`${amount}`) ) notMatch++
+
+    amounts.push(amount);
+
+    addresses.push(walletAdress[i].innerHTML);
+
   });
 
-  walletMount.forEach((walletMount) => {
-    amounts.push(walletMount.innerHTML);
-  });
-
-  return { addresses, amounts };
+  return { addresses, amounts, isMatching: notMatch == 0 };
 }
 
 export async function handleManualContinue() {
   if (!hideIncorrectWalletsContainer())
-    return showErrorAlert(`Fix Incorrect Info`);
+    return showErrorAlert( idioms[ languaje ].alerts.incorrect_info );
 
-  if (tokenInput.value === "ERC20" || tokenInput.value === "ERC721") {
+  if ( tokenInput.value !== "ETH" ) {
     if (!verifyAddress(tokenAddContainer.children[1].value))
-      return showErrorAlert(`Incorrect contract adress`);
+      return showErrorAlert(idioms[ languaje ].alerts.contract_address);
   }
 
-  const { addresses, amounts } = getAddAndAmounts();
+  const { addresses, amounts, isMatching } = getAddAndAmounts();
+
+  if ( isMatching ) 
+    return showErrorAlert(
+      'Error: ' +
+      idioms[languaje][tokenInput.value].amountInput_text
+      )
 
   await setFinalData(addresses, amounts);
 
