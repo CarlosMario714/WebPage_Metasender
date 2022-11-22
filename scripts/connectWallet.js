@@ -10,16 +10,20 @@ import {
 import ethChains from "./ethereumchains.js";
 const btnConnect = document.querySelector(".btnConnect");
 const installAlert = document.querySelector(".installAlert");
+const txCostTitle = document.querySelector(
+  '[data-type="send-process-resume-txCost"]'
+)
 export let isConnected = false;
 
-async function setWalletAddress() {
-  const isPalco = await handlePalco();
+export function setPalcoTexts( palcoMember, txFee ) {
 
   const start = ethereum.selectedAddress.match(/^\w{5}/);
 
   const end = ethereum.selectedAddress.match(/\w{4}$/);
 
-  return start + "..." + end + isPalco;
+  btnConnect.innerHTML = start + "..." + end + palcoMember;
+
+  txCostTitle.innerHTML = txFee
 }
 
 function listenChain() {
@@ -29,7 +33,7 @@ function listenChain() {
 
       changeWalletsTokenType()
 
-      btnConnect.innerHTML = await setWalletAddress();
+      handlePalco();
 
       showConnectAlert();
     } else showErrorAlert("Network Not Supported");
@@ -45,7 +49,7 @@ async function connectWallet() {
       params: [{ eth_accounts: {} }],
     })
     .then(async () => {
-      btnConnect.innerHTML = await setWalletAddress();
+      handlePalco();
       isConnected = true;
       listenChain();
     })

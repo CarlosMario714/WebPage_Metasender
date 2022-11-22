@@ -1,7 +1,7 @@
 import metasender from "./contracts/metasender.js";
 import { finalData  } from "./finalData.js";
 import ethChains from "./ethereumchains.js"
-import { getContract, handleError, handleTxFee, showInstallAlert  } from "./tools.js";
+import { getContract, handleError, handlePalco, handleTxFee, showInstallAlert  } from "./tools.js";
 import { isConnected, login } from "./connectWallet.js";
 const blockExplorerLinkItem = document.querySelector('.blockExplorerLink')
 
@@ -132,7 +132,17 @@ export async function hadlePalco() {
 
 	showInstallAlert()
 
-	if ( isConnected ) return await addToPALCO()
+	if ( isConnected ) {
+
+		await addToPALCO().then( async tx => {
+
+			await tx.wait()
+
+			await handlePalco()
+			
+		})
+
+	}
 
 	else login()
 

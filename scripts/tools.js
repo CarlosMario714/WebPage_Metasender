@@ -6,6 +6,7 @@ import ethereumchains from "./ethereumchains.js";
 import idioms from "./idioms.js";
 import { languaje } from "./translate.js";
 import { walletCount } from "./manualWallets.js";
+import { setPalcoTexts } from "./connectWallet.js";
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const selectChainItem = document.querySelector(".option-red select");
@@ -154,10 +155,27 @@ export async function handleTxFee() {
 }
 
 export async function handlePalco() {
+
   finalData.isPalco = await isPalco();
 
-  if (finalData.isPalco) return '<div class="isPalco">PALCO MEMBER</div>';
-  else return "";
+  if ( finalData.isPalco ) {
+
+    setPalcoTexts(
+      "<div class=\"isPalco\">PALCO MEMBER</div>",
+      idioms[ languaje ]["send-process"]["send-process-resume-txCost-Palco"]
+    )
+
+  }
+
+  else {
+
+    setPalcoTexts(
+      "",
+      idioms[ languaje ]["send-process"]["send-process-resume-txCost"]
+    )
+
+  };
+
 }
 
 export function showInstallAlert() {
@@ -199,5 +217,5 @@ export function onLoad() {
   tokenInput.value = "ETH" 
 
   fileTokenInput.value = "" 
-  
+
 }
