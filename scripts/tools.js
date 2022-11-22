@@ -14,6 +14,8 @@ const fileTokenInput = document.querySelector(".token-input-file");
 const installAlert = document.querySelector(".installAlert");
 const manWalletsCont = document.querySelector('.manual-wallets-container')
 const manIncorrectWalletsCont = document.querySelector('.incorrect-wallets-container')
+const pageloader = document.querySelector(".loaderContainer");
+const optinonRed = document.querySelector(".option-red select");
 
 export function removeClass(items, className) {
   for (const item of items) item.classList.remove(className);
@@ -186,4 +188,16 @@ export function changeWalletsTokenType() {
       : e.innerHTML = tokenInput.value
   })
 
+}
+
+export function onLoad() {
+
+  pageloader.style.display = "none"
+  // change
+  optinonRed.value = '0x5'
+
+  tokenInput.value = "ETH" 
+
+  fileTokenInput.value = "" 
+  
 }

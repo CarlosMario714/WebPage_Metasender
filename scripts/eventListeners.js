@@ -21,6 +21,7 @@ import { handleSend, metasenderFunctions } from "./transactions.js";
 import { toggleLanguage, languaje } from "./translate.js";
 import {
   deleteBatch,
+  onLoad,
   removeClass,
   showErrorAlert,
   userDeviceInfo,
@@ -83,7 +84,7 @@ const btnPalco = document.querySelector(".btn-palco");
 /***************************************************************************/
 /***************************** WINDOW **************************************/
 
-window.addEventListener("load", () => (pageloader.style.display = "none"));
+window.addEventListener("load", onLoad);
 
 /***************************************************************************/
 /***************************** NAVBAR **************************************/
