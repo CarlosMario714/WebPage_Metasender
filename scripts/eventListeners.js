@@ -138,6 +138,7 @@ optionUploadFile.addEventListener("click", () => {
   if (isConnected) {
     fileDataContainer.style.display = "flex";
     manualDataContainer.style.display = "none";
+    resumenFinalContainer.style.display = "none";
   } else login();
 });
 
