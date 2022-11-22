@@ -16,7 +16,7 @@ async function isApprovedForAll() {
     return await contract.isApprovedForAll( 
         ethereum.selectedAddress,
         metasender[`address_${ ethereum.chainId }`]
-    )
+    ).catch( handleError )
 
 }
 
@@ -25,8 +25,10 @@ async function getApproved( tokenId, metasenderAdd ) {
     const contract = getContract(finalData.tokenAddress, erc[721])
 
     const aprovAddres = await contract.getApproved( tokenId )
+        .catch( handleError )
 
     return aprovAddres == metasenderAdd
+    
 }
 
 async function getERC721Approved( tokenIds ) {
@@ -38,6 +40,7 @@ async function getERC721Approved( tokenIds ) {
     for ( const tokenId of tokenIds ) 
 
         aproved[tokenId] = await getApproved( tokenId, metasenderAdd )
+            .catch( handleError )
 
     return aproved
 
@@ -46,6 +49,7 @@ async function getERC721Approved( tokenIds ) {
 async function setERC721Aproved( tokenIds ) {
 
     const aproved = await getERC721Approved( tokenIds )
+        .catch( handleError )
 
     const notAproved = []
 
@@ -61,11 +65,11 @@ async function setERC721Aproved( tokenIds ) {
 
 export async function isERC721Aproved( tokenIds ) {
 
-    const isAproved = await isApprovedForAll()
+    const isAproved = await isApprovedForAll().catch( handleError )
 
-    return { isAproved }
+    finalData.tokensToAprove = tokenIds.length
 
-    // return await setERC721Aproved( tokenIds )
+    return { isAproved, notAproved: tokenIds.length }
 
 }
 
@@ -78,7 +82,7 @@ export async function isAproved( amounts ) {
     const tokensAproved = await contract.allowance( 
         ethereum.selectedAddress, 
         metasender[`address_${ ethereum.chainId }`]
-    )
+    ).catch( handleError )
 
     const aprove = Number(ethers.utils.formatUnits(tokensAproved, finalData.decimals))
 
@@ -93,6 +97,7 @@ export async function handleAllowance() {
     aproveErc20Container.classList.toggle("show-aprove-erc20-container");
 
     const symbol = await getTokenSymbol( finalData.tokenAddress )
+        .catch( handleError )
 
     totalToAprove.innerHTML = `${ finalData.tokensToAprove } ${ symbol }`
 
