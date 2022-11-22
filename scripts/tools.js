@@ -5,6 +5,7 @@ import { finalData } from "./finalData.js";
 import ethereumchains from "./ethereumchains.js";
 import idioms from "./idioms.js";
 import { languaje } from "./translate.js";
+import { walletCount } from "./manualWallets.js";
 const errorAlert = document.querySelector(".errorsAlert");
 const connectedToMainet = document.querySelector(".connectedToWeb3Netwrok");
 const selectChainItem = document.querySelector(".option-red select");
@@ -162,6 +163,10 @@ export function showInstallAlert() {
 }
 export function deleteBatch() {
   finalData.repeated = []
+
+  walletCount.correct = 0
+
+  walletCount.incorrect = 0
 
   manWalletsCont.innerHTML = idioms[ languaje ]['send-process'].correct_data_Title
 
