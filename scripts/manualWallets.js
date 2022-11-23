@@ -116,7 +116,7 @@ export function renameNumberOfIncorrectWallets() {
 }
 
 function hideIncorrectWalletsContainer() {
-  if (incorrectWalletsContainer.childNodes.length <= 1) {
+  if (incorrectWalletsContainer.children.length <= 1) {
     incorrectWalletsContainer.style.display = "none";
     return true;
   } else return false;
