@@ -9,6 +9,7 @@ import {
 import { handleAllowance, isTokenAproved } from "./allowance.js";
 import { languaje } from "./translate.js";
 import { deleteOkWallet, editOkWallet } from "./addWallet.js";
+import { verifyRepeatedWallets } from "./verify.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -116,7 +117,7 @@ export function renameNumberOfIncorrectWallets() {
 }
 
 function hideIncorrectWalletsContainer() {
-  if (incorrectWalletsContainer.childNodes.length <= 1) {
+  if (incorrectWalletsContainer.children.length <= 1) {
     incorrectWalletsContainer.style.display = "none";
     return true;
   } else return false;
@@ -132,6 +133,8 @@ export function showWallets() {
   }
 
   sendProcessButtonsContainer.style.display = "flex";
+
+  verifyRepeatedWallets();
 
   // continueBtnManual.style.display = "block";
   // continueBtnManual.classList.add("opacity");

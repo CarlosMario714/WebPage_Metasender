@@ -1,6 +1,8 @@
 import { addIncorrectWalletElement, addOkWalletElement } from "./addWallet.js";
 import ethereumchains from "./ethereumchains.js";
 import { finalData } from "./finalData.js";
+import idioms from "./idioms.js";
+import { languaje } from "./translate.js";
 import { verifyAddress } from "./tools.js";
 const spanWallet = document.querySelector(".span-wallet");
 const spanAmount = document.querySelector(".span-amount");
@@ -10,6 +12,15 @@ const spanContractAdressManual = document.querySelector(
   ".span-contract-manual"
 );
 const inputContractManual = document.querySelector(".input-contract-manual");
+const repetedWalletsContainer = document.querySelector(
+  ".repeated-wallets-container"
+);
+const repitedWalletElementText = document.createElement("p");
+repitedWalletElementText.classList.add("repeated-wallet");
+repitedWalletElementText.innerHTML =
+  idioms[languaje].incorrectElement.repitedWallet;
+
+//idioms[languaje].incorrectElement.repitedWallet;
 
 // verify the info of the excel file
 
@@ -19,19 +30,19 @@ export function verifyFileData(wallet, amount, typeOfToken) {
   let amountError = "amount error";
   let allError = "all errors";
   let repitedWallet = false;
-  typeOfToken == 'ETH' 
-    ? typeOfToken = ethereumchains[ ethereum.chainId ].symbol
+  typeOfToken == "ETH"
+    ? (typeOfToken = ethereumchains[ethereum.chainId].symbol)
     : typeOfToken;
 
   finalData.repeated.push(wallet);
 
   //if is ok data data from file
   if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
-    finalData.repeated.forEach((wallet, index) => {
-      finalData.repeated.indexOf(wallet) !== index
-        ? (repitedWallet = true)
-        : (repitedWallet = false);
-    });
+    // finalData.repeated.forEach((wallet, index) => {
+    //   finalData.repeated.indexOf(wallet) !== index
+    //     ? (repitedWallet = true)
+    //     : (repitedWallet = false);
+    // });
     addOkWalletElement(wallet, amount, typeOfToken, repitedWallet);
   }
 
@@ -56,8 +67,8 @@ export function verifyFileData(wallet, amount, typeOfToken) {
 
 export function verifyManualData(wallet, amount, typeOfToken) {
   const amountRegex = new RegExp(amountInput.pattern);
-  typeOfToken == 'ETH' 
-    ? typeOfToken = ethereumchains[ ethereum.chainId ].symbol
+  typeOfToken == "ETH"
+    ? (typeOfToken = ethereumchains[ethereum.chainId].symbol)
     : typeOfToken;
 
   //if is selected native blockchain currency
@@ -106,4 +117,44 @@ export function verifyManualData(wallet, amount, typeOfToken) {
       ? spanContractAdressManual.classList.add("is-active")
       : spanContractAdressManual.classList.remove("is-active");
   }
+}
+
+export function verifyRepeatedWallets() {
+  const walletsAddres = document.querySelectorAll(".wallet-adress");
+  let repeatedWallets = [];
+  walletsAddres.forEach((element) => {
+    repeatedWallets.push(element.innerHTML);
+  });
+
+  console.log(repeatedWallets);
+
+  repeatedWallets.forEach((wallet, index) => {
+    let firstRepeated = repeatedWallets.indexOf(wallet);
+    if (firstRepeated !== index) {
+      //primera wallet container
+      const individualWalletContainer = document.getElementById(
+        `${(firstRepeated += 1)}`
+      );
+      //wallets repetidas
+      const repeatedWalletElement = document.getElementById(`${(index += 1)}`)
+        .children[0];
+      console.log(repeatedWalletElement);
+
+      individualWalletContainer.appendChild(repeatedWalletElement);
+
+      individualWalletContainer.classList.add("repeated-walled");
+
+      //individualWalletContainer.appendChild(repitedWalletElementText);
+
+      console.log((firstRepeated += 1), (index += 1));
+    }
+
+    const repeatedWalletContainer =
+      document.querySelectorAll(".repeated-walled");
+
+    console.log(repeatedWalletContainer);
+    repeatedWalletContainer.forEach((walletContainer) => {
+      walletContainer.appendChild(repitedWalletElementText);
+    });
+  });
 }

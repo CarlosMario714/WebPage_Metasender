@@ -81,7 +81,7 @@ export default {
             "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address: </span>Add a valid Address without spaces</p></div>",
             "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Invalid amount:</span> Only positive numbers</p> </div>",
             "allErrors": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address:</span> write a valid address without spaces</p> <p><span>Invalid amount:</span> Only positive numbers</p></div>",
-            "repitedWallet": `<p class="repeated-wallet">Repeated wallet</p>`,
+            "repitedWallet": `Repeated wallets`,
         },
         "footer": {
             "footer-followus": "Follow Us"
