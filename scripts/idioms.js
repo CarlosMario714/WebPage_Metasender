@@ -62,6 +62,7 @@ export default {
         "palco": {
             "palco-title": "<span>Be part of our</span> Palco",
             "palco-info": "<span>The Metasender</span> will charge you a small tax for each batch of transactions that you make, you can make lots of free transactions for life by becoming part of our <span>Palco</span>",
+            "palco-table-title": "The MetaSender fees",
             "palco-normalUser": "Normal user",
             "palco-network": "Network",
             "palco-fees": "Transaction tax",
@@ -181,6 +182,7 @@ export default {
         "palco": {
             "palco-title": "<span>Sé parte de nuestro</span> Palco",
             "palco-info": "<span>El Metasender</span> te cobrará un pequeño impuesto por cada lote de transacciones que realices, puedes realizar muchas transacciones gratis de por vida siendo parte de nuestro <span>Palco</span>",
+            "palco-table-title": "Tarifas de The MetaSender",
             "palco-normalUser": "Usuario normal",
             "palco-network": "Red",
             "palco-fees": "Tarifa por transaccion",
