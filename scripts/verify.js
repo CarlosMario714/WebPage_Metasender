@@ -1,9 +1,18 @@
-import { addIncorrectWalletElement, addOkWalletElement } from "./addWallet.js";
+import {
+  addIncorrectWalletElement,
+  addOkWalletElement,
+  deleteOkWallet,
+} from "./addWallet.js";
 import ethereumchains from "./ethereumchains.js";
 import { finalData } from "./finalData.js";
 import idioms from "./idioms.js";
 import { languaje } from "./translate.js";
 import { verifyAddress } from "./tools.js";
+import {
+  newWalletsFragment,
+  renameNumberOfWallets,
+  walletCount,
+} from "./manualWallets.js";
 const spanWallet = document.querySelector(".span-wallet");
 const spanAmount = document.querySelector(".span-amount");
 const walletInput = document.querySelector(".wallet-input");
@@ -12,15 +21,14 @@ const spanContractAdressManual = document.querySelector(
   ".span-contract-manual"
 );
 const inputContractManual = document.querySelector(".input-contract-manual");
-const repetedWalletsContainer = document.querySelector(
-  ".repeated-wallets-container"
-);
 const repitedWalletElementText = document.createElement("p");
+const manualWalletsContainer = document.querySelector(
+  ".manual-wallets-container"
+);
+
 repitedWalletElementText.classList.add("repeated-wallet");
 repitedWalletElementText.innerHTML =
   idioms[languaje].incorrectElement.repitedWallet;
-
-//idioms[languaje].incorrectElement.repitedWallet;
 
 // verify the info of the excel file
 
@@ -119,42 +127,110 @@ export function verifyManualData(wallet, amount, typeOfToken) {
   }
 }
 
-export function verifyRepeatedWallets() {
-  const walletsAddres = document.querySelectorAll(".wallet-adress");
+export function verifyRepeatedWalletsFromFile() {
+  const walletsAddres = newWalletsFragment.querySelectorAll(".wallet-adress");
+
   let repeatedWallets = [];
+
   walletsAddres.forEach((element) => {
     repeatedWallets.push(element.innerHTML);
   });
-
-  console.log(repeatedWallets);
 
   repeatedWallets.forEach((wallet, index) => {
     let firstRepeated = repeatedWallets.indexOf(wallet);
     if (firstRepeated !== index) {
       //primera wallet container
-      const individualWalletContainer = document.getElementById(
+      const individualWalletContainer = newWalletsFragment.getElementById(
         `${(firstRepeated += 1)}`
       );
       //wallets repetidas
-      const repeatedWalletElement = document.getElementById(`${(index += 1)}`)
-        .children[0];
-      console.log(repeatedWalletElement);
+      const repeatedWalletElement = newWalletsFragment.getElementById(
+        `${(index += 1)}`
+      );
 
-      individualWalletContainer.appendChild(repeatedWalletElement);
+      individualWalletContainer.appendChild(repeatedWalletElement.children[0]);
 
-      individualWalletContainer.classList.add("repeated-walled");
+      individualWalletContainer.classList.add("repeated-wallet-container");
 
-      //individualWalletContainer.appendChild(repitedWalletElementText);
-
-      console.log((firstRepeated += 1), (index += 1));
+      newWalletsFragment.removeChild(repeatedWalletElement);
     }
-
-    const repeatedWalletContainer =
-      document.querySelectorAll(".repeated-walled");
-
-    console.log(repeatedWalletContainer);
-    repeatedWalletContainer.forEach((walletContainer) => {
-      walletContainer.appendChild(repitedWalletElementText);
-    });
   });
+
+  const repeatedWalletContainer = newWalletsFragment.querySelectorAll(
+    ".repeated-wallet-container"
+  );
+
+  repeatedWalletContainer.forEach((walletContainer) => {
+    walletContainer.append(repitedWalletElementText);
+  });
+}
+
+export function verifyRepeatedWalletsFormManual() {
+  const individualWalletContainer = document.querySelectorAll(
+    ".individual-wallet-container"
+  );
+  const walletToVerify =
+    newWalletsFragment.querySelector(".wallet-adress").innerHTML;
+  const walletToInsert = newWalletsFragment.querySelector(".manual-wallet");
+  let manualWalletsArr = [];
+
+  individualWalletContainer.forEach((element) => {
+    console.log(individualWalletContainer);
+    manualWalletsArr.push(
+      element.children[0].querySelector(".wallet-adress").innerHTML
+    );
+  });
+
+  console.log(manualWalletsArr);
+
+  console.log(manualWalletsArr.indexOf(walletToVerify) + 1);
+  console.log(walletToInsert);
+
+  if (manualWalletsArr.indexOf(walletToVerify) >= 0) {
+    let walletElement = document.getElementById(
+      `${manualWalletsArr.indexOf(walletToVerify) + 1}`
+    );
+
+    walletElement.appendChild(walletToInsert);
+
+    //remover el elemento que inserta el fragmento
+    manualWalletsContainer.removeChild(
+      newWalletsFragment.querySelector(".individual-wallet-container")
+    );
+  }
+
+  // repeatedWallets.forEach((wallet, index) => {
+  //   let firstRepeated = repeatedWallets.indexOf(wallet);
+  //   if (firstRepeated !== index) {
+  //     console.log((firstRepeated += 1), (index += 1));
+  //     //primera wallet container
+  //     const individualWalletContainer = document.getElementById(
+  //       `${(firstRepeated += 1)}`
+  //     );
+  //     //wallets repetidas
+  //     const repeatedWalletElement = document.getElementById(`${(index += 1)}`);
+
+  //     console.log("individual wallet", individualWalletContainer);
+
+  //     console.log("repeated wallet", repeatedWalletElement);
+
+  //     individualWalletContainer.appendChild(repeatedWalletElement.children[0]);
+
+  //     // if (
+  //     //   individualWalletContainer.classList[1] !== "repeated-wallet-container"
+  //     // ) {
+  //     //   individualWalletContainer.classList.add("repeated-wallet-container");
+  //     // }
+
+  //     // manualWalletsContainer.removeChild(repeatedWalletElement);
+  //   }
+  // });
+
+  // const repeatedWalletContainer = document.querySelectorAll(
+  //   ".repeated-wallet-container"
+  // );
+
+  // repeatedWalletContainer.forEach((walletContainer) => {
+  //   walletContainer.append(repitedWalletElementText);
+  // });
 }

@@ -7,7 +7,7 @@ import {
   renameNumberOfWallets,
 } from "./manualWallets.js";
 import { languaje } from "./translate.js";
-import { verifyManualData } from "./verify.js";
+import { verifyManualData, verifyRepeatedWalletsFormManual } from "./verify.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -101,10 +101,20 @@ export function addIncorrectWalletElement(
 }
 
 export function deleteOkWallet(event) {
-  manualWalletsContainer.removeChild(
-    event.target.parentNode.parentNode.parentNode
-  );
-  walletCount.correct -= 1;
+  if (
+    event.target.parentNode.parentNode.parentNode.classList[1] ===
+    "repeated-wallet-container"
+  ) {
+    event.target.parentNode.parentNode.parentNode.removeChild(
+      event.target.parentNode.parentNode
+    );
+    walletCount.correct -= 1;
+  } else {
+    manualWalletsContainer.removeChild(
+      event.target.parentNode.parentNode.parentNode
+    );
+    walletCount.correct -= 1;
+  }
 }
 
 export function editOkWallet(event) {
@@ -125,7 +135,7 @@ export function editOkWallet(event) {
     walletInput.classList.remove("edit");
     amountInput.classList.remove("edit");
   }, 1000);
-  manualWalletsContainer.removeChild(parentElementContainer);
+  deleteOkWallet(event);
   renameNumberOfWallets();
 }
 
@@ -149,7 +159,9 @@ function addNativeCurrencyWallet() {
       tokenInput.value
     );
 
+    verifyRepeatedWalletsFormManual();
     showWallets();
+
     //continueBtnManual.classList.add("opacity");
   } else {
     empyField(true, false);
@@ -175,6 +187,8 @@ function addTokenWallet() {
     );
 
     showWallets();
+    verifyRepeatedWalletsFormManual();
+
     //continueBtnManual.classList.add("opacity");
   } else {
     empyField(false, true);

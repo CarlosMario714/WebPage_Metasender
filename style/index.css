@@ -685,14 +685,7 @@ header {
   flex-direction: column;
 }
 
-.repeated-walled {
-  gap: 1rem;
-  border: rgb(250, 209, 173) 3px solid;
-  border-radius: 1rem;
-  margin: 1rem 0;
-}
-
-.repeated-walled {
+.repeated-wallet-container {
   gap: 1rem;
   border: rgb(250, 209, 173) 3px solid;
   border-radius: 1rem;

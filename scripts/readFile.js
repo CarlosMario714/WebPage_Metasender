@@ -1,5 +1,10 @@
 import idioms from "./idioms.js";
-import { showWallets, changeTypeOfToken, handleIncorrectWalletClick, handleWalletsClicks } from "./manualWallets.js";
+import {
+  showWallets,
+  changeTypeOfToken,
+  handleIncorrectWalletClick,
+  handleWalletsClicks,
+} from "./manualWallets.js";
 import {
   handleError,
   showErrorAlert,
@@ -8,7 +13,7 @@ import {
   deleteBatch,
 } from "./tools.js";
 import { languaje } from "./translate.js";
-import { verifyFileData } from "./verify.js";
+import { verifyFileData, verifyRepeatedWalletsFromFile } from "./verify.js";
 const dropArea = document.querySelector(".drop-area");
 const dragText = dropArea.querySelector("h2");
 const buttonToUploadFile = dropArea.querySelector("button");
@@ -55,8 +60,7 @@ function handleContract() {
 }
 
 export function handleFileContinue() {
-
-  deleteBatch()
+  deleteBatch();
 
   changeTypeOfToken(tokenInputFile.value);
 
@@ -119,6 +123,8 @@ export function migrateInfo() {
 
   //seria mejor que esta funcion devuelva una promesa, por si el archivo no es correcto no pase a la siguiente seccion
   verifyData();
+
+  verifyRepeatedWalletsFromFile();
 
   showWallets();
 
