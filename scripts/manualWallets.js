@@ -9,7 +9,7 @@ import {
 import { handleAllowance, isTokenAproved } from "./allowance.js";
 import { languaje } from "./translate.js";
 import { deleteOkWallet, editOkWallet } from "./addWallet.js";
-import { verifyRepeatedWalletsFromFile } from "./verify.js";
+import { combineAmounts, verifyRepeatedWalletsFromFile } from "./verify.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -31,6 +31,7 @@ const sendProcessButtonsContainer = document.querySelector(
 );
 export const walletCount = {
   correct: 0,
+  id: 0,
   incorrect: 0,
 };
 export let newWalletsFragment = document.createDocumentFragment();
@@ -65,11 +66,18 @@ export function changeTypeOfToken(item) {
 //rename wallets when someone is delete
 export function renameNumberOfWallets() {
   let numberOfWallet = document.querySelectorAll(".number-of-wallet");
+  let numberOfIndividualWallets = document.querySelectorAll(
+    ".individual-wallet-container"
+  );
 
   for (let i = 0; i < numberOfWallet.length; i++) {
-    numberOfWallet[i].parentNode.id = i + 1;
     numberOfWallet[i].innerHTML = i + 1;
     walletCount.correct = i + 1;
+  }
+
+  for (let i = 0; i < numberOfIndividualWallets.length; i++) {
+    numberOfIndividualWallets[i].id = i + 1;
+    walletCount.id = i + 1;
   }
 }
 
@@ -125,6 +133,7 @@ function hideIncorrectWalletsContainer() {
 
 export function showWallets() {
   manualWalletsContainer.appendChild(newWalletsFragment);
+  renameNumberOfWallets();
 
   if (newIncorrectsWalletsFragment.childNodes.length > 0) {
     tituloDatosCorrectos.style.display = "block";
@@ -205,6 +214,10 @@ export function handleWalletsClicks(e) {
 
   if (e.target.classList[0] == "edit-wallet") {
     editOkWallet(e);
+  }
+
+  if (e.target.classList[0] == "combine-amounts-btn") {
+    combineAmounts(e.target.parentNode);
   }
 }
 

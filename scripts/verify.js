@@ -13,6 +13,7 @@ import {
   renameNumberOfWallets,
   walletCount,
 } from "./manualWallets.js";
+import { getTotalValue } from "./transactions.js";
 const spanWallet = document.querySelector(".span-wallet");
 const spanAmount = document.querySelector(".span-amount");
 const walletInput = document.querySelector(".wallet-input");
@@ -21,14 +22,10 @@ const spanContractAdressManual = document.querySelector(
   ".span-contract-manual"
 );
 const inputContractManual = document.querySelector(".input-contract-manual");
-const repitedWalletElementText = document.createElement("p");
+
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
-
-repitedWalletElementText.classList.add("repeated-wallet");
-repitedWalletElementText.innerHTML =
-  idioms[languaje].incorrectElement.repitedWallet;
 
 // verify the info of the excel file
 
@@ -153,15 +150,27 @@ export function verifyRepeatedWalletsFromFile() {
       individualWalletContainer.classList.add("repeated-wallet-container");
 
       newWalletsFragment.removeChild(repeatedWalletElement);
+
+      //console.log(walletCount.id);
+      walletCount.id -= 1;
+      //console.log(walletCount.id);
     }
   });
 
   const repeatedWalletContainer = newWalletsFragment.querySelectorAll(
-    ".repeated-wallet-container"
+    ".repeated-wallet-container .repeated-wallet"
+  );
+
+  const combineAmountsBtn = newWalletsFragment.querySelectorAll(
+    ".repeated-wallet-container .combine-amounts-btn"
   );
 
   repeatedWalletContainer.forEach((walletContainer) => {
-    walletContainer.append(repitedWalletElementText);
+    walletContainer.style.display = "block";
+  });
+
+  combineAmountsBtn.forEach((btn) => {
+    btn.style.display = "block";
   });
 }
 
@@ -172,19 +181,19 @@ export function verifyRepeatedWalletsFormManual() {
   const walletToVerify =
     newWalletsFragment.querySelector(".wallet-adress").innerHTML;
   const walletToInsert = newWalletsFragment.querySelector(".manual-wallet");
+  const containerId = newWalletsFragment.querySelector(
+    ".individual-wallet-container"
+  );
+
   let manualWalletsArr = [];
 
   individualWalletContainer.forEach((element) => {
-    console.log(individualWalletContainer);
     manualWalletsArr.push(
       element.children[0].querySelector(".wallet-adress").innerHTML
     );
   });
 
-  console.log(manualWalletsArr);
-
   console.log(manualWalletsArr.indexOf(walletToVerify) + 1);
-  console.log(walletToInsert);
 
   if (manualWalletsArr.indexOf(walletToVerify) >= 0) {
     let walletElement = document.getElementById(
@@ -193,44 +202,52 @@ export function verifyRepeatedWalletsFormManual() {
 
     walletElement.appendChild(walletToInsert);
 
-    //remover el elemento que inserta el fragmento
-    manualWalletsContainer.removeChild(
-      newWalletsFragment.querySelector(".individual-wallet-container")
+    if (walletElement.classList[1] !== "repeated-wallet-container") {
+      walletElement.classList.add("repeated-wallet-container");
+    }
+
+    const combineAmountsBtn = walletElement.querySelector(
+      ".combine-amounts-btn"
     );
+
+    const textRepeatedWallets = walletElement.querySelector(".repeated-wallet");
+
+    combineAmountsBtn.style.display = "block";
+    textRepeatedWallets.style.display = "block";
+
+    newWalletsFragment.removeChild(containerId);
+
+    renameNumberOfWallets();
+  } else {
+    walletElement.classList.remove("repeated-wallet-container");
+
+    repeatedWalletContainer.forEach((walletContainer) => {
+      walletContainer.style.display = "none";
+    });
+
+    return false;
+  }
+}
+
+export function combineAmounts(individualWallet) {
+  const amountsElement = individualWallet.querySelectorAll(".wallet-amount");
+  const walletElement = individualWallet.querySelectorAll(".manual-wallet");
+  const amountsArr = [];
+
+  amountsElement.forEach((amount) => {
+    amountsArr.push(Number(amount.innerHTML));
+  });
+
+  const totalValue = amountsArr.reduce(
+    (prevValue, nextValue) => prevValue + nextValue
+  );
+
+  amountsElement[0].innerHTML = totalValue;
+
+  for (let i = 1; i <= amountsElement.length - 1; i++) {
+    console.log(amountsElement[i]);
+    individualWallet.removeChild(walletElement[i]);
   }
 
-  // repeatedWallets.forEach((wallet, index) => {
-  //   let firstRepeated = repeatedWallets.indexOf(wallet);
-  //   if (firstRepeated !== index) {
-  //     console.log((firstRepeated += 1), (index += 1));
-  //     //primera wallet container
-  //     const individualWalletContainer = document.getElementById(
-  //       `${(firstRepeated += 1)}`
-  //     );
-  //     //wallets repetidas
-  //     const repeatedWalletElement = document.getElementById(`${(index += 1)}`);
-
-  //     console.log("individual wallet", individualWalletContainer);
-
-  //     console.log("repeated wallet", repeatedWalletElement);
-
-  //     individualWalletContainer.appendChild(repeatedWalletElement.children[0]);
-
-  //     // if (
-  //     //   individualWalletContainer.classList[1] !== "repeated-wallet-container"
-  //     // ) {
-  //     //   individualWalletContainer.classList.add("repeated-wallet-container");
-  //     // }
-
-  //     // manualWalletsContainer.removeChild(repeatedWalletElement);
-  //   }
-  // });
-
-  // const repeatedWalletContainer = document.querySelectorAll(
-  //   ".repeated-wallet-container"
-  // );
-
-  // repeatedWalletContainer.forEach((walletContainer) => {
-  //   walletContainer.append(repitedWalletElementText);
-  // });
+  renameNumberOfWallets();
 }

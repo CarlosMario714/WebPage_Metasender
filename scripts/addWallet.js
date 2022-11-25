@@ -25,8 +25,9 @@ const inputContractManual = document.querySelector(".input-contract-manual");
 //add new ok wallet element
 export function addOkWalletElement(wallet, amount, typeOfToken, repitedWallet) {
   walletCount.correct += 1;
+  walletCount.id += 1;
   let newWalletContainer = document.createElement("div");
-  newWalletContainer.id = walletCount.correct;
+  newWalletContainer.id = walletCount.id;
   newWalletContainer.classList.add("individual-wallet-container");
   const manualWallet = `
   <div class="manual-wallet">
@@ -40,9 +41,13 @@ export function addOkWalletElement(wallet, amount, typeOfToken, repitedWallet) {
     </a>
     <a>
       <img class="delete-wallet" src="../img/icons/cerrar.png"
-      alt="cerrar pagina" />
+      alt="cerrar pagina"/>
     </a>
-  </div>`;
+  </div>
+  <p class="repeated-wallet" style="display: none;" data-content="incorrectElement" data-type="repitedWallet">${idioms[languaje].incorrectElement.repitedWallet}</p>
+  <button class="combine-amounts-btn btn2" data-content="send-process" data-type="combine-amounts-btn">
+            Combine amounts
+          </button>`;
   const repitedWalletElement = idioms[languaje].incorrectElement.repitedWallet;
 
   if (repitedWallet) {
@@ -113,8 +118,32 @@ export function deleteOkWallet(event) {
     manualWalletsContainer.removeChild(
       event.target.parentNode.parentNode.parentNode
     );
+    walletCount.id -= 1;
     walletCount.correct -= 1;
   }
+
+  setTimeout(() => {
+    const individualWalletContainer = document.querySelectorAll(
+      ".individual-wallet-container"
+    );
+
+    const repeatedText = document.querySelectorAll(
+      ".individual-wallet-container"
+    );
+
+    individualWalletContainer.forEach((element) => {
+      if (element.children.length <= 3) {
+        element.classList.remove("repeated-wallet-container");
+
+        const repeatedText = element.querySelector(".repeated-wallet");
+
+        const combineBtn = element.querySelector(".combine-amounts-btn");
+
+        repeatedText.style.display = "none";
+        combineBtn.style.display = "none";
+      }
+    });
+  }, 100);
 }
 
 export function editOkWallet(event) {
