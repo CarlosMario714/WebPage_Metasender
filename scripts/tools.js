@@ -205,7 +205,7 @@ export function changeWalletsTokenType() {
 export function onLoad() {
   pageloader.style.display = "none";
   // change
-  optinonRed.value = "0x5";
+  optinonRed.value = "0x1";
 
   tokenInput.value = "ETH";
 
