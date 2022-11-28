@@ -1,7 +1,19 @@
-import { addIncorrectWalletElement, addOkWalletElement } from "./addWallet.js";
+import {
+  addIncorrectWalletElement,
+  addOkWalletElement,
+  deleteOkWallet,
+} from "./addWallet.js";
 import ethereumchains from "./ethereumchains.js";
 import { finalData } from "./finalData.js";
+import idioms from "./idioms.js";
+import { languaje } from "./translate.js";
 import { verifyAddress } from "./tools.js";
+import {
+  newWalletsFragment,
+  renameNumberOfWallets,
+  walletCount,
+} from "./manualWallets.js";
+import { getTotalValue } from "./transactions.js";
 const spanWallet = document.querySelector(".span-wallet");
 const spanAmount = document.querySelector(".span-amount");
 const walletInput = document.querySelector(".wallet-input");
@@ -11,6 +23,10 @@ const spanContractAdressManual = document.querySelector(
 );
 const inputContractManual = document.querySelector(".input-contract-manual");
 
+const manualWalletsContainer = document.querySelector(
+  ".manual-wallets-container"
+);
+
 // verify the info of the excel file
 
 export function verifyFileData(wallet, amount, typeOfToken) {
@@ -19,19 +35,14 @@ export function verifyFileData(wallet, amount, typeOfToken) {
   let amountError = "amount error";
   let allError = "all errors";
   let repitedWallet = false;
-  typeOfToken == 'ETH' 
-    ? typeOfToken = ethereumchains[ ethereum.chainId ].symbol
+  typeOfToken == "ETH"
+    ? (typeOfToken = ethereumchains[ethereum.chainId].symbol)
     : typeOfToken;
 
   finalData.repeated.push(wallet);
 
   //if is ok data data from file
   if (verifyAddress(wallet) && AmountRegex.exec(amount)) {
-    finalData.repeated.forEach((wallet, index) => {
-      finalData.repeated.indexOf(wallet) !== index
-        ? (repitedWallet = true)
-        : (repitedWallet = false);
-    });
     addOkWalletElement(wallet, amount, typeOfToken, repitedWallet);
   }
 
@@ -56,8 +67,8 @@ export function verifyFileData(wallet, amount, typeOfToken) {
 
 export function verifyManualData(wallet, amount, typeOfToken) {
   const amountRegex = new RegExp(amountInput.pattern);
-  typeOfToken == 'ETH' 
-    ? typeOfToken = ethereumchains[ ethereum.chainId ].symbol
+  typeOfToken == "ETH"
+    ? (typeOfToken = ethereumchains[ethereum.chainId].symbol)
     : typeOfToken;
 
   //if is selected native blockchain currency
@@ -106,4 +117,139 @@ export function verifyManualData(wallet, amount, typeOfToken) {
       ? spanContractAdressManual.classList.add("is-active")
       : spanContractAdressManual.classList.remove("is-active");
   }
+}
+
+export function verifyRepeatedWalletsFromFile() {
+  const walletsAddres = newWalletsFragment.querySelectorAll(".wallet-adress");
+
+  let allWalletsArr = [];
+
+  walletsAddres.forEach((element) => {
+    allWalletsArr.push(element.innerHTML);
+  });
+
+  allWalletsArr.forEach((wallet, index) => {
+    let firstRepeated = allWalletsArr.indexOf(wallet);
+    //if there are repeated wallets
+    if (firstRepeated !== index) {
+      //primera wallet container
+      const individualWalletContainer = newWalletsFragment.getElementById(
+        `${(firstRepeated += 1)}`
+      );
+      //wallets repetidas
+      const repeatedWalletElement = newWalletsFragment.getElementById(
+        `${(index += 1)}`
+      );
+
+      //add repeated wallet in first repeated wallet container
+      individualWalletContainer.appendChild(repeatedWalletElement.children[0]);
+
+      individualWalletContainer.classList.add("repeated-wallet-container");
+
+      //delete container repeated wallet
+      newWalletsFragment.removeChild(repeatedWalletElement);
+
+      walletCount.id -= 1;
+    }
+  });
+
+  //show repeated btn and text
+
+  const repeatedWalletContainer = newWalletsFragment.querySelectorAll(
+    ".repeated-wallet-container .repeated-wallet"
+  );
+
+  const combineAmountsBtn = newWalletsFragment.querySelectorAll(
+    ".repeated-wallet-container .combine-amounts-btn"
+  );
+
+  repeatedWalletContainer.forEach((walletContainer) => {
+    walletContainer.style.display = "block";
+  });
+
+  combineAmountsBtn.forEach((btn) => {
+    btn.style.display = "block";
+  });
+}
+
+export function verifyRepeatedWalletsFromManual() {
+  const individualWalletContainer = document.querySelectorAll(
+    ".individual-wallet-container"
+  );
+  const walletToVerify =
+    newWalletsFragment.querySelector(".wallet-adress").innerHTML;
+  const walletToInsert = newWalletsFragment.querySelector(".manual-wallet");
+  const walletContainerFragment = newWalletsFragment.querySelector(
+    ".individual-wallet-container"
+  );
+
+  let manualWalletsArr = [];
+
+  individualWalletContainer.forEach((element) => {
+    manualWalletsArr.push(
+      element.children[0].querySelector(".wallet-adress").innerHTML
+    );
+  });
+
+  //if there is repeated wallet
+  if (manualWalletsArr.indexOf(walletToVerify) >= 0) {
+    const firsWalletRepeated = document.getElementById(
+      `${manualWalletsArr.indexOf(walletToVerify) + 1}`
+    );
+    const combineAmountsBtn = firsWalletRepeated.querySelector(
+      ".combine-amounts-btn"
+    );
+    const textRepeatedWallets =
+      firsWalletRepeated.querySelector(".repeated-wallet");
+
+    //insert repeated wallet in first repeated wallet container
+    firsWalletRepeated.appendChild(walletToInsert);
+
+    if (firsWalletRepeated.classList[1] !== "repeated-wallet-container") {
+      firsWalletRepeated.classList.add("repeated-wallet-container");
+    }
+
+    combineAmountsBtn.style.display = "block";
+    textRepeatedWallets.style.display = "block";
+
+    newWalletsFragment.removeChild(walletContainerFragment);
+
+    renameNumberOfWallets();
+  } else {
+    return false;
+  }
+}
+
+export function combineAmounts(individualWalletContainer) {
+  const amountsElement =
+    individualWalletContainer.querySelectorAll(".wallet-amount");
+  const walletElement =
+    individualWalletContainer.querySelectorAll(".manual-wallet");
+  const combineAmountsBtn = individualWalletContainer.querySelector(
+    ".combine-amounts-btn"
+  );
+  const textRepeatedWallets =
+    individualWalletContainer.querySelector(".repeated-wallet");
+  const amountsArr = [];
+
+  amountsElement.forEach((amount) => {
+    amountsArr.push(Number(amount.innerHTML));
+  });
+
+  const totalValue = amountsArr.reduce(
+    (prevValue, nextValue) => prevValue + nextValue
+  );
+
+  amountsElement[0].innerHTML = totalValue.toFixed(6);
+
+  for (let i = 1; i <= amountsElement.length - 1; i++) {
+    individualWalletContainer.removeChild(walletElement[i]);
+  }
+
+  individualWalletContainer.classList.remove("repeated-wallet-container");
+
+  combineAmountsBtn.style.display = "none";
+  textRepeatedWallets.style.display = "none";
+
+  renameNumberOfWallets();
 }

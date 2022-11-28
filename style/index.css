@@ -637,7 +637,6 @@ header {
 
 .manual-wallets-container,
 .incorrect-wallets-container {
-  display: flex;
   flex-direction: column;
   overflow: hidden;
   overflow-y: scroll;
@@ -673,10 +672,10 @@ header {
 
 .incorrect-wallets-container h2 {
   margin-top: 2rem;
-  background: rgb(255, 216, 216);
+  background: rgb(250, 209, 173);
   background: radial-gradient(
     circle,
-    rgb(255, 216, 216) 50%,
+    rgb(250, 209, 173) 50%,
     rgba(255, 255, 255, 1) 100%
   );
 }
@@ -684,6 +683,15 @@ header {
 .individual-wallet-container {
   display: flex;
   flex-direction: column;
+}
+
+.repeated-wallet-container {
+  gap: 1rem;
+  border: rgb(250, 209, 173) 3px solid;
+  border-radius: 1rem;
+  margin: 1rem 0;
+  position: relative;
+  padding-bottom: 7rem;
 }
 
 .manual-wallet {
@@ -723,16 +731,34 @@ header {
 }
 
 .repeated-wallet {
+  position: absolute;
   width: 20rem;
+  bottom: 0;
   font-weight: 500;
   font-style: italic;
-  margin: 0;
+  margin: 1rem;
   background: rgb(255, 234, 216);
   background: radial-gradient(
     circle,
     rgb(255, 234, 216) 50%,
     rgba(255, 255, 255, 1) 100%
   );
+}
+
+.combine-amounts-btn {
+  display: none;
+  margin: 1rem;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 4rem;
+  background: rgb(255, 234, 216);
+}
+
+.combine-amounts-btn:hover {
+  cursor: pointer;
+  box-shadow: 0 0 3px rgb(255, 169, 95), 0 0 6px rgb(255, 169, 95),
+    0 0 15px rgb(255, 169, 95), 0 0 30px rgb(255, 169, 95);
 }
 
 .wallet-errors-container {

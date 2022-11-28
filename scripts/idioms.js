@@ -41,6 +41,8 @@ export default {
             "send-process-template-condition2": "*If you are going to send ERC721, in the amount column you must indicate the ID of the token to send",
             "send-process-template-condition3": "*Maximum 255 transactions per operation",
             "send-process-file-label-tokenType": "Select the Type of Token to Send",
+            "send-process-delete": "Delete Batch",
+            "combine-amounts-btn": "Combine amounts",
             "send-process-resume-title": "Summary of the operation",
             "send-process-resume-totalwallets": "Total wallets or Address",
             "send-process-resume-totalTokens": "Total tokens to send",
@@ -81,7 +83,7 @@ export default {
             "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address: </span>Add a valid Address without spaces</p></div>",
             "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Invalid amount:</span> Only positive numbers</p> </div>",
             "allErrors": "<div class=\"wallet-errors\"><p><span>Invalid Wallet or Address:</span> write a valid address without spaces</p> <p><span>Invalid amount:</span> Only positive numbers</p></div>",
-            "repitedWallet": `<p class="repeated-wallet">Repeated wallet</p>`,
+            "repitedWallet": "Repeated Wallets",
         },
         "footer": {
             "footer-followus": "Follow Us"
@@ -161,6 +163,8 @@ export default {
             "send-process-template-condition2": "*Si vas a enviar ERC721, en la columna de mount debes indicar el ID del token a enviar",
             "send-process-template-condition3": "*Maximo 255 transacciones por lote",
             "send-process-file-label-tokenType": "Seleccione el tipo de token para enviar",
+            "send-process-delete": "Borrar Lote",
+            "combine-amounts-btn": "Combinar montos",
             "send-process-resume-title": "Resumen de la operación",
             "send-process-resume-totalwallets": "Total de wallets",
             "send-process-resume-totalTokens": "Tokens totales para enviar",
@@ -201,7 +205,7 @@ export default {
             "onlyWalletError": "<div class=\"wallet-errors\"><p><span>Wallet no válida: </span>Agregue una dirección válida sin espacios</p></div>",
             "onlyAmountError": "<div class=\"wallet-errors\"><p><span>Monto no valido:</span> Solo números positivos</p> </div>",
             "allErrors": "<div class=\"wallet-errors\"><p><span>Wallet no válida:</span> escriba una dirección válida sin espacios</p> <p><span>Monto no valido:</span> Solo numeros positivos</p></div>",
-            "repitedWallet": `<p class="repeated-wallet">Wallet Repetida</p>`,
+            "repitedWallet": "Wallets Repetidas",
         },
         "footer": {
             "footer-followus": "Síguenos"
