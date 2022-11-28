@@ -124,7 +124,9 @@ export function migrateInfo() {
   //seria mejor que esta funcion devuelva una promesa, por si el archivo no es correcto no pase a la siguiente seccion
   verifyData();
 
-  verifyRepeatedWalletsFromFile();
+  if (tokenInputFile.value !== "ERC721") {
+    verifyRepeatedWalletsFromFile();
+  }
 
   showWallets();
 

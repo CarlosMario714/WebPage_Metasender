@@ -13,8 +13,10 @@ const selectChainItem = document.querySelector(".option-red select");
 const tokenInput = document.getElementById("token-input");
 const fileTokenInput = document.querySelector(".token-input-file");
 const installAlert = document.querySelector(".installAlert");
-const manWalletsCont = document.querySelector('.manual-wallets-container')
-const manIncorrectWalletsCont = document.querySelector('.incorrect-wallets-container')
+const manWalletsCont = document.querySelector(".manual-wallets-container");
+const manIncorrectWalletsCont = document.querySelector(
+  ".incorrect-wallets-container"
+);
 const pageloader = document.querySelector(".loaderContainer");
 const optinonRed = document.querySelector(".option-red select");
 
@@ -151,71 +153,61 @@ export async function handleTxFee() {
   if (isPalcoM) return ethers.utils.parseEther("0");
 
   return await contract.txFee().catch(handleError);
-
 }
 
 export async function handlePalco() {
-
   finalData.isPalco = await isPalco();
 
-  if ( finalData.isPalco ) {
-
+  if (finalData.isPalco) {
     setPalcoTexts(
-      "<div class=\"isPalco\">PALCO MEMBER</div>",
-      idioms[ languaje ]["send-process"]["send-process-resume-txCost-Palco"]
-    )
-
-  }
-
-  else {
-
+      '<div class="isPalco">PALCO MEMBER</div>',
+      idioms[languaje]["send-process"]["send-process-resume-txCost-Palco"]
+    );
+  } else {
     setPalcoTexts(
       "",
-      idioms[ languaje ]["send-process"]["send-process-resume-txCost"]
-    )
-
-  };
-
+      idioms[languaje]["send-process"]["send-process-resume-txCost"]
+    );
+  }
 }
 
 export function showInstallAlert() {
   if (!window.ethereum) installAlert.classList.add("showAlert");
 }
 export function deleteBatch() {
-  finalData.repeated = []
+  finalData.repeated = [];
 
-  walletCount.correct = 0
+  walletCount.correct = 0;
 
-  walletCount.incorrect = 0
+  walletCount.id = 0;
 
-  manWalletsCont.innerHTML = idioms[ languaje ]['send-process'].correct_data_Title
+  walletCount.incorrect = 0;
 
-  manIncorrectWalletsCont.innerHTML = idioms[ languaje ]['send-process'].incorrect_data_Title;
+  manWalletsCont.innerHTML =
+    idioms[languaje]["send-process"].correct_data_Title;
 
+  manIncorrectWalletsCont.innerHTML =
+    idioms[languaje]["send-process"].incorrect_data_Title;
 }
 
 export function changeWalletsTokenType() {
+  const walletsTokenType = document.querySelectorAll(".token-type");
 
-  const walletsTokenType = document.querySelectorAll('.token-type')
+  if (walletsTokenType.length == 0) return;
 
-  if (walletsTokenType.length == 0 ) return
-
-  walletsTokenType.forEach( e => {
-    tokenInput.value == 'ETH'
-      ? e.innerHTML = ethereumchains[ ethereum.chainId ].symbol
-      : e.innerHTML = tokenInput.value
-  })
-
+  walletsTokenType.forEach((e) => {
+    tokenInput.value == "ETH"
+      ? (e.innerHTML = ethereumchains[ethereum.chainId].symbol)
+      : (e.innerHTML = tokenInput.value);
+  });
 }
 
 export function onLoad() {
-
-  pageloader.style.display = "none"
+  pageloader.style.display = "none";
   // change
-  optinonRed.value = '0x5'
+  optinonRed.value = "0x5";
 
-  tokenInput.value = "ETH" 
+  tokenInput.value = "ETH";
 
-  fileTokenInput.value = "" 
-
+  fileTokenInput.value = "";
 }

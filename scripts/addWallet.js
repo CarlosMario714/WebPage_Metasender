@@ -7,7 +7,7 @@ import {
   renameNumberOfWallets,
 } from "./manualWallets.js";
 import { languaje } from "./translate.js";
-import { verifyManualData, verifyRepeatedWalletsFormManual } from "./verify.js";
+import { verifyManualData, verifyRepeatedWalletsFromManual } from "./verify.js";
 const manualWalletsContainer = document.querySelector(
   ".manual-wallets-container"
 );
@@ -23,7 +23,7 @@ const spanContractAdressManual = document.querySelector(
 const inputContractManual = document.querySelector(".input-contract-manual");
 
 //add new ok wallet element
-export function addOkWalletElement(wallet, amount, typeOfToken, repitedWallet) {
+export function addOkWalletElement(wallet, amount, typeOfToken) {
   walletCount.correct += 1;
   walletCount.id += 1;
   let newWalletContainer = document.createElement("div");
@@ -48,15 +48,9 @@ export function addOkWalletElement(wallet, amount, typeOfToken, repitedWallet) {
   <button class="combine-amounts-btn btn2" data-content="send-process" data-type="combine-amounts-btn">
             Combine amounts
           </button>`;
-  const repitedWalletElement = idioms[languaje].incorrectElement.repitedWallet;
 
-  if (repitedWallet) {
-    newWalletContainer.innerHTML = manualWallet + repitedWalletElement;
-    newWalletsFragment.appendChild(newWalletContainer);
-  } else {
-    newWalletContainer.innerHTML = manualWallet;
-    newWalletsFragment.appendChild(newWalletContainer);
-  }
+  newWalletContainer.innerHTML = manualWallet;
+  newWalletsFragment.appendChild(newWalletContainer);
 }
 
 //add new error wallet element
@@ -127,10 +121,6 @@ export function deleteOkWallet(event) {
       ".individual-wallet-container"
     );
 
-    const repeatedText = document.querySelectorAll(
-      ".individual-wallet-container"
-    );
-
     individualWalletContainer.forEach((element) => {
       if (element.children.length <= 3) {
         element.classList.remove("repeated-wallet-container");
@@ -142,8 +132,12 @@ export function deleteOkWallet(event) {
         repeatedText.style.display = "none";
         combineBtn.style.display = "none";
       }
+
+      if (element.children.length <= 2) {
+        manualWalletsContainer.removeChild(element);
+      }
     });
-  }, 100);
+  }, 200);
 }
 
 export function editOkWallet(event) {
@@ -172,7 +166,7 @@ export function addWallet() {
   if (tokenInput.value !== "ERC20" && tokenInput.value !== "ERC721") {
     addNativeCurrencyWallet();
   } else {
-    addTokenWallet();
+    addTokenWallet(tokenInput.value);
   }
 }
 
@@ -188,16 +182,15 @@ function addNativeCurrencyWallet() {
       tokenInput.value
     );
 
-    verifyRepeatedWalletsFormManual();
-    showWallets();
-
-    //continueBtnManual.classList.add("opacity");
+    if (!verifyRepeatedWalletsFromManual()) {
+      showWallets();
+    }
   } else {
     empyField(true, false);
   }
 }
 
-function addTokenWallet() {
+function addTokenWallet(typeOfToken) {
   if (
     walletInput.value !== "" &&
     amountInput.value !== "" &&
@@ -215,8 +208,13 @@ function addTokenWallet() {
       tokenInput.value
     );
 
-    showWallets();
-    verifyRepeatedWalletsFormManual();
+    if (typeOfToken === "ERC20") {
+      if (!verifyRepeatedWalletsFromManual()) {
+        showWallets();
+      }
+    } else {
+      showWallets();
+    }
 
     //continueBtnManual.classList.add("opacity");
   } else {

@@ -1,14 +1,14 @@
 import { estimateTx } from "./estimate.js";
 import { finalData } from "./finalData.js";
-import ethChains from "./ethereumchains.js"
+import ethChains from "./ethereumchains.js";
 import { getTotalValue } from "./transactions.js";
-import erc from './ercABI.js'
-import { getContract, getTokenSymbol, handleTxFee } from './tools.js';
+import erc from "./ercABI.js";
+import { getContract, getTokenSymbol, handleTxFee } from "./tools.js";
 export const ercABI = [
-    'function balanceOf(address owner) view returns (uint balance)',
-    'function symbol() public view returns (string)',
-    'function allowance(address owner, address spender) external view returns (uint256)',
-]
+  "function balanceOf(address owner) view returns (uint balance)",
+  "function symbol() public view returns (string)",
+  "function allowance(address owner, address spender) external view returns (uint256)",
+];
 const totalWallets = document.querySelector(".total-wallets");
 const totalTokens = document.querySelectorAll(".total-tokens");
 const balanceTokens = document.querySelector(".balance-tokens");
@@ -18,126 +18,106 @@ const costoTotalOperacion = document.querySelector(".costo-operacion-total");
 const loaderSendProcess = document.querySelector(".loader-send-process");
 const manualDataContainer = document.querySelector(".manual-data-container");
 const resumenFinalContainer = document.querySelector(
-    ".resumen-final-container"
+  ".resumen-final-container"
 );
 const blockExplorerLinkItem = document.querySelector(".blockExplorerLink");
 
-
-function roundNumber( num ) {
-
-    return (Math.round(num * 100000)) / 100000
-
+function roundNumber(num) {
+  return Math.round(num * 100000) / 100000;
 }
 
 export async function getDecimals() {
+  const contract = getContract(finalData.tokenAddress, erc[20]);
 
-    const contract = getContract(
-        finalData.tokenAddress, 
-        erc[20]
-    )
-
-    return await contract.decimals()
-
+  return await contract.decimals();
 }
 
 async function getUserBalance() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const bigNumBal = await provider.getBalance(ethereum.selectedAddress);
 
-    const bigNumBal = await provider.getBalance( ethereum.selectedAddress );
+  const balance = Number(ethers.utils.formatEther(bigNumBal));
 
-    const balance = Number(ethers.utils.formatEther(bigNumBal)) 
-
-    return roundNumber( balance )
-
+  return roundNumber(balance);
 }
 
-async function getUserTokenBalance( _address, tokenType ){
+async function getUserTokenBalance(_address, tokenType) {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const contract = new ethers.Contract(_address, ercABI, provider);
 
-    const contract = new ethers.Contract( _address, ercABI, provider )
+  const inBalance = await contract.balanceOf(ethereum.selectedAddress);
 
-    const inBalance = await contract.balanceOf( ethereum.selectedAddress );
+  if (tokenType == "ERC721") return inBalance;
 
-    if ( tokenType == 'ERC721') return inBalance
+  const balance = Number(
+    ethers.utils.formatUnits(inBalance, finalData.decimals)
+  );
 
-    const balance = Number(ethers.utils.formatUnits(inBalance, finalData.decimals)) 
-
-    return roundNumber( balance )
-
+  return roundNumber(balance);
 }
 
 async function getTxCostAprox() {
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
 
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+  const { gasEstimation } = await estimateTx();
 
-    const { gasEstimation } = await estimateTx()
+  const txFee = await handleTxFee();
 
-    const txFee = await handleTxFee()
+  const gasPrice = await provider.getGasPrice();
 
-    const gasPrice = await provider.getGasPrice();
+  const totalGas = gasPrice.mul(gasEstimation).add(txFee);
 
-    const totalGas = gasPrice.mul(gasEstimation).add(txFee)
-
-    return roundNumber(
-        Number(ethers.utils.formatEther(totalGas))
-    )
-
+  return roundNumber(Number(ethers.utils.formatEther(totalGas)));
 }
 
 function getTotalToSend() {
-
-    return Number(ethers.utils.formatUnits(
-            getTotalValue( finalData.amount ), finalData.decimals
-    ))
-    
-
+  return Number(
+    ethers.utils.formatUnits(
+      getTotalValue(finalData.amount),
+      finalData.decimals
+    )
+  );
 }
 
 export default async function setResumeInfo() {
-    
-    finalData.numAddresses = finalData.wallets.length
+  finalData.numAddresses = finalData.wallets.length;
 
-    finalData.tokenToSend == 'ERC721' ?
-        finalData.totalToSend = finalData.amount.length :
-        finalData.totalToSend = getTotalToSend()
+  finalData.tokenToSend == "ERC721"
+    ? (finalData.totalToSend = finalData.amount.length)
+    : (finalData.totalToSend = getTotalToSend());
 
-    finalData.userETHBalance = await getUserBalance()
+  finalData.userETHBalance = await getUserBalance();
 
-    finalData.txCost = await getTxCostAprox()
+  finalData.txCost = await getTxCostAprox();
 
-    finalData.NativeToken = ethChains[ ethereum.chainId ].symbol
+  finalData.NativeToken = ethChains[ethereum.chainId].symbol;
 
-    if( finalData.tokenToSend == 'ETH' ) {
+  if (finalData.tokenToSend == "ETH") {
+    finalData.userTokenBalance = finalData.userETHBalance;
 
-        finalData.userTokenBalance = finalData.userETHBalance
+    finalData.tokenSymbol = finalData.NativeToken;
 
-        finalData.tokenSymbol = finalData.NativeToken
+    finalData.totalCost = finalData.txCost + finalData.totalToSend;
+  } else {
+    finalData.userTokenBalance = await getUserTokenBalance(
+      finalData.tokenAddress,
+      finalData.tokenToSend
+    );
 
-        finalData.totalCost = finalData.txCost + finalData.totalToSend
+    finalData.tokenSymbol = await getTokenSymbol(finalData.tokenAddress);
 
-    } else  {
+    finalData.totalCost = finalData.txCost;
+  }
 
-        finalData.userTokenBalance = await getUserTokenBalance(
-            finalData.tokenAddress,
-            finalData.tokenToSend
-        )
+  console.log({ finalData });
 
-        finalData.tokenSymbol = await getTokenSymbol( finalData.tokenAddress )
-
-        finalData.totalCost = finalData.txCost
-
-     }
-
-    return
-
+  return;
 }
 
 async function setFinalResume() {
-
   return await setResumeInfo().then(() => {
-
     totalWallets.innerHTML = finalData.numAddresses;
 
     totalTokens[0].innerHTML = `${finalData.totalToSend} ${finalData.tokenSymbol}`;
@@ -151,13 +131,10 @@ async function setFinalResume() {
     costoOperacion.innerHTML = `${finalData.txCost} ${finalData.NativeToken}`;
 
     costoTotalOperacion.innerHTML = `${finalData.totalCost} ${finalData.NativeToken}`;
-
   });
-  
 }
 
 export async function setDataAndShowResume() {
-
   loaderSendProcess.classList.toggle("show-loader-send-process");
 
   await setFinalResume();
@@ -168,6 +145,5 @@ export async function setDataAndShowResume() {
 
   resumenFinalContainer.style.display = "flex";
 
-  blockExplorerLinkItem.style.display = 'none';
-
+  blockExplorerLinkItem.style.display = "none";
 }

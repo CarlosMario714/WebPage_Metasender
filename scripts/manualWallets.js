@@ -82,7 +82,6 @@ export function renameNumberOfWallets() {
 }
 
 export function deleteIncorrectWallet(event) {
-  console.log(incorrectWalletsContainer);
   incorrectWalletsContainer.removeChild(
     event.target.parentNode.parentNode.parentNode
   );
@@ -142,11 +141,6 @@ export function showWallets() {
   }
 
   sendProcessButtonsContainer.style.display = "flex";
-
-  //renameNumberOfWallets();
-
-  // continueBtnManual.style.display = "block";
-  // continueBtnManual.classList.add("opacity");
 }
 
 function getAddAndAmounts() {
