@@ -55,7 +55,7 @@ async function sendNativeTokenDifferentValue(addresses, amounts) {
     .catch(handleError);
 }
 
-async function sendIERC20SameValue(contactAdd, addresses, amounts) {
+async function sendERC20SameValue(contactAdd, addresses, amounts) {
   const contract = getContract(
     metasender[`address_${ethereum.chainId}`],
     metasender.abi
@@ -64,11 +64,11 @@ async function sendIERC20SameValue(contactAdd, addresses, amounts) {
   const txFee = await handleTxFee();
 
   return await contract
-    .sendIERC20SameValue(contactAdd, addresses, amounts[0], { value: txFee })
+    .sendERC20SameValue(contactAdd, addresses, amounts[0], { value: txFee })
     .catch(handleError);
 }
 
-async function sendIERC20DifferentValue(contactAdd, addresses, amounts) {
+async function sendERC20DifferentValue(contactAdd, addresses, amounts) {
   const contract = getContract(
     metasender[`address_${ethereum.chainId}`],
     metasender.abi
@@ -77,11 +77,11 @@ async function sendIERC20DifferentValue(contactAdd, addresses, amounts) {
   const txFee = await handleTxFee();
 
   return await contract
-    .sendIERC20DifferentValue(contactAdd, addresses, amounts, { value: txFee })
+    .sendERC20DifferentValue(contactAdd, addresses, amounts, { value: txFee })
     .catch(handleError);
 }
 
-async function sendIERC721(contactAdd, addresses, tokenIds) {
+async function sendERC721(contactAdd, addresses, tokenIds) {
   const contract = getContract(
     metasender[`address_${ethereum.chainId}`],
     metasender.abi
@@ -90,7 +90,7 @@ async function sendIERC721(contactAdd, addresses, tokenIds) {
   const txFee = await handleTxFee();
 
   return await contract
-    .sendIERC721(contactAdd, addresses, tokenIds, { value: txFee })
+    .sendERC721(contactAdd, addresses, tokenIds, { value: txFee })
     .catch(handleError);
 }
 
@@ -122,9 +122,9 @@ class MetasenderMethods {
   constructor() {
     this.sendNativeTokenDifferentValue = sendNativeTokenDifferentValue;
     this.sendNativeTokenSameValue = sendNativeTokenSameValue;
-    this.sendIERC20DifferentValue = sendIERC20DifferentValue;
-    this.sendIERC20SameValue = sendIERC20SameValue;
-    this.sendIERC721 = sendIERC721;
+    this.sendERC20DifferentValue = sendERC20DifferentValue;
+    this.sendERC20SameValue = sendERC20SameValue;
+    this.sendERC721 = sendERC721;
     this.addPALCO = hadlePalco;
   }
 }
@@ -140,11 +140,11 @@ export async function sendTransaction() {
 
     case "ERC20":
       return await metasenderFunctions[
-        `sendIERC20${isSameValue(finalData.amount)}Value`
+        `sendERC20${isSameValue(finalData.amount)}Value`
       ](finalData.tokenAddress, finalData.wallets, finalData.amount);
 
     case "ERC721":
-      return await metasenderFunctions.sendIERC721(
+      return await metasenderFunctions.sendERC721(
         finalData.tokenAddress,
         finalData.wallets,
         finalData.amount
