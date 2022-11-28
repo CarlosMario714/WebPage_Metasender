@@ -102,7 +102,7 @@ export async function login() {
     await connectWallet();
 
     //change
-    await changeChain('0x5');
+    await changeChain('0x1');
   } else {
     installAlert.classList.add("showAlert");
   }
