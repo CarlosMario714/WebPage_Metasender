@@ -46,7 +46,7 @@ export function addOkWalletElement(wallet, amount, typeOfToken) {
   </div>
   <p class="repeated-wallet" style="display: none;" data-content="incorrectElement" data-type="repitedWallet">${idioms[languaje].incorrectElement.repitedWallet}</p>
   <button class="combine-amounts-btn btn2" data-content="send-process" data-type="combine-amounts-btn">
-            Combine amounts
+  ${idioms[languaje]["send-process"]["combine-amounts-btn"]}
           </button>`;
 
   newWalletContainer.innerHTML = manualWallet;
