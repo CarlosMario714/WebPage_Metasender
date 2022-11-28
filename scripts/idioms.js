@@ -164,7 +164,7 @@ export default {
             "send-process-template-condition3": "*Maximo 255 transacciones por lote",
             "send-process-file-label-tokenType": "Seleccione el tipo de token para enviar",
             "send-process-delete": "Borrar Lote",
-            "combine-amounts-btn": "Combinar montos",
+            "combine-amounts-btn": "Combinar Montos",
             "send-process-resume-title": "Resumen de la operación",
             "send-process-resume-totalwallets": "Total de wallets",
             "send-process-resume-totalTokens": "Tokens totales para enviar",
