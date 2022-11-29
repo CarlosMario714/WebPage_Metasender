@@ -95,9 +95,14 @@ async function sendERC721(contactAdd, addresses, tokenIds) {
 }
 
 async function addToPALCO() {
-  const contract = getContract(
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+  const signer = provider.getSigner();
+
+  const contract = new ethers.Contract(
     metasender[`address_${ethereum.chainId}`],
-    metasender.abi
+    metasender.abi,
+    signer
   );
 
   const PALCOFee = await contract.PALCOPass();
@@ -107,7 +112,7 @@ async function addToPALCO() {
     .catch(handleError);
 }
 
-export async function hadlePalco() {
+export async function buyPalcoPass() {
   showInstallAlert();
 
   if (isConnected) {
@@ -124,8 +129,7 @@ class MetasenderMethods {
     this.sendNativeTokenSameValue = sendNativeTokenSameValue;
     this.sendERC20DifferentValue = sendERC20DifferentValue;
     this.sendERC20SameValue = sendERC20SameValue;
-    this.sendERC721 = sendERC721;
-    this.addPALCO = hadlePalco;
+    this.sendERC721 = sendERC721
   }
 }
 

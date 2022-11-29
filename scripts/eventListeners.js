@@ -17,7 +17,7 @@ import {
   processFile,
   showFile,
 } from "./readFile.js";
-import { handleSend, metasenderFunctions } from "./transactions.js";
+import { buyPalcoPass, handleSend, metasenderFunctions } from "./transactions.js";
 import { toggleLanguage, languaje } from "./translate.js";
 import {
   deleteBatch,
@@ -263,4 +263,4 @@ btnSend.addEventListener("click", handleSend);
 /***************************************************************************/
 /***************************** PALCO ***************************************/
 
-btnPalco.onclick = metasenderFunctions.addPALCO;
+btnPalco.onclick = buyPalcoPass;
