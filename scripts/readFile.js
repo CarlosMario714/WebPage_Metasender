@@ -195,4 +195,23 @@ async function handleDrop(e) {
     idioms[languaje]["send-process"]["send-process-drop-title"];
 }
 
-export { walletsFileArr, amountFileArr, file, handleDrop };
+async function onChangeFile(e) {
+
+  e.preventDefault();
+  file = e.target.files[0];
+
+  showFile();
+
+  await processFile()
+    .then(handleFileContinue)
+    .catch((e) => {
+      showErrorAlert(e);
+      deleteFile();
+    });
+
+  dropArea.classList.add("active");
+  dropArea.classList.remove("active");
+  
+}
+
+export { walletsFileArr, amountFileArr, file, handleDrop, onChangeFile };

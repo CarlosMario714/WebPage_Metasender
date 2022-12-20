@@ -1,4 +1,4 @@
-import { addWallet, deleteOkWallet, editOkWallet } from "./addWallet.js";
+import { addWallet } from "./addWallet.js";
 import { handleAproval } from "./allowance.js";
 import { isConnected, login, setChain } from "./connectWallet.js";
 import {
@@ -8,16 +8,13 @@ import {
   handleIncorrectWalletClick,
 } from "./manualWallets.js";
 import {
-  deleteFile,
-  file,
   handleDelete,
   handleDrop,
   handleFileContinue,
   migrateInfo,
-  processFile,
-  showFile,
+  onChangeFile,
 } from "./readFile.js";
-import { buyPalcoPass, handleSend, metasenderFunctions } from "./transactions.js";
+import { buyPalcoPass, handleSend } from "./transactions.js";
 import { toggleLanguage, languaje } from "./translate.js";
 import {
   deleteBatch,
@@ -143,22 +140,7 @@ optionUploadFile.addEventListener("click", () => {
 });
 
 //detecta cada vez que input cambia, osea cada vez que se sube un archivo
-inputFileToUpload.addEventListener("change", async (e) => {
-  e.preventDefault();
-  file = e.target.files[0];
-
-  showFile();
-
-  await processFile()
-    .then(handleFileContinue)
-    .catch((e) => {
-      showErrorAlert(e);
-      deleteFile();
-    });
-
-  dropArea.classList.add("active");
-  dropArea.classList.remove("active");
-});
+inputFileToUpload.addEventListener("change", onChangeFile );
 
 //elementos que se estan arrastrando encima del area
 dropArea.addEventListener("dragover", (e) => {
