@@ -94,7 +94,10 @@ export default {
             "batch_max": "Error: maximum 255 per lot",
             "incorrect_file": "Error: file not compatible",
             contract_address: "Error: Incorrect Contract Address",
-            incorrect_info: "Error: Fix Incorrect Info"
+            incorrect_info: "Error: Fix Incorrect Info",
+            your_account: "Your account",
+            is_connected: "is connected",
+            wallet_disconnected: "Wallet disconnected"
         },
         "ETH": {
             "labelAdress": "Account or Wallet to send",
@@ -216,7 +219,10 @@ export default {
             "batch_max": "Error: maximo 255 por lote",
             "incorrect_file": "Error: archivo no compatible",
             contract_address: "Error: Direccion de contrato incorrecta",
-            incorrect_info: "Error: Corrija información incorrecta"
+            incorrect_info: "Error: Corrija información incorrecta",
+            your_account: "Tu Wallet",
+            is_connected: "esta conectada",
+            wallet_disconnected: "Wallet desconectada"
         },
         "ETH": {
             "labelAdress": "Wallet para enviar",
